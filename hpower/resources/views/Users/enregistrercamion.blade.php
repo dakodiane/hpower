@@ -29,12 +29,13 @@
                       <label>Photo de l'immatriculation du camion</label>
                       <input type="file" name="img[]" class="file-upload-default">
                       <div class="input-group col-xs-12">
-                        <input type="text" class="form-control file-upload-info" disabled placeholder="Upload Image">
+                        <input type="text" class="form-control file-upload-info" disabled placeholder="Charger l'image">
                         <span class="input-group-append">
                           <button class="file-upload-browse btn btn-primary" type="button">Charger l'image</button>
                         </span>
                       </div>
                     </div>
+                 
                     <div class="form-group">
                       <label for="exampleInputCity1">Poids (tonnes)</label>
                       <input type="text" class="form-control" id="exampleInputCity1" placeholder="">
@@ -67,4 +68,6 @@
         </div>
  
       </div>
+
+
 @endsection
