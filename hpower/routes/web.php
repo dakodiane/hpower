@@ -1,6 +1,10 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\fournicontroller;
+
+
+
 
 /*
 |--------------------------------------------------------------------------
@@ -22,6 +26,8 @@ Route::get('inscription/', function () {
 Route::get('admin/', function () {
     return view('Admin/tableaudebord');
 });
+
+
 Route::get('allcamion/', function () {
     return view('Admin/allcamion');
 });
@@ -42,4 +48,27 @@ Route::get('listecamionsave/', function () {
 });
 Route::get('listecamionfin/', function () {
     return view('Users/listecamionfin');
+});
+
+
+Route::get('fourni/', function () {
+    return view('fourni/tableaudebord');
+});
+Route::get('enregistcamion/', function () {
+    return view('fourni/enregistcamion');
+});
+
+
+Route::get('/new', 'fournicontroller@create')->name('create');
+
+Route::post('/fourni/enregistcamion', [fournicontroller::class, 'store'])->name('store');
+
+
+
+
+Route::get('consultation/', function () {
+    return view('fourni/consultation');
+});
+Route::get('data/', function () {
+    return view('fourni/data');
 });
