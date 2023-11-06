@@ -30,11 +30,10 @@ class CamionController extends Controller
         }
     
         if ($request->hasFile('cam_photo')) {
-            $photoPath = $request->file('cam_photo')->store('public/photo_immat');
+            $photoPath = $request->file('cam_photo')->store('photo_immat', 'public');
             $data['cam_photo'] = $photoPath;
         }
     
-
         $data['num_bordereau'] = $newNumBordereau;
     
         $camion = new Camion();
@@ -48,4 +47,45 @@ class CamionController extends Controller
         return redirect()->route('camion.create')->with('success', 'Camion enregistré avec succès.');
     }
     
+    public function view()
+{
+    $camions = Camion::all(); // Récupérez tous les camions depuis la base de données
+
+    return view('Users/listecamionsave', compact('camions')); // Transmettez les camions à la vue
+}
+
+public function viewfin(Request $request)
+{
+    $camions = Camion::all();;
+    return view('Users/listecamionfin', compact('camions'));
+}
+
+public function savefin($cam_id)
+{
+    $camions = Camion::find($cam_id);
+
+    return view('Users/enregistrerfin', compact('camions'));
+}
+
+public function storefin(Request $request, $cam_id)
+{
+    // Récupérer l'camion à partir de l'ID
+    $camions = Camion::find($cam_id);
+
+
+    $data = $request->all();
+
+    if ($request->hasFile('cam_photo1')) {
+        $photoPath = $request->file('cam_photo1')->store('photo_immat', 'public');
+        $data['cam_photo1'] = $photoPath;
+    }
+
+    $camions->fill($data);
+
+
+    $camions->save();
+
+     return view('Users/listecamionfin', compact('camions'))->with('success', 'Données de l\'camion complétées avec succès');
+}
+
 }

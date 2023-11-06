@@ -47,7 +47,7 @@
       <nav class="sidebar sidebar-offcanvas" id="sidebar">
         <ul class="nav">
           <li class="nav-item">
-            <a class="nav-link" href="{{{'user'}}}">
+            <a class="nav-link" href="{{{'/user'}}}">
               <i class="icon-grid menu-icon"></i>
               <span class="menu-title">Tableau de bord</span>
             </a>
@@ -59,13 +59,13 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="{{'listecamionsave'}}">
+            <a class="nav-link" href="{{'/listecamionsave'}}">
               <i class="icon-grid menu-icon"></i>
               <span class="menu-title">Camions à finaliser</span>
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="{{'listecamionfin'}}">
+            <a class="nav-link" href="{{'/listecamionfin'}}">
               <i class="icon-grid menu-icon"></i>
               <span class="menu-title">Camions finalisés</span>
             </a>

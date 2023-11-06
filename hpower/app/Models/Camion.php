@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 class Camion extends Model
 {
     protected $table = 'camions'; // Nom de la table dans la base de données
+    protected $primaryKey = 'cam_id'; // Remplacez par le nom de votre colonne de clé primaire
 
     protected $fillable = [
         'num_bordereau',
@@ -15,6 +16,7 @@ class Camion extends Model
         'heure_depart',
         'heure_arrive',
         'observation',
+        'observation1',
         'poids_vide',
         'poids_charge',
         'poids_net',
@@ -23,6 +25,7 @@ class Camion extends Model
         'avance_recue',
         'solde',
         'cam_photo',
+        'cam_photo1',
         'provenance',
         'destination',
         'util_id',

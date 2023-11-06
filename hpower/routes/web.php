@@ -32,15 +32,12 @@ Route::get('user/', function () {
     return view('Users/tableaudebord');
 });
 
-Route::get('enregistrerfin/', function () {
-    return view('Users/enregistrerfin');
-});
-Route::get('listecamionsave/', function () {
-    return view('Users/listecamionsave');
-});
-Route::get('listecamionfin/', function () {
-    return view('Users/listecamionfin');
-});
+
 
 Route::get('enregistrercamion/', 'App\Http\Controllers\CamionController@create')->name('camion.create');
 Route::post('enregistrercamion/','App\Http\Controllers\CamionController@store')->name('camion.store');
+Route::get('listecamionsave/', 'App\Http\Controllers\CamionController@view')->name('camion.view');
+Route::get('listecamionfin/', 'App\Http\Controllers\CamionController@viewfin')->name('camion.viewfin');
+Route::get('enregistrerfin/{cam_id}/', 'App\Http\Controllers\CamionController@savefin')->name('camion.savefin');
+Route::post('enregistrerfin/{cam_id}/','App\Http\Controllers\CamionController@storefin')->name('camion.storefin');
+

@@ -20,7 +20,7 @@
                           <th>Nom du chauffeur</th>
                           <th>Heure de départ</th>
                           <th>Heure d'arrivée</th>
-                          <th>Nombre de sacs endommagés</th>
+                          <th>Nombre de sacs</th>
                           
                      
                         </tr>
