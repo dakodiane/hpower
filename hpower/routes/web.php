@@ -37,9 +37,7 @@ Route::get('paiement/', function () {
 Route::get('user/', function () {
     return view('Users/tableaudebord');
 });
-Route::get('enregistrercamion/', function () {
-    return view('Users/enregistrercamion');
-});
+
 Route::get('enregistrerfin/', function () {
     return view('Users/enregistrerfin');
 });
@@ -50,25 +48,5 @@ Route::get('listecamionfin/', function () {
     return view('Users/listecamionfin');
 });
 
-
-Route::get('fourni/', function () {
-    return view('fourni/tableaudebord');
-});
-Route::get('enregistcamion/', function () {
-    return view('fourni/enregistcamion');
-});
-
-
-Route::get('/new', 'fournicontroller@create')->name('create');
-
-Route::post('/fourni/enregistcamion', [fournicontroller::class, 'store'])->name('store');
-
-
-
-
-Route::get('consultation/', function () {
-    return view('fourni/consultation');
-});
-Route::get('data/', function () {
-    return view('fourni/data');
-});
+Route::get('enregistrercamion/', 'App\Http\Controllers\CamionController@create')->name('camion.create');
+Route::post('enregistrercamion/','App\Http\Controllers\CamionController@store')->name('camion.store');

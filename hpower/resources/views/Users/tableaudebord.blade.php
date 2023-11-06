@@ -27,7 +27,7 @@
             <div class="col-md-6 grid-margin stretch-card">
               <div class="card tale-bg">
                 <div class="card-people mt-auto">
-                  <img src="images/dashboard/people.svg" alt="people">
+                  <img src="{{asset('images/accueil-01.jpg')}}" alt="people">
                   <div class="weather-info">
                     <div class="d-flex">
                       <div>
@@ -47,16 +47,16 @@
                 <div class="col-md-6 mb-4 stretch-card transparent">
                   <div class="card card-tale">
                     <div class="card-body">
-                      <p class="mb-4">Camions enregistrés aujourd'hui</p>
-                      <p class="fs-30 mb-2">4006</p>
+                      <p class="mb-4" style="color: white;">Camions enregistrés aujourd'hui</p>
+                      <p class="fs-30 mb-2" style="color: white;">4006</p>
                     </div>
                   </div>
                 </div>
                 <div class="col-md-6 mb-4 stretch-card transparent">
                   <div class="card card-dark-blue">
                     <div class="card-body">
-                      <p class="mb-4">Camions enregistrés ce mois</p>
-                      <p class="fs-30 mb-2">61344</p>
+                      <p class="mb-4" style="color: white;">Camions enregistrés ce mois</p>
+                      <p class="fs-30 mb-2" style="color: white;">61344</p>
                       
                     </div>
                   </div>

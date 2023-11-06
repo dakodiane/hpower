@@ -22172,7 +22172,6 @@ code {
 }
 
 .data-icon-card-primary .background-icon::before {
-  content: url("../../images/dashboard/shape-4.svg");
   position: absolute;
 }
 
@@ -22191,7 +22190,6 @@ code {
 }
 
 .data-icon-card-secondary .background-icon::before {
-  content: url("../../images/dashboard/shape-4.svg");
   position: absolute;
 }
 
@@ -22210,7 +22208,6 @@ code {
 }
 
 .data-icon-card-success .background-icon::before {
-  content: url("../../images/dashboard/shape-4.svg");
   position: absolute;
 }
 
@@ -22229,7 +22226,6 @@ code {
 }
 
 .data-icon-card-info .background-icon::before {
-  content: url("../../images/dashboard/shape-4.svg");
   position: absolute;
 }
 
@@ -22267,7 +22263,6 @@ code {
 }
 
 .data-icon-card-danger .background-icon::before {
-  content: url("../../images/dashboard/shape-4.svg");
   position: absolute;
 }
 
@@ -22286,7 +22281,6 @@ code {
 }
 
 .data-icon-card-light .background-icon::before {
-  content: url("../../images/dashboard/shape-4.svg");
   position: absolute;
 }
 
@@ -22305,7 +22299,6 @@ code {
 }
 
 .data-icon-card-dark .background-icon::before {
-  content: url("../../images/dashboard/shape-4.svg");
   position: absolute;
 }
 
@@ -28833,7 +28826,7 @@ div.tagsinput span.tag a {
 
 .navbar .navbar-brand-wrapper .brand-logo-mini img {
   width: calc(70px - 30px);
-  max-width: 100%;
+  width: 100%;
   margin: auto;
 }
 
