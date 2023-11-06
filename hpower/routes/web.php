@@ -31,9 +31,7 @@ Route::get('paiement/', function () {
 Route::get('user/', function () {
     return view('Users/tableaudebord');
 });
-Route::get('enregistrercamion/', function () {
-    return view('Users/enregistrercamion');
-});
+
 Route::get('enregistrerfin/', function () {
     return view('Users/enregistrerfin');
 });
@@ -43,3 +41,6 @@ Route::get('listecamionsave/', function () {
 Route::get('listecamionfin/', function () {
     return view('Users/listecamionfin');
 });
+
+Route::get('enregistrercamion/', 'App\Http\Controllers\CamionController@create')->name('camion.create');
+Route::post('enregistrercamion/','App\Http\Controllers\CamionController@store')->name('camion.store');

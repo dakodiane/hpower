@@ -53,7 +53,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="{{'enregistrercamion'}}">
+            <a class="nav-link" href="{{ route('camion.create') }}">
               <i class="icon-grid menu-icon mdi mdi-cloud-download"></i>
               <span class="menu-title">Enregistrer un camion</span>
             </a>

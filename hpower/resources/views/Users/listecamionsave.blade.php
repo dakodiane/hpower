@@ -15,7 +15,9 @@
                         <tr>
                           <th>Rapporteur de départ</th>
                           <th>Numéro d'immatriculation</th>
+                          <th>Photo d'immatriculation</th>
                           <th>Nom du chauffeur</th>
+                          <th>Type de produit</th>
                           <th>Heure de départ</th>
                           <th>Action</th>
                         </tr>
@@ -24,7 +26,9 @@
                         <tr>
                           <td>Jacob</td>
                           <td>53275531</td>
+                          <td><a href="{{'/'}}" type="button" class="btn btn-success btn-md">Voir la photo</a></td>
                           <td>Yves </td>
+                          <td>Soja</td>
                           <td>08h30</td>
                           <td><a href="{{'enregistrerfin'}}" type="button" class="btn btn-success btn-md">Finaliser</a></td>
                         </tr>

@@ -9,7 +9,7 @@
             <div class="col-12 grid-margin stretch-card">
               <div class="card">
                 <div class="card-body">
-                  <h4 class="card-title">Enregistrement de camion fin</h4>
+                  <h4 class="card-title">Finaliser un enregistrement</h4>
                   <form class="forms-sample">
                     <div class="form-group">
                       <label for="exampleInputName1">Nom du chauffeur</label>

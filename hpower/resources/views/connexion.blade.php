@@ -26,8 +26,7 @@
               <div class="brand-logo">
               <img src="{{asset('images/hpower.jpeg')}}" alt="logo">
              </div>
-              
-              <h6 class="font-weight-light">Connectez-vous!</h6>
+                           <h6 class="font-weight-light">Connectez-vous!</h6>
               <form class="pt-3">
                 <div class="form-group">
                   <input type="email" class="form-control form-control-lg" id="exampleInputEmail1" placeholder="Email">
@@ -39,7 +38,7 @@
                   <a class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn" href="{{'admin'}}">SE CONNECTER</a>
                 </div>
                 <div class="text-center mt-4 font-weight-light">
-                  Vous n'avz pas de compte? <a href="{{'inscription'}}" class="text-primary">S'inscrire</a>
+                  Vous n'avez pas de compte? <a href="{{'inscription'}}" class="text-primary">S'inscrire</a>
                 </div>
               </form>
             </div>
