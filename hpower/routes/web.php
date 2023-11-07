@@ -16,15 +16,12 @@ Route::get('/', function () {
     return view("welcome");
 });
 
-Route::get('/connexion',[IdentifyController::class,'connexion']);
+Route::get('/connexion','App\Http\Controllers\IdentifyController@connexion')->name('connexion');
 
 Route::get('/inscription',[IdentifyController::class,'inscription']);
 
 Route::post('/inscription','App\Http\Controllers\IdentifyController@registerUser')->name('insUser');
-
-// Route::post('/connexion','App\Http\Controllers\IdentifyController@connectUser')->name('conUser');
-
-Route::post('/connexion',[IdentifyController::class,'conUser'])->name('conUser');
+Route::post('/connexion','App\Http\Controllers\IdentifyController@loginUser')->name('conUser');
 
 
 Route::get('allcamion/', function () {
@@ -33,8 +30,9 @@ Route::get('allcamion/', function () {
 Route::get('paiement/', function () {
     return view('Admin/paiement');
 });
+
 Route::get('user/','App\Http\Controllers\CamionController@statistiquesCamions');
-Route::get('admin/','App\Http\Controllers\CamionController@statistiquesCamions');
+Route::get('admin/','App\Http\Controllers\CamionController@statistiqueCamions');
 
 
 

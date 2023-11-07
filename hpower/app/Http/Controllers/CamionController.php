@@ -112,4 +112,20 @@ public function statistiquesCamions()
     return view('Users/tableaudebord', compact('camionsAujourdhui', 'camionsCeMois'));
 }
 
+public function statistiqueCamions()
+{
+    $aujourdHui = Carbon::now();
+    $ceMois = Carbon::now()->startOfMonth();
+
+    $camionsAujourdhui = DB::table('camions')
+        ->whereDate('created_at', $aujourdHui->toDateString())
+        ->count();
+
+    $camionsCeMois = DB::table('camions')
+        ->whereYear('created_at', $ceMois->year)
+        ->whereMonth('created_at', $ceMois->month)
+        ->count();
+
+    return view('Admin/tableaudebord', compact('camionsAujourdhui', 'camionsCeMois'));
+} 
 }
