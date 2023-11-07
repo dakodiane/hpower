@@ -26,28 +26,36 @@ Route::post('/inscription','App\Http\Controllers\IdentifyController@registerUser
 
 Route::post('/connexion',[IdentifyController::class,'conUser'])->name('conUser');
 
+// Route::get('',[IdentifyController::class,'']);
 
-Route::get('admin/', function () {
-    return view('Admin/tableaudebord');
-});
-Route::get('allcamion/', function () {
-    return view('Admin/allcamion');
-});
-Route::get('paiement/', function () {
-    return view('Admin/paiement');
-});
-Route::get('user/', function () {
-    return view('Users/tableaudebord');
-});
-Route::get('enregistrercamion/', function () {
-    return view('Users/enregistrercamion');
-});
-Route::get('enregistrerfin/', function () {
-    return view('Users/enregistrerfin');
-});
-Route::get('listecamionsave/', function () {
-    return view('Users/listecamionsave');
-});
-Route::get('listecamionfin/', function () {
-    return view('Users/listecamionfin');
-});
+Route::get('/paiement','App\Http\Controllers\semenceController@paiement');
+
+// Route::get('/paiement',[semencesController::class,'paiement'])->name('paiement');
+
+// Route::get('/affichage',[semencesController::class,'affichage']);
+
+
+// Route::get('admin/', function () {
+//     return view('Admin/tableaudebord');
+// });
+// Route::get('allcamion/', function () {
+//     return view('Admin/allcamion');
+// });
+// Route::get('paiement/', function () {
+//     return view('Admin/paiement');
+// });
+// Route::get('user/', function () {
+//     return view('Users/tableaudebord');
+// });
+// Route::get('enregistrercamion/', function () {
+//     return view('Users/enregistrercamion');
+// });
+// Route::get('enregistrerfin/', function () {
+//     return view('Users/enregistrerfin');
+// });
+// Route::get('listecamionsave/', function () {
+//     return view('Users/listecamionsave');
+// });
+// Route::get('listecamionfin/', function () {
+//     return view('Users/listecamionfin');
+// });

@@ -89,4 +89,5 @@ class IdentifyController extends Controller
      if (!Hash::check($password, $user->password)) {
          return redirect()->back()->withErrors(['password' => 'Adresse Email ou Mot de passe incorrect'])->withInput();
      }}
+     
 }
