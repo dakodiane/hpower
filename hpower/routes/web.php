@@ -1,11 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\fournicontroller;
-
-
-
-
+use App\Http\Controllers\IdentifyController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -16,16 +12,16 @@ use App\Http\Controllers\fournicontroller;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+Route::get('/', function () {
+    return view("welcome");
+});
 
-Route::get('connexion/', function () {
-    return view('connexion');
-});
-Route::get('inscription/', function () {
-    return view('inscription');
-});
-Route::get('admin/', function () {
-    return view('Admin/tableaudebord');
-});
+Route::get('/connexion','App\Http\Controllers\IdentifyController@connexion')->name('connexion');
+
+Route::get('/inscription',[IdentifyController::class,'inscription']);
+
+Route::post('/inscription','App\Http\Controllers\IdentifyController@registerUser')->name('insUser');
+Route::post('/connexion','App\Http\Controllers\IdentifyController@loginUser')->name('conUser');
 
 
 Route::get('allcamion/', function () {
@@ -34,19 +30,11 @@ Route::get('allcamion/', function () {
 Route::get('paiement/', function () {
     return view('Admin/paiement');
 });
-Route::get('user/', function () {
-    return view('Users/tableaudebord');
-});
 
-Route::get('enregistrerfin/', function () {
-    return view('Users/enregistrerfin');
-});
-Route::get('listecamionsave/', function () {
-    return view('Users/listecamionsave');
-});
-Route::get('listecamionfin/', function () {
-    return view('Users/listecamionfin');
-});
+Route::get('user/','App\Http\Controllers\CamionController@statistiquesCamions');
+Route::get('admin/','App\Http\Controllers\CamionController@statistiqueCamions');
+
+
 
 Route::get('fourni/', function () {
     return view('fourni/tableaudebord');
@@ -61,9 +49,7 @@ Route::get('enregistcamion/', function () {
 
 Route::get('enregistrercamion/', 'App\Http\Controllers\CamionController@create')->name('camion.create');
 Route::post('enregistrercamion/','App\Http\Controllers\CamionController@store')->name('camion.store');
-
-
-Route::get('enregistcamion/', 'App\Http\Controllers\fourniController@create')->name('fourni.create');
-Route::post('enregistcamion/','App\Http\Controllers\fourniController@store')->name('fourni.store');
-
-Route::get('consultation/', 'App\Http\Controllers\ConsultcamController@show')->name('Consultcam.show');
+Route::get('listecamionsave/', 'App\Http\Controllers\CamionController@view')->name('camion.view');
+Route::get('listecamionfin/', 'App\Http\Controllers\CamionController@viewfin')->name('camion.viewfin');
+Route::get('enregistrerfin/{cam_id}/', 'App\Http\Controllers\CamionController@savefin')->name('camion.savefin');
+Route::post('enregistrerfin/{cam_id}/','App\Http\Controllers\CamionController@storefin')->name('camion.storefin');

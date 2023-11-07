@@ -11,7 +11,7 @@
           <div class="card-body">
             <h4 class="card-title">Enregistrement de camion départ</h4>
             <form method="POST" action="{{ route('camion.store') }}" enctype="multipart/form-data">
-              @csrf <!-- Le CSRF pour la sécurité -->
+              @csrf 
 
               <div class="form-group">
                 <label for="chauffeur">Nom du chauffeur</label>
@@ -44,7 +44,7 @@
 
               <div class="form-group">
                 <label for="heure_depart">Heure de départ</label>
-                <input type="date" class="form-control" id="heure_depart" name="heure_depart" placeholder="08h30" required>
+                <input type="datetime-local" class="form-control" id="heure_depart" name="heure_depart" placeholder="08h30" required>
               </div>
 
               <div class="form-group">
@@ -55,7 +55,14 @@
                   <option value="Banikoara">Banikoara</option>
                 </select>
               </div>
-
+              <div class="form-group">
+                <label for="exampleInputCity1">Poids à vide (tonnes)</label>
+                <input type="text" class="form-control" name="poids_vide" id="exampleInputCity1" placeholder="">
+              </div>
+              <div class="form-group">
+                <label for="exampleInputCity1">Poids chargé(tonnes)</label>
+                <input type="text" class="form-control" name="poids_charge" id="exampleInputCity1" placeholder="">
+              </div>
               <div class="form-group">
                 <label for="observation">Observation</label>
                 <textarea class="form-control" id="observation" name="observation" rows="4" ></textarea>

@@ -13,6 +13,7 @@
                     <table class="tableau">
                       <thead>
                         <tr>
+                        <th>Numéro de Bordereau</th>
                           <th>Ville de départ</th>
                           <th>Rapporteur au départ</th>
                           <th>Rapporteur à la destination</th>
@@ -20,23 +21,30 @@
                           <th>Nom du chauffeur</th>
                           <th>Heure de départ</th>
                           <th>Heure d'arrivée</th>
-                          <th>Nombre de sacs endommagés</th>
-                          
-                     
+                          <th>Nombre de sacs</th>
+                          <th>Poids à vide</th>
+                          <th>Poids chargé</th>
+                          <th>Poids net</th>         
                         </tr>
                       </thead>
                       <tbody>
+                      @foreach($camions as $camion)
                         <tr>
-                          <td>Cotonou</td>
-                          <td>Jacob</td>
-                          <td>Yves </td>
-                          <td>53275531</td>
-                          <td>Farid </td>
-                          <td>08h30</td>
-                          <td>10h</td>
-                          <td>10</td>
+                        <td>{{ $camion->num_bordereau }}</td>
+                          <td>{{ $camion->provenance }}</td>
+                          <td>{{ $camion->cam_nomchauf }}</td>
+                          <td>{{ $camion->cam_nomchauf }} </td>
+                          <td>{{ $camion->num_immatriculation }}</td>
+                          <td>{{ $camion->cam_nomchauf }}</td>
+                          <td>{{ $camion->heure_depart}}</td>
+                          <td>{{ $camion->heure_arrive }}</td>
+                          <td>{{ $camion->nombre_sac }}</td>
+                          <td>{{ $camion->poids_vide}}</td>
+                          <td>{{ $camion->poids_charge }}</td>
+                          <td>{{ $camion->poids_net }}</td>
+                  
                         </tr>
-                      
+                      @endforeach
                       </tbody>
                     </table>
                   </div>
