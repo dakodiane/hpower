@@ -1,44 +1,55 @@
 <?php
-
 namespace App\Http\Controllers;
+use App\Models\Produit;
+use App\Models\Camion;
 
 use Illuminate\Http\Request;
-use App\Models\Camions;
+
 
 
 class fournicontroller extends Controller
 {
 
+    //
     public function create()
     {
-        return view('fourni.enregistcamion');
+        $produits = Produit::all();
+        return view('fourni/enregistcamion', ['produits' => $produits]);
     }
 
-        public function store(Request $request)
-        {
-          
-            $camion = camions::create([
-                'num_bordereau' => $request->input('numero_bordereau'),
-                'num_ima' => $request->input('numero_imatri'),
-                'cam_nomchauf' => $request->input('nom_chauffeur'),
-                'type_produit' => $request->input('type_produit'),
-                'heure_depart' => $request->input('heure_depart'),
-                'observation' => $request->input('observation'),
-                'poids_vide' => $request->input('poids_vide'),
-                'poids_charge' => $request->input('poids_charge'),
-                'poids_net' => $request->input('poids_net'),
-                'cam_photo' => $request->input('photo_immatriculation'),
-                'statut_dechargement' => $request->input('statutChargement'),
-                'nombre_sac' => $request->input('nombre_sacs'),
-                'ville_depart' => $request->input('ville_depart'),
-                'name_fourni' => $request->input('fournisseur'),
-                        dd
-                    ]);
-                    
     
-            return redirect()->back()->with('success', 'Camion enregistré avec succès.');
+    public function store(Request $request)
+    {
+        $data = $request->all();
+  //dd($data);
+        $lastCamion = Camion::orderBy('cam_id', 'desc')->first();
+        if ($lastCamion) {
+            $lastNumBordereau = $lastCamion->num_bordereau;
+            $lastNumBordereau = substr($lastNumBordereau, 2); 
+            $newNumBordereau = 'HP' . str_pad(($lastNumBordereau + 1), 4, '0', STR_PAD_LEFT);
+        } else {
+            $newNumBordereau = 'HP0001';
         }
+    
+        if ($request->hasFile('cam_photo')) {
+            $photoPath = $request->file('cam_photo')->store('photo_immat');
+            $data['cam_photo'] = $photoPath;
+        }
+    
 
+        $data['num_bordereau'] = $newNumBordereau;
+    
+        $camion = new Camion();
+
+        $camion->fill($data);
+    
+        $camion->save();
+    
+        return redirect()->route('fourni.create')->with('success', 'Camion enregistré avec succès.');
+    }
+    
+ 
+    
     
 
 

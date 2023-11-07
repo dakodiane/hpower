@@ -10,50 +10,40 @@
               <div class="card">
                 <div class="card-body">
                       <h4 class="card-title">Enregistrement de camion </h4>   
-                  <form class="forms-sample" action="{{ route('store') }}" method="POST" enctype="multipart/form-data">
-                  @csrf 
-                 
-                    
-                    <div class="form-group">
-                      <label for="exampleInputName1">Fournisseur</label>
-                      <input type="text" class="form-control" id="exampleInputName1" placeholder="Name" required name="fournisseur">
-                    </div>
+                      <form method="POST" action="{{ route('fourni.store') }}" enctype="multipart/form-data">
+                          @csrf <!-- Le CSRF pour la sécurité -->
+          
                   
-                    <div class="form-group">
-                      <label for="exampleInputName1">Numéro de bordereau</label>
-                      <input type="text" class="form-control" id="exampleInputName1" placeholder="Name" required name="numero_bordereau">
-                    </div>
-                    <div class="form-group">
-                      <label for="exampleInputName1">Numéro d'immatriculation</label>
-                      <input type="text" class="form-control" id="exampleInputName1" placeholder="Name" required name="numero_imatri">
-                    </div>
-                    <div class="form-group">
-                      <label>Photo de l'immatriculation du camion</label>
-                      <input type="file" name="img" class="file-upload-default" required name="photo_immatriculation">
-                      <div class="input-group col-xs-12">
-                        <input type="text" class="form-control file-upload-info" disabled placeholder="Charger l'image">
-                        <span class="input-group-append">
-                          <button class="file-upload-browse btn btn-primary" type="button">Charger l'image</button>
-                        </span>
-                      </div>
-                    </div>
                   
                     <div class="form-group">
                       <label for="exampleInputName1">Nom du chauffeur</label>
-                      <input type="text" class="form-control" id="exampleInputName1" placeholder="Name" required name="nom_chauffeur">
+                      <input type="text" class="form-control" id="exampleInputName1" placeholder="Name" required name="cam_nomchauf">
                     </div>
                   
+                    
                     <div class="form-group">
-                      <label for="exampleSelectGender">Type de produit</label>
-                        <select class="form-control" id="exampleSelectGender" required name="type_produit">
-                        <option></option> 
-                          <option>Soja</option>
-                          <option>Karité</option>
-                          <option>Riz</option>
-                          <option>Karité</option>
+                      <label for="exampleInputName1">Numéro d'immatriculation</label>
+                      <input type="text" class="form-control" id="exampleInputName1" placeholder="Name" required name="num_immatriculation">
+                    </div>
+                    <div class="form-group">
+                          <label for="photo_immat">Photo de l'immatriculation du camion</label>
+                          <input type="file" name="cam_photo" class="file-upload-default" required>
+                          <div class="input-group col-xs-12">
+                            <input type="text" class="form-control file-upload-info" disabled placeholder="Charger l'image" required>
+                            <span class="input-group-append">
+                              <button class="file-upload-browse btn btn-primary" type="button">Charger l'image</button>
+                            </span>
+                          </div>
+                        </div>
+
+                      <div class="form-group">
+                        <label for="type_produit">Type de produit</label>
+                        <select class="form-control" id="prod_nom" name="type_produit" required>
+                          @foreach($produits as $produit)
+                          <option value="{{ $produit->prod_nom }}">{{ $produit->prod_nom }}</option>
+                          @endforeach
                         </select>
                       </div>
-                    
                  
                     <div class="form-group">
                       <label for="exampleInputCity1">Poids à vide</label>
@@ -81,8 +71,8 @@
                     </div>
                     
                     <div class="form-group">
-                      <label for="exampleSelectGender">ville de départ </label>
-                        <select class="form-control" id="exampleSelectGender"  name="ville_depart">
+                      <label for="exampleSelectGender">Provenance </label>
+                        <select class="form-control" id="exampleSelectGender"  name="provenance">
                         <option></option>
                           <option>Cotonou</option>
                           <option>Parakou</option>
