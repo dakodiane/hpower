@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\IdentifyController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -12,13 +12,21 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+Route::get('/', function () {
+    return view("welcome");
+});
 
-Route::get('connexion/', function () {
-    return view('connexion');
-});
-Route::get('inscription/', function () {
-    return view('inscription');
-});
+Route::get('/connexion',[IdentifyController::class,'connexion']);
+
+Route::get('/inscription',[IdentifyController::class,'inscription']);
+
+Route::post('/inscription','App\Http\Controllers\IdentifyController@registerUser')->name('insUser');
+
+// Route::post('/connexion','App\Http\Controllers\IdentifyController@connectUser')->name('conUser');
+
+Route::post('/connexion',[IdentifyController::class,'conUser'])->name('conUser');
+
+
 Route::get('admin/', function () {
     return view('Admin/tableaudebord');
 });
