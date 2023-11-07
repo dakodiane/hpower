@@ -12,6 +12,7 @@
               <table class="tableau">
                 <thead>
                   <tr>
+                  <th>Numéro de Bordereau</th>
                     <th>Rapporteur de départ</th>
                     <th>Numéro d'immatriculation</th>
                     <th>Photo d'immatriculation</th>
@@ -24,12 +25,14 @@
                 <tbody>
                   @foreach($camions as $camion)
                   <tr>
+                  <td>{{ $camion->num_bordereau}}</td>
                     <td>{{ $camion->cam_nomchauf }}</td>
                     <td>{{ $camion->num_immatriculation }}</td>
                     <td><a href="{{ asset($camion->cam_photo) }}" type="button" class="btn btn-success btn-md">Voir la photo</a></td>
                     <td>{{ $camion->cam_nomchauf }}</td>
                     <td>{{ $camion->type_produit }}</td>
                     <td>{{ $camion->heure_depart }}</td>
+
                     <td><a href="{{ route('camion.savefin', ['cam_id' => $camion->cam_id]) }}" type="button" class="btn btn-success btn-md">Finaliser</a></td>
                   </tr>
                   @endforeach

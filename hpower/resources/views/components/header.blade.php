@@ -53,12 +53,6 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="{{('/allcamion')}}">
-              <i class="icon-grid menu-icon mdi mdi-cloud-download"></i>
-              <span class="menu-title">Effectuer un paiement</span>
-            </a>
-          </li>
-          <li class="nav-item">
             <a class="nav-link" href="{{'listecamionfin'}}">
               <i class="icon-grid menu-icon"></i>
               <span class="menu-title">Camions finalisés</span>

@@ -109,7 +109,7 @@ public function statistiquesCamions()
         ->whereMonth('created_at', $ceMois->month)
         ->count();
 
-    return view('Users/tableaudebord', compact('camionsAujourdhui', 'camionsCeMois'));
+    return view('Admin/tableaudebord', compact('camionsAujourdhui', 'camionsCeMois'));
 }
 
 }

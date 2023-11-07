@@ -55,7 +55,14 @@
                   <option value="Banikoara">Banikoara</option>
                 </select>
               </div>
-
+              <div class="form-group">
+                <label for="exampleInputCity1">Poids à vide (tonnes)</label>
+                <input type="text" class="form-control" name="poids_vide" id="exampleInputCity1" placeholder="">
+              </div>
+              <div class="form-group">
+                <label for="exampleInputCity1">Poids chargé(tonnes)</label>
+                <input type="text" class="form-control" name="poids_charge" id="exampleInputCity1" placeholder="">
+              </div>
               <div class="form-group">
                 <label for="observation">Observation</label>
                 <textarea class="form-control" id="observation" name="observation" rows="4" ></textarea>

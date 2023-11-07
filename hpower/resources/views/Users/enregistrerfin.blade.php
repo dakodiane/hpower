@@ -44,7 +44,7 @@
               </div>
               <div class="form-group">
                 <label for="exampleInputCity1">Heure d'arrivée</label>
-                <input type="date" name="heure_arrive" class="form-control" id="exampleInputCity1">
+                <input type="datetime-local" name="heure_arrive" class="form-control" id="exampleInputCity1">
               </div>
               <div class="form-group">
                 <label for="exampleInputName1">Nombre de sacs</label>
@@ -57,14 +57,6 @@
                   <option>Déchargé</option>
 
                 </select>
-              </div>
-              <div class="form-group">
-                <label for="exampleInputCity1">Poids à vide (tonnes)</label>
-                <input type="text" class="form-control" name="poids_vide" id="exampleInputCity1" placeholder="">
-              </div>
-              <div class="form-group">
-                <label for="exampleInputCity1">Poids chargé(tonnes)</label>
-                <input type="text" class="form-control" name="poids_charge" id="exampleInputCity1" placeholder="">
               </div>
 
               <div class="form-group">

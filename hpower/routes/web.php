@@ -19,18 +19,15 @@ Route::get('connexion/', function () {
 Route::get('inscription/', function () {
     return view('inscription');
 });
-Route::get('admin/', function () {
-    return view('Admin/tableaudebord');
-});
+
 Route::get('allcamion/', function () {
     return view('Admin/allcamion');
 });
 Route::get('paiement/', function () {
     return view('Admin/paiement');
 });
-Route::get('user/', function () {
-    return view('Users/tableaudebord');
-});
+Route::get('user/','App\Http\Controllers\CamionController@statistiquesCamions');
+Route::get('admin/','App\Http\Controllers\CamionController@statistiquesCamions');
 
 
 
@@ -40,4 +37,3 @@ Route::get('listecamionsave/', 'App\Http\Controllers\CamionController@view')->na
 Route::get('listecamionfin/', 'App\Http\Controllers\CamionController@viewfin')->name('camion.viewfin');
 Route::get('enregistrerfin/{cam_id}/', 'App\Http\Controllers\CamionController@savefin')->name('camion.savefin');
 Route::post('enregistrerfin/{cam_id}/','App\Http\Controllers\CamionController@storefin')->name('camion.storefin');
-
