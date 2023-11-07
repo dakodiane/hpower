@@ -58,10 +58,6 @@ Route::get('enregistcamion/', function () {
 
 
 
-Route::get('consultation/', function () {
-    return view('fourni/consultation');
-});
-
 
 Route::get('enregistrercamion/', 'App\Http\Controllers\CamionController@create')->name('camion.create');
 Route::post('enregistrercamion/','App\Http\Controllers\CamionController@store')->name('camion.store');
@@ -70,4 +66,4 @@ Route::post('enregistrercamion/','App\Http\Controllers\CamionController@store')-
 Route::get('enregistcamion/', 'App\Http\Controllers\fourniController@create')->name('fourni.create');
 Route::post('enregistcamion/','App\Http\Controllers\fourniController@store')->name('fourni.store');
 
-Route::post('consulation/', 'App\Http\Controllers\ConsultcamController@show')->name('Consultcam.show');
+Route::get('consultation/', 'App\Http\Controllers\ConsultcamController@show')->name('Consultcam.show');
