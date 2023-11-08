@@ -55,14 +55,10 @@
                       <input type="number" class="form-control" id="exampleInputCity1" placeholder="poids du camion et du chargement" required name="poids_charge">
                     </div>
 
-                    <div class="form-group">
-                      <label for="exampleInputCity1">Poids net</label>
-                      <input type="number" class="form-control" id="exampleInputCity1" placeholder="poids net" required name="poids_net">
-                    </div>
-
+                   
                     <div class="form-group">
                       <label for="exampleInputCity1">Nombre de sacs</label>
-                      <input type="number" class="form-control" id="exampleInputCity1" placeholder="" required name="nombre_sacs">
+                      <input type="number" class="form-control" id="exampleInputCity1" placeholder="" required name="nombre_sac">
                     </div>
                     
                     <div class="form-group">
@@ -83,7 +79,7 @@
 
                       <div class="form-group">
                           <label for="statutChargement">Statut du chargement</label>
-                          <select class="form-control" id="statutChargement" name="statutChargement" >
+                          <select class="form-control" id="statut_dechargement" name="statut_dechargement" >
                               <option value="1">Chargé</option>
                               <option value="0">Non chargé</option>
                           </select>

@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\IdentifyController;
+use App\Http\Controllers\fournicontroller;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -45,6 +46,12 @@ Route::get('enregistcamion/', function () {
 
 
 
+    
+Route::get('consultation/', 'App\Http\Controllers\ConsultcamController@show')->name('Consultcam.show');
+Route::get('enregistcamion/', 'App\Http\Controllers\fourniController@create')->name('fourni.create');
+Route::post('enregistcamion/','App\Http\Controllers\fourniController@store')->name('fourni.store');
+
+
 
 
 Route::get('enregistrercamion/', 'App\Http\Controllers\CamionController@create')->name('camion.create');
@@ -53,3 +60,8 @@ Route::get('listecamionsave/', 'App\Http\Controllers\CamionController@view')->na
 Route::get('listecamionfin/', 'App\Http\Controllers\CamionController@viewfin')->name('camion.viewfin');
 Route::get('enregistrerfin/{cam_id}/', 'App\Http\Controllers\CamionController@savefin')->name('camion.savefin');
 Route::post('enregistrerfin/{cam_id}/','App\Http\Controllers\CamionController@storefin')->name('camion.storefin');
+
+
+
+
+

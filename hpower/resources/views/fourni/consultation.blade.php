@@ -13,17 +13,17 @@
                             <table class="tableau">
                                 <thead>
                                     <tr>
-                                        <th>Ville de départ</th>
-                                        <th>Fournisseur</th>
-                                        <th>Rapporteur à la destination</th>
-                                        <th>Numéro d'immatriculation camion</th>
                                         <th>Nom du chauffeur</th>
+                                        <th>Numéro d'immatriculation</th>
+                                        <th>Photo de l'immatriculation du camion</th>
                                         <th>Type de produit</th>
-                                        <th>Conditionnement</th>
-                                        <th>Etat du camion</th>
+                                        <th>Poids à vide</th>
+                                        <th>Poids charge</th>
+                                        <th>Poids net</th>
+                                        <th>Nombre de sacs</th>
                                         <th>Heure de départ</th>
-                                        <th>Heure d'arrivée</th>
-                                        <th>Nombre de sacs endommagés</th>
+                                        <th>Provenance</th>
+                                        <th>Statut du chargement</th>
                                         <th>observation</th>
                                         <th>Paiement</th>
                                     </tr>
@@ -31,17 +31,17 @@
                                 <tbody>
                                     @foreach($camions as $camion)
                                     <tr>
-                                        <td>{{ $camion->provenance }}</td>
-                                        <td>{{ $camion->util_id }}</td>
-                                        <td>{{ $camion->destination }}</td>
-                                        <td>{{ $camion->num_immatriculation }}</td>
-                                        <td>{{ $camion->cam_nomchauf }}</td>
+                                       <td>{{ $camion->cam_nomchauf }}</td>
+                                       <td>{{ $camion->num_immatriculation }}</td>     
+                                       <td><a href="{{ asset($camion->cam_photo) }}" type="button" class="btn btn-success btn-md">Voir la photo</a></td>
                                         <td>{{ $camion->type_produit }}</td>
-                                        <td>{{ $camion->conditionnement }}</td>
-                                        <td>{{ $camion->etat_camion }}</td>
-                                        <td>{{ $camion->heure_depart }}</td>
-                                        <td>{{ $camion->heure_arrive }}</td>
+                                        <td>{{ $camion->poids_vide }}</td>
+                                        <td>{{ $camion->poids_charge }}</td>
+                                        <td>{{ $camion->poids_net }}</td>
                                         <td>{{ $camion->nombre_sac }}</td>
+                                        <td>{{ $camion->heure_depart }}</td>
+                                        <td>{{ $camion->provenance }}</td>
+                                        <td>{{ $camion->statut_dechargement }}</td>
                                         <td>{{ $camion->observation }}</td>
                                         <td>{{ $camion->statut_paiement }}</td>
                                     </tr>

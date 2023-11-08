@@ -21,7 +21,7 @@ class fournicontroller extends Controller
     public function store(Request $request)
     {
         $data = $request->all();
-  //dd($data);
+        //dd($data);
         $lastCamion = Camion::orderBy('cam_id', 'desc')->first();
         if ($lastCamion) {
             $lastNumBordereau = $lastCamion->num_bordereau;
@@ -38,6 +38,12 @@ class fournicontroller extends Controller
     
 
         $data['num_bordereau'] = $newNumBordereau;
+        
+        $poidsCharge = $request->input('poids_charge');
+        $poidsVide = $request->input('poids_vide');
+        $poidsNet = $poidsCharge - $poidsVide;
+    
+        $data['poids_net'] = $poidsNet;
     
         $camion = new Camion();
 
