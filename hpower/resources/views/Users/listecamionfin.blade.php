@@ -42,7 +42,6 @@
                           <td>{{ $camion->poids_vide}}</td>
                           <td>{{ $camion->poids_charge }}</td>
                           <td>{{ $camion->poids_net }}</td>
-                  
                         </tr>
                       @endforeach
                       </tbody>

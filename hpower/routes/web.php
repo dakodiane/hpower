@@ -40,6 +40,10 @@ Route::get('admin/','App\Http\Controllers\CamionController@statistiqueCamions');
 Route::get('fourni/', function () {
     return view('fourni/tableaudebord');
 });
+
+Route::get('servicetrans/', function () {
+    return view('servicetrans/tableaudebord');
+});
 Route::get('enregistcamion/', function () {
     return view('fourni/enregistcamion');
 });
@@ -48,8 +52,11 @@ Route::get('enregistcamion/', function () {
 
     
 Route::get('consultation/', 'App\Http\Controllers\ConsultcamController@show')->name('Consultcam.show');
+
 Route::get('enregistcamion/', 'App\Http\Controllers\fourniController@create')->name('fourni.create');
 Route::post('enregistcamion/','App\Http\Controllers\fourniController@store')->name('fourni.store');
+
+Route::get('fourni/','App\Http\Controllers\fournicontroller@statistiqueCamions');
 
 
 
@@ -61,7 +68,12 @@ Route::get('listecamionfin/', 'App\Http\Controllers\CamionController@viewfin')->
 Route::get('enregistrerfin/{cam_id}/', 'App\Http\Controllers\CamionController@savefin')->name('camion.savefin');
 Route::post('enregistrerfin/{cam_id}/','App\Http\Controllers\CamionController@storefin')->name('camion.storefin');
 
+Route::get('servconsultation/', 'App\Http\Controllers\ServicetransController@show')->name('Servicetrans.show');
+Route::get('servicetrans/','App\Http\Controllers\ServicetransController@statistiquesCamions');
 
 
 
 
+
+Route::get('servpaiement/{cam_id}', 'App\Http\Controllers\ServicetransController@paiement')->name('servicetrans.servpaiement');
+Route::post('servpaiement/{cam_id}/store', 'App\Http\Controllers\ServicetransController@storepaie')->name('Servicetrans.storepaie');

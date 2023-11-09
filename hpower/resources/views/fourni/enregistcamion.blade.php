@@ -16,46 +16,41 @@
                   
                   
                     <div class="form-group">
-                      <label for="exampleInputName1">Nom du chauffeur</label>
+                      <label for="exampleInputName1">Nom du conducteur</label>
                       <input type="text" class="form-control" id="exampleInputName1" placeholder="Name" required name="cam_nomchauf">
                     </div>
+
+                    <div class="form-group">
+                      <label for="exampleInputName1">N° de tel du conducteur</label>
+                      <input type="number" class="form-control" id="exampleInputName1" placeholder="Name" required name="tel_conducteur">
+                    </div>
+                  
                   
                     
                     <div class="form-group">
-                      <label for="exampleInputName1">Numéro d'immatriculation</label>
+                      <label for="exampleInputName1">N° d'immatriculation</label>
                       <input type="text" class="form-control" id="exampleInputName1" placeholder="Name" required name="num_immatriculation">
                     </div>
                     <div class="form-group">
-                          <label for="photo_immat">Photo de l'immatriculation du camion</label>
-                          <input type="file" name="cam_photo" class="file-upload-default" required>
-                          <div class="input-group col-xs-12">
-                            <input type="text" class="form-control file-upload-info" disabled placeholder="Charger l'image" required>
-                            <span class="input-group-append">
-                              <button class="file-upload-browse btn btn-primary" type="button">Charger l'image</button>
-                            </span>
-                          </div>
+                        <label for="photo_immat">Photo de l'immatriculation</label>
+                        <input type="file" name="cam_photo" class="file-upload-default" required>
+                        <div class="input-group col-xs-12">
+                          <input type="text" class="form-control file-upload-info" disabled placeholder="Charger l'image" required>
+                          <span class="input-group-append">
+                            <button class="file-upload-browse btn btn-primary" type="button">Charger l'image</button>
+                          </span>
                         </div>
+                      </div>
 
                       <div class="form-group">
-                        <label for="type_produit">Type de produit</label>
+                        <label for="type_produit">Matière transportée</label>
                         <select class="form-control" id="prod_nom" name="type_produit" required>
                           @foreach($produits as $produit)
                           <option value="{{ $produit->prod_nom }}">{{ $produit->prod_nom }}</option>
                           @endforeach
                         </select>
                       </div>
-                 
-                    <div class="form-group">
-                      <label for="exampleInputCity1">Poids à vide</label>
-                      <input type="number" class="form-control" id="exampleInputCity1" placeholder="poids à vide du camion" required name="poids_vide">
-                    </div>
-
-                    <div class="form-group">
-                      <label for="exampleInputCity1">Poids charge</label>
-                      <input type="number" class="form-control" id="exampleInputCity1" placeholder="poids du camion et du chargement" required name="poids_charge">
-                    </div>
-
-                   
+           
                     <div class="form-group">
                       <label for="exampleInputCity1">Nombre de sacs</label>
                       <input type="number" class="form-control" id="exampleInputCity1" placeholder="" required name="nombre_sac">

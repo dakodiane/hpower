@@ -11,7 +11,9 @@ class ConsultcamController extends Controller
 public function show()
 {
     $camions = Camion::all();
-    return view('fourni/consultation', ['camions' => $camions]);
+   
+    return view('fourni/consultation', compact('camions'));
+    
 }
 
 }

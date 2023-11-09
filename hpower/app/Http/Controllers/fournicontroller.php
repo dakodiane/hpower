@@ -2,7 +2,8 @@
 namespace App\Http\Controllers;
 use App\Models\Produit;
 use App\Models\Camion;
-
+use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 
@@ -32,7 +33,7 @@ class fournicontroller extends Controller
         }
     
         if ($request->hasFile('cam_photo')) {
-            $photoPath = $request->file('cam_photo')->store('photo_immat');
+            $photoPath = $request->file('cam_photo')->store('photo_immat','public');
             $data['cam_photo'] = $photoPath;
         }
     
@@ -57,6 +58,28 @@ class fournicontroller extends Controller
  
     
     
+
+    
+    public function statistiqueCamions()
+    {
+        $aujourdHui = Carbon::now();
+        $ceMois = Carbon::now()->startOfMonth();
+    
+        $camionsAujourdhui = DB::table('camions')
+            ->whereDate('created_at', $aujourdHui->toDateString())
+            ->count();
+    
+        $camionsCeMois = DB::table('camions')
+            ->whereYear('created_at', $ceMois->year)
+            ->whereMonth('created_at', $ceMois->month)
+            ->count();
+    
+        return view('fourni/tableaudebord', compact('camionsAujourdhui', 'camionsCeMois'));
+    } 
+
+
+
+
 
 
 }

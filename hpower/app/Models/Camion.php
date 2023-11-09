@@ -32,6 +32,15 @@ class Camion extends Model
         'statut_dechargement',
         'nombre_sac',
         'statut_paiement',
+        'tel_conducteur',
     ];
+
+
+            // Dans le modèle Camion
+        public function paiements()
+        {
+            return $this->hasMany(Paiement::class, 'cam_id');
+        }
+
 
 }

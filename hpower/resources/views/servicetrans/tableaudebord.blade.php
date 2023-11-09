@@ -1,4 +1,4 @@
-@extends('templates.fourni')
+@extends('templates.servicetrans')
 
 @section('document')
 

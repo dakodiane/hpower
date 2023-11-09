@@ -1,4 +1,4 @@
-@extends('templates.fourni')
+@extends('templates.servicetrans')
 
 @section('document')
 <div class="main-panel">
@@ -13,34 +13,43 @@
                             <table class="tableau">
                                 <thead>
                                     <tr>
-                                        <th>Nom du chauffeur</th>
-                                        <th>Numéro d'immatriculation</th>
-                                        <th>Photo de l'immatriculation du camion</th>
-                                        <th>Type de produit</th>
-                                        <th>Poids à vide</th>
-                                        <th>Poids charge</th>
-                                        <th>Poids net</th>
-                                        <th>Nombre de sacs</th>
-                                        <th>Heure de départ</th>
+                                        <th>Date</th>
+                                        <th>N° d'immatriculation</th>
+                                        <th>Photo de l'immatriculation</th>
+                                        <th>Nom du conducteur</th>
+                                        <th>N° de tel du conducteur</th>
+                                        <th>Matière transportée</th>
+                                        <th>Poids vide du camion (kg)</th>
+                                        <th>Poids chargé du camion(Kg)</th>
+                                        <th>Poids net du produit</th>
+                                        <th>N° de bordereau de chargement</th>
                                         <th>Provenance</th>
-                                        <th>Statut du chargement</th>
-                                        <th>observation</th>
-                                        <th>charge</th>
+                                        <th>Prix SIPI (FCFA/Kilo)</th>
+                                        <th>Prix HPG (FCFA/kilo)</th>
+                                        <th>Montant SIPI (FCFA)</th>
+                                        <th>Montant HPG (FCFA)</th>
+                                        <th>Recette HPG (FCFA)</th>
+                                        <th>Charge</th>
                                         <th>Paiement</th>
+                                        
                                     </tr>
                                 </thead> 
                                 <tbody>
                                     @foreach($camions as $camion)
                                     <tr>
-                                       <td>{{ $camion->cam_nomchauf }}</td>
+                                       <td>{{ $camion->created_at }}</td>
                                        <td>{{ $camion->num_immatriculation }}</td>     
                                        <td><a href="{{ asset($camion->cam_photo) }}" type="button" class="btn btn-success btn-sm">Voir la photo</a></td>
+                                       <td>{{ $camion->cam_nomchauf }}</td>
+                                       <td>{{ $camion->tel_conducteur }}</td>
                                         <td>{{ $camion->type_produit }}</td>
                                         <td>{{ $camion->poids_vide }}</td>
                                         <td>{{ $camion->poids_charge }}</td>
                                         <td>{{ $camion->poids_net }}</td>
                                         <td>{{ $camion->nombre_sac }}</td>
-                                        <td>{{ $camion->heure_depart }}</td>
+                                        <td>{{ $camion->provenance }}</td>
+                                        <td>{{ $camion->provenance }}</td>
+                                        <td>{{ $camion->provenance }}</td>
                                         <td>{{ $camion->provenance }}</td>
                                         <td>
                                             @if($camion->statut_dechargement == 1)
@@ -52,7 +61,6 @@
 
                                         <td>{{ $camion->observation }}</td>
                                         <td></td>
-                                        <td>{{ $camion->statut_paiement }}</td>
                                     </tr>
                                     @endforeach
                                 </tbody>
