@@ -49,12 +49,10 @@
 
               <div class="form-group">
                 <label for="destination">Ville de destination</label>
-                <select class="form-control" id="ville_depart" name="destination" required>
-                  <option value="Cotonou">Cotonou</option>
-                  <option value="Parakou">Parakou</option>
-                  <option value="Banikoara">Banikoara</option>
-                </select>
+                <input type="text" class="form-control"  id="destination" name="destination" placeholder="Tapez une ville" autocomplete="off">
+                <ul id="villes-list"></ul>
               </div>
+      
               <div class="form-group">
                 <label for="exampleInputCity1">Poids à vide (tonnes)</label>
                 <input type="text" class="form-control" name="poids_vide" id="exampleInputCity1" placeholder="">
@@ -81,6 +79,38 @@
   </div>
 
 </div>
+<script>
+      var input = document.getElementById('ville');
+      var villesList = document.getElementById('villes-list');
 
+
+      input.addEventListener('input', function() {
+
+        var recherche = input.value.toLowerCase();
+
+        villesList.innerHTML = '';
+
+        var villes = ['Cotonou', 'Abomey-Calavi', 'Porto-Novo', 'Parakou', 'Djougou', 'Bohicon', 'Natitingou',
+          'Savé', 'Abomey', 'Nikki', 'Lokossa', 'Ouidah', 'Dogbo-Tota', 'Kandi', 'Cové', 'Malanville',
+          'Pobé', 'Kérou', 'Savalou', 'Sakété', 'Comè', 'Bembéréké', 'Bassila', 'Banikoara', 'Kétou',
+          'Dassa-Zoumè', 'Tchaourou', 'Allada', 'Aplahoué', 'Tanguiéta', 'N\'Dali', 'Segbana', 'Athiémé',
+          'Grand Popo', 'Kouandé',
+        ];
+
+        var villesFiltrees = villes.filter(function(ville) {
+          return ville.toLowerCase().includes(recherche);
+        });
+
+        villesFiltrees.forEach(function(ville) {
+          var li = document.createElement('li');
+          li.textContent = ville;
+          li.addEventListener('click', function() {
+            input.value = ville;
+            villesList.innerHTML = '';
+          });
+          villesList.appendChild(li);
+        });
+      });
+    </script>
 
 @endsection

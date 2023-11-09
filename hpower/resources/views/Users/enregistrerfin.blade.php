@@ -22,16 +22,11 @@
                 <label for="exampleSelectGender">Type de produit</label>
                 <input type="text" class="form-control" id="type_produit" value="{{ isset($camions) ? $camions->type_produit : '' }}" readonly>
               </div>
-
               <div class="form-group">
-                <label for="exampleSelectGender">Ville de depart</label>
-                <select class="form-control" name="provenance" id="exampleSelectGender">
-                  <option>Cotonou</option>
-                  <option>Parakou</option>
-                  <option>Banikoara</option>
-                  <option>...</option>
-                </select>
+                <label for="exampleSelectGender">Ville de départ</label>
+                <input type="text" class="form-control" id="type_produit" value="{{ isset($camions) ? $camions->provenance : '' }}" readonly>
               </div>
+           
               <div class="form-group">
                 <label for="photo_immatf">Photo de l'immatriculation du camion</label>
                 <input type="file" name="cam_photo1" class="file-upload-default" required>

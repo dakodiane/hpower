@@ -20,10 +20,11 @@ class User extends Authenticatable
     protected $fillable = [
         'name',
         'email',
+        'password',
         'telephone',
         'role',
-        'password',
         'ville',
+        'last_activity',
         'confirmation_token',
     ];
 
@@ -46,5 +47,10 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    public function updateLastActivity()
+    {
+        $this->update(['last_activity' => now()]);
+    }
 
 }
