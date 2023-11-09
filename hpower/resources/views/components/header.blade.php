@@ -43,7 +43,6 @@
     </nav>
     <div class="container-fluid page-body-wrapper">
      
-      <!-- partial:partials/_sidebar.html -->
       <nav class="sidebar sidebar-offcanvas" id="sidebar">
         <ul class="nav">
           <li class="nav-item">
@@ -53,20 +52,38 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="{{'listecamionfin'}}">
+            <a class="nav-link" href="{{'allcamion'}}">
               <i class="icon-grid menu-icon"></i>
-              <span class="menu-title">Camions finalisés</span>
+              <span class="menu-title">Tous les camions</span>
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="pages/forms/listecamionfin.html">
+            <a class="nav-link" href="{{'fournilist'}}">
               <i class="icon-grid menu-icon"></i>
-              <span class="menu-title">Camions finalisés</span>
+              <span class="menu-title">Tous les fournisseurs</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{'paiement'}}">
+              <i class="icon-grid menu-icon"></i>
+              <span class="menu-title">Tous les paiements</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{'userlist'}}">
+              <i class="icon-grid menu-icon"></i>
+              <span class="menu-title">Utilisateurs </span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{'createproduit'}}">
+              <i class="icon-grid menu-icon"></i>
+              <span class="menu-title">Produits </span>
             </a>
           </li>
        
           <li class="nav-item">
-            <a class="nav-link" href="pages/documentation/documentation.html">
+            <a class="nav-link" href="{{'logout'}}">
               <i class="icon-paper menu-icon"></i>
               <span class="menu-title">Déconnexion</span>
             </a>

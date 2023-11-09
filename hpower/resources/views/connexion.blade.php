@@ -27,12 +27,13 @@
               <img src="{{asset('images/hpower.jpeg')}}" alt="logo">
              </div>
                            <h6 class="font-weight-light">Connectez-vous!</h6>
-              <form class="pt-3">
+              <form class="pt-3" method="post" action="{{ route('conUser') }}">
+              @csrf>
                 <div class="form-group">
-                  <input type="email" class="form-control form-control-lg" id="exampleInputEmail1" placeholder="Email">
+                  <input type="email" name="email" class="form-control form-control-lg" id="exampleInputEmail1" placeholder="Email">
                 </div>
                 <div class="form-group">
-                  <input type="password" class="form-control form-control-lg" id="exampleInputPassword1" placeholder="Mot de passe">
+                  <input type="password" name="password" class="form-control form-control-lg" id="exampleInputPassword1" placeholder="Mot de passe">
                 </div>
                 <div class="mt-3">
                   <a class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn" href="{{'admin'}}">SE CONNECTER</a>

@@ -43,7 +43,6 @@
     </nav>
     <div class="container-fluid page-body-wrapper">
      
-      <!-- partial:partials/_sidebar.html -->
       <nav class="sidebar sidebar-offcanvas" id="sidebar">
         <ul class="nav">
           <li class="nav-item">
@@ -54,7 +53,7 @@
           </li>
           <li class="nav-item">
             <a class="nav-link" href="{{ route('camion.create') }}">
-              <i class="icon-grid menu-icon mdi mdi-cloud-download"></i>
+            <i class="fas fa-save"></i>
               <span class="menu-title">Enregistrer un camion</span>
             </a>
           </li>
@@ -72,7 +71,7 @@
           </li>
 
           <li class="nav-item">
-            <a class="nav-link" href="pages/documentation/documentation.html">
+            <a class="nav-link" href="{{'logout'}}">
               <i class="icon-paper menu-icon"></i>
               <span class="menu-title">Deconnexion</span>
             </a>

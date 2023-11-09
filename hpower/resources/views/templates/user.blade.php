@@ -15,6 +15,8 @@
         <link rel="{{ asset('vendors/datatables.net-bs4/dataTables.bootstrap4.css') }}">
         <link  type="text/css" src="{{ asset('js/select.dataTables.min.css') }}">
         <link rel="stylesheet" href="{{asset('css/vertical-layout-light/style.css')}}">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
 
 </head> 
 <body>

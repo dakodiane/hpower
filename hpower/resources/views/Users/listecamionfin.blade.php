@@ -1,6 +1,15 @@
 @extends('templates.user')
 
 @section('document')
+<style>
+  .no-camion-message {
+    color: red; /* Couleur du texte gris */
+    font-size: 18px; /* Taille de texte */
+    font-weight: bold; /* Gras */
+    text-align: center; /* Centrer le texte */
+    margin-top: 20px; /* Espacement en haut */
+}
+</style>
 <div class="main-panel">
         <div class="content-wrapper">
           <div class="row">
@@ -10,6 +19,9 @@
                   <h4 class="card-title">Camions finalisés</h4>
                  
                   <div class="table-responsive">
+                  @if ($camions->isEmpty())
+                        <p class="no-camion-message">Aucun camion à finaliser.</p>
+                    @else
                     <table class="tableau">
                       <thead>
                         <tr>
@@ -47,6 +59,7 @@
                       @endforeach
                       </tbody>
                     </table>
+                    @endif
                   </div>
                 </div>
               </div>
