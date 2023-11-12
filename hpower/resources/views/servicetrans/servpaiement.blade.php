@@ -11,10 +11,9 @@
           <div class="card-body">
             <h4 class="card-title">Valider le payement</h4>
 
-            <form class="forms-sample" method="POST" action="{{ route('Servicetrans.storepaie', ['cam_id' => $camions->cam_id]) }}" enctype="multipart/form-data">
-            @csrf 
+            <form class="forms-sample" method="POST" action="{{ route('Servicetrans.servpaiement', ['cam_id' => $camions->cam_id]) }}" enctype="multipart/form-data">            @csrf 
             <div class="form-group">
-                <label for="exampleInputName1">N° d'immatriculation</label>
+                 <label for="exampleInputName1">N° d'immatriculation</label>
                 <input type="text" class="form-control" id="exampleInputName1" value="{{ isset($camions) ? $camions->num_immatriculation : '' }}" readonly>
               </div>
 
@@ -49,20 +48,23 @@
               </div>
 
               <div class="form-group">
-               
-                <label for="exampleInputCity1">Prix SIPI (FCFA/Kilo)</label>
-                <input type="number" name="Prix_SIPI" class="form-control" id="exampleInputCity1">
-              </div>
-              
-              <div class="form-group">
-                <label for="exampleInputName1">Prix HPG (FCFA/kilo)</label>
-                <input type="number" name="Prix_HPG" class="form-control" id="exampleInputName1" placeholder="">
+                <label for="exampleInputName1">Entreprise bénéficiaire </label>
+                <input type="text" name="charge" class="form-control" id="exampleInputName1" placeholder="">
               </div>
 
               <div class="form-group">
-                <label for="exampleInputName1">Charge</label>
-                <input type="number" name="charge" class="form-control" id="exampleInputName1" placeholder="">
+                <label for="exampleInputCity1">Prix(FCFA/Tonne)</label>
+                <input type="number" name="prix_tp" class="form-control" id="exampleInputCity1">
               </div>
+
+             
+              
+              <div class="form-group">
+                <label for="exampleInputName1">Prix HPG (FCFA/Tonne)</label>
+                <input type="number" name="Prix_HPG" class="form-control" id="exampleInputName1" placeholder="">
+              </div>
+
+              
              
 
            

@@ -29,9 +29,8 @@
                                         <th>Montant SIPI (FCFA)</th>
                                         <th>Montant HPG (FCFA)</th>
                                         <th>Recette HPG (FCFA)</th>
-                                        <th>Charge</th>
                                         <th>Paiement</th>
-                                        
+
                                     </tr>
                                 </thead> 
                                 <tbody>

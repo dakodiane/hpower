@@ -14,7 +14,6 @@ class paiement extends Model
         'prix_unit',
         'qte_totale',
         'prix_total',
-        'util_id',
         'cam_id',
         'date_paiement',
         'created_at',

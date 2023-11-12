@@ -80,7 +80,7 @@ class ServicetransController extends Controller
             $camions->paiements()->save($paiement);
         
             // Redirigez vers la page appropriée
-            return redirect()->route('servicetrans.servpaiement', ['cam_id' => $camions->id])
+            return redirect()->route('servicetrans.servconsultationfin', ['cam_id' => $camions->id])
                 ->with('success', 'Paiement enregistré avec succès.');
         }
         
