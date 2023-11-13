@@ -90,16 +90,13 @@ Route::put('/activate-produit/{id}', 'App\Http\Controllers\ProduitController@act
 Route::put('/deactivate-produit/{id}', 'App\Http\Controllers\ProduitController@deactivate')->name('produit.deactivate');
 Route::get('allcamion/', 'App\Http\Controllers\AdminController@camions')->name('allcamion');
 
-<<<<<<< HEAD
 Route::get('fournilist','App\Http\Controllers\AdminController@fournilist')->name('fournilist');
 Route::get('fournisave/', 'App\Http\Controllers\CamionController@fournisave')->name('fournisave');
 
 
 Route::put('/activate-user/{id}', 'App\Http\Controllers\AdminController@activate')->name('user.activate');
 Route::put('/deactivate-user/{id}', 'App\Http\Controllers\AdminController@deactivate')->name('user.deactivate');
-=======
 Route::post('/logout', 'App\Http\Controllers\IdentifyController@logout')->name('logout');
 
 Route::get('servconsultationfin/', 'App\Http\Controllers\ServicetransController@viewfin')->name('Servicetrans.viewfin');
 Route::post ('servpaiement/{cam_id}', 'App\Http\Controllers\ServicetransController@paiement')->name('Servicetrans.servpaiement');
->>>>>>> 1879c89e0e4db69fa53c3340520b96842235ffff
