@@ -8,14 +8,16 @@ use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+
 class CamionController extends Controller
 {
     //
     public function create()
     {
-        $produits = Produit::where('active',1);
+        $produits = Produit::where('active', '1')->get();
         return view('Users/enregistrercamion', ['produits' => $produits]);
     }
+
 
     public function store(Request $request)
     {
@@ -36,12 +38,13 @@ class CamionController extends Controller
         }
         $data['num_bordereau'] = $newNumBordereau;
 
-        $poidsCharge = $request->input('poids_charge');
-        $poidsVide = $request->input('poids_vide');
-        $poidsNet = $poidsCharge - $poidsVide;
+        //    $poidsCharge = $request->input('poids_charge');
+        //    $poidsVide = $request->input('poids_vide');
+        //   $poidsNet = $poidsCharge - $poidsVide;
 
-        $data['poids_net'] = $poidsNet;
+        //   $data['poids_net'] = $poidsNet;
         $data['provenance'] = $user->ville;
+        $data['util_id'] = $user->id;
         $camion = new Camion();
 
         $camion->fill($data);
@@ -54,25 +57,24 @@ class CamionController extends Controller
     public function view()
     {
         $user = Auth::user();
-        $camions = Camion::where('destination', $user->ville)
-            ->whereNull('heure_arrive')
+        $camions = Camion::where('util_id', $user->id)
+            ->whereNull('numerodebord')
             ->get();
-    
         return view('Users/listecamionsave', compact('camions'));
     }
-    
+
 
 
     public function viewfin(Request $request)
     {
         $user = Auth::user();
-        $camions = Camion::where('destination', $user->ville)
-            ->whereNotNull('heure_arrive')
+        $camions = Camion::where('util_id', $user->id)
+            ->whereNotNull('numerodebord')
             ->get();
-    
-        return view('Users/listecamionfin', compact('camions'));
+
+        return view('Users/listecamionfin', compact('camions', 'user'));
     }
-    
+
 
 
     public function savefin($cam_id)
@@ -86,7 +88,6 @@ class CamionController extends Controller
     public function storefin(Request $request, $cam_id)
     {
         $user = Auth::user();
-
         $camions = Camion::findOrfail($cam_id);
 
         $data = $request->all();
@@ -95,7 +96,6 @@ class CamionController extends Controller
             $photoPath = $request->file('cam_photo1')->store('photo_immat', 'public');
             $data['cam_photo1'] = $photoPath;
         }
-        $data['util_id'] = $user->id;
         $camions->fill($data);
         $camions->save();
         return redirect()->intended(route('camion.viewfin',  compact('camions')));
@@ -106,61 +106,69 @@ class CamionController extends Controller
     {
         if (Auth::check()) {
             $user = Auth::user();
-            if($user->role=='rapporteur'){
-         
+            if ($user->role == 'rapporteur') {
+
                 $aujourdHui = Carbon::now();
                 $ceMois = Carbon::now()->startOfMonth();
-        
+
                 $camionsAujourdhui = DB::table('camions')
                     ->whereDate('created_at', $aujourdHui->toDateString())
                     ->count();
-        
+
                 $camionsCeMois = DB::table('camions')
                     ->whereYear('created_at', $ceMois->year)
                     ->whereMonth('created_at', $ceMois->month)
                     ->count();
-        
+
                 return view('Users/tableaudebord', compact('camionsAujourdhui', 'camionsCeMois', 'user'));
-            }else{
+            } else {
                 return redirect()->route('connexion');
             }
-      
         } else {
             return redirect()->route('connexion');
         }
     }
-    
+
 
 
     public function statistiqueCamions()
-{
-    if (Auth::check()) {
-        $user = Auth::user();
-        if($user->role=='directeur'){
-     
-            $aujourdHui = Carbon::now();
-            $ceMois = Carbon::now()->startOfMonth();
-    
-            $camionsAujourdhui = DB::table('camions')
-                ->whereDate('created_at', $aujourdHui->toDateString())
-                ->count();
-    
-            $camionsCeMois = DB::table('camions')
-                ->whereYear('created_at', $ceMois->year)
-                ->whereMonth('created_at', $ceMois->month)
-                ->count();
-    
-            return view('Admin/tableaudebord', compact('camionsAujourdhui', 'camionsCeMois', 'user'));
-        }else{
+    {
+        if (Auth::check()) {
+            $user = Auth::user();
+            if ($user->role == 'directeur') {
+
+                $aujourdHui = Carbon::now();
+                $ceMois = Carbon::now()->startOfMonth();
+
+                $camionsAujourdhui = DB::table('camions')
+                    ->whereDate('created_at', $aujourdHui->toDateString())
+                    ->count();
+
+                $camionsCeMois = DB::table('camions')
+                    ->whereYear('created_at', $ceMois->year)
+                    ->whereMonth('created_at', $ceMois->month)
+                    ->count();
+
+                return view('Admin/tableaudebord', compact('camionsAujourdhui', 'camionsCeMois', 'user'));
+            } else {
+                return redirect()->route('connexion');
+            }
+        } else {
             return redirect()->route('connexion');
         }
-  
-    } else {
-        return redirect()->route('connexion');
     }
-}
 
+    public function fournisave()
+    {
+        $user = Auth::user();
 
+        $camions = Camion::where('destination', $user->ville)
+            ->whereHas('utilisateur', function ($query) {
+                $query->where('role', 'fournisseur');
+            })
+            ->whereNull('numerodebord')
+            ->get();
 
-
+        return view('Users/listecamionsave', compact('camions'));
+    }
 }

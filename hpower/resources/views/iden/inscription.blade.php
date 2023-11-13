@@ -39,13 +39,16 @@
               <div class="alert alert-success">[]</div>
               @endif
               <!-- 2 column grid layout with text inputs for the first and last names -->
-                  <div class="form-outline mb-4">
+              <div class="row">
+                <div class="col-md-12 mb-4">
+                  <div class="form-outline">
                     <input type="text" name="name" id="form3Example1" class="form-control" placeholder="Saisissez votre nom complet" />
                     <label class="form-label" for="form3Example1">Nom Complet</label>
                     <br><span class="text-danger">@error('name') {{ $message }} @enderror</span>
                   </div>
                 </div>
 
+              </div>
 
               <!-- Email input -->
               <div class="form-outline mb-4">
@@ -136,7 +139,7 @@
   border: 1px solid #ccc;
   max-height: 150px;
   overflow-y: auto;
-  width: 80%;
+  width: 65%;
   z-index: 1;
   list-style: none;
   padding: 0;

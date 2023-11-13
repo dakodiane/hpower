@@ -16,10 +16,6 @@ use App\Http\Controllers\AdminController;
 */
 
 
-Route::get('user/','App\Http\Controllers\CamionController@statistiquesCamions');
-Route::get('admin/','App\Http\Controllers\CamionController@statistiqueCamions');
-
-
 
 Route::get('fourni/', function () {
     return view('fourni/tableaudebord');
@@ -65,6 +61,10 @@ Route::get('paiement/', function () {
 //Route::get('connexion/', function () {
  //   return view('connexion');
 //});
+
+Route::get('user/','App\Http\Controllers\CamionController@tableaudebord')->name('tableaudebord');
+Route::get('admin/','App\Http\Controllers\CamionController@statistiqueCamions');
+
 Route::get('enregistrercamion/', 'App\Http\Controllers\CamionController@create')->name('camion.create');
 Route::post('enregistrercamion/','App\Http\Controllers\CamionController@store')->name('camion.store');
 Route::get('listecamionsave/', 'App\Http\Controllers\CamionController@view')->name('camion.view');
@@ -84,3 +84,9 @@ Route::put('/activate-produit/{id}', 'App\Http\Controllers\ProduitController@act
 Route::put('/deactivate-produit/{id}', 'App\Http\Controllers\ProduitController@deactivate')->name('produit.deactivate');
 Route::get('allcamion/', 'App\Http\Controllers\AdminController@camions')->name('allcamion');
 
+Route::get('fournilist','App\Http\Controllers\AdminController@fournilist')->name('fournilist');
+Route::get('fournisave/', 'App\Http\Controllers\CamionController@fournisave')->name('fournisave');
+
+
+Route::put('/activate-user/{id}', 'App\Http\Controllers\AdminController@activate')->name('user.activate');
+Route::put('/deactivate-user/{id}', 'App\Http\Controllers\AdminController@deactivate')->name('user.deactivate');

@@ -28,7 +28,7 @@
                     <th>Photo d'immatriculation</th>
                     <th>Nom du chauffeur</th>
                     <th>Type de produit</th>
-       
+ 
                     <th>Action</th>
                   </tr>
                 </thead>
@@ -40,7 +40,8 @@
                     <td><a href="{{ asset($camion->cam_photo) }}" type="button" class="btn btn-success btn-md">Voir la photo</a></td>
                     <td>{{ $camion->cam_nomchauf }}</td>
                     <td>{{ $camion->type_produit }}</td>
-                  
+             
+              
                     <td><a href="{{ route('camion.savefin', ['cam_id' => $camion->cam_id]) }}" type="button" class="btn btn-success btn-md">Finaliser</a></td>
                   </tr>
                   @endforeach

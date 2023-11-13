@@ -1,6 +1,39 @@
 @extends('templates.app')
 
 @section('document')
+<style>
+  .table {
+    table-layout: fixed;
+}
+
+.table th, .table td {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.table th, .table td, .table button {
+    height: 40px; /* Ajustez la hauteur selon vos préférences */
+}
+
+.table button {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.table form {
+    border: 1px solid #ddd; /* Couleur de la bordure */
+    border-radius: 5px; /* Coins arrondis */
+    padding: 5px; /* Espacement intérieur */
+    margin-right: 5px; /* Marge entre les formulaires */
+}
+
+.table button:hover {
+    cursor: pointer;
+}
+
+
+</style>
 <main class="main-panel">
 
     <div class="container-fluid py-4">
@@ -30,7 +63,7 @@
                                             Nom du produit
                                         </th>
                                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
-                                            Quantité Totale Transportée(en kg)
+                                            Quantité Totale Transportée(en tonne)
 
                                         </th>
                                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">

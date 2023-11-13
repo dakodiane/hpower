@@ -60,7 +60,13 @@
           <li class="nav-item">
             <a class="nav-link" href="{{'/listecamionsave'}}">
               <i class="icon-grid menu-icon"></i>
-              <span class="menu-title">Camions à finaliser</span>
+              <span class="menu-title">Camions enregistrés</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{'/fournisave'}}">
+              <i class="icon-grid menu-icon"></i>
+              <span class="menu-title">Fournisseurs</span>
             </a>
           </li>
           <li class="nav-item">

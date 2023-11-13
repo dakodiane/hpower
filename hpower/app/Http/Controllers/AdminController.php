@@ -21,7 +21,7 @@ class AdminController extends Controller
             $totalPoidsNet = Camion::where('type_produit', $produit->prod_nom)->sum('poids_net');
             $produit->totalPoidsNet = $totalPoidsNet;
         }
-        return view('Admin.createproduit', compact('produits'));
+        return view('Admin/createproduit', compact('produits'));
     }
     
         
@@ -30,18 +30,19 @@ class AdminController extends Controller
         $request->validate([
             'prod_nom' => 'required|string|max:255',
         ]);
-        $produit = new Produit();
-        $produit->prod_nom = $request->input('prod_nom');
+        $produits = new Produit();
+        $produits->prod_nom = $request->input('prod_nom');
 
-        $produit->save();
+        $produits->save();
     
-        return view('Admin/createproduit'); 
+        return redirect()->intended(route('createproduit',  compact('produits')));
     }
-    
+     
 
     public function fournilist()
 {
-    $users = User::where('role','fournisseur');
+    $users = User::where('role','fournisseur')
+    ->get();
 
     return view('Admin/fournisseur', compact('users'));
 }
@@ -49,21 +50,40 @@ class AdminController extends Controller
 
 public function userlist()
 {
-    $usersOnline = User::where('last_activity', '>', now()->subMinutes(10))
-    ->whereIn('id', Cache::get('user-online', []))
-    ->get();
-    return view('Admin/userlist', compact('usersOnline'));
+    $users = User::all();
+   // ('last_activity', '>', now()->subMinutes(10))
+  //  ->whereIn('id', Cache::get('user-online', []))
+  //  ->get();
+    return view('Admin/userlist', compact('users'));
 }
 
 public function camions(Request $request)
 {
   
     $camions = Camion::whereNotNull('heure_arrive')
-        ->get();
+    ->with('utilisateur') // Charger la relation utilisateur
+    ->get();
+
 
     return view('Admin/allcamion', compact('camions'));
 }
+public function activate($id)
+{
+    $users = User::find($id);
+    $users->active = 1;
+    $users->save();
 
+    return redirect()->back(); // Redirigez l'utilisateur vers la page précédente
+}
+
+public function deactivate($id)
+{
+    $users = User::find($id);
+    $users->active = 0;
+    $users->save();
+
+    return redirect()->back(); // Redirigez l'utilisateur vers la page précédente
+}
 
 
 }
