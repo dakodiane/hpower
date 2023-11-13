@@ -85,27 +85,31 @@ class ServicetransController extends Controller
 
 
         public function storepaie(Request $request, $cam_id)
-        {
-            
+{
+    // Récupérer le camion
+    $camion = Camion::findOrFail($cam_id);
 
-           
-            $camions = Camion::findOrfail($cam_id);
+    // Récupérer les données du formulaire
+    $data = $request->all();
 
-            $data = $request->all();
-                
-        
-        
-            // Créez un nouveau paiement associé au camion
-            $paiement = new Paiement();
-            $paiement->fill($data);
-            $user = Auth::user();
-            // Enregistrez le paiement en le liant au camion
-            $camions->paiements()->save($paiement);
-        
-            // Redirigez vers la page appropriée
-            return redirect()->route('servicetrans.servconsultationfin', ['cam_id' => $camions->id])
-                ->with('success', 'Paiement enregistré avec succès.');
-        }
-        
+    // Calculs pour le modèle Paiement
+    $poidsCharge = $request->input('poids_charge');
+    $poidsVide = $request->input('poids_vide');
+    $poidsNet = $poidsCharge - $poidsVide;
+   
+
+   
+    // Créer un nouveau paiement associé au camion
+    $paiement = new Paiement();
+    $paiement->fill($data);
+
+    // Enregistrer le paiement en le liant au camion
+    $camion->paiements()->save($paiement);
+
+    // Rediriger vers la page appropriée
+    return redirect()->route('servicetrans.servconsultationfin', ['cam_id' => $camion->id])
+        ->with('success', 'Paiement enregistré avec succès.');
+}
+
         
 }

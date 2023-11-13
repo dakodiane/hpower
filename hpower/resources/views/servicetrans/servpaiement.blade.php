@@ -41,14 +41,14 @@
 
               <div class="form-group">
                 <label for="exampleInputCity1">Prix (FCFA/Tonne)</label>
-                <input type="number" name="prix_tp" class="form-control" id="exampleInputCity1">
+                <input type="text" name="prix_tp" class="form-control" id="exampleInputCity1">
               </div>
 
              
               
               <div class="form-group">
                 <label for="exampleInputName1">Prix HPG (FCFA/Tonne)</label>
-                <input type="number" name="prix_HPG" class="form-control" id="exampleInputName1" placeholder="">
+                <input type="text" name="prix_HPG" class="form-control" id="exampleInputName1" placeholder="">
               </div>
 
               

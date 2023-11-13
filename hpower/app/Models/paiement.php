@@ -20,9 +20,9 @@ class paiement extends Model
         'updated_at',
         'prix_tp',
         'prix_HPG',
-        'Montant_tp',
-        'Montant_HPG',
-        'Recette_HPG',
+        'montant_tp',
+        'montant_HPG',
+        'recette_HPG',
        'entrep_benef'
     ];
 
