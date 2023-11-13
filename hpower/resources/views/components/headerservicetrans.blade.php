@@ -59,6 +59,12 @@
               <span class="menu-title">Consultation</span>
             </a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{'servconsultationfin'}}">
+              <i class="icon-grid menu-icon mdi mdi-cloud-download"></i>
+              <span class="menu-title">Liste des camions</span>
+            </a>
+          </li>
         
 
           <li class="nav-item">

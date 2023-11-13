@@ -24,14 +24,13 @@
                                         <th>Poids net du produit</th>
                                         <th>N° de bordereau de chargement</th>
                                         <th>Provenance</th>
-                                        <th>Prix SIPI (FCFA/Kilo)</th>
-                                        <th>Prix HPG (FCFA/kilo)</th>
-                                        <th>Montant SIPI (FCFA)</th>
+                                        <th>Prix Entreprise bénéficiaire(FCFA/Tonne)</th>
+                                        <th>Prix HPG (FCFA/Tonne)</th>
+                                        <th>Montant Entreprise bénéficiaire</th>
                                         <th>Montant HPG (FCFA)</th>
                                         <th>Recette HPG (FCFA)</th>
-                                        <th>Charge</th>
                                         <th>Paiement</th>
-                                        
+
                                     </tr>
                                 </thead> 
                                 <tbody>
@@ -47,9 +46,8 @@
                                         <td>{{ $camion->poids_charge }}</td>
                                         <td>{{ $camion->poids_net }}</td>
                                         <td>{{ $camion->nombre_sac }}</td>
-                                        <td>{{ $camion->provenance }}</td>
-                                        <td>{{ $camion->provenance }}</td>
-                                        <td>{{ $camion->provenance }}</td>
+                                        <td>{{ $camion->prix_tp}}</td>
+                                        <td>{{ $camion->prix_HPG }}</td>
                                         <td>{{ $camion->provenance }}</td>
                                         <td>
                                             @if($camion->statut_dechargement == 1)
@@ -61,7 +59,7 @@
 
                                         <td>{{ $camion->observation }}</td>
                                         <td></td>
-                                        <td><a href="{{ route('servicetrans.servpaiement', ['cam_id' => $camion->cam_id]) }}" type="button" class="btn btn-success btn-md">Valider paiement</a></td>
+                                        <td><a href="{{ route('Servicetrans.servpaiement', ['cam_id' => $camion->cam_id]) }}" type="button" class="btn btn-success btn-md">Valider paiement</a></td>
                                     </tr>
                                     @endforeach
                                 </tbody>

@@ -17,19 +17,21 @@
                   
                     <div class="form-group">
                       <label for="exampleInputName1">Nom du conducteur</label>
-                      <input type="text" class="form-control" id="exampleInputName1" placeholder="Name" required name="cam_nomchauf">
+                      <input type="text" class="form-control" id="exampleInputName1" placeholder="Nom et prenom" required name="cam_nomchauf" required>
                     </div>
 
-                    <div class="form-group">
-                      <label for="exampleInputName1">N° de tel du conducteur</label>
-                      <input type="number" class="form-control" id="exampleInputName1" placeholder="Name" required name="tel_conducteur">
-                    </div>
+                      <div class="form-group">
+                          <label for="exampleInputName1">N° de tel du conducteur</label>
+                          <input type="text" class="form-control" id="exampleInputName1" placeholder="Telephone" required name="tel_conducteur" pattern="\d{1,8}" required>
+                          
+                      </div>
+
                   
                   
                     
                     <div class="form-group">
                       <label for="exampleInputName1">N° d'immatriculation</label>
-                      <input type="text" class="form-control" id="exampleInputName1" placeholder="Name" required name="num_immatriculation">
+                      <input type="text" class="form-control" id="exampleInputName1" placeholder="immatriculation" required name="num_immatriculation">
                     </div>
                     <div class="form-group">
                         <label for="photo_immat">Photo de l'immatriculation</label>
@@ -53,30 +55,23 @@
            
                     <div class="form-group">
                       <label for="exampleInputCity1">Nombre de sacs</label>
-                      <input type="number" class="form-control" id="exampleInputCity1" placeholder="" required name="nombre_sac">
-                    </div>
-                    
-                    <div class="form-group">
-                      <label for="exampleInputCity1">Heure de départ</label>
-                      <input type="datetime-local" class="form-control" id="exampleInputCity1" placeholder="" name="heure_depart">
-                    </div>
+                      <input type="number" class="form-control" id="exampleInputCity1" placeholder="" required name="nombre_sac" required>
+                    </div>   
                     
                     <div class="form-group">
                       <label for="exampleSelectGender">Provenance </label>
-                        <select class="form-control" id="exampleSelectGender"  name="provenance">
-                        <option></option>
-                          <option>Cotonou</option>
-                          <option>Parakou</option>
-                          <option>Banikoara</option>
-                          
-                        </select>
+                      <input type="text" class="form-control"  id="provenance" name="provenance" placeholder="Tapez une ville" autocomplete="off" required>
+                        <ul id="villes-list"></ul>
                       </div>
+
+                     
+
 
                       <div class="form-group">
                           <label for="statutChargement">Statut du chargement</label>
-                          <select class="form-control" id="statut_dechargement" name="statut_dechargement" >
-                              <option value="1">Chargé</option>
-                              <option value="0">Non chargé</option>
+                          <select class="form-control" id="statut_dechargement" name="statut_dechargement" required>
+                              <option value="1">En route</option>
+                              <option value="0">Non en route</option>
                           </select>
                       </div>
 
@@ -98,5 +93,37 @@
  
       </div>
 
+      <script>
+      var input = document.getElementById('provenance');
+      var villesList = document.getElementById('villes-list');
 
+
+      input.addEventListener('input', function() {
+
+        var recherche = input.value.toLowerCase();
+
+        villesList.innerHTML = '';
+
+        var villes = ['Cotonou', 'Abomey-Calavi', 'Porto-Novo', 'Parakou', 'Djougou', 'Bohicon', 'Natitingou',
+          'Savé', 'Abomey', 'Nikki', 'Lokossa', 'Ouidah', 'Dogbo-Tota', 'Kandi', 'Cové', 'Malanville',
+          'Pobé', 'Kérou', 'Savalou', 'Sakété', 'Comè', 'Bembéréké', 'Bassila', 'Banikoara', 'Kétou',
+          'Dassa-Zoumè', 'Tchaourou', 'Allada', 'Aplahoué', 'Tanguiéta', 'N\'Dali', 'Segbana', 'Athiémé',
+          'Grand Popo', 'Kouandé',
+        ];
+
+        var villesFiltrees = villes.filter(function(ville) {
+          return ville.toLowerCase().includes(recherche);
+        });
+
+        villesFiltrees.forEach(function(ville) {
+          var li = document.createElement('li');
+          li.textContent = ville;
+          li.addEventListener('click', function() {
+            input.value = ville;
+            villesList.innerHTML = '';
+          });
+          villesList.appendChild(li);
+        });
+      });
+    </script>
 @endsection

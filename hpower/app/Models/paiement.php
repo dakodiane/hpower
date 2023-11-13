@@ -14,16 +14,19 @@ class paiement extends Model
         'prix_unit',
         'qte_totale',
         'prix_total',
-        'util_id',
         'cam_id',
         'date_paiement',
         'created_at',
         'updated_at',
-        'Prix_SIPI',
-        'Prix_HPG',
-        'Montant_SIPI',
-        'Montant_HPG',
-        'Recette_HPG',
+        'prix_tp',
+        'prix_HPG',
+        'montant_tp',
+        'montant_HPG',
+        'recette_HPG',
+       'entrep_benef'
     ];
 
 }
+
+
+

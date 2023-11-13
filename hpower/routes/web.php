@@ -28,6 +28,12 @@ Route::get('enregistcamion/', function () {
     return view('fourni/enregistcamion');
 });
 
+Route::get('consultation/', function () {
+    return view('fourni/enregistcamion');
+});
+
+
+
 Route::get('consultation/', 'App\Http\Controllers\ConsultcamController@show')->name('Consultcam.show');
 Route::get('enregistcamion/', 'App\Http\Controllers\fourniController@create')->name('fourni.create');
 Route::post('enregistcamion/','App\Http\Controllers\fourniController@store')->name('fourni.store');
@@ -43,8 +49,8 @@ Route::post('enregistrerfin/{cam_id}/','App\Http\Controllers\CamionController@st
 
 Route::get('servconsultation/', 'App\Http\Controllers\ServicetransController@show')->name('Servicetrans.show');
 Route::get('servicetrans/','App\Http\Controllers\ServicetransController@statistiquesCamions');
-Route::get('servpaiement/{cam_id}', 'App\Http\Controllers\ServicetransController@paiement')->name('servicetrans.servpaiement');
-Route::post('servpaiement/{cam_id}/store', 'App\Http\Controllers\ServicetransController@storepaie')->name('Servicetrans.storepaie');
+Route::get('servpaiement/{cam_id}', 'App\Http\Controllers\ServicetransController@paiement')->name('Servicetrans.servpaiement');
+Route::get('servpaiement/{cam_id}/store', 'App\Http\Controllers\ServicetransController@storepaie')->name('Servicetrans.storepaie');
 
 Route::get('/connexion','App\Http\Controllers\IdentifyController@connexion')->name('connexion');
 Route::get('/inscription','App\Http\Controllers\IdentifyController@inscription')->name('inscription');
@@ -84,9 +90,16 @@ Route::put('/activate-produit/{id}', 'App\Http\Controllers\ProduitController@act
 Route::put('/deactivate-produit/{id}', 'App\Http\Controllers\ProduitController@deactivate')->name('produit.deactivate');
 Route::get('allcamion/', 'App\Http\Controllers\AdminController@camions')->name('allcamion');
 
+<<<<<<< HEAD
 Route::get('fournilist','App\Http\Controllers\AdminController@fournilist')->name('fournilist');
 Route::get('fournisave/', 'App\Http\Controllers\CamionController@fournisave')->name('fournisave');
 
 
 Route::put('/activate-user/{id}', 'App\Http\Controllers\AdminController@activate')->name('user.activate');
 Route::put('/deactivate-user/{id}', 'App\Http\Controllers\AdminController@deactivate')->name('user.deactivate');
+=======
+Route::post('/logout', 'App\Http\Controllers\IdentifyController@logout')->name('logout');
+
+Route::get('servconsultationfin/', 'App\Http\Controllers\ServicetransController@viewfin')->name('Servicetrans.viewfin');
+Route::post ('servpaiement/{cam_id}', 'App\Http\Controllers\ServicetransController@paiement')->name('Servicetrans.servpaiement');
+>>>>>>> 1879c89e0e4db69fa53c3340520b96842235ffff
