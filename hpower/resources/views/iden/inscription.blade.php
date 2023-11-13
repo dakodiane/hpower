@@ -16,8 +16,8 @@
   <section class="text-center">
     <!-- Background image -->
     <div class="p-5 bg-image" style="
-            background: rgb(4, 70, 92) url('{{ asset('images/hpower.png') }}'); background-size: 500px; background-position: center; background-repeat: no-repeat;
-            height: 300px;
+            background: rgb(4, 70, 92) url('{{ asset('images/hpower.png') }}'); background-size: 400px; background-position: center; background-repeat: no-repeat;
+            height: 500px;
             "></div>
     <!-- Background image -->
 
@@ -25,6 +25,7 @@
             margin-top: -100px;
             background: hsla(0, 0%, 100%, 0.8);
             backdrop-filter: blur(30px);
+         
             ">
       <div class="card-body py-5 px-md-5">
 
@@ -52,7 +53,7 @@
 
               <!-- Email input -->
               <div class="form-outline mb-4">
-                <input type="email" name="email" id="form3Example3" class="form-control" placeholder="Saisissez votre adresse email"  />
+                <input type="email" name="email" id="form3Example3" class="form-control" placeholder="Saisissez votre adresse email" />
                 <label class="form-label" for="form3Example3">Email</label>
                 <br><span class="text-danger">@error('email') {{ $message }} @enderror
               </div>
@@ -72,7 +73,7 @@
               </div>
 
               {{-- Categories select --}}
-         <br>     <select class="form-select" name="role" aria-label="Default select example">
+              <br> <select class="form-select" name="role" aria-label="Default select example">
                 <option value="directeur">Directeur</option>
                 <option value="fournisseur">Fournisseur</option>
                 <option value="rapporteur" selected>Rapporteur</option>
@@ -84,10 +85,10 @@
 
               <br>
               <div class="form-outline mb-4">
-       <br>       <input type="text" class="form-control"  id="ville" name="ville" placeholder="Tapez une ville" autocomplete="off">
-              <label class="form-label" for="form3Example4">Ville</label>
+                <br> <input type="text" class="form-control" id="ville" name="ville" placeholder="Tapez une ville" autocomplete="off">
+                <label class="form-label" for="form3Example4">Ville</label>
 
-              <ul id="villes-list"></ul>
+                <ul id="villes-list"></ul>
               </div>
 
               <br><br><button type="submit" value="inscription" class="btn btn-primary btn-block mb-4">
@@ -134,28 +135,27 @@
 
     <style>
       #villes-list {
-  position: absolute;
-  background-color: #fff;
-  border: 1px solid #ccc;
-  max-height: 150px;
-  overflow-y: auto;
-  width: 65%;
-  z-index: 1;
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-}
+        position: absolute;
+        background-color: #fff;
+        border: 1px solid #ccc;
+        max-height: 150px;
+        overflow-y: auto;
+        width: 65%;
+        z-index: 1;
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+      }
 
-#villes-list li {
-  padding: 8px 12px;
-  cursor: pointer;
-}
+      #villes-list li {
+        padding: 8px 12px;
+        cursor: pointer;
+      }
 
-#villes-list li:hover {
-  background-color: #f0f0f0;
-}
-
+      #villes-list li:hover {
+        background-color: #f0f0f0;
+      }
     </style>
   </section>
   <!-- Section: Design Block -->

@@ -15,7 +15,7 @@
   <section class="text-center">
     <!-- Background image -->
     <div class="p-5 bg-image" style="background: rgb(4, 70, 92) url('{{ asset('images/hpower.png') }}'); background-size: 500px; background-position: center; background-repeat: no-repeat;
-            height: 300px;"></div>
+            height: 500px;"></div>
     <!-- Background image -->
 
     <div class="card mx-4 mx-md-5 shadow-5-strong" style="
