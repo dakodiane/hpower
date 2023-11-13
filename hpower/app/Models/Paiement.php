@@ -12,10 +12,11 @@ class Paiement extends Model
     protected $primaryKey = 'paie_id';
 
     protected $fillable = [
-        "prod_nom",
-        "prod_qtelivree",
-        "prod_qtevendue",
-        "prod_nat",
+        "paie_prixlivraison",
+        "prix_tp",
+        "prix_HPG",
+        "montant_tp",
+        "montant_HPG",
         "prod_magasin",
         "prod_lieuprod",
     ];

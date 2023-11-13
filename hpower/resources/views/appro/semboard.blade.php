@@ -8,7 +8,7 @@
             <div class="col-md-12 grid-margin">
               <div class="row">
                 <div class="col-12 col-xl-8 mb-4 mb-xl-0">
-                  <h3 class="font-weight-bold">Bienvenue Cristiano Ronaldo</h3>
+                  <h3 class="font-weight-bold">Bienvenue M. BARCKLEY</h3>
                 </div>
                 <div class="col-12 col-xl-4">
                  <div class="justify-content-end d-flex">
@@ -32,10 +32,13 @@
                 <tr>
                   <th scope="col">Num</th>
                   <th scope="col">Nom et Prénom</th>
-                  <th scope="col">Email</th>
                   <th scope="col">Fournisseur</th>
-                  <th scope="col">Montant payé</th>
-                  <th scope="col">Reste</th>
+                  <th scope="col">Quantité livrée</th>
+                  <th scope="col">Prix de livraison</th>
+                  <th scope="col">Prix HPG au kg</th>
+                  <th scope="col">Quantité vendue</th>
+                  <th scope="col">Total des vente HPG</th>
+                  <th scope="col">Recette</th>
                   <th scope="col">Etat de paiement</th>
                 </tr>
               </thead>

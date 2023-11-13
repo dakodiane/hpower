@@ -8,7 +8,7 @@
             <div class="col-md-12 grid-margin">
               <div class="row">
                 <div class="col-12 col-xl-8 mb-4 mb-xl-0">
-                  <h3 class="font-weight-bold">Bienvenue Cristiano Ronaldo</h3>
+                  <h3 class="font-weight-bold">Bienvenue M. BARCKLEY</h3>
                 </div>
                 <div class="col-12 col-xl-4">
                  <div class="justify-content-end d-flex">
@@ -32,8 +32,8 @@
               <thead>
                 <tr>
                   <th scope="col">Num</th>
-                  <th scope="col">Nom et Prénom</th>
-                  <th scope="col">Fournisseur</th>
+                  <th scope="col">Semence</th>
+                  {{-- <th scope="col">Fournisseur</th> --}}
                   <th scope="col">Quantité livrée</th>
                   <th scope="col">Prix de livraison</th>
                   <th scope="col">Prix HPG au kg</th>
@@ -42,19 +42,19 @@
                   <th scope="col">Recette</th>
                 </tr>
               </thead>
+              @foreach ($produits as $produit)
               <tbody>
                 <tr>
-                  <th scope="row">1</th>
-                  <td>Cristiano Ronaldo</td>
-                  <td>Al Nassr</td>
-                  <td>120 kg</td>
-                  <td>1.000.000 FCFA</td>
-                  <td>9500 FCFA</td>
-                  <td>90 kg</td>
-                  <td>855000 FCFA</td>
-                  <td>-145000 FCFA</td>
+                  <td>{{ $produit->id }}</td>
+                  <td>{{ $produit->prod_nom }}</td>
+                  <td>{{ $produit->prod_qtelivree }}</td>
+                  <td>{{ $produit->prod_qtevendue }}</td>
+                  <td>{{ $produit->prod_nat }}</td>
+                  <td>{{ $produit->prod_lieuprod }}</td>
+                  <td>{{ $produit->prod_magasin }}</td>
                 </tr>
-              </tbody>
+              </tbody> 
+              @endforeach
             </table>
             
             </div>

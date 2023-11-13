@@ -18,7 +18,7 @@ class semencesController extends Controller
    {
         return view("services_semence.paiement");
    }
-
+   
    public function paie(Request $request){
      $data = $request->validate([
           'semence'=>'required',
@@ -27,12 +27,10 @@ class semencesController extends Controller
           'nature'=>'required',
           'magasin'=>'required',
           'lieu'=>'required',
-          // 'fournisseur'=>'required',          
-          
-          // 'pvf'=>'required|numeric',
-          // 'phpg'=>'required|numeric',
-          
-          // 'recette'=>'numeric'
+          'fournisseur'=>'required',          
+          'pvf'=>'required|numeric',
+          'phpg'=>'required|numeric',          
+          'recette'=>'numeric'
      ]);
 
      $newProd = new Produit();
