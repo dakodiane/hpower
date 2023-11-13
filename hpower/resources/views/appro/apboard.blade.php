@@ -1,4 +1,4 @@
-@extends('templates.semlayout')
+@extends('templates.appro')
 
 @section('document')
 
@@ -30,27 +30,26 @@
             <table class="table table-blue table-hover">
               <thead>
                 <tr>
-                  <th scope="col">Semence</th>
-                  <th scope="col">Quantité livrée</th>
-                  <th scope="col">Quantité vendue</th>
-                  <th scope="col">Nature de la semence</th>
-                  <th scope="col">Lieu de production</th>
-                  <th scope="col">Magasin de vente</th>                  
+                  <th scope="col">Num</th>
+                  <th scope="col">Nom et Prénom</th>
+                  <th scope="col">Email</th>
+                  <th scope="col">Fournisseur</th>
+                  <th scope="col">Montant payé</th>
+                  <th scope="col">Reste</th>
+                  <th scope="col">Etat de paiement</th>
                 </tr>
               </thead>
-              @foreach ($produits as $produit)
               <tbody>
                 <tr>
-                  <td>{{ $produit->prod_nom }}</td>
-                  <td>{{ $produit->prod_qtelivree }}</td>
-                  <td>{{ $produit->prod_qtevendue }}</td>
-                  <td>{{ $produit->prod_nat }}</td>
-                  <td>{{ $produit->prod_lieuprod }}</td>
-                  <td>{{ $produit->prod_magasin }}</td>
+                  <th scope="row">1</th>
+                  <td>Cristiano Ronaldo</td>
+                  <td>rmfc@gmail.com</td>
+                  <td>Al Nassr</td>
+                  <td>10.000.000 FCFA</td>
+                  <td>7.000.000 FCFA</td>
+                  <td>En attente</td>
                 </tr>
-              </tbody> 
-              @endforeach
-              
+              </tbody>
             </table>
             
             </div>

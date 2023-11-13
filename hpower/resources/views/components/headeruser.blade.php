@@ -47,25 +47,25 @@
       <nav class="sidebar sidebar-offcanvas" id="sidebar">
         <ul class="nav">
           <li class="nav-item">
-            <a class="nav-link" href="{{{'user'}}}">
+            <a class="nav-link" href="{{{'/user'}}}">
               <i class="icon-grid menu-icon"></i>
               <span class="menu-title">Tableau de bord</span>
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="{{'enregistrercamion'}}">
+            <a class="nav-link" href="{{ route('camion.create') }}">
               <i class="icon-grid menu-icon mdi mdi-cloud-download"></i>
               <span class="menu-title">Enregistrer un camion</span>
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="{{'listecamionsave'}}">
+            <a class="nav-link" href="{{'/listecamionsave'}}">
               <i class="icon-grid menu-icon"></i>
               <span class="menu-title">Camions à finaliser</span>
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="{{'listecamionfin'}}">
+            <a class="nav-link" href="{{route('camion.viewfin')}}">
               <i class="icon-grid menu-icon"></i>
               <span class="menu-title">Camions finalisés</span>
             </a>

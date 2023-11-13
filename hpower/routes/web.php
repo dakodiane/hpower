@@ -1,5 +1,9 @@
 <?php
 
+use App\Http\Controllers\ApproController;
+use App\Http\Controllers\PaiementController;
+use App\Http\Controllers\ResearchController;
+use App\Http\Controllers\semencesController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\IdentifyController;
 /*
@@ -16,23 +20,28 @@ Route::get('/', function () {
     return view("welcome");
 });
 
-Route::get('/connexion',[IdentifyController::class,'connexion']);
+Route::get('/connexion','App\Http\Controllers\IdentifyController@connexion')->name('connexion');
 
 Route::get('/inscription',[IdentifyController::class,'inscription']);
 
 Route::post('/inscription','App\Http\Controllers\IdentifyController@registerUser')->name('insUser');
 
-// Route::post('/connexion','App\Http\Controllers\IdentifyController@connectUser')->name('conUser');
+Route::post('/connexion','App\Http\Controllers\IdentifyController@loginUser')->name('conUser');
 
-Route::post('/connexion',[IdentifyController::class,'conUser'])->name('conUser');
+Route::get('/semences/semence',[semencesController::class,'display'])->name('semence');
 
-// Route::get('',[IdentifyController::class,'']);
+Route::get('/semences/paiement',[semencesController::class,'paiement'])->name('paiement');
 
-Route::get('/paiement','App\Http\Controllers\semenceController@paiement');
+Route::post('/semences',[semencesController::class,'paie'])->name('paie');
 
-// Route::get('/paiement',[semencesController::class,'paiement'])->name('paiement');
+Route::get('/semences/dashboard',[PaiementController::class,'paiecalc'])->name('dashboard'); 
 
-// Route::get('/affichage',[semencesController::class,'affichage']);
+Route::get('/search',[ResearchController::class,'search']);
+
+Route::get('/get-result',[ResearchController::class,'result'])->name('get-result');
+
+Route::get('/approdashboard',[ApproController::class,'affichage']);
+
 
 
 // Route::get('admin/', function () {

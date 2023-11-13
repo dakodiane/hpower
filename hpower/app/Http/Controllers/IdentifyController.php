@@ -37,23 +37,44 @@ class IdentifyController extends Controller
      $user->ville=$request->ville;
      $res = $user->save();
      if($res){
-          return back()->with('success','Enregistrement effectué avec succès');
+        return redirect()->route('connexion');
      }else{
           return back()->with('fail','Erreur');
      }
 
    }
 
-   public function loginUser(Request $request){
 
-     $email = $request->email;
-     $password = $request->password;
+public function loginUser(Request $request) {
+    $email = $request->input('nom'); // Assurez-vous que vous utilisez le bon nom de champ
+    $password = $request->input('mdp'); // Assurez-vous que vous utilisez le bon nom de champ
 
-         $user = User::where('email', "=", $email)->first();
+    $user = User::where('email', $email)->first();
 
-     if (Auth::attempt(['email' => $email, 'password' => $password])) {
-         if ($user) {
+    if (!$user) {
+        return redirect()->back()->withErrors(['nom' => 'Adresse Email ou Mot de passe incorrect'])->withInput();
+    }
 
+    if (Auth::attempt(['email' => $email, 'password' => $password])) {
+        if ($user->role == 'fournisseur') {
+            return redirect()->intended('user'); // Rediriger vers la page d'accueil
+           } elseif ($user->role == 'directeur') {
+            return redirect()->intended('admin'); // Rediriger vers la page d'accueil
+           } elseif ($user->role == 'rapporteur') {
+            return redirect()->intended('user'); // Rediriger vers la page d'accueil
+           } elseif ($user->role == 'servicesemence') {
+            return redirect()->intended('user'); // Rediriger vers la page d'accueil
+           } elseif ($user->role == 'servicetransport') {
+            return redirect()->intended('user'); // Rediriger vers la page d'accueil
+           } else {
+               return redirect()->back()->withErrors(['email' => 'Rôle non reconnu'])->withInput();
+           } 
+    } else {
+        return redirect()->back()->withErrors(['nom' => 'Adresse Email ou Mot de passe incorrect'])->withInput();
+    }
+}
+
+<<<<<<< HEAD
              if ($user->role == 'fournisseur') {
                $request->session()->regenerate();
                 
@@ -90,4 +111,6 @@ class IdentifyController extends Controller
          return redirect()->back()->withErrors(['password' => 'Adresse Email ou Mot de passe incorrect'])->withInput();
      }}
      
+=======
+>>>>>>> e3ee30221ee187b1ef3d81f6768129e5c0c881b4
 }

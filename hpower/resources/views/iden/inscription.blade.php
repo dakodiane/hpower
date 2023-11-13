@@ -30,10 +30,13 @@
             <div class="col-lg-8">
               <h2 class="fw-bold mb-5">Inscription <hr></h2>
               <form action="{{ route('insUser') }}" method="post">
-                @csrf
                 @if(Session::has('success'))
-                  <div class="alert alert-success">[]</div> 
+                  <div class="alert alert-success">{{ Session::get('success') }}</div> 
                 @endif
+                @if(Session::has('fail'))
+                  <div class="alert alert-danger">{{ Session::get('fail') }}</div> 
+                @endif
+                @csrf
                 <!-- 2 column grid layout with text inputs for the first and last names -->
                 <div class="row">
                   <div class="col-md-12 mb-4">

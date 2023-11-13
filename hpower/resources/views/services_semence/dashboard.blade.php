@@ -27,30 +27,34 @@
             <div class="col-md-12 grid-margin">
               
             </div>
+            
             <table class="table table-blue table-hover">
               <thead>
                 <tr>
-                  <th scope="col">Semence</th>
+                  <th scope="col">Num</th>
+                  <th scope="col">Nom et Prénom</th>
+                  <th scope="col">Fournisseur</th>
                   <th scope="col">Quantité livrée</th>
+                  <th scope="col">Prix de livraison</th>
+                  <th scope="col">Prix HPG au kg</th>
                   <th scope="col">Quantité vendue</th>
-                  <th scope="col">Nature de la semence</th>
-                  <th scope="col">Lieu de production</th>
-                  <th scope="col">Magasin de vente</th>                  
+                  <th scope="col">Total des vente HPG</th>
+                  <th scope="col">Recette</th>
                 </tr>
               </thead>
-              @foreach ($produits as $produit)
               <tbody>
                 <tr>
-                  <td>{{ $produit->prod_nom }}</td>
-                  <td>{{ $produit->prod_qtelivree }}</td>
-                  <td>{{ $produit->prod_qtevendue }}</td>
-                  <td>{{ $produit->prod_nat }}</td>
-                  <td>{{ $produit->prod_lieuprod }}</td>
-                  <td>{{ $produit->prod_magasin }}</td>
+                  <th scope="row">1</th>
+                  <td>Cristiano Ronaldo</td>
+                  <td>Al Nassr</td>
+                  <td>120 kg</td>
+                  <td>1.000.000 FCFA</td>
+                  <td>9500 FCFA</td>
+                  <td>90 kg</td>
+                  <td>855000 FCFA</td>
+                  <td>-145000 FCFA</td>
                 </tr>
-              </tbody> 
-              @endforeach
-              
+              </tbody>
             </table>
             
             </div>
