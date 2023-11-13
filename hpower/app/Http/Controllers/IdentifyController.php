@@ -61,7 +61,7 @@ class IdentifyController extends Controller
                 //dd( $user = Auth::user());
                 if ($user->role == 'fournisseur') {
                     $request->session()->regenerate();
-                    return redirect('user');
+                    return redirect('fourni');
                 } elseif ($user->role == 'directeur') {
                     $request->session()->regenerate();
                     return redirect()->intended('admin');
@@ -74,7 +74,7 @@ class IdentifyController extends Controller
                     return redirect('user');
                 } elseif ($user->role == 'servicetransport') {
                     $request->session()->regenerate();
-                    return redirect('user');
+                    return redirect('servicetrans');
                 } else {
                     return redirect()->back()->withErrors(['role' => 'Rôle non reconnu'])->withInput();
                 }

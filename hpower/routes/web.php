@@ -53,8 +53,8 @@ Route::post('enregistrerfin/{cam_id}/','App\Http\Controllers\CamionController@st
 
 Route::get('servconsultation/', 'App\Http\Controllers\ServicetransController@show')->name('Servicetrans.show');
 Route::get('servicetrans/','App\Http\Controllers\ServicetransController@statistiquesCamions');
-Route::get('servpaiement/{cam_id}', 'App\Http\Controllers\ServicetransController@paiement')->name('servicetrans.servpaiement');
-Route::post('servpaiement/{cam_id}/store', 'App\Http\Controllers\ServicetransController@storepaie')->name('Servicetrans.storepaie');
+Route::get('servpaiement/{cam_id}', 'App\Http\Controllers\ServicetransController@paiement')->name('Servicetrans.servpaiement');
+Route::get('servpaiement/{cam_id}/store', 'App\Http\Controllers\ServicetransController@storepaie')->name('Servicetrans.storepaie');
 
 Route::get('/connexion','App\Http\Controllers\IdentifyController@connexion')->name('connexion');
 Route::get('/inscription','App\Http\Controllers\IdentifyController@inscription')->name('inscription');
@@ -90,3 +90,7 @@ Route::put('/activate-produit/{id}', 'App\Http\Controllers\ProduitController@act
 Route::put('/deactivate-produit/{id}', 'App\Http\Controllers\ProduitController@deactivate')->name('produit.deactivate');
 Route::get('allcamion/', 'App\Http\Controllers\AdminController@camions')->name('allcamion');
 
+Route::post('/logout', 'App\Http\Controllers\IdentifyController@logout')->name('logout');
+
+Route::get('servconsultationfin/', 'App\Http\Controllers\ServicetransController@viewfin')->name('Servicetrans.viewfin');
+Route::post ('servpaiement/{cam_id}', 'App\Http\Controllers\ServicetransController@paiement')->name('Servicetrans.servpaiement');

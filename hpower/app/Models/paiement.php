@@ -18,11 +18,15 @@ class paiement extends Model
         'date_paiement',
         'created_at',
         'updated_at',
-        'Prix_SIPI',
-        'Prix_HPG',
-        'Montant_SIPI',
+        'prix_tp',
+        'prix_HPG',
+        'Montant_tp',
         'Montant_HPG',
         'Recette_HPG',
+       'entrep_benef'
     ];
 
 }
+
+
+

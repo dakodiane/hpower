@@ -60,7 +60,7 @@
 
                                         <td>{{ $camion->observation }}</td>
                                         <td></td>
-                                        <td><a href="{{ route('servicetrans.servpaiement', ['cam_id' => $camion->cam_id]) }}" type="button" class="btn btn-success btn-md">Valider paiement</a></td>
+                                        <td><a href="{{ route('Servicetrans.servpaiement', ['cam_id' => $camion->cam_id]) }}" type="button" class="btn btn-success btn-md">Valider paiement</a></td>
                                     </tr>
                                     @endforeach
                                 </tbody>

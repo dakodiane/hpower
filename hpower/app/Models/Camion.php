@@ -20,8 +20,6 @@ class Camion extends Model
         'poids_vide',
         'poids_charge',
         'poids_net',
-        'prix_CIPI',
-        'prix_HPG',
         'avance_recue',
         'solde',
         'cam_photo',
@@ -42,5 +40,13 @@ class Camion extends Model
             return $this->hasMany(Paiement::class, 'cam_id');
         }
 
+        public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
+    public function isEmpty()
+    {
+        return $this->count() === 0;
+    }
 
 }

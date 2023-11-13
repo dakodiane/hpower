@@ -21,11 +21,10 @@
                                         <th>Poids charge</th>
                                         <th>Poids net</th>
                                         <th>Nombre de sacs</th>
-                                        <th>Heure de départ</th>
+                                        <th>Heure d'enrégistrement</th>
                                         <th>Provenance</th>
                                         <th>Statut du chargement</th>
                                         <th>observation</th>
-                                        <th>charge</th>
                                         <th>Paiement</th>
                                     </tr>
                                 </thead> 
@@ -40,18 +39,18 @@
                                         <td>{{ $camion->poids_charge }}</td>
                                         <td>{{ $camion->poids_net }}</td>
                                         <td>{{ $camion->nombre_sac }}</td>
-                                        <td>{{ $camion->heure_depart }}</td>
+                                        <td>{{ $camion->created_at }}</td>
                                         <td>{{ $camion->provenance }}</td>
                                         <td>
                                             @if($camion->statut_dechargement == 1)
-                                                Chargé
+                                                En route
                                             @else
-                                                Non chargé
+                                                Non en route
                                             @endif
                                         </td>
 
                                         <td>{{ $camion->observation }}</td>
-                                        <td></td>
+                                       
                                         <td>{{ $camion->statut_paiement }}</td>
                                     </tr>
                                     @endforeach
