@@ -1,0 +1,353 @@
+-- phpMyAdmin SQL Dump
+-- version 5.2.0
+-- https://www.phpmyadmin.net/
+--
+-- Hôte : 127.0.0.1:3306
+-- Généré le : mar. 14 nov. 2023 à 13:11
+-- Version du serveur : 8.0.31
+-- Version de PHP : 8.2.0
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Base de données : `hpowercamp`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `approvisionnements`
+--
+
+DROP TABLE IF EXISTS `approvisionnements`;
+CREATE TABLE IF NOT EXISTS `approvisionnements` (
+  `appro_id` int NOT NULL AUTO_INCREMENT,
+  `num_bordereau` varchar(255) NOT NULL,
+  `num_immatriculation` varchar(255) NOT NULL,
+  `cam_nomchauf` varchar(255) NOT NULL,
+  `type_produit` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
+  `heure_arrive` timestamp NULL DEFAULT NULL,
+  `observation` text CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci,
+  `observation1` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT NULL,
+  `poids_vide` int DEFAULT NULL,
+  `poids_charge` int DEFAULT NULL,
+  `poids_net` int DEFAULT NULL,
+  `avance_recue` varchar(255) DEFAULT NULL,
+  `cam_photo` varchar(255) NOT NULL,
+  `cam_photo1` varchar(255) DEFAULT NULL,
+  `provenance` varchar(255) DEFAULT NULL,
+  `destination` varchar(255) DEFAULT NULL,
+  `util_id` int DEFAULT NULL,
+  `statut_dechargement` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT 'En attente',
+  `nombre_sac` int DEFAULT NULL,
+  `statut_paiement` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT 'En attente',
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `ville_arrive` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT NULL,
+  `numerodebord` varchar(255) DEFAULT NULL,
+  `nombre_sacs` int DEFAULT NULL,
+  `tel_conducteur` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT NULL,
+  `bordereauchargement` varchar(255) DEFAULT NULL,
+  `cam_photo2` varchar(255) DEFAULT NULL,
+  `avancepaye` varchar(255) DEFAULT NULL,
+  `entreprise_benef` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT NULL,
+  `qte_charge` int DEFAULT NULL,
+  PRIMARY KEY (`appro_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb3;
+
+--
+-- Déchargement des données de la table `approvisionnements`
+--
+
+INSERT INTO `approvisionnements` (`appro_id`, `num_bordereau`, `num_immatriculation`, `cam_nomchauf`, `type_produit`, `heure_arrive`, `observation`, `observation1`, `poids_vide`, `poids_charge`, `poids_net`, `avance_recue`, `cam_photo`, `cam_photo1`, `provenance`, `destination`, `util_id`, `statut_dechargement`, `nombre_sac`, `statut_paiement`, `created_at`, `updated_at`, `ville_arrive`, `numerodebord`, `nombre_sacs`, `tel_conducteur`, `bordereauchargement`, `cam_photo2`, `avancepaye`, `entreprise_benef`, `qte_charge`) VALUES
+(20, 'HP0001', 'B33', 'Annick', 'Noix d\'anacade', '2023-11-14 10:58:00', NULL, NULL, NULL, NULL, NULL, NULL, 'photo_immat/ULLiYLswZEbmgIbM6oJcIMlVZrkDSz2Wk5ZuGU8F.png', NULL, 'Cotonou', NULL, 17, 'En attente', NULL, 'En attente', '2023-11-14 10:00:21', '2023-11-14 10:00:21', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `fournisseurs`
+--
+
+DROP TABLE IF EXISTS `fournisseurs`;
+CREATE TABLE IF NOT EXISTS `fournisseurs` (
+  `fournisseur_id` int NOT NULL AUTO_INCREMENT,
+  `num_bordereau` varchar(255) NOT NULL,
+  `num_immatriculation` varchar(255) NOT NULL,
+  `cam_nomchauf` varchar(255) NOT NULL,
+  `type_produit` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
+  `heure_arrive` timestamp NULL DEFAULT NULL,
+  `observation` text CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci,
+  `observation1` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT NULL,
+  `poids_vide` int DEFAULT NULL,
+  `poids_charge` int DEFAULT NULL,
+  `poids_net` int DEFAULT NULL,
+  `avance_recue` varchar(255) DEFAULT NULL,
+  `cam_photo` varchar(255) NOT NULL,
+  `cam_photo1` varchar(255) DEFAULT NULL,
+  `provenance` varchar(255) DEFAULT NULL,
+  `destination` varchar(255) DEFAULT NULL,
+  `util_id` int DEFAULT NULL,
+  `statut_dechargement` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT 'En attente',
+  `nombre_sac` int DEFAULT NULL,
+  `statut_paiement` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT 'En attente',
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `ville_arrive` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT NULL,
+  `numerodebord` varchar(255) DEFAULT NULL,
+  `nombre_sacs` int DEFAULT NULL,
+  `tel_conducteur` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT NULL,
+  PRIMARY KEY (`fournisseur_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb3;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `paiements`
+--
+
+DROP TABLE IF EXISTS `paiements`;
+CREATE TABLE IF NOT EXISTS `paiements` (
+  `paie_id` int NOT NULL AUTO_INCREMENT,
+  `prix_unit` int DEFAULT NULL,
+  `qte_totale` int DEFAULT NULL,
+  `util_id` int NOT NULL,
+  `semence_id` int DEFAULT NULL,
+  `appro_id` int DEFAULT NULL,
+  `transport_id` int DEFAULT NULL,
+  `fournisseur_id` int DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `prix_tp` int DEFAULT NULL,
+  `prix_HPG` int DEFAULT NULL,
+  `montant_tp` int DEFAULT NULL,
+  `montant_HPG` int DEFAULT NULL,
+  `recette_HPG` int DEFAULT NULL,
+  `entrep_benef` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`paie_id`),
+  KEY `fk_idutil` (`util_id`),
+  KEY `cam_id` (`semence_id`),
+  KEY `appro_id` (`appro_id`),
+  KEY `transport_id` (`transport_id`),
+  KEY `fournisseur_id` (`fournisseur_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `produits`
+--
+
+DROP TABLE IF EXISTS `produits`;
+CREATE TABLE IF NOT EXISTS `produits` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `prod_nom` varchar(255) NOT NULL,
+  `active` tinyint(1) NOT NULL DEFAULT '1',
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb3;
+
+--
+-- Déchargement des données de la table `produits`
+--
+
+INSERT INTO `produits` (`id`, `prod_nom`, `active`, `created_at`, `updated_at`) VALUES
+(1, 'Soja', 1, '2023-11-03 09:44:41', '2023-11-03 09:44:41'),
+(2, 'Cajou', 1, '2023-11-03 09:44:41', '2023-11-08 20:03:33'),
+(3, 'Riz', 1, '2023-11-08 15:42:43', '2023-11-08 15:42:43'),
+(5, 'Noix d\'anacade', 1, '2023-11-08 15:44:29', '2023-11-08 15:44:29'),
+(7, 'Noix de palme', 1, '2023-11-10 08:31:20', '2023-11-10 08:31:20'),
+(14, 'Noix palmiste', 0, '2023-11-13 09:11:47', '2023-11-13 09:11:53');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `semences`
+--
+
+DROP TABLE IF EXISTS `semences`;
+CREATE TABLE IF NOT EXISTS `semences` (
+  `semence_id` int NOT NULL AUTO_INCREMENT,
+  `num_bordereau` varchar(255) NOT NULL,
+  `num_immatriculation` varchar(255) NOT NULL,
+  `cam_nomchauf` varchar(255) NOT NULL,
+  `type_produit` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
+  `heure_arrive` timestamp NULL DEFAULT NULL,
+  `observation` text CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci,
+  `observation1` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT NULL,
+  `poids_vide` int DEFAULT NULL,
+  `poids_charge` int DEFAULT NULL,
+  `poids_net` int DEFAULT NULL,
+  `avance_recue` varchar(255) DEFAULT NULL,
+  `cam_photo` varchar(255) NOT NULL,
+  `cam_photo1` varchar(255) DEFAULT NULL,
+  `provenance` varchar(255) DEFAULT NULL,
+  `destination` varchar(255) DEFAULT NULL,
+  `util_id` int DEFAULT NULL,
+  `statut_dechargement` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT 'En attente',
+  `nombre_sac` int DEFAULT NULL,
+  `statut_paiement` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT 'En attente',
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `ville_arrive` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT NULL,
+  `numerodebord` varchar(255) DEFAULT NULL,
+  `nombre_sacs` int DEFAULT NULL,
+  `tel_conducteur` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT NULL,
+  `bordereauchargement` varchar(255) DEFAULT NULL,
+  `cam_photo2` varchar(255) DEFAULT NULL,
+  `avancepaye` varchar(255) DEFAULT NULL,
+  `entreprise_benef` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT NULL,
+  `qte_charge` int DEFAULT NULL,
+  PRIMARY KEY (`semence_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb3;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `transports`
+--
+
+DROP TABLE IF EXISTS `transports`;
+CREATE TABLE IF NOT EXISTS `transports` (
+  `transport_id` int NOT NULL AUTO_INCREMENT,
+  `num_bordereau` varchar(255) NOT NULL,
+  `num_immatriculation` varchar(255) NOT NULL,
+  `cam_nomchauf` varchar(255) NOT NULL,
+  `type_produit` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
+  `heure_arrive` timestamp NULL DEFAULT NULL,
+  `observation` text CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci,
+  `observation1` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT NULL,
+  `poids_vide` int DEFAULT NULL,
+  `poids_charge` int DEFAULT NULL,
+  `poids_net` int DEFAULT NULL,
+  `avance_recue` varchar(255) DEFAULT NULL,
+  `cam_photo` varchar(255) NOT NULL,
+  `cam_photo1` varchar(255) DEFAULT NULL,
+  `provenance` varchar(255) DEFAULT NULL,
+  `destination` varchar(255) DEFAULT NULL,
+  `util_id` int DEFAULT NULL,
+  `statut_dechargement` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT 'En attente',
+  `nombre_sac` int DEFAULT NULL,
+  `statut_paiement` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT 'En attente',
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `ville_arrive` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT NULL,
+  `numerodebord` varchar(255) DEFAULT NULL,
+  `nombre_sacs` int DEFAULT NULL,
+  `tel_conducteur` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT NULL,
+  `bordereauchargement` varchar(255) DEFAULT NULL,
+  `cam_photo2` varchar(255) DEFAULT NULL,
+  `avancepaye` varchar(255) DEFAULT NULL,
+  `entreprise_benef` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT NULL,
+  `qte_charge` int DEFAULT NULL,
+  PRIMARY KEY (`transport_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8mb3;
+
+--
+-- Déchargement des données de la table `transports`
+--
+
+INSERT INTO `transports` (`transport_id`, `num_bordereau`, `num_immatriculation`, `cam_nomchauf`, `type_produit`, `heure_arrive`, `observation`, `observation1`, `poids_vide`, `poids_charge`, `poids_net`, `avance_recue`, `cam_photo`, `cam_photo1`, `provenance`, `destination`, `util_id`, `statut_dechargement`, `nombre_sac`, `statut_paiement`, `created_at`, `updated_at`, `ville_arrive`, `numerodebord`, `nombre_sacs`, `tel_conducteur`, `bordereauchargement`, `cam_photo2`, `avancepaye`, `entreprise_benef`, `qte_charge`) VALUES
+(20, 'HP0001', 'N23', 'aZIZ', 'Cajou', '2023-11-14 10:10:00', NULL, NULL, NULL, NULL, NULL, NULL, 'photo_immat/GyPRCC4UMJrJn6RPTCrOGV41ljXvAX3D1ORrBJDW.png', NULL, 'Cotonou', NULL, 17, 'En attente', NULL, 'En attente', '2023-11-14 09:10:56', '2023-11-14 09:10:56', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(21, 'HP0002', 'B23', 'Yves', 'Riz', '2023-11-14 12:43:00', 'Neant', NULL, 34, 68, 34, NULL, 'photo_immat/3KOYQoHz8rBrc36lApUNIZSMz9nDjug3oTUFaAdP.png', 'photo_immat/09FOklLLAwTy8dXIDadjXz3yPgI673u7d5Nf3vOO.png', 'Cotonou', 'Parakou', 17, 'Déchargé', 45, 'En attente', '2023-11-14 11:44:07', '2023-11-14 12:06:36', NULL, NULL, 1, '43434345', 'B3', 'photo_immat/B6p2zOGMKdwFtmqoKdhkz1xX73QnhLLQO8cGLfnQ.png', '100000', 'CIPI', 34);
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `users`
+--
+
+DROP TABLE IF EXISTS `users`;
+CREATE TABLE IF NOT EXISTS `users` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
+  `email` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
+  `telephone` varchar(255) NOT NULL,
+  `role` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
+  `password` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
+  `ville` varchar(255) DEFAULT NULL,
+  `last_activity` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `active` tinyint(1) NOT NULL DEFAULT '1',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb3;
+
+--
+-- Déchargement des données de la table `users`
+--
+
+INSERT INTO `users` (`id`, `name`, `email`, `telephone`, `role`, `password`, `ville`, `last_activity`, `created_at`, `updated_at`, `active`) VALUES
+(11, 'parakou', 'parakou@gmail.com', '60000001', 'rapporteur', '$2y$10$2SdB5LcdPSrB43fPIz0dc.cQp3OQ/uphCktJ2.Ou39zadhipd/0fS', 'Parakou', '2023-11-09 08:24:33', '2023-11-08 10:53:47', '2023-11-13 09:10:51', 0),
+(12, 'cotonou', 'cotonou@gmail.com', '6000000', 'rapporteur', '$2y$10$7HnUmqsdGsOJnGSc1KQ1X.B.2apX1cZRNCxG8oXV0x4i7ED97emZC', 'Cotonou', '0000-00-00 00:00:00', '2023-11-08 10:54:16', '2023-11-08 10:54:16', 1),
+(13, 'DOSSOU Alex', 'dossoualex@gmail.com', '60000001', 'directeur', '$2y$10$.f.DUom6EUPq9LfzSF992e47Mb7VcdEE7YKwyWQ1fFiGeDGr50aca', 'Cotonou', NULL, '2023-11-08 12:36:12', '2023-11-08 12:36:12', 1),
+(14, 'JEAN jean', 'jean@gmail.com', '60000001', 'fournisseur', '$2y$10$dnxKqJ/F0lL2jmY59nFqPu.xi3PTkBTewjSoe/nJqWU4ZsLQWamFO', 'Cotonou', '2023-11-09 09:39:45', '2023-11-09 08:39:45', '2023-11-12 09:53:22', 0),
+(15, 'DAVID David', 'david@gmail.com', '60000001', 'rapporteur', '$2y$10$CQzmSp05LGcCVg2w5vPy/.zE5YwGi197qDg5uDci/a3FD.8kIDlze', 'Parakou', '2023-11-09 09:45:51', '2023-11-09 08:45:51', '2023-11-09 08:45:51', 1),
+(16, 'David', 'daviddavid@gmail.com', '34343434', 'rapporteur', '$2y$10$0Z4nirHEKRShnG6d1BthtuGDmlaRZEfacbWA/Fo3vQu/DwwYJBfei', 'Cotonou', '2023-11-10 09:19:51', '2023-11-10 08:19:51', '2023-11-10 08:19:51', 1),
+(17, 'Hamid', 'hamid@gmail.com', '4094040', 'rapporteur', '$2y$10$MQaxOjDWbULPpaXYElbruOfg2vY/gtNTn3aRYSrYBem//DHZc4.WG', 'Parakou', '2023-11-13 10:04:25', '2023-11-13 09:04:25', '2023-11-13 09:04:25', 1),
+(18, 'julio', 'julio@gmail.com', '344', 'fournisseur', '$2y$10$Hh1fyQPCsILvaZYquqi23eboPscSueyL3nnuysftqfzFEENUJUmCG', 'Cotonou', '2023-11-13 10:26:59', '2023-11-13 09:26:59', '2023-11-13 09:26:59', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `villes`
+--
+
+DROP TABLE IF EXISTS `villes`;
+CREATE TABLE IF NOT EXISTS `villes` (
+  `nom` varchar(255) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb3;
+
+--
+-- Déchargement des données de la table `villes`
+--
+
+INSERT INTO `villes` (`nom`) VALUES
+('Cotonou'),
+('Abomey-Calavi'),
+('Porto-Novo'),
+('Parakou'),
+('Djougou'),
+('Bohicon'),
+('Natitingou'),
+('Savé'),
+('Abomey'),
+('Nikki'),
+('Lokossa'),
+('Ouidah'),
+('Dogbo-Tota'),
+('Kandi'),
+('Cové'),
+('Malanville'),
+('Pobé'),
+('Kérou'),
+('Savalou'),
+('Sakété'),
+('Comè'),
+('Bembéréké'),
+('Bassila'),
+('Banikoara'),
+('Kétou'),
+('Dassa-Zoumè'),
+('Tchaourou'),
+('Allada'),
+('Aplahoué'),
+('Tanguiéta'),
+('N\'Dali'),
+('Segbana'),
+('Athiémé'),
+('Grand Popo'),
+('Kouandé');
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

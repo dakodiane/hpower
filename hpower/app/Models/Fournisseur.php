@@ -3,10 +3,10 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Camion extends Model
+class Fournisseur extends Model
 {
-    protected $table = 'camions'; // Nom de la table dans la base de données
-    protected $primaryKey = 'cam_id'; // Remplacez par le nom de votre colonne de clé primaire
+    protected $table = 'fournisseurs'; // Nom de la table dans la base de données
+    protected $primaryKey = 'founisseur_id'; // Remplacez par le nom de votre colonne de clé primaire
 
     protected $fillable = [
         'num_bordereau',
@@ -39,7 +39,7 @@ class Camion extends Model
             // Dans le modèle Camion
         public function paiements()
         {
-            return $this->hasMany(Paiement::class, 'cam_id');
+            return $this->hasMany(Paiement::class, 'fournisseur_id');
         }
 
         public function utilisateur()

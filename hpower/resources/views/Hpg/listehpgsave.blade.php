@@ -3,11 +3,11 @@
 @section('document')
 <style>
   .no-camion-message {
-    color: red; 
-    font-size: 18px; 
-    font-weight: bold; 
-    text-align: center; 
-    margin-top: 20px; 
+    color: red; /* Couleur du texte gris */
+    font-size: 18px; /* Taille de texte */
+    font-weight: bold; /* Gras */
+    text-align: center; /* Centrer le texte */
+    margin-top: 20px; /* Espacement en haut */
 }
 
 </style>
@@ -28,7 +28,7 @@
                     <th>Photo d'immatriculation</th>
                     <th>Nom du chauffeur</th>
                     <th>Type de produit</th>
- 
+       
                     <th>Action</th>
                   </tr>
                 </thead>
@@ -40,9 +40,8 @@
                     <td><a href="{{ asset($camion->cam_photo) }}" type="button" class="btn btn-success btn-md">Voir la photo</a></td>
                     <td>{{ $camion->cam_nomchauf }}</td>
                     <td>{{ $camion->type_produit }}</td>
-             
-              
-                    <td><a href="{{ route('appro.savefin', ['approvisionnement_id' => $camion->approvisionnement_id]) }}" type="button" class="btn btn-success btn-md">Finaliser</a></td>
+                  
+                    <td><a href="{{ route('savefin.hpg', ['approvionnement_id' => $camion->approvisionnement_id]) }}" type="button" class="btn btn-success btn-md">Finaliser</a></td>
                   </tr>
                   @endforeach
                 </tbody>

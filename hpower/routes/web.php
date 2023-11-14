@@ -71,12 +71,6 @@ Route::get('paiement/', function () {
 Route::get('user/','App\Http\Controllers\CamionController@tableaudebord')->name('tableaudebord');
 Route::get('admin/','App\Http\Controllers\CamionController@statistiqueCamions');
 
-Route::get('enregistrercamion/', 'App\Http\Controllers\CamionController@create')->name('camion.create');
-Route::post('enregistrercamion/','App\Http\Controllers\CamionController@store')->name('camion.store');
-Route::get('listecamionsave/', 'App\Http\Controllers\CamionController@view')->name('camion.view');
-Route::get('listecamionfin/', 'App\Http\Controllers\CamionController@viewfin')->name('camion.viewfin');
-Route::get('enregistrerfin/{cam_id}/', 'App\Http\Controllers\CamionController@savefin')->name('camion.savefin');
-Route::post('enregistrerfin/{cam_id}/','App\Http\Controllers\CamionController@storefin')->name('camion.storefin');
 
 Route::get('enregistrerproduit/', function () {
     return view('Admin/enregistrerproduit');
@@ -100,3 +94,33 @@ Route::post('/logout', 'App\Http\Controllers\IdentifyController@logout')->name('
 
 Route::get('servconsultationfin/', 'App\Http\Controllers\ServicetransController@viewfin')->name('Servicetrans.viewfin');
 Route::post ('servpaiement/{cam_id}', 'App\Http\Controllers\ServicetransController@paiement')->name('Servicetrans.servpaiement');
+
+
+
+Route::get('enregistrerappro/', 'App\Http\Controllers\RapporteurController@createappro')->name('create.appro');
+Route::post('enregistrerappro/','App\Http\Controllers\RapporteurController@storeappro')->name('store.appro');
+Route::get('listeapprosave/', 'App\Http\Controllers\RapporteurController@viewappro')->name('view.appro');
+Route::get('listeapprofin/', 'App\Http\Controllers\RapporteurController@viewfinappro')->name('appro.viewfin');
+Route::get('approfin/{appro_id}/', 'App\Http\Controllers\RapporteurController@savefinappro')->name('savefin.appro');
+Route::post('approfin/{appro_id}/','App\Http\Controllers\RapporteurController@storefinappro')->name('storefin.appro');
+
+
+Route::get('enregistrersemence/', 'App\Http\Controllers\RapporteurController@createsemence')->name('create.semence');
+Route::post('enregistrersemence/','App\Http\Controllers\RapporteurController@storesemence')->name('store.semence');
+Route::get('listesemencesave/', 'App\Http\Controllers\RapporteurController@viewsemence')->name('view.semence');
+Route::get('listesemencefin/', 'App\Http\Controllers\RapporteurController@viewfinsemence')->name('semence.viewfin');
+Route::get('semencefin/{semence_id}/', 'App\Http\Controllers\RapporteurController@savefinsemence')->name('savefin.semence');
+Route::post('semencefin/{semence_id}/','App\Http\Controllers\RapporteurController@storefinsemence')->name('storefin.semence');
+
+
+Route::get('enregistrertransport/', 'App\Http\Controllers\RapporteurController@createtransport')->name('create.transport');
+Route::post('enregistrertransport/','App\Http\Controllers\RapporteurController@storetransport')->name('store.transport');
+Route::get('listetransportsave/', 'App\Http\Controllers\RapporteurController@viewtransport')->name('view.transport');
+Route::get('listetransportfin/', 'App\Http\Controllers\RapporteurController@viewfintransport')->name('transport.viewfin');
+Route::get('transportfin/{transport_id}/', 'App\Http\Controllers\RapporteurController@savefintransport')->name('savefin.transport');
+Route::post('transportfin/{transport_id}/','App\Http\Controllers\RapporteurController@storefintransport')->name('storefin.transport');
+
+
+Route::get('enregistrerhpg/', 'App\Http\Controllers\RapporteurController@createhpg')->name('create.hpg');
+Route::get('listehpgsave/', 'App\Http\Controllers\RapporteurController@viewappro')->name('view.hpg');
+Route::get('listehpgfin/', 'App\Http\Controllers\RapporteurController@viewfinhpg')->name('viewfin.hpg');

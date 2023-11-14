@@ -3,11 +3,11 @@
 @section('document')
 <style>
   .no-camion-message {
-    color: red; 
-    font-size: 18px; 
-    font-weight: bold; 
-    text-align: center; 
-    margin-top: 20px; 
+    color: red; /* Couleur du texte gris */
+    font-size: 18px; /* Taille de texte */
+    font-weight: bold; /* Gras */
+    text-align: center; /* Centrer le texte */
+    margin-top: 20px; /* Espacement en haut */
 }
 
 </style>
@@ -42,7 +42,7 @@
                     <td>{{ $camion->type_produit }}</td>
              
               
-                    <td><a href="{{ route('appro.savefin', ['approvisionnement_id' => $camion->approvisionnement_id]) }}" type="button" class="btn btn-success btn-md">Finaliser</a></td>
+                    <td><a href="{{ route('savefin.appro', ['appro_id' => $camion->appro_id]) }}" type="button" class="btn btn-success btn-md">Finaliser</a></td>
                   </tr>
                   @endforeach
                 </tbody>

@@ -43,7 +43,7 @@
             <div class="card card-tale">
               <div class="card-body">
                 <p class="mb-4" style="color: white;">Camions enregistrés aujourd'hui</p>
-                <p class="fs-30 mb-2" style="color: white;">{{ $camionsAujourdhui }}</p>
+                <p class="fs-30 mb-2" style="color: white;">{{ $totaltoday }}</p>
               </div>
             </div>
           </div>
@@ -51,7 +51,7 @@
             <div class="card card-dark-blue">
               <div class="card-body">
                 <p class="mb-4" style="color: white;">Camions enregistrés ce mois</p>
-                <p class="fs-30 mb-2" style="color: white;">{{ $camionsCeMois }}</p>
+                <p class="fs-30 mb-2" style="color: white;">{{ $totalmonth }}</p>
               </div>
             </div>
           </div>
