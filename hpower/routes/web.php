@@ -144,3 +144,13 @@ Route::post('transportfin/{transport_id}/','App\Http\Controllers\RapporteurContr
 Route::get('enregistrerhpg/', 'App\Http\Controllers\RapporteurController@createhpg')->name('create.hpg');
 Route::get('listehpgsave/', 'App\Http\Controllers\RapporteurController@viewappro')->name('view.hpg');
 Route::get('listehpgfin/', 'App\Http\Controllers\RapporteurController@viewfinhpg')->name('viewfin.hpg');
+
+
+//E  X  P  O  R  T
+
+Route::get('creeatebook/', 'App\Http\Controllers\ExportController@createexport')->name('create.export');
+Route::post('creeatebook/','App\Http\Controllers\ExportController@storeexport')->name('store.export');
+//Route::get('listeexportsave/', 'App\Http\Controllers\ExportController@viewexport')->name('view.export');
+//Route::get('listeexportfin/', 'App\Http\Controllers\ExportController@viewfinexport')->name('export.viewfin');
+//Route::get('exportfin/{export_id}/', 'App\Http\Controllers\ExportController@savefinexport')->name('savefin.export');
+//Route::post('exportfin/{export_id}/','App\Http\Controllers\ExportController@storefinexport')->name('storefin.export');

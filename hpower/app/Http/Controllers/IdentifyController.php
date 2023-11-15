@@ -47,7 +47,33 @@ class IdentifyController extends Controller
     }
 
 
+    public function registerClient(Request $request)
+    {
 
+        $request->validate([
+            'name' => 'required',
+            'email' => 'required|email|unique:users',
+            'password' => 'required|min:5|max:12',
+            'telephone' => 'required',
+            'role' => 'required',
+            'nom_entreprise' => 'required',
+            'adresse' => 'required',
+         
+        ]);
+        $user = new User();
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->password = Hash::make($request->password);
+        $user->telephone = $request->telephone;
+        $user->role = $request->role;
+        $user->ville = $request->ville;
+        $res = $user->save();
+        if ($res) {
+            return redirect()->route('connexion');
+        } else {
+            return back()->with('fail', 'Erreur');
+        }
+    }
 
     public function loginUser(Request $request)
     {

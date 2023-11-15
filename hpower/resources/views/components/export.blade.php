@@ -46,7 +46,7 @@
       <nav class="sidebar sidebar-offcanvas" id="sidebar">
         <ul class="nav">
           <li class="nav-item">
-            <a class="nav-link" href="{{{'/user'}}}">
+            <a class="nav-link" href="{{{'/export'}}}">
               <i class="ti-layout-grid2-alt menu-icon"></i>
               <span class="menu-title">Tableau de bord</span>
             </a>
@@ -54,14 +54,13 @@
           <li class="nav-item">
             <a class="nav-link" data-toggle="collapse" href="#icons" aria-expanded="false" aria-controls="icons">
               <i class="ti-truck menu-icon"></i>
-              <span class="menu-title">Transport</span>
+              <span class="menu-title">Booking</span>
               <i class="menu-arrow"></i>
             </a>
             <div class="collapse" id="icons">
               <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="{{ route('create.transport') }}">Enregistrer camion</a></li>
-                <li class="nav-item"> <a class="nav-link" href="{{'/listetransportsave'}}">Finaliser camion</a></li>
-                <li class="nav-item"> <a class="nav-link" href="{{ route('transport.viewfin') }}">Liste camions finalisés</a></li>
+                <li class="nav-item"> <a class="nav-link" href="{{ route('create.booking') }}">Enregistrer camion</a></li>
+                <li class="nav-item"> <a class="nav-link" href="{{ route('booking.viewfin') }}">Liste Booking</a></li>
 
 
               </ul>
@@ -87,12 +86,12 @@
           <li class="nav-item">
             <a class="nav-link" data-toggle="collapse" href="#error" aria-expanded="false" aria-controls="error">
               <i class="ti-shopping-cart menu-icon"></i>
-              <span class="menu-title">Approvisionnement</span>
+              <span class="menu-title">Loading</span>
               <i class="menu-arrow"></i>
             </a>
             <div class="collapse" id="error">
               <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="{{ route('create.appro') }}">HPG </a></li>
+                <li class="nav-item"> <a class="nav-link" href="{{ route('create.loading') }}">Loading</a></li>
                 <li class="nav-item"> <a class="nav-link" href="{{'/listeapprosave'}}"> Finaliser HPG </a></li>
                 <li class="nav-item"> <a class="nav-link" href="{{'/fournisave'}}">Fournisseurs </a></li>
                 <li class="nav-item"> <a class="nav-link" href="{{ route('appro.viewfin') }}">Liste camions finalisés</a></li>
