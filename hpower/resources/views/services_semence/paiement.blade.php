@@ -8,6 +8,7 @@
       <li>{{ $error }}</li> 
       @endforeach                
     </ul>
+    @endif
   </div>
 
 <div id="booking" class="d-flex justify-content-center" style="background: url('{{ asset('images/hpower.png') }}'); background-size: cover; background-position: center; background-repeat: no-repeat; background-blend-mode: darken; backdrop-filter: blur(50px); background-color: rgba(0, 0, 0, 0.1);">

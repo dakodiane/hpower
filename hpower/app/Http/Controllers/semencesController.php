@@ -8,9 +8,14 @@ use Illuminate\Http\Request;
 
 class semencesController extends Controller
 {
-    public function display()
+    public function index()
+    {
+          $produitsVendus = Produit::where('')->count();
+          return view ("services_semence.dashboard", compact("produitsVendus"));
+    }
+     public function display()
    {
-          $produits = Produit::all();
+          
         return view("services_semence.semence", ['produits' => $produits]);
    }
 

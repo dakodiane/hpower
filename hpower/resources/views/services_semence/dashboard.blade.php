@@ -23,42 +23,59 @@
               </div>
             </div>
           </div>
-          <div class="row">
+           <div class="row">
             <div class="col-md-12 grid-margin">
               
             </div>
-            
-            <table class="table table-blue table-hover">
-              <thead>
-                <tr>
-                  <th scope="col">Num</th>
-                  <th scope="col">Semence</th>
-                  {{-- <th scope="col">Fournisseur</th> --}}
-                  <th scope="col">Quantité livrée</th>
-                  <th scope="col">Prix de livraison</th>
-                  <th scope="col">Prix HPG au kg</th>
-                  <th scope="col">Quantité vendue</th>
-                  <th scope="col">Total des vente HPG</th>
-                  <th scope="col">Recette</th>
-                </tr>
-              </thead>
-              @foreach ($produits as $produit)
-              <tbody>
-                <tr>
-                  <td>{{ $produit->id }}</td>
-                  <td>{{ $produit->prod_nom }}</td>
-                  <td>{{ $produit->prod_qtelivree }}</td>
-                  <td>{{ $produit->prod_qtevendue }}</td>
-                  <td>{{ $produit->prod_nat }}</td>
-                  <td>{{ $produit->prod_lieuprod }}</td>
-                  <td>{{ $produit->prod_magasin }}</td>
-                </tr>
-              </tbody> 
-              @endforeach
-            </table>
-            
+            <div class="row">
+              <div class="col-md-12 grid-margin transparent">
+                <div class="row">
+                  <div class="col-md-6 mb-4 stretch-card transparent" style="text-align: center;">
+                    <div class="card card-tale">
+                      <div class="card-body">
+                        <p class="mb-4" style="color: white; font-size:2em;">DEPENSES POUR ACHAT</p>
+                        <p class="fs-30 mb-2" style="color: white;">4006</p>
+                        <a href="/semences" style="color: white;"><small>Voir plus</small></a>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-6 mb-4 stretch-card transparent" style="text-align: center;">
+                    <div class="card card-dark-blue">
+                      <div class="card-body">
+                        <p class="mb-4" style="color: white; font-size:2em;">QUANTITE VENDUE</p>
+                        <p class="fs-30 mb-2" style="color: white;">{{ $produitsVendus }}</p>
+                        <a href="/semences" style="color: white;"><small>Voir plus</small></a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6 mb-4 mb-lg-0 stretch-card transparent" style="text-align: center;">
+                    <div class="card card-light-blue">
+                      <div class="card-body">
+                        <p class="mb-4" style="color: white; font-size:2em;">QUANTITE ACHETEE</p>
+                        <p class="fs-30 mb-2" style="color: white;">34040</p>
+                        <a href="/semences" style="color: white;"><small>Voir plus</small></a>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-6 stretch-card transparent" style="text-align: center;">
+                    <div class="card card-light-danger">
+                      <div class="card-body">
+                        <p class="mb-4" style="color: white; font-size:2em;">MONTANT DE VENTE</p>
+                        <p class="fs-30 mb-2" style="color: white;">47033</p>
+                        <a href="/semences" style="color: white;"><small>Voir plus</small></a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
+            
+           
+            
           </div>
+        </div>
       
         </div>    
-  @endsection
+  @endsection 

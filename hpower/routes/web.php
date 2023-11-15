@@ -16,9 +16,6 @@ use App\Http\Controllers\IdentifyController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-Route::get('/', function () {
-    return view("welcome");
-});
 
 Route::get('/connexion','App\Http\Controllers\IdentifyController@connexion')->name('connexion');
 
@@ -28,13 +25,15 @@ Route::post('/inscription','App\Http\Controllers\IdentifyController@registerUser
 
 Route::post('/connexion','App\Http\Controllers\IdentifyController@loginUser')->name('conUser');
 
+Route::get('/semences',[semencesController::class,'index'])->name('dashboard');
+
 Route::get('/semences/semence',[semencesController::class,'display'])->name('semence');
 
 Route::get('/semences/paiement',[semencesController::class,'paiement'])->name('paiement');
 
-Route::post('/semences',[semencesController::class,'paie'])->name('paie');
+// Route::post('/semences',[semencesController::class,'paie'])->name('paie');
 
-Route::get('/semences/dashboard',[PaiementController::class,'paiecalc'])->name('dashboard'); 
+ 
 
 Route::get('/search',[ResearchController::class,'search']);
 
