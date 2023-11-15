@@ -243,7 +243,7 @@ class RapporteurController extends Controller
     public function viewfinappro(Request $request)
     {
         $user = Auth::user();
-        $camions = Transport::where('destination', $user->ville)
+        $camions = Approvisionnement::where('destination', $user->ville)
             ->whereNotNull('numerodebord')
             ->get();
 
@@ -263,7 +263,7 @@ class RapporteurController extends Controller
     public function viewfinsemence(Request $request)
     {
         $user = Auth::user();
-        $camions = Transport::where('destination', $user->ville)      
+        $camions = Semence::where('destination', $user->ville)      
               ->whereNotNull('numerodebord')
             ->get();
 

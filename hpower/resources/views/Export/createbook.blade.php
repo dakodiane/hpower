@@ -1,4 +1,4 @@
-@extends('templates.user')
+@extends('templates.export')
 
 @section('document')
 <div class="main-panel">
