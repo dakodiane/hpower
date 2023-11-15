@@ -43,36 +43,86 @@
     </nav>
     <div class="container-fluid page-body-wrapper">
      
-      <!-- partial:partials/_sidebar.html -->
       <nav class="sidebar sidebar-offcanvas" id="sidebar">
         <ul class="nav">
           <li class="nav-item">
             <a class="nav-link" href="{{{'/user'}}}">
-              <i class="icon-grid menu-icon"></i>
+              <i class="ti-layout-grid2-alt menu-icon"></i>
               <span class="menu-title">Tableau de bord</span>
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="{{ route('camion.create') }}">
-              <i class="icon-grid menu-icon mdi mdi-cloud-download"></i>
-              <span class="menu-title">Enregistrer un camion</span>
+            <a class="nav-link" data-toggle="collapse" href="#tables" aria-expanded="false" aria-controls="tables">
+              <i class="ti-dropbox menu-icon"></i>
+              <span class="menu-title">HPG</span>
+              <i class="menu-arrow"></i>
             </a>
+            <div class="collapse" id="tables">
+              <ul class="nav flex-column sub-menu">
+                <li class="nav-item"> <a class="nav-link" href="{{ route('create.hpg')}}">Enregistrer camion</a></li>
+                <li class="nav-item"> <a class="nav-link" href="/listehpgsave">Finaliser camion</a></li>
+                
+              </ul>
+            </div>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="{{'/listecamionsave'}}">
-              <i class="icon-grid menu-icon"></i>
-              <span class="menu-title">Camions à finaliser</span>
+            <a class="nav-link" data-toggle="collapse" href="#icons" aria-expanded="false" aria-controls="icons">
+              <i class="ti-truck menu-icon"></i>
+              <span class="menu-title">Transport</span>
+              <i class="menu-arrow"></i>
             </a>
+            <div class="collapse" id="icons">
+              <ul class="nav flex-column sub-menu">
+                <li class="nav-item"> <a class="nav-link" href="{{ route('create.transport') }}">Enregistrer camion</a></li>
+                <li class="nav-item"> <a class="nav-link" href="{{'/listetransportsave'}}">Finaliser camion</a></li>
+                <li class="nav-item"> <a class="nav-link" href="{{ route('transport.viewfin') }}">Liste camions finalisés</a></li>
+
+
+              </ul>
+            </div>           
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="{{route('camion.viewfin')}}">
-              <i class="icon-grid menu-icon"></i>
-              <span class="menu-title">Camions finalisés</span>
+            <a class="nav-link" data-toggle="collapse" href="#auth" aria-expanded="false" aria-controls="auth">
+              <i class="ti-control-record menu-icon"></i>
+              <span class="menu-title">Semence</span>
+              <i class="menu-arrow"></i>
             </a>
+            <div class="collapse" id="auth">
+              <ul class="nav flex-column sub-menu">
+                <li class="nav-item"> <a class="nav-link" href="{{ route('create.semence') }}"> Enregistrer camion </a></li>
+                <li class="nav-item"> <a class="nav-link" href="{{'/listesemencesave'}}"> Finaliser camion </a></li>
+                <li class="nav-item"> <a class="nav-link" href="{{ route('semence.viewfin') }}">Liste camions finalisés</a></li>
+
+              </ul>
+            </div>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" data-toggle="collapse" href="#error" aria-expanded="false" aria-controls="error">
+              <i class="ti-shopping-cart menu-icon"></i>
+              <span class="menu-title">Approvisionnement</span>
+              <i class="menu-arrow"></i>
+            </a>
+            <div class="collapse" id="error">
+              <ul class="nav flex-column sub-menu">
+                <li class="nav-item"> <a class="nav-link" href="{{ route('create.appro') }}">Enregistrer camion </a></li>
+                <li class="nav-item"> <a class="nav-link" href="{{'/listeapprosave'}}"> Finaliser camion </a></li>
+                <li class="nav-item"> <a class="nav-link" href="{{ route('appro.viewfin') }}">Liste camions finalisés</a></li>
+
+              </ul>
+            </div>
           </li>
 
+      
           <li class="nav-item">
-            <a class="nav-link" href="pages/documentation/documentation.html">
+            <a class="nav-link" href="{{'/fournisave'}}">
+              <i class="ti-user menu-icon"></i>
+              <span class="menu-title">Fournisseurs</span>
+            </a>
+          </li>
+      
+
+          <li class="nav-item">
+            <a class="nav-link" href="{{'logout'}}">
               <i class="icon-paper menu-icon"></i>
               <span class="menu-title">Deconnexion</span>
             </a>

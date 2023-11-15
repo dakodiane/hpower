@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+x <!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -15,8 +15,7 @@
   <section class="text-center">
     <!-- Background image -->
     <div class="p-5 bg-image" style="background: rgb(4, 70, 92) url('{{ asset('images/hpower.png') }}'); background-size: 500px; background-position: center; background-repeat: no-repeat;
-            height: 300px;
-            "></div>
+            height: 500px;"></div>
     <!-- Background image -->
 
     <div class="card mx-4 mx-md-5 shadow-5-strong" style="
@@ -31,21 +30,10 @@
             <h2 class="fw-bold mb-5">Connexion
               <hr>
             </h2>
-            <form method="post" action="{{ route('conUser') }}">
+            <form method="POST" action="{{('connexion') }}">
+
               @csrf
-              <!-- Email input -->
-              <div class="form-outline mb-4">
-                <input type="email" name="nom" id="form3Example3" class="form-control" value="{{ old('nom') }}" />
-                <label class="form-label" for="form3Example3">Email ou Téléphone</label>
-              </div>
-
-              <!-- Password input -->
-              <div class="form-outline mb-4">
-                <input type="password" name="mdp" id="form3Example4" class="form-control" />
-                <label class="form-label" for="form3Example4">Mot de passe</label>
-              </div>
-
-              <!-- Display error messages -->
+ <!-- Display error messages -->
               @if ($errors->any())
               <div class="alert alert-danger">
                 <ul>
@@ -55,9 +43,17 @@
                 </ul>
               </div>
               @endif
+              <div class="form-outline mb-4">
+                <input type="email" name="email" id="email" class="form-control" />
+                <label class="form-label" for="email">Email</label>
+              </div>
 
-              <!-- Submit button -->
-              <button type="submit" value="connexion" class="btn btn-primary btn-block mb-4">
+              <div class="form-outline mb-4">
+                <input type="password" name="password" id="password" class="form-control" />
+                <label class="form-label" for="password">Mot de passe</label>
+              </div>
+
+              <button type="submit" class="btn btn-primary btn-block mb-4">
                 Se connecter
               </button>
             </form>

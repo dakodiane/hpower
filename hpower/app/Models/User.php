@@ -6,10 +6,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+
 use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
 {
+  
+
     use HasApiTokens, HasFactory, Notifiable;
 
     /**
@@ -20,10 +23,11 @@ class User extends Authenticatable
     protected $fillable = [
         'name',
         'email',
+        'password',
         'telephone',
         'role',
-        'password',
         'ville',
+        'last_activity',
         'confirmation_token',
     ];
 
@@ -47,4 +51,9 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
+    public function updateLastActivity()
+    {
+        $this->update(['last_activity' => now()]);
+    }
+ 
 }

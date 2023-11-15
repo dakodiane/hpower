@@ -3,113 +3,87 @@
 namespace App\Http\Controllers;
 use App\Models\Produit;
 use App\Models\Camion;
+use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Http\Request;
-
-class CamionController extends Controller
+use Illuminate\Support\Facades\Auth;
+class AdminController extends Controller
 {
     //
-    public function create()
+ 
+
+    public function produit()
     {
         $produits = Produit::all();
-        return view('Users/enregistrercamion', ['produits' => $produits]);
+        foreach ($produits as $produit) {
+            $totalPoidsNet = Camion::where('type_produit', $produit->prod_nom)->sum('poids_net');
+            $produit->totalPoidsNet = $totalPoidsNet;
+        }
+        return view('Admin/createproduit', compact('produits'));
     }
-
-    public function store(Request $request)
-    {
+    
         
-        $data = $request->all();
+    public function createproduit(Request $request)
+    {
+        $request->validate([
+            'prod_nom' => 'required|string|max:255',
+        ]);
+        $produits = new Produit();
+        $produits->prod_nom = $request->input('prod_nom');
+
+        $produits->save();
+    
+        return redirect()->intended(route('createproduit',  compact('produits')));
+    }
+     
+
+    public function fournilist()
+{
+    $users = User::where('role','fournisseur')
+    ->get();
+
+    return view('Admin/fournisseur', compact('users'));
+}
+
+
+public function userlist()
+{
+    $users = User::all();
+   // ('last_activity', '>', now()->subMinutes(10))
+  //  ->whereIn('id', Cache::get('user-online', []))
+  //  ->get();
+    return view('Admin/userlist', compact('users'));
+}
+
+public function camions(Request $request)
+{
   
-        $lastCamion = Camion::orderBy('cam_id', 'desc')->first();
-        if ($lastCamion) {
-            $lastNumBordereau = $lastCamion->num_bordereau;
-            $lastNumBordereau = substr($lastNumBordereau, 2); 
-            $newNumBordereau = 'HP' . str_pad(($lastNumBordereau + 1), 4, '0', STR_PAD_LEFT);
-        } else {
-            $newNumBordereau = 'HP0001';
-        }
-    
-        if ($request->hasFile('cam_photo')) {
-            $photoPath = $request->file('cam_photo')->store('photo_immat', 'public');
-            $data['cam_photo'] = $photoPath;
-        }
-    
-        $data['num_bordereau'] = $newNumBordereau;
+    $camions = Camion::whereNotNull('heure_arrive')
+    ->with('utilisateur') // Charger la relation utilisateur
+    ->get();
 
-        $poidsCharge = $request->input('poids_charge');
-        $poidsVide = $request->input('poids_vide');
-        $poidsNet = $poidsCharge - $poidsVide;
-    
-        $data['poids_net'] = $poidsNet;
-    
-        $camion = new Camion();
 
-        $camion->fill($data);
-    
-        $camion->save();
-    
-//dd($camion);
-    
-        return redirect()->route('camion.create')->with('success', 'Camion enregistré avec succès.');
-    }
-    
-    public function view()
+    return view('Admin/allcamion', compact('camions'));
+}
+public function activate($id)
 {
-    $camions = Camion::all();
+    $users = User::find($id);
+    $users->active = 1;
+    $users->save();
 
-    return view('Users/listecamionsave', compact('camions'));
+    return redirect()->back(); // Redirigez l'utilisateur vers la page précédente
 }
 
-
-public function viewfin(Request $request)
+public function deactivate($id)
 {
-    $camions = Camion::all();
-    return view('Users/listecamionfin', compact('camions'));
+    $users = User::find($id);
+    $users->active = 0;
+    $users->save();
+
+    return redirect()->back(); // Redirigez l'utilisateur vers la page précédente
 }
 
-
-public function savefin($cam_id)
-{
-    $camions = Camion::find($cam_id);
-
-    return view('Users/enregistrerfin', compact('camions'));
-}
-
-
-public function storefin(Request $request, $cam_id)
-{
-   
-    $camions = Camion::findOrfail($cam_id);
-
-    $data = $request->all();
-
-    if ($request->hasFile('cam_photo1')) {
-        $photoPath = $request->file('cam_photo1')->store('photo_immat', 'public');
-        $data['cam_photo1'] = $photoPath;
-    }
-
-    $camions->fill($data);
-    $camions->save();
-    return redirect()->intended(route('camion.viewfin',  compact('camions')));
-
-}
-
-public function statistiquesCamions()
-{
-    $aujourdHui = Carbon::now();
-    $ceMois = Carbon::now()->startOfMonth();
-
-    $camionsAujourdhui = DB::table('camions')
-        ->whereDate('created_at', $aujourdHui->toDateString())
-        ->count();
-
-    $camionsCeMois = DB::table('camions')
-        ->whereYear('created_at', $ceMois->year)
-        ->whereMonth('created_at', $ceMois->month)
-        ->count();
-
-    return view('Admin/tableaudebord', compact('camionsAujourdhui', 'camionsCeMois'));
-}
 
 }
