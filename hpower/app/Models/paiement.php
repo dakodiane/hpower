@@ -23,7 +23,12 @@ class paiement extends Model
         'montant_tp',
         'montant_HPG',
         'recette_HPG',
-       'entrep_benef'
+         'solde',
+       'entrep_benef',
+       'net_paye',
+        'rest_paie',
+        'paietotal',
+        'statut_paie',
     ];
 
 }

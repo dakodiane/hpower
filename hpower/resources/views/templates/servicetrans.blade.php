@@ -15,6 +15,8 @@
         <link rel="{{ asset('vendors/datatables.net-bs4/dataTables.bootstrap4.css') }}">
         <link  type="text/css" src="{{ asset('js/select.dataTables.min.css') }}">
         <link rel="stylesheet" href="{{asset('css/vertical-layout-light/style.css')}}">
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
 
 </head> 
 <body>

@@ -2,106 +2,109 @@
 
 @section('document')
 <style>
-  .no-camion-message {
-    color: red;
-    font-size: 18px;
-    font-weight: bold;
-    text-align: center;
-    margin-top: 20px;
-}
+    .no-transport-message {
+        color: red;
+        font-size: 18px;
+        font-weight: bold;
+        text-align: center;
+        margin-top: 20px;
+    }
 </style>
 <div class="main-panel">
     <div class="content-wrapper">
         <div class="row">
+            
             <div class="col-lg-12 grid-margin stretch-card">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="card-title">Liste des camions payés</h4>
+                                        @if(session('success'))
+                        <div class="alert alert-success auto-dismiss">
+                            {{ session('success') }}
+                        </div>
+                    @endif
+
+                        <h4 class="card-title">Liste des Transports avec Paiements</h4>
                         <div class="table-responsive">
-                            @if ($camions->isEmpty())
-                                <p class="no-camion-message">Aucun camion à finaliser.</p>
+                            @if ($transports->isEmpty())
+                                <p class="no-transport-message">Aucun transport à afficher.</p>
                             @else
                                 <table class="tableau">
                                     <thead>
                                         <tr>
+                                            <!-- Ajoutez les colonnes de la table Transports -->
+                                            <th>N° Transaction HPG</th>
                                             <th>Date</th>
-                                            <th>N° d'immatriculation</th>
-                                            <th>Nom du conducteur</th>
-                                            <th>N° de tel du conducteur</th>
-                                            <th>Matière transportée</th>
-                                            <th>Poids vide du camion (kg)</th>
-                                            <th>Poids chargé du camion(Kg)</th>
-                                            <th>Poids net du produit</th>
-                                            <th>N° de bordereau de chargement</th>
+                                            <th>Matricule Camion</th>
+                                            <th>Image Matricule Camion</th>
                                             <th>Provenance</th>
-                                            <th>Entreprise bénéficiaire</th>
-                                            <th>Prix Entreprise bénéficiaire(FCFA/Tonne)</th>
+                                            <th>Nom du Chauffeur</th>
+                                            <th>Tel Chauffeur</th>
+                                            <th>Produit</th>
+                                            <th>Quantité Chargée</th>
+                                            <th>Destination</th>
+                                            <th>N° Bordereau de Chargement</th>
+                                            <th>Image Bordereau de Chargement</th>
+                                            <th>Avance Payée</th>
+                                            <th>Poids Chargé (Tonne)</th>
+                                            <th>Poids Vide (Tonne)</th>
+                                            <th>Poids Net (Tonne)</th>
+                                            <th>N° Bordereau du Pont</th>
+                                            <th>Image Bordereau du Pont</th>
+                                            <th>Entreprise Bénéficiaire</th>
+
+                                            <!-- Ajoutez les colonnes de la table Paiements -->
+                                            <th>Prix de l'entreprise bénéficiaire (FCFA/Tonne)</th>
                                             <th>Prix HPG (FCFA/Tonne)</th>
-                                            <th>Montant Entreprise bénéficiaire</th>
-                                            <th>Montant HPG</th>
-                                            <th>Recette HPG</th>
-                                            
+                                            <th>Montant de l'entreprise bénéficiaire (FCFA)</th>
+                                            <th>Montant HPG (FCFA)</th>
+                                            <th>Recette HPG (FCFA)</th>
+                                            <th>Solde (FCFA)</th>
+
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach($camions as $camion)
+                                        @foreach($transports as $transport)
                                             <tr>
-                                                <td>{{ $camion->created_at }}</td>
-                                                <td>{{ $camion->num_immatriculation }}</td>
-                                                <td>{{ $camion->cam_nomchauf }}</td>
-                                                <td>{{ $camion->tel_conducteur }}</td>
-                                                <td>{{ $camion->type_produit }}</td>
-                                                <td>{{ $camion->poids_vide }}</td>
-                                                <td>{{ $camion->poids_charge }}</td>
-                                                <td>{{ $camion->poids_net }}</td>
-                                                <td>{{ $camion->num_bordereau }}</td>
-                                                <td>{{ $camion->provenance }}</td>
-                                                <td>
-                                                    @if (!$camion->paiements->isEmpty())
-                                                        {{ $camion->paiements[0]->entrep_benef }}
-                                                    @else
-                                                        Neant
-                                                    @endif
-                                                </td>
+                                                <!-- Affichez les valeurs de la table Transports -->
+                                                <td>{{ $transport->num_bordereau }}</td>
+                                                <td>{{ $transport->heure_arrive }}</td>
+                                                <td>{{ $transport->num_immatriculation }}</td>
+                                                <td><a href="{{ asset($transport->cam_photo) }}" type="button" class="btn btn-success btn-sm">Voir la photo</a></td>
+                                                <td>{{ $transport->provenance }}</td>
+                                                <td>{{ $transport->cam_nomchauf }}</td>
+                                                <td>{{ $transport->tel_conducteur }}</td>
+                                                <td>{{ $transport->type_produit }}</td>
+                                                <td>{{ $transport->qte_charge }}</td>
+                                                <td>{{ $transport->destination }}</td>
+                                                <td>{{ $transport->bordereauchargement }}</td>
+                                                <td><a href="{{ asset($transport->cam_photo1) }}" type="button" class="btn btn-success btn-sm">Voir la photo</a></td>
+                                                <td>{{ $transport->avancepaye }}</td>
+                                                <td>{{ $transport->poids_charge }}</td>
+                                                <td>{{ $transport->poids_vide }}</td>
+                                                <td>{{ $transport->poids_net }}</td>
+                                                <td>{{ $transport->numerodebord }}</td>
+                                                <td><a href="{{ asset($transport->cam_photo2) }}" type="button" class="btn btn-success btn-sm">Voir la photo</a></td>
+                                                <td>{{ $transport->entreprise_benef }}</td>
 
-                                                <td>
-                                                    @if (!$camion->paiements->isEmpty())
-                                                        {{ $camion->paiements[0]->prix_tp }}
-                                                    @else
-                                                        Neant
-                                                    @endif
-                                                </td>
+                                                <!-- Vérifiez si le transport a des paiements avant d'afficher les valeurs -->
+                                                @if (!$transport->paiements->isEmpty())
+                                                    <td>{{ $transport->paiements[0]->prix_tp }}</td>
+                                                    <td>{{ $transport->paiements[0]->prix_HPG }}</td>
+                                                    <td>{{ $transport->paiements[0]->montant_tp }}</td>
+                                                    <td>{{ $transport->paiements[0]->montant_HPG }}</td>
+                                                    <td>{{ $transport->paiements[0]->recette_HPG }}</td>
+                                                    <td>{{ $transport->paiements[0]->paietotal }}</td>
+                                                @else
+                                                    <!-- Si le transport n'a pas de paiements, affichez "Neant" -->
+                                                    <td>Neant</td>
+                                                    <td>Neant</td>
+                                                    <td>Neant</td>
+                                                    <td>Neant</td>
+                                                    <td>Neant</td>
+                                                    <td>Neant</td>
+                                                @endif
 
-                                                <td>
-                                                    @if (!$camion->paiements->isEmpty())
-                                                        {{ $camion->paiements[0]->prix_HPG }}
-                                                    @else
-                                                        Neant
-                                                    @endif
-                                                </td>
-
-                                                <td>
-                                                    @if (!$camion->paiements->isEmpty())
-                                                        {{ $camion->paiements[0]->Montant_tp }}
-                                                    @else
-                                                        Neant
-                                                    @endif
-                                                </td>
-                                                <td>
-                                                    @if (!$camion->paiements->isEmpty())
-                                                        {{ $camion->paiements[0]->Montant_HPG }}
-                                                    @else
-                                                        Neant
-                                                    @endif
-                                                </td>
-                                                <td>
-                                                    @if (!$camion->paiements->isEmpty())
-                                                        {{ $camion->paiements[0]->Recette_HPG }}
-                                                    @else
-                                                        Neant
-                                                    @endif
-                                                </td>
-                                               
+                                            
                                             </tr>
                                         @endforeach
                                     </tbody>
@@ -114,4 +117,20 @@
         </div>
     </div>
 </div>
+
+<script>
+    // Attendre que le document soit chargé
+    document.addEventListener('DOMContentLoaded', function() {
+        // Sélectionner l'élément avec la classe auto-dismiss
+        var autoDismissElement = document.querySelector('.auto-dismiss');
+
+        // Si l'élément existe
+        if (autoDismissElement) {
+            // Masquer l'élément après 15 secondes
+            setTimeout(function() {
+                autoDismissElement.style.display = 'none';
+            }, 5000); // 5 secondes en millisecondes
+        }
+    });
+</script>
 @endsection
