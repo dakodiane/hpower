@@ -1,173 +1,144 @@
 @extends('templates.export')
 
 @section('document')
-<div class="main-panel">
-  <div class="content-wrapper">
-    <div class="row">
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 
+<div class="container">
+    <h2 class="my-4">Enregistrement de Booking</h2>
 
-      <div class="col-12 grid-margin stretch-card">
-        <div class="card">
-          <div class="card-body">
-          @if(session('success'))
-                <div class="alert alert-success" role="alert">
-                    {{ session('success') }}
-                </div>
-            @endif
-            <h4 class="card-title">Veuillez entrer les informations du camion</h4>
-            <form method="POST" action="{{ route('store.appro') }}" enctype="multipart/form-data">
-              @csrf
+    <!-- Formulaire d'enregistrement -->
+    <form action="{{route('store.booking')}}" method="post">
+        @csrf
 
-              <div class="form-group">
-                <label for="chauffeur">Nom du chauffeur</label>
-                <input type="text" class="form-control" id="chauffeur" name="cam_nomchauf" placeholder="Nom du chauffeur" required>
-              </div>
-              <div class="form-group">
-                <label for="chauffeur">Numéro de téléphone du chauffeur</label>
-                <input type="text" class="form-control" id="chauffeur" name="tel_conducteur" placeholder="Numero du chauffeur" required>
-              </div>
-
-              <div class="form-group">
-                <label for="type_produit">Type de produit</label>
-                <select class="form-control" id="prod_nom" name="type_produit" required>
-                  @foreach($produits as $produit)
-                  <option value="{{ $produit->prod_nom }}">{{ $produit->prod_nom }}</option>
-                  @endforeach
-                </select>
-              </div>
-              <div class="form-group">
-                <label for="chauffeur">Numero d'immatriculation</label>
-                <input type="text" class="form-control" id="chauffeur" name="num_immatriculation" placeholder="Numero d'immatriculation" required>
-              </div>
-              <div class="form-group">
-                <label for="photo_immatf">Photo d'immatriculation</label>
-                <div class="input-group">
-                  <input type="file" name="cam_photo" class="file-upload-default" id="photo_input" capture="camera" accept="image/*" required>
-                  <div class="input-group col-xs-12">
-                    <input type="text" class="form-control file-upload-info" disabled placeholder="Charger l'image" required>
-                    <span class="input-group-append">
-                      <button class="file-upload-browse btn btn-primary" type="button">Charger l'image</button>
-                    </span>
-                  </div>
-                </div>
-              </div>
-              <div class="form-group">
-                <label for="numerodebord">Numéro de bordereau de chargement</label>
-                <input type="text" class="form-control" id="bordereauchargement" name="bordereauchargement" placeholder="Numero de bordereau" required>
-              </div>
-
-              <div class="form-group">
-                <label for="photo_immatf">Photo du bordereau</label>
-                <input type="file" name="cam_photo1" class="file-upload-default" required>
-                <div class="input-group col-xs-12">
-                  <input type="text" class="form-control file-upload-info" disabled placeholder="Charger l'image" required>
-                  <span class="input-group-append">
-                    <button class="file-upload-browse btn btn-primary" type="button">Charger l'image</button>
-                  </span>
-                </div>
-              </div>
-              <div class="form-group">
-                <label for="heure_depart">Heure d'arrivée</label>
-                <input type="datetime-local" class="form-control" id="heure_arrive" name="heure_arrive" placeholder="08h30" required>
-              </div>
-              <div class="form-group">
-                <label for="numerodebord">Quantité chargée</label>
-                <input type="text" class="form-control" id="qte_charge" name="qte_charge" placeholder="Avance payée" required>
-              </div>
-             
-              <div class="form-group">
-                <label for="destination">Destination</label>
-                <input type="text" class="form-control styled-input" id="destination" name="destination" placeholder="Destination" required>
-                <ul id="villes-list"></ul>
-              </div>
-
-              <div class="form-group">
-                <label for="observation">Observation</label>
-                <textarea class="form-control" id="observation" name="observation" rows="4"></textarea>
-              </div>
-
-              <button type="submit" class="btn btn-primary mr-2">Enregistrer</button>
-              <button type="button" class="btn btn-light">Annuler</button>
-            </form>
-
-            <script>
-              function capturePhoto() {
-                var input = document.getElementById('photo_input');
-                input.capture = "camera"; // for mobile devices
-                input.accept = "image/*";
-                input.removeAttribute("capture"); // for non-mobile devices
-              }
-            </script>
-
-
-
-          </div>
-
-
+        <!-- Référence Booking -->
+        <div class="mb-3">
+            <label for="ref_booking" class="form-label">Référence Booking</label>
+            <input type="text" class="form-control" name="ref_booking" required>
         </div>
-      </div>
 
-    </div>
-  </div>
+        <!-- Compagnie Maritime -->
+        <div class="mb-3">
+            <label for="compagnie_maritime" class="form-label">Compagnie Maritime</label>
+            <input type="text" class="form-control" name="compagnie_maritime" required>
+        </div>
 
+        <!-- Shipper -->
+        <div class="mb-3">
+            <label for="shipper" class="form-label">Shipper</label>
+            <input type="text" class="form-control" name="shipper" required>
+        </div>
+
+        <!-- Date Emission -->
+        <div class="mb-3">
+            <label for="date_emission" class="form-label">Date Emission du Booking</label>
+            <input type="date" class="form-control" name="date_emission" required>
+        </div>
+
+        <!-- Nom Navire -->
+        <div class="mb-3">
+            <label for="nom_navire" class="form-label">Nom du Navire</label>
+            <input type="text" class="form-control" name="nom_navire" required>
+        </div>
+
+        <!-- Port -->
+        <div class="mb-3">
+            <label for="port" class="form-label">Port de chargement</label>
+            <input type="text" class="form-control" name="port" required>
+        </div>
+
+        <!-- Destination -->
+        <div class="mb-3">
+            <label for="destination" class="form-label">Destination finale</label>
+            <input type="text" class="form-control" name="destination" required>
+        </div>
+
+        <!-- Nombre CTS 20 et Nombre CTS 40 sur la même ligne -->
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <label for="nombre_cts_20" class="form-label">Nombre conteneur de 20'</label>
+                <input type="number" class="form-control" name="nombre_cts_20" required>
+            </div>
+
+            <div class="col-md-6 mb-3">
+                <label for="nombre_cts_40" class="form-label">Nombre conteneur de 40'</label>
+                <input type="number" class="form-control" name="nombre_cts_40" required>
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <label for="client_input" class="form-label">Nom du Client</label>
+            <input type="text" class="form-control" id="client_input" name="id_client" autocomplete="off" required>
+            <ul id="clients-list"></ul>
+        </div>
+
+        <!-- Bouton Enregistrer -->
+        <button type="submit" class="btn btn-primary">Enregistrer</button>
+    </form>
+    <script>
+        var input = document.getElementById('client_input');
+        var clientsList = document.getElementById('clients-list');
+
+        input.addEventListener('input', function() {
+            var recherche = input.value.toLowerCase();
+            clientsList.innerHTML = '';
+
+            $.ajax({
+                url: '/rechercher-client',
+                method: 'GET',
+                data: {
+                    term: recherche
+                },
+                success: function(data) {
+                    data.forEach(function(client) {
+                        var li = document.createElement('li');
+                        li.textContent = client.name;
+
+                        li.addEventListener('mousedown', function() {
+                            input.value = client.name;
+                            input.setAttribute('data-client-id', client.id);
+
+                            // Assurez-vous de mettre à jour également le champ 'id_client' du formulaire
+                            document.querySelector('[name="id_client"]').value = client.id;
+
+                            clientsList.innerHTML = '';
+                        });
+
+                        clientsList.appendChild(li);
+                    });
+                },
+                error: function(error) {
+                    console.error('Erreur lors de la récupération des clients:', error);
+                }
+            });
+        });
+    </script>
+
+
+
+    <style>
+        #clients-list {
+            position: absolute;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            max-height: 150px;
+            overflow-y: auto;
+            width: 31%;
+            z-index: 1;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        #clients-list li {
+            padding: 8px 12px;
+            cursor: pointer;
+        }
+
+        #clients-list li:hover {
+            background-color: #f0f0f0;
+        }
+    </style>
 </div>
-<script>
-  var input = document.getElementById('destination');
-  var villesList = document.getElementById('villes-list');
-
-
-  input.addEventListener('input', function() {
-
-    var recherche = input.value.toLowerCase();
-
-    villesList.innerHTML = '';
-
-    var villes = ['Cotonou', 'Abomey-Calavi', 'Porto-Novo', 'Parakou', 'Djougou', 'Bohicon', 'Natitingou',
-      'Savé', 'Abomey', 'Nikki', 'Lokossa', 'Ouidah', 'Dogbo-Tota', 'Kandi', 'Cové', 'Malanville',
-      'Pobé', 'Kérou', 'Savalou', 'Sakété', 'Comè', 'Bembéréké', 'Bassila', 'Banikoara', 'Kétou',
-      'Dassa-Zoumè', 'Tchaourou', 'Allada', 'Aplahoué', 'Tanguiéta', 'N\'Dali', 'Segbana', 'Athiémé',
-      'Grand Popo', 'Kouandé',
-    ];
-
-    var villesFiltrees = villes.filter(function(ville) {
-      return ville.toLowerCase().includes(recherche);
-    });
-
-    villesFiltrees.forEach(function(ville) {
-      var li = document.createElement('li');
-      li.textContent = ville;
-      li.addEventListener('click', function() {
-        input.value = ville;
-        villesList.innerHTML = '';
-      });
-      villesList.appendChild(li);
-    });
-  });
-</script>
-<style>
-  #villes-list {
-    position: absolute;
-    background-color: #fff;
-    border: 1px solid #ccc;
-    max-height: 150px;
-    overflow-y: auto;
-    width: 38%;
-    z-index: 1;
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-  }
-
-  #villes-list li {
-    padding: 8px 12px;
-    cursor: pointer;
-  }
-
-  #villes-list li:hover {
-    background-color: #f0f0f0;
-  }
-</style>
-
 
 @endsection

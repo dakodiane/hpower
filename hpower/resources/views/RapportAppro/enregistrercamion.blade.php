@@ -40,11 +40,11 @@
                 <input type="text" class="form-control" id="chauffeur" name="num_immatriculation" placeholder="Numero d'immatriculation" required>
               </div>
               <div class="form-group">
-                <label for="photo_immatf">Photo d'immatriculation</label>
+                <label for="photo_immatf">Photo d'immatriculation(facultatif)</label>
                 <div class="input-group">
-                  <input type="file" name="cam_photo" class="file-upload-default" id="photo_input" capture="camera" accept="image/*" required>
+                  <input type="file" name="cam_photo" class="file-upload-default" id="photo_input" capture="camera" accept="image/*" >
                   <div class="input-group col-xs-12">
-                    <input type="text" class="form-control file-upload-info" disabled placeholder="Charger l'image" required>
+                    <input type="text" class="form-control file-upload-info" disabled placeholder="Charger l'image" >
                     <span class="input-group-append">
                       <button class="file-upload-browse btn btn-primary" type="button">Charger l'image</button>
                     </span>
@@ -56,16 +56,6 @@
                 <input type="text" class="form-control" id="bordereauchargement" name="bordereauchargement" placeholder="Numero de bordereau" required>
               </div>
 
-              <div class="form-group">
-                <label for="photo_immatf">Photo du bordereau</label>
-                <input type="file" name="cam_photo1" class="file-upload-default" required>
-                <div class="input-group col-xs-12">
-                  <input type="text" class="form-control file-upload-info" disabled placeholder="Charger l'image" required>
-                  <span class="input-group-append">
-                    <button class="file-upload-browse btn btn-primary" type="button">Charger l'image</button>
-                  </span>
-                </div>
-              </div>
               <div class="form-group">
                 <label for="heure_depart">Heure d'arrivée</label>
                 <input type="datetime-local" class="form-control" id="heure_arrive" name="heure_arrive" placeholder="08h30" required>

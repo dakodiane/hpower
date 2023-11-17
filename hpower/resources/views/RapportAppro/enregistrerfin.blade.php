@@ -25,7 +25,16 @@
                 <label for="exampleSelectGender">Provenance</label>
                 <input type="text" class="form-control" id="provenance" value="{{ isset($camions) ? $camions->provenance : '' }}" readonly>
               </div>
-             
+              <div class="form-group">
+                <label for="photo_immatf">Photo du bordereau de chargement</label>
+                <input type="file" name="cam_photo1" class="file-upload-default" required>
+                <div class="input-group col-xs-12">
+                  <input type="text" class="form-control file-upload-info" disabled placeholder="Charger l'image" required>
+                  <span class="input-group-append">
+                    <button class="file-upload-browse btn btn-primary" type="button">Charger l'image</button>
+                  </span>
+                </div>
+              </div>
               <div class="form-group">
                 <label for="numerodebord">Numéro de bordereau de pont</label>
                 <input type="text" class="form-control" id="numerodebord" name="numerodebord" placeholder="Numero de bordereau" required>
