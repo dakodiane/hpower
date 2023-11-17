@@ -23,40 +23,72 @@
               </div>
             </div>
           </div>
+          
+
           <div class="row">
-            <div class="col-md-12 grid-margin">
-              
+            <div class="col-md-6 grid-margin stretch-card">
+              <div class="card tale-bg">
+                <div class="card-people mt-auto">
+                  <img src="{{asset('images/hpower.jpeg')}}" alt="people">
+                </div>
+              </div>
             </div>
-            <table class="table table-blue table-hover">
-              <thead>
-                <tr>
-                  <th scope="col">Num</th>
-                  <th scope="col">Nom et Prénom</th>
-                  <th scope="col">Fournisseur</th>
-                  <th scope="col">Quantité livrée</th>
-                  <th scope="col">Prix de livraison</th>
-                  <th scope="col">Prix HPG au kg</th>
-                  <th scope="col">Quantité vendue</th>
-                  <th scope="col">Total des vente HPG</th>
-                  <th scope="col">Recette</th>
-                  <th scope="col">Etat de paiement</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <th scope="row">1</th>
-                  <td>Cristiano Ronaldo</td>
-                  <td>rmfc@gmail.com</td>
-                  <td>Al Nassr</td>
-                  <td>10.000.000 FCFA</td>
-                  <td>7.000.000 FCFA</td>
-                  <td>En attente</td>
-                </tr>
-              </tbody>
-            </table>
-            
+            <div class="col-md-6 grid-margin transparent">
+                <div class="row">
+                  <div class="col-md-6 mb-4 stretch-card transparent">
+                    <div class="card card-tale">
+                      <div class="card-body">
+                        <p class="mb-4" style="color: white; font-size:2em;">QUANTITE ACHETEE</p>
+                        <p class="fs-30 mb-2" style="color: white;"><b>{{ $qteAchetee }}</b> kg</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-6 mb-4 stretch-card transparent">
+                    <div class="card card-dark-blue">
+                      <div class="card-body">
+                        <p class="mb-4" style="color: white; font-size:2em;">MONTANT DES VENTES</p>
+                        <p class="fs-30 mb-2" style="color: white;"><b>{{ $Vente }}</b> FCFA</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6 mb-4 mb-lg-0 stretch-card transparent">
+                    <div class="card card-light-blue">
+                      <div class="card-body">
+                        <p class="mb-4" style="color: white; font-size:2em;">DEPENSES POUR ACHAT</p>
+                        <p class="fs-30 mb-2" style="color: white;"><b>{{ $depense }}</b> FCFA</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-6 stretch-card transparent">
+                    <div class="card card-light-danger">
+                      <div class="card-body">
+                        <p class="mb-4" style="color: white; font-size:2em;">QUANTITE VENDUE</p>
+                        <p class="fs-30 mb-2" style="color: white;"><b>{{ $qteVendue }}</b> kg</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
             </div>
+            <div class="row">
+                <div class="col-md-6 mb-4 mb-lg-0 stretch-card transparent">
+                  <div class="card card-light-blue">
+                    <div class="card-body">
+                      <p class="mb-4" style="color: white; font-size:2em;">PAIEMENTS EN ATTENTE</p>
+                      <p class="fs-30 mb-2" style="color: white;"><b>{{ $stat }}</b></p>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6 stretch-card transparent">
+                  <div class="card card-light-danger">
+                    <div class="card-body">
+                      <p class="mb-4" style="color: white; font-size:2em;">PAIEMENTS EFFECTUES</p>
+                      <p class="fs-30 mb-2" style="color: white;"><b>{{ $statt }}</b></p>
+                    </div>
+                  </div>
+                </div>
+              </div>
           </div>
-      
-        </div>    
+              
   @endsection
