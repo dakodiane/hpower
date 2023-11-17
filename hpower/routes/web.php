@@ -4,6 +4,8 @@ use App\Http\Controllers\ApproController;
 use App\Http\Controllers\PaiementController;
 use App\Http\Controllers\ResearchController;
 use App\Http\Controllers\semencesController;
+use App\Http\Controllers\SemenceController;
+use App\Http\Controllers\DownloadController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\IdentifyController;
 use App\Http\Controllers\fournicontroller;
@@ -62,21 +64,28 @@ Route::get('/inscription','App\Http\Controllers\IdentifyController@inscription')
 Route::post('/inscription','App\Http\Controllers\IdentifyController@registerUser')->name('inscription');
 Route::post('/connexion','App\Http\Controllers\IdentifyController@loginUser')->name('connexion');
 
+//SEMENCE
+
 Route::get('/semences',[semencesController::class,'index'])->name('dashboard');
 
-Route::get('/semences/semence',[semencesController::class,'display'])->name('semence');
+Route::get('/semences/vente',[SemenceController::class,'traitement'])->name('vente');
 
-Route::get('/semences/paiement',[semencesController::class,'paiement'])->name('paiement');
+Route::get('/semences/reception',[semencesController::class,'reception'])->name('reception');
 
-// Route::post('/semences',[semencesController::class,'paie'])->name('paie');
+Route::post('/semences',[semencesController::class,'paie'])->name('paie');
 
- 
+Route::get('semences/download',[DownloadController::class,'telecharger'])->name('telechargement');
 
 Route::get('/search',[ResearchController::class,'search']);
 
 Route::get('/get-result',[ResearchController::class,'result'])->name('get-result');
 
 Route::get('/approdashboard',[ApproController::class,'affichage']);
+
+//APPROVISIONNEMENT
+Route::get('/approvisionnement',[ApproController::class,'affichage'])->name('index');
+
+Route::get('/approvisionnement/hpg',[ApproController::class,'hpg'])->name('hpg');
 
 Route::get('allcamion/', function () {
     return view('Admin/allcamion');

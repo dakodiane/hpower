@@ -2,50 +2,90 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Produit;
+use App\Models\paiement;
+use App\Models\Semence;
 use Illuminate\Http\Request;
+use  PDF;
+
 
 
 class semencesController extends Controller
 {
     public function index()
     {
-          $produitsVendus = Produit::where('')->count();
-          return view ("services_semence.dashboard", compact("produitsVendus"));
+
+          $paiements = paiement::all();
+          $semences = Semence::all();
+          
+          $mntRevient = paiement::WhereNotNULL('semence_id')->get();
+          $depense = $mntRevient->sum('montant_tp');
+
+          $qteVente = Semence::whereNotNULL('sem_qtevendue')->get();
+          $qteVendue = $qteVente->sum('sem_qtevendue');
+
+          $qteAchat = Semence::WhereNotNULL('sem_qtereçu')->get();
+          $qteAchetee = $qteAchat->sum('sem_qtereçu');
+
+          $mntVente = paiement::WhereNotNULL('semence_id')->get();
+          $Vente = $mntVente->sum('montant_HPG');
+
+          return view ("services_semence.dashboard", compact('qteVendue', 'depense', 'qteAchetee', 'Vente', 'semences', 'paiements'));
     }
-     public function display()
+     public function vente()
    {
           
-        return view("services_semence.semence", ['produits' => $produits]);
+        return view("services_semence.vente");
    }
 
-   public function paiement()
+   public function reception()
    {
-        return view("services_semence.paiement");
+        return view("services_semence.reception");
    }
    
    public function paie(Request $request){
      $data = $request->validate([
           'semence'=>'required',
           'ql'=> 'required|decimal:0,2',
-          'qv'=>'required|decimal:0,2',
+          'fournisseur'=>'String|required',
           'nature'=>'required',
-          'magasin'=>'required',
-          'lieu'=>'required',
-          'fournisseur'=>'required',          
-          'pvf'=>'required|numeric',
-          'phpg'=>'required|numeric',          
-          'recette'=>'numeric'
+          'magasin'=>'String|required',
+          'lieu'=>'String|required',
+          'pl'=>'Numeric|required',
+          'pu'=>'Numeric',     
+          'transact'=>'Numeric', 
+          'bord'=>'Numeric',
+          'moyen'=>'String',
+          'matricul'=>'Image',
+          'qv'=>'required|decimal: 0,2',
+          'puhpg'=>'numeric',
+          'montant'=>'numeric',
+          'client'=>'String',
+          'lieusemi'=>'String'
+          
      ]);
 
-     $newProd = new Produit();
-     $newProd->prod_nom=$request->semence;
-     $newProd->prod_qtelivree=$request->ql;
-     $newProd->prod_qtevendue=$request->qv;
-     $newProd->prod_nat=$request->nature;
-     $newProd->prod_magasin=$request->magasin;
-     $newProd->prod_lieuprod=$request->lieu;
-     $res = $newProd->save();
+     $newSemence = new Semence();
+     $paiement = new paiement();
+     $newSemence->sem_numtrans=$request->transact;
+     $newSemence->sem_nummatricul=$request->matricul;
+     $newSemence->sem_fourn=$request->fournisseur;
+     $newSemence->sem_type=$request->nature;
+     $paiement->montant_tp=$request->pu * $request->ql;
+     $newSemence->sem_prixunit=$request->pu;
+     $newSemence->sem_qtereçu=$request->ql;
+     $newSemence->sem_magdecht=$request->magasin;
+     $newSemence->sem_nature=$request->semence;
+     $newSemence->sem_deplace=$request->moyen;
+     $newSemence->sem_bord=$request->bord;
+     $newSemence->sem_prove=$request->lieu;
+     $newSemence->sem_qtevendue=$request->qv;
+     $newSemence->sem_prixunitHPG=$request->puhpg;
+     $paiement->montant_HPG=$request->montant;
+     $newSemence->sem_client=$request->client;
+     $newSemence->sem_lieusemi=$request->lieusemi;
+
+     $paiement->save();
+     $res = $newSemence->save();
       if($res){
         return redirect()->route('dashboard');
       }else{
@@ -54,4 +94,11 @@ class semencesController extends Controller
 
    }
 
+   public function telecharger(){
+          $pdf = PDF::loadView('services_semence.dashboard');  
+          return $pdf->download('document.pdf');
+   }
+ 
+
 }
+ 

@@ -17,18 +17,17 @@
             <div class="row">
                 <div class="col-md-5">
                     <div class="booking-cta" style="padding-top: 50px">
-                        <br><h1 style="color: navy;">ENREGISTREMENT DES SEMENCES </h1>                        
+                        <br><h1 style="color: navy;">ENREGISTREMENT DES RECEPTIONS </h1>                        
                     </div>
                 </div>
                 <div class="col-md-6 col-md-offset-1">
                     <div class="booking-form">
-                        <form method="post" action="{{ route('paie') }}">
+                        <form method="post" action="{{ route('paie') }}" enctype="multipart/form-data">
                             @csrf
                             @method('post')
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <span class="form-label">Semences</span>
                                         <select class="form-control" name="semence" id="villes" value="{{ old('semence') }}">
                                             <option value="soja">sodja</option>
                                             <option value="cajou">cajou</option>
@@ -38,6 +37,7 @@
                                             <option value="noix de palme">noix de palme</option>                      
                                         </select>
                                         <span class="select-arrow"></span>
+                                        <span class="form-label">Semences</span>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
@@ -50,31 +50,30 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <input class="form-control" type="tel" name="fournisseur" placeholder="real madrid" value="{{ old('fournisseur') }}">
+                                        <input class="form-control" type="text" name="fournisseur" placeholder="real madrid" value="{{ old('fournisseur') }}">
                                         <span class="form-label">Fournisseur</span>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <input class="form-control" type="text" name="magasin" value="{{ old('magasin') }}">
-                                        <span class="form-label">Magasin de vente</span>
+                                        <span class="form-label">Magasin de déchargement</span>
                                     </div>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-sm-6">
                                     <div class="form-group">
-                                        <span class="form-label">Nature de la semence</span>
                                         <select class="form-control" name="nature" value="{{ old('nature') }}">
                                             <option value="certifiée DPV">certifiée DPV</option>
                                             <option value="bio">bio</option>
                                         </select>
                                         <span class="select-arrow"></span>
+                                        <span class="form-label">Nature de la semence</span>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <span class="form-label">Lieu de production</span>
                                         <select class="form-control" name="lieu" id="villes" value="{{ old('lieu') }}">
                                             <option value="Cotonou">Cotonou</option>
                                             <option value="Abomey-Calavi">Abomey-Calavi</option>
@@ -113,34 +112,49 @@
                                             <option value="Kouandé">Kouandé</option>                                                
                                         </select>
                                         <span class="select-arrow"></span>
+                                        <span class="form-label">Lieu de production</span>
                                     </div>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <input class="form-control" type="number" name="pvf" placeholder="en FCFA">
-                                        <span class="form-label">Prix de vente fournisseur</span>
+                                        <input class="form-control" type="number" name="pl" placeholder="en FCFA">
+                                        <span class="form-label">Prix de livraison</span>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <input class="form-control" type="number" name="phpg" placeholder="en FCFA">
-                                        <span class="form-label">Prix de vente HPG</span>
+                                        <input class="form-control" type="number" name="pu" placeholder="en FCFA">
+                                        <span class="form-label">Prix unitaire</span>
                                     </div>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <input class="form-control" type="number" name="qv" placeholder="5.20 kg">
-                                        <span class="form-label">Quantité vendue</span>
+                                        <input class="form-control" type="number" name="transact" disabled>
+                                        <span class="form-label">N° Transaction</span>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <input class="form-control" type="number" name="recette" placeholder="en FCFA" disabled>
-                                        <span class="form-label">Recette</span>
+                                        <input class="form-control" type="number" name="bord" disabled>
+                                        <span class="form-label">Bordereau</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <input class="form-control" type="text" name="moyen" placeholder="">
+                                        <span class="form-label">Moyen de livraison</span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <input class="form-control" type="file" name="matricul" placeholder="Télécharger un image">
+                                        <span class="form-label">Immatriculation du moyen</span>
                                     </div>
                                 </div>
                             </div>

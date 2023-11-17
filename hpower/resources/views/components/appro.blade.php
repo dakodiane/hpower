@@ -16,7 +16,7 @@
                       <i class="icon-search"></i>
                     </span>
                   </div>
-                  <input type="text" class="form-control search" id="navbar-search-input" placeholder="Rechercher un fournisseur..." aria-label="search" aria-describedby="search" style="width: 250px;">
+                  <input type="text" class="form-control search" id="navbar-search-input" placeholder="Entrez le numéro d'un camion" aria-label="search" aria-describedby="search" style="width: 250px;">
                 </div>
               </li>
             </ul> 
@@ -47,28 +47,34 @@
           <nav class="sidebar sidebar-offcanvas" id="sidebar">
             <ul class="nav">
               <li class="nav-item">
-                <a class="nav-link" href="{{route('dashboard')}}">
+                <a class="nav-link" href="{{route('index')}}">
                   <i class="icon-grid menu-icon"></i>
-                  <span class="menu-title">Tableau de bord</span>
+                  <span class="menu-title">TABLEAU DE BORD</span>
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="{{('semence')}}">
+                <a class="nav-link" href="">
                   <i class="icon-grid menu-icon"></i>
-                  <span class="menu-title">Semences</span>
+                  <span class="menu-title">HPG</span>
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="{{route('paiement')}}">
+                <a class="nav-link" href="{{route('create.transport')}}">
                   <i class="icon-grid menu-icon"></i>
-                  <span class="menu-title">Paiements</span>
+                  <span class="menu-title">RAPPORTEUR</span>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{{route('fournisave')}}">
+                  <i class="icon-grid menu-icon"></i>
+                  <span class="menu-title">FOURNISSEUR</span>
                 </a>
               </li>
            
               <li class="nav-item">
-                <a class="nav-link" href="pages/documentation/documentation.html">
+                <a class="nav-link" href="{{ route('connexion') }}">
                   <i class="icon-paper menu-icon"></i>
-                  <span class="menu-title">Déconnexion</span>
+                  <span class="menu-title">DECONNEXION</span>
                 </a>
               </li>
             </ul>

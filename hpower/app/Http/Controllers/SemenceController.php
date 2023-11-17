@@ -1,64 +1,53 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Models\Produit;
+
+use App\Models\paiement;
+use App\Models\Semence;
 use Illuminate\Http\Request;
 
-class SemenceController extends Controller
-{
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
-    {
-        //
-    }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
+class semencesController extends Controller
+{      
+     public function vente()
+   {
+        $paiements = paiement::all();
+        $semences = Semence::all();
+          
+        return view("services_semence.vente", compact('paiements', 'semences'));
+   }
+   
+   public function traitement(Request $request){
+     $data = $request->validate([
+          'qv'=>'required|decimal: 0,2',
+          'puhpg'=>'numeric',
+          'montant'=>'numeric',
+          'client'=>'String',
+          'lieusemi'=>'String'
+          
+     ]);
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
+     $newSemence = new Semence();
+     $paiement = new paiement();
+     
+     $newSemence->sem_qtevendue=$request->qv;
+     $newSemence->sem_prixunitHPG=$request->puhpg;
+     $paiement->montant_HPG=$request->montant;
+     $newSemence->sem_client=$request->client;
+     $newSemence->sem_lieusemi=$request->lieusemi;
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
+     $paiement->save();
+     $res = $newSemence->save();
+      if($res){
+        return redirect()->route('dashboard');
+      }else{
+           return back()->with('fail','Erreur');
+     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
-    }
+   }
+ 
+
 }
+ 

@@ -49,26 +49,26 @@
               <li class="nav-item">
                 <a class="nav-link" href="{{route('dashboard')}}">
                   <i class="icon-grid menu-icon"></i>
-                  <span class="menu-title">Tableau de bord</span>
+                  <span class="menu-title">TABLEAU DE BORD</span>
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="{{('semence')}}">
+                <a class="nav-link" href="{{('reception')}}">
                   <i class="icon-grid menu-icon"></i>
-                  <span class="menu-title">Semences</span>
+                  <span class="menu-title">RECEPTION</span>
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="{{route('paiement')}}">
+                <a class="nav-link" href="{{route('vente')}}">
                   <i class="icon-grid menu-icon"></i>
-                  <span class="menu-title">Paiements</span>
+                  <span class="menu-title">VENTE</span>
                 </a>
               </li>
            
               <li class="nav-item">
-                <a class="nav-link" href="pages/documentation/documentation.html">
+                <a class="nav-link" href="{{route('connexion')}}">
                   <i class="icon-paper menu-icon"></i>
-                  <span class="menu-title">Déconnexion</span>
+                  <span class="menu-title">DECONNEXION</span>
                 </a>
               </li>
             </ul>
