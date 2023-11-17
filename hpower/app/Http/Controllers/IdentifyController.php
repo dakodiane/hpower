@@ -19,6 +19,10 @@ class IdentifyController extends Controller
     {
         return view("iden.inscription");
     }
+    public function client()
+    {
+        return view("iden.client");
+    }
 
     public function registerUser(Request $request)
     {
@@ -49,31 +53,38 @@ class IdentifyController extends Controller
 
     public function registerClient(Request $request)
     {
-
         $request->validate([
             'name' => 'required',
             'email' => 'required|email|unique:users',
             'password' => 'required|min:5|max:12',
             'telephone' => 'required',
-            'role' => 'required',
             'nom_entreprise' => 'required',
             'adresse' => 'required',
-         
         ]);
+
         $user = new User();
         $user->name = $request->name;
         $user->email = $request->email;
         $user->password = Hash::make($request->password);
         $user->telephone = $request->telephone;
-        $user->role = $request->role;
-        $user->ville = $request->ville;
+        $user->role = 'Client';
+        $user->nom_entreprise = $request->nom_entreprise;
+        $user->adresse = $request->adresse;
+
+        $latestUser = User::latest('id')->first();
+        $num = $latestUser ? (int)substr($latestUser->num_enregistrement, -3) + 1 : 1;
+        $user->num_enregistrement = 'HPG-C' . str_pad($num, 3, '0', STR_PAD_LEFT);
+
         $res = $user->save();
+
         if ($res) {
             return redirect()->route('connexion');
         } else {
             return back()->with('fail', 'Erreur');
         }
     }
+
+
 
     public function loginUser(Request $request)
     {
@@ -101,6 +112,9 @@ class IdentifyController extends Controller
                 } elseif ($user->role == 'servicetransport') {
                     $request->session()->regenerate();
                     return redirect('servicetrans');
+                } elseif ($user->role == 'export') {
+                    $request->session()->regenerate();
+                    return redirect('export');
                 } else {
                     return redirect()->back()->withErrors(['role' => 'Rôle non reconnu'])->withInput();
                 }

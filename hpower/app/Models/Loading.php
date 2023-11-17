@@ -11,14 +11,12 @@ class Loading extends Model
     protected $fillable = [
         'nom_enleveur',
         'produit',
+        'lieu_chargement',
         'id_booking ',
         'nombre_sac' ,
         'num_cts	',
         'num_seal',
         'poids_cts_charge',
-        'nombre_cts_20' ,
-        'nombre_cts_40' ,
-        'nombre_total', 
         'poids_cts_vide' , 
         'poids_cts_net' ,
         'poids_vgm' ,
@@ -30,6 +28,10 @@ class Loading extends Model
     public function booking()
     {
         return $this->belongsTo(Booking::class);
+    }
+    public function isEmpty()
+    {
+        return $this->count() === 0;
     }
 		
 	

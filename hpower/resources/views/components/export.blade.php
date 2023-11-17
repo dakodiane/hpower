@@ -53,14 +53,14 @@
           </li>
           <li class="nav-item">
             <a class="nav-link" data-toggle="collapse" href="#icons" aria-expanded="false" aria-controls="icons">
-              <i class="ti-truck menu-icon"></i>
+              <i class="ti-pencil-alt menu-icon"></i>
               <span class="menu-title">Booking</span>
               <i class="menu-arrow"></i>
             </a>
             <div class="collapse" id="icons">
               <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="{{ route('create.booking') }}">Enregistrer camion</a></li>
-                <li class="nav-item"> <a class="nav-link" href="{{ route('booking.viewfin') }}">Liste Booking</a></li>
+                <li class="nav-item"> <a class="nav-link" href="{{ route('create.booking') }}">Enregistrer Booking</a></li>
+                <li class="nav-item"> <a class="nav-link" href="{{ route('liste.booking') }}">Liste Booking</a></li>
 
 
               </ul>
@@ -85,16 +85,15 @@
           
           <li class="nav-item">
             <a class="nav-link" data-toggle="collapse" href="#error" aria-expanded="false" aria-controls="error">
-              <i class="ti-shopping-cart menu-icon"></i>
+              <i class="ti-control-record menu-icon"></i>
               <span class="menu-title">Loading</span>
               <i class="menu-arrow"></i>
             </a>
             <div class="collapse" id="error">
               <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="{{ route('create.loading') }}">Loading</a></li>
-                <li class="nav-item"> <a class="nav-link" href="{{'/listeapprosave'}}"> Finaliser HPG </a></li>
-                <li class="nav-item"> <a class="nav-link" href="{{'/fournisave'}}">Fournisseurs </a></li>
-                <li class="nav-item"> <a class="nav-link" href="{{ route('appro.viewfin') }}">Liste camions finalisés</a></li>
+                <li class="nav-item"> <a class="nav-link" href="{{ route('liste.loading') }}">Liste Loading</a></li>
+               <!--  <li class="nav-item"> <a class="nav-link" href=""> Enregistrer Loading </a></li>-->
+
 
               </ul>
             </div>

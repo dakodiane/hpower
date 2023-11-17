@@ -62,10 +62,7 @@
                                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                             Nom du produit
                                         </th>
-                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
-                                            Quantité Totale Transportée(en tonne)
-
-                                        </th>
+                                       
                                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
                                             Action
                                         </th>
@@ -79,13 +76,7 @@
                                                 <p class="text-xs font-weight-bold mb-0">{{ $produit->prod_nom }}</p>
                                             </div>
                                         </td>
-                                        <td>
-                                            <div>
-                                                <p class="text-xs font-weight-bold mb-0">
-                                                    {{ $produit->totalPoidsNet }}
-                                                </p>
-                                            </div>
-                                        </td>
+                                      
                                         <td>
                                             <div>
                                                     @if ($produit->active == 1)
