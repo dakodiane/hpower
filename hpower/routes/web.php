@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\IdentifyController;
 use App\Http\Controllers\fournicontroller;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\ServicetransController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -24,6 +26,7 @@ Route::get('fourni/', function () {
 Route::get('servicetrans/', function () {
     return view('servicetrans/tableaudebord');
 });
+
 Route::get('enregistcamion/', function () {
     return view('fourni/enregistcamion');
 });
@@ -48,9 +51,9 @@ Route::get('enregistrerfin/{cam_id}/', 'App\Http\Controllers\CamionController@sa
 Route::post('enregistrerfin/{cam_id}/','App\Http\Controllers\CamionController@storefin')->name('camion.storefin');
 
 Route::get('servconsultation/', 'App\Http\Controllers\ServicetransController@show')->name('Servicetrans.show');
-Route::get('servicetrans/','App\Http\Controllers\ServicetransController@statistiquesCamions');
-Route::get('servpaiement/{cam_id}', 'App\Http\Controllers\ServicetransController@paiement')->name('Servicetrans.servpaiement');
-Route::get('servpaiement/{cam_id}/store', 'App\Http\Controllers\ServicetransController@storepaie')->name('Servicetrans.storepaie');
+Route::get('servicetrans/','App\Http\Controllers\ServicetransController@statistiquesCamions')->name('statistiquesCamions');;
+Route::get('servpaiement/{transport_id}/', 'App\Http\Controllers\ServicetransController@paiement')->name('Servicetrans.servpaiement');
+Route::get('servpaiement/{transport_id}/store/', 'App\Http\Controllers\ServicetransController@storepaie')->name('Servicetrans.storepaie');
 
 Route::get('/connexion','App\Http\Controllers\IdentifyController@connexion')->name('connexion');
 Route::get('/inscription','App\Http\Controllers\IdentifyController@inscription')->name('inscription');
@@ -93,7 +96,8 @@ Route::put('/deactivate-user/{id}', 'App\Http\Controllers\AdminController@deacti
 Route::post('/logout', 'App\Http\Controllers\IdentifyController@logout')->name('logout');
 
 Route::get('servconsultationfin/', 'App\Http\Controllers\ServicetransController@viewfin')->name('Servicetrans.viewfin');
-Route::post ('servpaiement/{cam_id}', 'App\Http\Controllers\ServicetransController@paiement')->name('Servicetrans.servpaiement');
+Route::post ('servpaiement/{transport_id}/', 'App\Http\Controllers\ServicetransController@paiement')->name('Servicetrans.storepaie');
+Route::post ('servpaiement/{transport_id}/store/', 'App\Http\Controllers\ServicetransController@storepaie')->name('Servicetrans.storepaie');
 
 
 
@@ -144,3 +148,9 @@ Route::get('/rechercher-client', 'App\Http\Controllers\ExportController@recherch
 //Route::get('listeexportfin/', 'App\Http\Controllers\ExportController@viewfinexport')->name('export.viewfin');
 //Route::get('exportfin/{export_id}/', 'App\Http\Controllers\ExportController@savefinexport')->name('savefin.export');
 //Route::post('exportfin/{export_id}/','App\Http\Controllers\ExportController@storefinexport')->name('storefin.export');
+
+
+
+Route::get('GeneratePDF', [ServicetransController::class, 'GeneratePDF'])->name('GeneratePDF');
+
+Route::get('/recherche', 'SearchController@search')->name('search');

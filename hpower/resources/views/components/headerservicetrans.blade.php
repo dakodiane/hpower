@@ -47,20 +47,20 @@
       <nav class="sidebar sidebar-offcanvas" id="sidebar">
         <ul class="nav">
           <li class="nav-item">
-            <a class="nav-link" href="{{{'servicetrans'}}}">
+            <a class="nav-link" href="{{{'/servicetrans'}}}">
               <i class="icon-grid menu-icon"></i>
               <span class="menu-title">Tableau de bord</span>
             </a>
           </li>
          
           <li class="nav-item">
-            <a class="nav-link" href="{{'servconsultation'}}">
+            <a class="nav-link" href="{{route('Servicetrans.show')}}">
               <i class="icon-grid menu-icon mdi mdi-cloud-download"></i>
               <span class="menu-title">Consultation</span>
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="{{'servconsultationfin'}}">
+            <a class="nav-link" href="{{route('Servicetrans.viewfin')}}">
               <i class="icon-grid menu-icon mdi mdi-cloud-download"></i>
               <span class="menu-title">Liste des camions</span>
             </a>
@@ -76,5 +76,7 @@
         </ul>
       </nav>
       
-    
+<!-- Mettez à jour le script dans votre fichier HTML -->
+
+
  
