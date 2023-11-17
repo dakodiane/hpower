@@ -15,6 +15,8 @@
         <link rel="{{ asset('vendors/datatables.net-bs4/dataTables.bootstrap4.css') }}">
         <link  type="text/css" src="{{ asset('js/select.dataTables.min.css') }}">
         <link rel="stylesheet" href="{{asset('css/vertical-layout-light/style.css')}}">
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
 
 </head> 
 <body>
@@ -42,4 +44,22 @@
         <script src="{{asset('js/select2.js')}}"></script>
         
 </body>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    var searchInput = document.getElementById('navbar-search-input');
+    searchInput.addEventListener('input', function() {
+        var searchTerm = searchInput.value.toLowerCase();
+        fetch('/recherche?search=' + searchTerm)
+            .then(response => response.json())
+            .then(data => {
+                console.log(data);
+                // Mettez à jour l'interface utilisateur avec les résultats de la recherche
+                // ...
+            })
+            .catch(error => {
+                console.error('Erreur lors de la récupération des résultats de recherche:', error);
+            });
+    });
+});
+</script>
 </html>

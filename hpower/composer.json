@@ -7,6 +7,10 @@
     "require": {
         "php": "^8.1",
         "barryvdh/laravel-dompdf": "^2.0",
+<<<<<<< HEAD
+=======
+        "barryvdh/laravel-snappy": "^1.0",
+>>>>>>> e2300598f55ea46cb01e60662aa06ef4268b5087
         "guzzlehttp/guzzle": "^7.2",
         "laravel/framework": "^10.10",
         "laravel/sanctum": "^3.2",
