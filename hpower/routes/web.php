@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\IdentifyController;
 use App\Http\Controllers\fournicontroller;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\ServicetransController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -136,3 +138,9 @@ Route::post('creeatebook/','App\Http\Controllers\ExportController@storeexport')-
 //Route::get('listeexportfin/', 'App\Http\Controllers\ExportController@viewfinexport')->name('export.viewfin');
 //Route::get('exportfin/{export_id}/', 'App\Http\Controllers\ExportController@savefinexport')->name('savefin.export');
 //Route::post('exportfin/{export_id}/','App\Http\Controllers\ExportController@storefinexport')->name('storefin.export');
+
+
+
+Route::get('GeneratePDF', [ServicetransController::class, 'GeneratePDF'])->name('GeneratePDF');
+
+Route::get('/recherche', 'SearchController@search')->name('search');

@@ -10,8 +10,15 @@ use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Barryvdh\Snappy\Facades\SnappyPdf;
+use Illuminate\Support\Facades\View;
+use App\Http\Controllers\Response;
+
+use Barryvdh\DomPDF\Facade\Pdf;
+
 class ServicetransController extends Controller
 {
+
     
     public function show()
     {
@@ -173,9 +180,33 @@ public function viewfin()
         return back()->withError('Une erreur s\'est produite lors de la récupération des données.');
     }
 }
+public function GeneratePDF()
+{
+    // Configuration de DomPDF
+    PDF::setOptions([
+        "defaultFont" => "Courier",
+        "defaultPaperSize" => "a4",
+        "orientation" => "landscape", // Portrait plutôt que paysage
+        "dpi" => 130
+    ]);
 
+    // Récupération des données
+    $user = Auth::user();
+    $transports = Transport::all();
 
+    // Génération du PDF
+    $pdf = PDF::loadView('pdf.transports', [
+        'transports' => $transports
+    ]);
 
-
-
+    // Téléchargement du PDF
+    return $pdf->download('transports.pdf');
 }
+
+
+
+
+
+
+} 
+
