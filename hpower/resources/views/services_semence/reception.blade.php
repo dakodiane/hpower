@@ -50,7 +50,7 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <input class="form-control" type="text" name="fournisseur" placeholder="real madrid" value="{{ old('fournisseur') }}">
+                                        <input class="form-control" type="text" name="fournisseur" placeholder="SODECO" value="{{ old('fournisseur') }}">
                                         <span class="form-label">Fournisseur</span>
                                     </div>
                                 </div>

@@ -21,7 +21,8 @@ class DownloadController extends Controller
    public function telecharger(){
 
         $paiements = paiement::all();
-        $semences = Semence::all(); 
+        $semences = Semence::all();
+         
         $pdf = PDF::loadView('services_semence.pdf');  
         return $pdf->download('document.pdf');
    }

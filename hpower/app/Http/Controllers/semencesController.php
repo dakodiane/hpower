@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\paiement;
 use App\Models\Semence;
+use App\Models\User;
 use Illuminate\Http\Request;
-use  PDF;
+use Illuminate\Support\Facades\Auth;
+
 
 
 
@@ -14,6 +16,9 @@ class semencesController extends Controller
     public function index()
     {
 
+        
+        $user = Auth::user(); // Récupère l'utilisateur connecté //dd($user);
+       
           $paiements = paiement::orderBy('created_at','desc')->paginate(10);
           $semences = Semence::orderBy('created_at','desc');
           
@@ -29,13 +34,13 @@ class semencesController extends Controller
           $mntVente = paiement::WhereNotNULL('semence_id')->get();
           $Vente = $mntVente->sum('montant_HPG');
 
-          return view ("services_semence.dashboard", compact('qteVendue', 'depense', 'qteAchetee', 'Vente', 'semences', 'paiements'));
+          return view ("services_semence.dashboard", compact('qteVendue', 'depense', 'qteAchetee', 'Vente', 'semences', 'paiements','user'));
     }
-     public function vente()
-   {
+   //   public function vente()
+   // {
           
-        return view("services_semence.vente");
-   }
+   //      return view("services_semence.vente");
+   // }
 
    public function reception()
    {
@@ -43,6 +48,7 @@ class semencesController extends Controller
    }
    
    public function paie(Request $request){
+     
      $data = $request->validate([
           'semence'=>'required',
           'ql'=> 'required|decimal:0,2',
@@ -56,7 +62,7 @@ class semencesController extends Controller
           'bord'=>'Numeric',
           'moyen'=>'String',
           'matricul'=>'Image',
-          'qv'=>'required|decimal: 0,2',
+          // 'qv'=>'required|decimal: 0,2',
           'puhpg'=>'numeric',
           'montant'=>'numeric',
           'client'=>'String',
@@ -65,8 +71,7 @@ class semencesController extends Controller
      ]);
 
      $montant_tp = $request->input('pu') * $request->input('ql');
-     $montant_HPG = $request->input('puhpg') * $request->input('qv');
-     $recette_HPG = $montant_HPG-$montant_tp;
+     
 
      $newSemence = new Semence();
      $paiement = new paiement();
@@ -83,21 +88,20 @@ class semencesController extends Controller
      $newSemence->sem_deplace=$request->moyen;
      $newSemence->sem_bord=$request->bord;
      $newSemence->sem_prove=$request->lieu;
-     $newSemence->sem_qtevendue=$request->qv;
-     $newSemence->sem_prixunitHPG=$request->puhpg;
-     $paiement->montant_HPG=$request->montant;
-     $newSemence->sem_client=$request->client;
-     $newSemence->sem_lieusemi=$request->lieusemi;
+     
 
      $paiement->save();
      $res = $newSemence->save();
       if($res){
-        return redirect()->route('dashboard', compact('montant_tp', 'montant_HPG', 'recette_HPG'));
+        return redirect()->route('dashboard', compact('montant_tp', 'montant_HPG', 'recette_HPG','user'));
       }else{
            return back()->with('fail','Erreur');
      }
 
    }
+
+   
+    
 
 
    

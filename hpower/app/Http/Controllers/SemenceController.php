@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\paiement;
 use App\Models\Semence;
 use Illuminate\Http\Request;
+use  PDF;
+use Illuminate\Support\Facades\Auth;
 
 
 
@@ -25,7 +27,7 @@ class SemenceController extends Controller
           
      ]);
 
-      $newSemence->sem_qtevendue=$request->qv;
+     $newSemence->sem_qtevendue=$request->qv;
      $newSemence->sem_prixunitHPG=$request->puhpg;
      $paiement->montant_HPG=$request->montant;
      $newSemence->sem_client=$request->client;
@@ -37,7 +39,10 @@ class SemenceController extends Controller
    }
 
    public function index(){
-      return view('services_semence.vente');
+
+      $user = Auth::user();
+      return view('services_semence.vente', compact('user'));
+
    }    
   
   
