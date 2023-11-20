@@ -30,10 +30,6 @@ Route::get('fourni/', function () {
     return view('fourni/tableaudebord');
 });
 
-Route::get('servicetrans/', function () {
-    return view('servicetrans/tableaudebord');
-});
-
 Route::get('enregistcamion/', function () {
     return view('fourni/enregistcamion');
 });
@@ -91,9 +87,7 @@ Route::get('/approvisionnement/hpg',[ApproController::class,'hpg'])->name('hpg')
 Route::get('allcamion/', function () {
     return view('Admin/allcamion');
 });
-Route::get('paiement/', function () {
-    return view('Admin/paiement');
-});
+
 //Route::get('connexion/', function () {
  //   return view('connexion');
 //});
@@ -115,8 +109,8 @@ Route::put('/deactivate-produit/{id}', 'App\Http\Controllers\ProduitController@d
 Route::get('allcamion/', 'App\Http\Controllers\AdminController@camions')->name('allcamion');
 
 Route::get('fournilist','App\Http\Controllers\AdminController@fournilist')->name('fournilist');
+Route::get('paiements','App\Http\Controllers\AdminController@paiements')->name('paiements');
 Route::get('fournisave/', 'App\Http\Controllers\CamionController@fournisave')->name('fournisave');
-
 
 Route::put('/activate-user/{id}', 'App\Http\Controllers\AdminController@activate')->name('user.activate');
 Route::put('/deactivate-user/{id}', 'App\Http\Controllers\AdminController@deactivate')->name('user.deactivate');
@@ -150,6 +144,8 @@ Route::get('listetransportsave/', 'App\Http\Controllers\RapporteurController@vie
 Route::get('listetransportfin/', 'App\Http\Controllers\RapporteurController@viewfintransport')->name('transport.viewfin');
 Route::get('transportfin/{transport_id}/', 'App\Http\Controllers\RapporteurController@savefintransport')->name('savefin.transport');
 Route::post('transportfin/{transport_id}/','App\Http\Controllers\RapporteurController@storefintransport')->name('storefin.transport');
+Route::get('transportupdate/{transport_id}/', 'App\Http\Controllers\RapporteurController@updatetransport')->name('update.transport');
+Route::post('transportupdate/{transport_id}/','App\Http\Controllers\RapporteurController@storefintransport')->name('storefin.transport');
 
 
 Route::get('enregistrerhpg/', 'App\Http\Controllers\RapporteurController@createhpg')->name('create.hpg');
