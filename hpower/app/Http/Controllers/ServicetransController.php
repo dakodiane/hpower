@@ -179,29 +179,32 @@ public function viewfin()
         // Gérer l'erreur, par exemple, en enregistrant le message d'erreur ou en renvoyant une réponse appropriée
         return back()->withError('Une erreur s\'est produite lors de la récupération des données.');
     }
-}
-public function GeneratePDF()
-{
-    // Configuration de DomPDF
-    PDF::setOptions([
-        "defaultFont" => "Courier",
-        "defaultPaperSize" => "a4",
-        "orientation" => "landscape", // Portrait plutôt que paysage
-        "dpi" => 130
-    ]);
+        }
 
-    // Récupération des données
-    $user = Auth::user();
-    $transports = Transport::all();
 
-    // Génération du PDF
-    $pdf = PDF::loadView('pdf.transports', [
-        'transports' => $transports
-    ]);
+        public function GeneratePDF()
+        {
+            // Configuration de DomPDF
+            PDF::setOptions([
+                "defaultFont" => "Courier",
+                "defaultPaperSize" => "a4",
+                "orientation" => "landscape", // Portrait plutôt que paysage
+                "dpi" => 130
+            ]);
 
-    // Téléchargement du PDF
-    return $pdf->download('transports.pdf');
-}
+                // Récupération des données
+            $user = Auth::user();
+            $transports = Transport::all();
+
+            // Rendre la vue actuelle en tant que HTML
+            $html = View::make('templates.servicetrans')->render();
+
+            // Génération du PDF
+            $pdf = PDF::loadHTML($html);
+
+            // Téléchargement du PDF
+            return $pdf->download('transports.pdf');
+        }
 
 
 
