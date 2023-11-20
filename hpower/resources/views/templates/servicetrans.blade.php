@@ -17,6 +17,7 @@
         <link rel="stylesheet" href="{{asset('css/vertical-layout-light/style.css')}}">
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
+        
 
 </head> 
 <body>
