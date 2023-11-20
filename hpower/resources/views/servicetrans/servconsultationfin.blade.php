@@ -10,6 +10,8 @@
         margin-top: 20px;
     }
 </style>
+
+
 <div class="main-panel">
     <div class="content-wrapper">
         <div class="row">
@@ -31,7 +33,6 @@
                                 <table class="tableau">
                                     <thead>
                                         <tr>
-                                            <!-- Ajoutez les colonnes de la table Transports -->
                                             <th>N° Transaction HPG</th>
                                             <th>Date</th>
                                             <th>Matricule Camion</th>
@@ -51,8 +52,6 @@
                                             <th>N° Bordereau du Pont</th>
                                             <th>Image Bordereau du Pont</th>
                                             <th>Entreprise Bénéficiaire</th>
-
-                                            <!-- Ajoutez les colonnes de la table Paiements -->
                                             <th>Prix de l'entreprise bénéficiaire (FCFA/Tonne)</th>
                                             <th>Prix HPG (FCFA/Tonne)</th>
                                             <th>Montant de l'entreprise bénéficiaire (FCFA)</th>
@@ -65,7 +64,6 @@
                                     <tbody>
                                         @foreach($transports as $transport)
                                             <tr>
-                                                <!-- Affichez les valeurs de la table Transports -->
                                                 <td>{{ $transport->num_bordereau }}</td>
                                                 <td>{{ $transport->heure_arrive }}</td>
                                                 <td>{{ $transport->num_immatriculation }}</td>
