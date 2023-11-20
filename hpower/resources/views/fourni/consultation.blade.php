@@ -29,29 +29,29 @@
                                     </tr>
                                 </thead> 
                                 <tbody>
-                                    @foreach($camions as $camion)
+                                    @foreach($fournisseurs as $Fournisseur)
                                     <tr>
-                                       <td>{{ $camion->cam_nomchauf }}</td>
-                                       <td>{{ $camion->num_immatriculation }}</td>     
-                                       <td><a href="{{ asset($camion->cam_photo) }}" type="button" class="btn btn-success btn-sm">Voir la photo</a></td>
-                                        <td>{{ $camion->type_produit }}</td>
-                                        <td>{{ $camion->poids_vide }}</td>
-                                        <td>{{ $camion->poids_charge }}</td>
-                                        <td>{{ $camion->poids_net }}</td>
-                                        <td>{{ $camion->nombre_sac }}</td>
-                                        <td>{{ $camion->created_at }}</td>
-                                        <td>{{ $camion->provenance }}</td>
+                                       <td>{{ $Fournisseur->cam_nomchauf }}</td>
+                                       <td>{{ $Fournisseur->num_immatriculation }}</td>     
+                                       <td><a href="{{ asset($Fournisseur->cam_photo) }}" type="button" class="btn btn-success btn-sm">Voir la photo</a></td>
+                                        <td>{{ $Fournisseur->type_produit }}</td>
+                                        <td>{{ $Fournisseur->poids_vide }}</td>
+                                        <td>{{ $Fournisseur->poids_charge }}</td>
+                                        <td>{{ $Fournisseur->poids_net }}</td>
+                                        <td>{{ $Fournisseur->nombre_sac }}</td>
+                                        <td>{{ $Fournisseur->created_at }}</td>
+                                        <td>{{ $Fournisseur->provenance }}</td>
                                         <td>
-                                            @if($camion->statut_dechargement == 1)
+                                            @if($Fournisseur->statut_dechargement == 1)
                                                 En route
                                             @else
                                                 Non en route
                                             @endif
                                         </td>
 
-                                        <td>{{ $camion->observation }}</td>
+                                        <td>{{ $Fournisseur->observation }}</td>
                                        
-                                        <td>{{ $camion->statut_paiement }}</td>
+                                        <td>{{ $Fournisseur->statut_paiement }}</td>
                                     </tr>
                                     @endforeach
                                 </tbody>

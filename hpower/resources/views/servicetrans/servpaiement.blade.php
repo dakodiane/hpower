@@ -52,20 +52,37 @@
                 <input type="text" class="form-control" id="entreprise_benef" value="{{ isset($transports) ? $transports->entreprise_benef : '' }}" readonly>
               </div>
 
+
+              <div class="form-group">
+                <label for="exampleSelectGender">Avance payée</label>
+                <input type="text" class="form-control" id="avancepaye" value="{{ isset($transports) ? $transports->avancepaye : '' }}" readonly>
+              </div>
+
+              <div class="form-group">
+                <label for="exampleInputName1">Reste à payé</label>
+                <input type="text" name="rest_paie" class="form-control" id="exampleInputName1" placeholder="" required>
+              </div>
+
               <div class="form-group">
                 <label for="exampleInputCity1">Prix {{ isset($transports) ? $transports->entreprise_benef : '' }} (FCFA/Tonne)</label>
                 <input type="text" name="prix_tp" class="form-control" id="exampleInputCity1" required>
               </div>
+
+             
 
               <div class="form-group">
                 <label for="exampleInputName1">Prix HPG (FCFA/Tonne)</label>
                 <input type="text" name="prix_HPG" class="form-control" id="exampleInputName1" placeholder="" required>
               </div>
 
+             
+
               <div class="form-group">
-                <label for="exampleInputName1">Reste payé</label>
-                <input type="text" name="rest_paie" class="form-control" id="exampleInputName1" placeholder="" required>
+                <label for="exampleInputName1">Date du paiement</label>
+                <input type="date" name="date_paie" class="form-control" id="exampleInputName1" placeholder="" required>
               </div>
+
+              
 
               <button type="submit" class="btn btn-primary mr-2">Enregistrer</button>
               <button class="btn btn-light" >Annuler</button>

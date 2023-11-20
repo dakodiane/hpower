@@ -29,6 +29,7 @@ class paiement extends Model
         'rest_paie',
         'paietotal',
         'statut_paie',
+        'date_paie',
     ];
 
 }
