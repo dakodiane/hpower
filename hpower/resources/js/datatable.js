@@ -1,5 +1,7 @@
-// datatables-config.js
+// datatables.js
 document.addEventListener('DOMContentLoaded', function () {
-    const dataTable = new simpleDatatables.DataTable('#datatablesSimple');
-    // Autres configurations de Datatables...
+    const datatablesSimple = document.getElementById('#datatablesSimple');
+    if (datatablesSimple) {
+        new simpleDatatables.DataTable(datatablesSimple);
+    }
 });

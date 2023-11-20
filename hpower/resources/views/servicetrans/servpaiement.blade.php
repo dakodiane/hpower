@@ -48,6 +48,11 @@
               </div>
 
               <div class="form-group">
+                <label for="exampleSelectGender">Poids Net (Tonne)</label>
+                <input type="text" class="form-control" id="poids_net " value="{{ isset($transports) ? $transports->poids_net : '' }}" readonly >
+              </div>
+
+              <div class="form-group">
                 <label for="exampleSelectGender">Entreprise bénéficiaire</label>
                 <input type="text" class="form-control" id="entreprise_benef" value="{{ isset($transports) ? $transports->entreprise_benef : '' }}" readonly>
               </div>

@@ -13,6 +13,8 @@ use Illuminate\Support\Facades\Auth;
 use Barryvdh\Snappy\Facades\SnappyPdf;
 use Illuminate\Support\Facades\View;
 use App\Http\Controllers\Response;
+use App\Exports\TransportsExport;
+use Maatwebsite\Excel\Facades\Excel;
 
 use Barryvdh\DomPDF\Facade\Pdf;
 
@@ -182,32 +184,37 @@ public function viewfin()
         }
 
 
-        public function GeneratePDF()
+        public function exportExcel($viewType)
         {
-            // Configuration de DomPDF
-            PDF::setOptions([
-                "defaultFont" => "Courier",
-                "defaultPaperSize" => "a4",
-                "orientation" => "landscape", // Portrait plutôt que paysage
-                "dpi" => 130
-            ]);
+            try {
+                
+                // Récupérer uniquement les transports en fonction de la vue
+                if ($viewType == 'servconsultation') {
+                    // Logique spécifique à la vue servconsultation
+                    $transports = Transport::doesntHave('paiements')->get();
+                } elseif ($viewType == 'servconsultationfin') {
+                    // Logique spécifique à la vue servconsultationfin
+                    $transports = Transport::with(['paiements' => function ($query) {
+                        $query->where('recette_HPG', '!=', 0);
+                    }])
+                    ->whereHas('paiements', function ($query) {
+                        $query->where('recette_HPG', '!=', 0);
+                    })
+                    ->get();
+                } else {
+                    // Gérer d'autres cas si nécessaire
+                    $transports = collect();
+                }
+                
 
-                // Récupération des données
-            $user = Auth::user();
-            $transports = Transport::all();
-
-            // Rendre la vue actuelle en tant que HTML
-            $html = View::make('templates.servicetrans')->render();
-
-            // Génération du PDF
-            $pdf = PDF::loadHTML($html);
-
-            // Téléchargement du PDF
-            return $pdf->download('transports.pdf');
+        
+                return Excel::download(new TransportsExport($transports), 'transports.xlsx');
+            } catch (\Exception $e) {
+                // Gérer l'erreur, par exemple, en enregistrant le message d'erreur ou en renvoyant une réponse appropriée
+                return back()->withError('Une erreur s\'est produite lors de la récupération des données pour l\'export Excel.');
+            }
         }
-
-
-
+        
 
 
 
