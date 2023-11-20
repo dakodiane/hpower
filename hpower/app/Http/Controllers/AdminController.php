@@ -1,8 +1,12 @@
 <?php
 
 namespace App\Http\Controllers;
+
+use App\Models\Approvisionnement;
 use App\Models\Produit;
 use App\Models\Camion;
+use App\Models\Semence;
+use App\Models\Transport;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
@@ -17,10 +21,7 @@ class AdminController extends Controller
     public function produit()
     {
         $produits = Produit::all();
-        foreach ($produits as $produit) {
-            $totalPoidsNet = Camion::where('type_produit', $produit->prod_nom)->sum('poids_net');
-            $produit->totalPoidsNet = $totalPoidsNet;
-        }
+     
         return view('Admin/createproduit', compact('produits'));
     }
     
@@ -60,12 +61,13 @@ public function userlist()
 public function camions(Request $request)
 {
   
-    $camions = Camion::whereNotNull('heure_arrive')
-    ->with('utilisateur') // Charger la relation utilisateur
-    ->get();
+    $semences= Semence::all();
+    $approvisionnements= Approvisionnement::whereNotNull('heure_arrive')->get();
+    $transports= Transport::whereNotNull('heure_arrive')->get();
+    
 
 
-    return view('Admin/allcamion', compact('camions'));
+    return view('Admin/allcamion', compact('semences','approvisionnements','transports'));
 }
 public function activate($id)
 {

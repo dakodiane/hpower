@@ -28,6 +28,9 @@ class User extends Authenticatable
         'role',
         'ville',
         'last_activity',
+        'adresse',
+        'num_enregistrment',
+        'nom_entreprise',
         'confirmation_token',
     ];
 

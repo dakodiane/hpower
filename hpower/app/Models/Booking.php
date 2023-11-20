@@ -28,5 +28,8 @@ class Booking extends Model
     {
         return $this->hasMany(Loading::class);
     }
-
+    public function isEmpty()
+    {
+        return $this->count() === 0;
+    }
 }

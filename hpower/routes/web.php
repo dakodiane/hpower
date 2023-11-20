@@ -131,9 +131,19 @@ Route::get('listehpgfin/', 'App\Http\Controllers\RapporteurController@viewfinhpg
 
 
 //E  X  P  O  R  T
+Route::get('/client','App\Http\Controllers\IdentifyController@client')->name('client');
+Route::post('/client','App\Http\Controllers\IdentifyController@registerClient')->name('client');
 
-Route::get('creeatebook/', 'App\Http\Controllers\ExportController@createexport')->name('create.export');
-Route::post('creeatebook/','App\Http\Controllers\ExportController@storeexport')->name('store.export');
+Route::get('createbook/', 'App\Http\Controllers\ExportController@createbook')->name('create.booking');
+Route::post('createbook/','App\Http\Controllers\ExportController@storebooking')->name('store.booking');
+Route::get('export/','App\Http\Controllers\ExportController@tableaudebord')->name('export');
+Route::get('listbook/', 'App\Http\Controllers\ExportController@listbooking')->name('liste.booking');
+Route::get('listload/', 'App\Http\Controllers\ExportController@listloading')->name('liste.loading');
+Route::get('loading/{id_booking}/', 'App\Http\Controllers\ExportController@createloading')->name('create.loading');
+Route::post('loading/{id_booking}/', 'App\Http\Controllers\ExportController@storeloading')->name('store.loading');
+
+Route::get('/rechercher-client', 'App\Http\Controllers\ExportController@rechercherClient');
+
 //Route::get('listeexportsave/', 'App\Http\Controllers\ExportController@viewexport')->name('view.export');
 //Route::get('listeexportfin/', 'App\Http\Controllers\ExportController@viewfinexport')->name('export.viewfin');
 //Route::get('exportfin/{export_id}/', 'App\Http\Controllers\ExportController@savefinexport')->name('savefin.export');

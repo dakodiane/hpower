@@ -5,7 +5,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Inscription</title>
+  <title>Enregistrement/Inscription</title>
+  {{-- bootstrap inclusion --}}
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 </head>
 
@@ -33,12 +34,12 @@
             <h2 class="fw-bold mb-5">Inscription
               <hr>
             </h2>
-            <form action="{{ route('inscription') }}" method="post">
+            <form action="{{ route('client') }}" method="post">
               @csrf
               @if(Session::has('success'))
               <div class="alert alert-success">[]</div>
               @endif
-              <!-- 2 column grid layout with text inputs for the first and last names -->
+            
               <div class="row">
                 <div class="col-md-12 mb-4">
                   <div class="form-outline">
@@ -63,7 +64,16 @@
                 <label class="form-label" for="form3Example4">Téléphone</label>
                 <br><span class="text-danger">@error('telephone') {{ $message }} @enderror
               </div>
-
+              <div class="form-outline mb-4">
+                <input type="tel" name="nom_entreprise" id="form3Example4" class="form-control" placeholder="Nom de l'entreprise" />
+                <label class="form-label" for="form3Example4">Nom de l'entreprise</label>
+                <br><span class="text-danger">@error('telephone') {{ $message }} @enderror
+              </div>
+              <div class="form-outline mb-4">
+                <input type="tel" name="adresse" id="form3Example4" class="form-control" placeholder="Adresse" />
+                <label class="form-label" for="form3Example4">Adresse</label>
+                <br><span class="text-danger">@error('telephone') {{ $message }} @enderror
+              </div>
               <!-- Password input -->
               <div class="form-outline mb-4">
                 <input type="password" name="password" id="form3Example4" class="form-control" placeholder="Saisissez un mot de passe" />
@@ -71,26 +81,7 @@
                 <br><span class="text-danger">@error('password') {{ $message }} @enderror
               </div>
 
-              {{-- Categories select --}}
-              <br> <select class="form-select" name="role" aria-label="Default select example">
-                <option value="directeur">Directeur</option>
-                <option value="fournisseur">Fournisseur</option>
-                <option value="rapporteur" selected>Rapporteur</option>
-                <option value="servicesemence">Service des Semences</option>
-                <option value="servicetransport">Service des Transports</option>
-                <option value="serviceappro">Service d'approvisionnement</option>
-                <option value="export">Export</option>
-              </select>
-              <label class="form-label" for="form3Example4">Qui êtes-vous?</label>
-
-
-              <br>
-              <div class="form-outline mb-4">
-                <br> <input type="text" class="form-control" id="ville" name="ville" placeholder="Tapez une ville" autocomplete="off">
-                <label class="form-label" for="form3Example4">Ville</label>
-
-                <ul id="villes-list"></ul>
-              </div>
+        
 
               <br><br><button type="submit" value="inscription" class="btn btn-primary btn-block mb-4">
                 S'inscrire
