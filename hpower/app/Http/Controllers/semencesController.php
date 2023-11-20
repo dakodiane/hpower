@@ -7,8 +7,7 @@ use App\Models\Semence;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-
-
+use  PDF;
 
 
 class semencesController extends Controller
@@ -16,8 +15,7 @@ class semencesController extends Controller
     public function index()
     {
 
-        
-        $user = Auth::user(); // Récupère l'utilisateur connecté //dd($user);
+            $user = Auth::user(); 
        
           $paiements = paiement::orderBy('created_at','desc')->paginate(10);
           $semences = Semence::orderBy('created_at','desc');
@@ -36,19 +34,18 @@ class semencesController extends Controller
 
           return view ("services_semence.dashboard", compact('qteVendue', 'depense', 'qteAchetee', 'Vente', 'semences', 'paiements','user'));
     }
-   //   public function vente()
-   // {
-          
-   //      return view("services_semence.vente");
-   // }
+
+    // Pour la réception     
 
    public function reception()
    {
-        return view("services_semence.reception");
+        $user = Auth::user();  
+        return view("services_semence.reception", compact('user'));
    }
+
    
-   public function paie(Request $request){
-     
+   public function analyse (Request $request){
+     $user = Auth::user();
      $data = $request->validate([
           'semence'=>'required',
           'ql'=> 'required|decimal:0,2',
@@ -63,10 +60,10 @@ class semencesController extends Controller
           'moyen'=>'String',
           'matricul'=>'Image',
           // 'qv'=>'required|decimal: 0,2',
-          'puhpg'=>'numeric',
-          'montant'=>'numeric',
-          'client'=>'String',
-          'lieusemi'=>'String'
+          // 'puhpg'=>'numeric',
+          // 'montant'=>'numeric',
+          // 'client'=>'String',
+          // 'lieusemi'=>'String'
           
      ]);
 
@@ -78,7 +75,7 @@ class semencesController extends Controller
 
      $newSemence->sem_numtrans=$request->transact;
      $newSemence->sem_nummatricul=$request->matricul;
-     $newSemence->sem_fourn=$request->fournisseur;
+     $newSemence->sem_fourni=$request->fournisseur;
      $newSemence->sem_type=$request->nature;
      $paiement->montant_tp=$montant_tp;
      $newSemence->sem_prixunit=$request->pu;
@@ -88,23 +85,67 @@ class semencesController extends Controller
      $newSemence->sem_deplace=$request->moyen;
      $newSemence->sem_bord=$request->bord;
      $newSemence->sem_prove=$request->lieu;
+     // $newSemence->sem_
      
-
+     $paiement->util_id = $user->id;
      $paiement->save();
      $res = $newSemence->save();
       if($res){
-        return redirect()->route('dashboard', compact('montant_tp', 'montant_HPG', 'recette_HPG','user'));
+        return redirect()->route('dashboard', compact('montant_tp', 'user'));
       }else{
            return back()->with('fail','Erreur');
      }
 
    }
 
-   
-    
+   // POur la vente
+
+   public function vente()
+   {
+        $user = Auth::user();
+        return view("services_semence.vente", compact('user'));
+   }
+
+    public function traitement(Request $request){
+      $user = Auth::user();
+      
+      $newSemence = new Semence();
+      $paiement = new paiement();
 
 
-   
+      $data = $request->validate([
+          'qv'=>'required|decimal: 0,2',
+          'puhpg'=>'numeric',
+          'montant'=>'numeric',
+          'client'=>'String',
+          'lieusemi'=>'String',
+          'pl'=>'Numeric'
+          
+     ]);
+
+     $newSemence->sem_qtevendue=$request->qv;
+     $newSemence->sem_prixunitHPG=$request->puhpg;
+     $paiement->montant_HPG=$request->montant;
+     $newSemence->sem_client=$request->client;
+     $newSemence->sem_lieusemi=$request->lieusemi;
+
+
+      $montant_HPG = $request->input('puhpg') * $request->input('qv');
+      $recette = $request->input('pl') - $montant_HPG;
+      // $recette_HPG = $montant_HPG-$montant_tp;
+      $paiement->util_id = $user->id;
+      $paiement->solde = $recette;
+        $paiement->save();
+
+        $res = $newSemence->save();
+      if($res){
+        return redirect()->route('dashboard', compact('montant_HPG', 'user'));
+      }else{
+           return back()->with('fail','Erreur');
+     }
+      
+
+   }  
  
 
 }

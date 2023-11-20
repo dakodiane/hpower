@@ -16,6 +16,7 @@ class ApproController extends Controller
 {
     public function affichage()
     {
+         $user = Auth::user();
         $paiements = paiement::all();
         $semences = Semence::all();
         $appro = Approvisionnement::all();
@@ -37,11 +38,26 @@ class ApproController extends Controller
 
           $mntVente = paiement::WhereNotNULL('semence_id')->get();
           $Vente = $mntVente->sum('montant_HPG');
-         return view("appro.dashboard", compact('qteVendue', 'depense', 'qteAchetee', 'Vente', 'semences', 'paiements','stat','statt'));
+         return view("appro.dashboard", compact('qteVendue', 'depense', 'qteAchetee', 'Vente', 'semences', 'paiements','stat','statt','user'));
     }
 
+
     public function hpg()
-    {
-         return view("appro.hpg");
+    {   
+
+         return view('appro.hpg');
     }
+
+    public function paie(Request $request){
+     $data = $request->validate([
+          'nom'=>'required',
+          'tel'=> 'required',
+          'heure'=>'required',
+          'photo'=>'Image|required',
+          'provenance'=>'String|required',
+          'qte'=>'required',
+          'prix'=>'required',
+          'obs'=>'String',               
+     ]); 
+
 }

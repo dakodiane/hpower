@@ -67,11 +67,15 @@ Route::post('/connexion','App\Http\Controllers\IdentifyController@loginUser')->n
 
 Route::get('/semences',[semencesController::class,'index'])->name('dashboard');
 
-Route::get('/semences/vente',[SemenceController::class,'index'])->name('vente');
+Route::get('/semences/vente',[semencesController::class,'vente'])->name('vente');
+
+Route::post('/semences/vente',[semencesController::class,'traitement'])->name('traitement');
 
 Route::get('/semences/reception',[semencesController::class,'reception'])->name('reception');
 
-Route::post('/semences',[semencesController::class,'paie'])->name('paie');
+Route::post('/semences/reception',[semencesController::class,'analyse'])->name('analyse');
+
+// Route::post('/semences',[semencesController::class,'paie'])->name('paie');
 
 Route::get('semences/download/{semence_id}',[DownloadController::class,'show'])->name('show');
 

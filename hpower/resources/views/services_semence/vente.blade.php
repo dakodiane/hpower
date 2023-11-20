@@ -35,13 +35,13 @@
           </div>
           <div class="col-md-6 col-md-offset-1">
             <div class="booking-form">
-                <form method="post" action="{{ route('paie') }}" enctype="multipart/form-data">
+                <form method="post" action="{{ route('traitement') }}" enctype="multipart/form-data">
                     @csrf
                     @method('post')
                     <div class="row">
                       <div class="col-md-6">
                         <div class="form-group">
-                            <input class="form-control" type="text" name="date" disabled>
+                            <input class="form-control" type="text" name="date">
                             <span class="form-label">Date</span>
                         </div>
                     </div>
@@ -80,14 +80,21 @@
                                 <span class="form-label">Lieu de semi</span>
                             </div>
                         </div>
-                    </div>
+                    </div>                                                           
                     <div class="row">
-                        <div class="col-md-12">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <input class="form-control" type="number" name="pl" placeholder="en FCFA">
+                                <span class="form-label">Prix de livraison</span>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
                             <div class="form-group">
                                 <input class="form-control" type="number" name="recette" disabled>
                                 <span class="form-label">Recette</span>
                             </div>
                         </div>
+
                     </div>
                     <div class="form-btn">
                         <button class="btn btn-danger" type="submit">VALIDER</button>

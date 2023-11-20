@@ -22,7 +22,7 @@
                 </div>
                 <div class="col-md-6 col-md-offset-1">
                     <div class="booking-form">
-                        <form method="post" action="{{ route('paie') }}" enctype="multipart/form-data">
+                        <form method="post" action="{{ route('analyse') }}" enctype="multipart/form-data">
                             @csrf
                             @method('post')
                             <div class="row">

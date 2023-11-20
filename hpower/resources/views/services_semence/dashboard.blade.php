@@ -76,7 +76,7 @@
                       <h4 class="card-title">Table des Semences (vente et réception)</h4>
                       <p class="card-description">
                          <!-- <code><a class="btn btn-success" href="">Exporter en PDF</a></code> -->
-                         <code><a class="btn btn-success" href="{{ '/pdf' }}">Exporter en Excel</a></code>
+                         <!-- <code><a class="btn btn-success" href="{{ '/pdf' }}">Exporter en Excel</a></code> -->
                       </p>
                       <div class="table-responsive">
                         <table class="table-hover table-striped">
@@ -118,6 +118,10 @@
                               <td>{{ $semence->sem_deplace }}</td>
                               <td>{{ $semence->sem_nummatricul }}</td>
                               <td>{{ $semence->sem_bord }}</td>
+                              @endforeach 
+                              @endforeach 
+                            @foreach ($semences as $semence)
+                            @foreach ($paiements as $paiement) 
                               <td>{{ $semence->sem_qtevendue }}</td>
                               <td>{{ $semence->prixunitHPG }}</td>
                               <td>{{ $montant_HPG }}</td>
