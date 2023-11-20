@@ -54,7 +54,7 @@
           </li>
          
           <li class="nav-item">
-            <a class="nav-link" href="{{route('Servicetrans.show')}}">
+            <a class="nav-link" href="{{route('Servicetrans.show')}}" >
               <i class="icon-grid menu-icon mdi mdi-cloud-download"></i>
               <span class="menu-title">Consultation</span>
             </a>
@@ -68,11 +68,14 @@
         
 
           <li class="nav-item">
-            <a class="nav-link" href="pages/documentation/documentation.html">
-              <i class="icon-paper menu-icon"></i>
-              <span class="menu-title">Deconnexion</span>
-            </a>
-          </li>
+            <form method="POST" action="{{ route('logout') }}">
+                @csrf
+                <button type="submit" class="nav-link" style="border: none; background: none; padding: 0; margin: 0; cursor: pointer;">
+                    <i class="icon-paper menu-icon"></i>
+            <span class="menu-title">Déconnexion</span>
+                </a>
+            </form>
+        </li>
         </ul>
       </nav>
       
