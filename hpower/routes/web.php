@@ -4,7 +4,6 @@ use App\Http\Controllers\ApproController;
 use App\Http\Controllers\PaiementController;
 use App\Http\Controllers\ResearchController;
 use App\Http\Controllers\semencesController;
-use App\Http\Controllers\SemenceController;
 use App\Http\Controllers\DownloadController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\IdentifyController;
@@ -75,8 +74,6 @@ Route::get('/semences/reception',[semencesController::class,'reception'])->name(
 
 Route::post('/semences/reception',[semencesController::class,'analyse'])->name('analyse');
 
-// Route::post('/semences',[semencesController::class,'paie'])->name('paie');
-
 Route::get('semences/download/{semence_id}',[DownloadController::class,'show'])->name('show');
 
 Route::get('/search',[ResearchController::class,'search']);
@@ -84,9 +81,13 @@ Route::get('/search',[ResearchController::class,'search']);
 Route::get('/get-result',[ResearchController::class,'result'])->name('get-result');
 
 //APPROVISIONNEMENT
-Route::get('/approvisionnement',[ApproController::class,'affichage']);
+Route::get('/approvisionnement',[ApproController::class,'affichage'])->name('affichage');
 
-Route::get('/approvisionnement/hpg',[ApproController::class,'hpg'])->name('hpg');
+Route::get('/approvisionnement/hpg',[ApproController::class,'hpg']);
+
+Route::post('/approvisionnement/hpg',[ApproController::class,'paie'])->name('hpg');
+
+
 
 Route::get('allcamion/', function () {
     return view('Admin/allcamion');
@@ -181,5 +182,3 @@ Route::get('/rechercher-client', 'App\Http\Controllers\ExportController@recherch
 Route::get('GeneratePDF', [ServicetransController::class, 'GeneratePDF'])->name('GeneratePDF');
 
 Route::get('/recherche', 'SearchController@search')->name('search');
-
-Route::get('/export-excel/{viewType}', 'App\Http\Controllers\ServicetransController@exportExcel')->name('exportExcel');

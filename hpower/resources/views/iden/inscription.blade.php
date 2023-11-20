@@ -76,11 +76,11 @@
                <!--   <option value="directeur">Directeur</option>-->
                 <option value="fournisseur">Fournisseur</option>
                 <option value="rapporteur" selected>Rapporteur</option>
-<<<<<<< HEAD
+
              <option value="servicesemence">Service des Semences</option>
-=======
+
                  <option value="servicesemence">Service des Semences</option>
->>>>>>> e3398bc1cdc751e12336be29f482d77593b4bd25
+
                 <option value="servicetransport">Service des Transports</option>
                 <option value="serviceappro">Service d'approvisionnement</option>
                 <option value="export">Export</option>

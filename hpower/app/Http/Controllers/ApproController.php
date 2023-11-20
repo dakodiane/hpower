@@ -44,11 +44,13 @@ class ApproController extends Controller
 
     public function hpg()
     {   
-
-         return view('appro.hpg');
+          $user = Auth::user();
+         return view('appro.hpg', compact('user'));
     }
 
     public function paie(Request $request){
+
+     $user = Auth::user();
      $data = $request->validate([
           'nom'=>'required',
           'tel'=> 'required',
@@ -60,4 +62,24 @@ class ApproController extends Controller
           'obs'=>'String',               
      ]); 
 
+     $newApro = new Approvisionnement();
+
+     $newApro->cam_nomchauf=$request->nom;
+     $newApro->tel_conducteur=$request->tel;
+     $newApro->heure_arrive=$request->heure;
+     $newApro->cam_photo=$request->photo;
+     $paiement->provenance=$provenance;
+     $newApro->qte_charge=$request->qte;
+     $newApro->prix_cession=$prix;
+     $newApro->observationt=$request->obs;
+     
+     $res = $newApro->save();
+
+      if($res){
+        return redirect()->route('affichage');
+      }else{
+           return back()->with('fail','Erreur');
+     }
+dd($res);
+     }
 }
