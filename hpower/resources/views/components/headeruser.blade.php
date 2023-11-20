@@ -8,18 +8,7 @@
         <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
           <span class="icon-menu"></span>
         </button>
-        <ul class="navbar-nav mr-lg-2">
-          <li class="nav-item nav-search d-none d-lg-block">
-            <div class="input-group">
-              <div class="input-group-prepend hover-cursor" id="navbar-search-icon">
-                <span class="input-group-text" id="search">
-                  <i class="icon-search"></i>
-                </span>
-              </div>
-              <input type="text" class="form-control" id="navbar-search-input" placeholder="Search now" aria-label="search" aria-describedby="search">
-            </div>
-          </li>
-        </ul>
+       
         <ul class="navbar-nav navbar-nav-right">
           <li class="nav-item nav-profile dropdown">
            
@@ -100,13 +89,15 @@
               </ul>
             </div>
           </li>
-
           <li class="nav-item">
-            <a class="nav-link" href="{{'logout'}}">
-              <i class="icon-paper menu-icon"></i>
-              <span class="menu-title">Deconnexion</span>
-            </a>
-          </li>
+            <form method="POST" action="{{ route('logout') }}">
+                @csrf
+                <button type="submit" class="nav-link" style="border: none; background: none; padding: 0; margin: 0; cursor: pointer;">
+                    <i class="icon-paper menu-icon"></i>
+            <span class="menu-title">Déconnexion</span>
+                </a>
+            </form>
+        </li>
         </ul>
       </nav>
       
