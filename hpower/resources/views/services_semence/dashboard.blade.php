@@ -73,9 +73,10 @@
                 <div class="col-md-12 grid-margin stretch-card">
                   <div class="card">
                     <div class="card-body col-md-12" style="height: 600px; overflow: auto; width:100%">
-                      <h4 class="card-title">Table des Réceptions</h4>
+                      <h4 class="card-title">Table des Semences (vente et réception)</h4>
                       <p class="card-description">
-                         <code>Etat Des Semences Réceptionnées </code>
+                         <code><a class="btn btn-success" href="{{ '/semences/download/semence_id' }}">Exporter en PDF</a></code>
+                         <code><a class="btn btn-success" href="{{ '/pdf' }}">Exporter en Excel</a></code>
                       </p>
                       <div class="table-responsive">
                         <table class="table-hover table-striped">
@@ -86,13 +87,19 @@
                               <th>Magasin de <br>Déchargement</th>
                               <th>Quantité Reçue</th>
                               <th>Prix Unitaire</th>
-                              <th>Montant</th>
+                              <th>Montant de la livraison</th>
                               <th>Fournisseur</th>
                               <th>Nature de la <br>Semence</th>
                               <th>Type de <br>Certification</th>
                               <th>Type de <br>Véhicule</th>
                               <th>Matricule du <br>Véhicule</th>
                               <th>Bordereau</th>
+                              <th>Quantité vendue</th>
+                              <th>Prix Unitaire HPG</th>
+                              <th>Montant HPG</th>
+                              <th>Client</th>
+                              <th>Lieu de Semi</th>
+                              <th>Recette</th> 
                             </tr>
                           </thead>
                           @foreach ($semences as $semence)
@@ -104,16 +111,19 @@
                               <td>{{ $semence->sem_magdecht }}</td>
                               <td>{{ $semence->sem_qtereçu }}</td>
                               <td>{{ $semence->sem_prixunit }}</td>
-                              <td>{{ $paiement->montant_tp }} FCFA</td>
+                              <td>{{ $montant_tp }} FCFA</td>
                               <td>{{ $semence->sem_fournisseur }}</td>
                               <td>{{ $semence->sem_nature }}</td>
                               <td>{{ $semence->sem_type }}</td>                              
                               <td>{{ $semence->sem_deplace }}</td>
                               <td>{{ $semence->sem_nummatricul }}</td>
-                              <td>{{ $semence->sem_bord }}</td>  
-                              <td>
-                                <a class="btn btn-success" href="{{ '/pdf' }}">Exporter en PDF</a>
-                              </td>                         
+                              <td>{{ $semence->sem_bord }}</td>
+                              <td>{{ $semence->sem_qtevendue }}</td>
+                              <td>{{ $semence->prixunitHPG }}</td>
+                              <td>{{ $montant_HPG }}</td>
+                              <td>{{ $semence->sem_client }}</td>
+                              <td>{{ $semence->sem_lieusemi }}</td> 
+                              <td>{{ $recette_HPG }}</td>                       
                             </tr>
                           </tbody>
                           @endforeach 
@@ -121,50 +131,5 @@
                         </table>
                       </div>
 
-              
-  <br><br><br><br><br><div class="col-md-12 grid-margin stretch-card">
-                        <div class="card">
-                          <div class="card-body col-md-12" style="height: 600px; overflow: auto; width:100%">
-                            <h4 class="card-title">Table des Ventes</h4>
-                            <p class="card-description">
-                               <code>Etat Des Semences Vendues </code>
-                            </p>
-                            <div class="table-responsive">
-                              <table class="table-hover table-striped">
-                                <thead>
-                                  <tr>
-                                    <th>Date</th>
-                                    <th>Quantité</th>
-                                    <th>Prix Unitaire</th>
-                                    <th>Montant</th>
-                                    <th>Client</th>
-                                    <th>Montant de livraison</th>
-                                    <th>Lieu de Semi</th>
-                                    <th>Recette</th>                                    
-                                  </tr>
-                                </thead>
-                                @foreach ($semences as $semence)
-                                @foreach ($paiements as $paiement) 
-                                <tbody>
-                                  <tr>
-                                    <td>{{ $semence->created_at }}</td>
-                                    <td>{{ $semence->sem_qtevendue }}</td>
-                                    <td>{{ $semence->prixunitHPG }}</td>
-                                    <td>{{ $paiement->montant_HPG }}</td>
-                                    <td>{{ $semence->sem_client }}</td>
-                                    <td>{{ $paiement->montant_tp }}</td>
-                                    <td>{{ $semence->sem_lieusemi }}</td>
-                                    <td>{{ $paiement->recette }}</td>
-                                    <td></td>
-                                  </tr>                  
-                                </tbody>
-                                @endforeach
-                                @endforeach
-                              </table>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-      
            
   @endsection 

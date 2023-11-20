@@ -9,16 +9,20 @@ use  PDF;
 
 
 
-class semencesController extends Controller
+class DownloadController extends Controller
 {
-    
+     public function show($semence_id)
+   {
+        $invoice = Semence::find($semence_id);
+        return view('services_semence.pdf', ['invoice'=>$invoice]);
+   }
 
              
    public function telecharger(){
 
         $paiements = paiement::all();
         $semences = Semence::all(); 
-        $pdf = PDF::loadView('services_semence.dashboard');  
+        $pdf = PDF::loadView('services_semence.pdf');  
         return $pdf->download('document.pdf');
    }
  

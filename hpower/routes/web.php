@@ -71,22 +71,20 @@ Route::post('/connexion','App\Http\Controllers\IdentifyController@loginUser')->n
 
 Route::get('/semences',[semencesController::class,'index'])->name('dashboard');
 
-Route::get('/semences/vente',[SemenceController::class,'traitement'])->name('vente');
+Route::get('/semences/vente',[SemenceController::class,'index'])->name('vente');
 
 Route::get('/semences/reception',[semencesController::class,'reception'])->name('reception');
 
 Route::post('/semences',[semencesController::class,'paie'])->name('paie');
 
-Route::get('semences/download',[DownloadController::class,'telecharger'])->name('telechargement');
+Route::get('semences/download/{semence_id}',[DownloadController::class,'show'])->name('show');
 
 Route::get('/search',[ResearchController::class,'search']);
 
 Route::get('/get-result',[ResearchController::class,'result'])->name('get-result');
 
-Route::get('/approdashboard',[ApproController::class,'affichage']);
-
 //APPROVISIONNEMENT
-Route::get('/approvisionnement',[ApproController::class,'affichage'])->name('index');
+Route::get('/approvisionnement',[ApproController::class,'affichage']);
 
 Route::get('/approvisionnement/hpg',[ApproController::class,'hpg'])->name('hpg');
 

@@ -53,7 +53,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="">
+                <a class="nav-link" href="{{route('hpg')}}">
                   <i class="icon-grid menu-icon"></i>
                   <span class="menu-title">HPG</span>
                 </a>
@@ -68,6 +68,12 @@
                 <a class="nav-link" href="{{route('fournisave')}}">
                   <i class="icon-grid menu-icon"></i>
                   <span class="menu-title">FOURNISSEUR</span>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{{route('dashboard')}}">
+                  <i class="icon-grid menu-icon"></i>
+                  <span class="menu-title">SEMENCES</span>
                 </a>
               </li>
            
