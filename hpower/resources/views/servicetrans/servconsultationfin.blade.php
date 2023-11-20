@@ -34,7 +34,8 @@
                                     <thead>
                                         <tr>
                                             <th>N° Transaction HPG</th>
-                                            <th>Date</th>
+                                            <th>Date reception</th>
+                                            <th>Date paiement</th>
                                             <th>Matricule Camion</th>
                                             <th>Image Matricule Camion</th>
                                             <th>Provenance</th>
@@ -57,7 +58,8 @@
                                             <th>Montant de l'entreprise bénéficiaire (FCFA)</th>
                                             <th>Montant HPG (FCFA)</th>
                                             <th>Recette HPG (FCFA)</th>
-                                            <th>Solde (FCFA)</th>
+                                            <th>Solde après paiement (FCFA)</th>
+                                            <th>Etat du paiement</th>
 
                                         </tr>
                                     </thead>
@@ -66,6 +68,7 @@
                                             <tr>
                                                 <td>{{ $transport->num_bordereau }}</td>
                                                 <td>{{ $transport->heure_arrive }}</td>
+                                                <td>{{ $transport->paiements[0]->date_paie }}</td>
                                                 <td>{{ $transport->num_immatriculation }}</td>
                                                 <td><a href="{{ asset($transport->cam_photo) }}" type="button" class="btn btn-success btn-sm">Voir la photo</a></td>
                                                 <td>{{ $transport->provenance }}</td>
@@ -92,6 +95,7 @@
                                                     <td>{{ $transport->paiements[0]->montant_HPG }}</td>
                                                     <td>{{ $transport->paiements[0]->recette_HPG }}</td>
                                                     <td>{{ $transport->paiements[0]->paietotal }}</td>
+                                                    <td>{{ $transport->paiements[0]->statut_paie }}</td>
                                                 @else
                                                     <!-- Si le transport n'a pas de paiements, affichez "Neant" -->
                                                     <td>Neant</td>
@@ -110,7 +114,7 @@
 
                             @endif
                         </div>
-                        <a href="{{ route('GeneratePDF') }}" class="btn btn-primary">Télécharger le PDF</a>
+                        <a href="{{ route('exportExcel', ['viewType' => 'servconsultationfin']) }}" class="btn btn-success">Télécharger Excel</a>
 
                     </div>
                 </div>

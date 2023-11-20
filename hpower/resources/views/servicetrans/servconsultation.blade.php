@@ -10,7 +10,7 @@
                         <h4 class="card-title">Liste des Transports </h4>
 
                         <div class="table-responsive">
-                            <table class="tableau">
+                            <table class="tableau" >
                                 <thead>
                                     <tr>
                                     <th>N° Transaction HPG</th>
@@ -33,16 +33,10 @@
                                         <th>Image Borderau du pont</th>
                                         <th>Entreprise Bénéficiaire</th>
                                         <th>Action</th>
-                                        <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
-                                            <div class="input-group">
-                                                <!-- Champ de saisie pour la recherche -->
-                                                <input class="form-control" type="text" placeholder="Search for..." aria-label="Search for..." aria-describedby="btnNavbarSearch" />
-                                                <!-- Bouton de recherche -->
-                                                <button class="btn btn-primary" id="btnNavbarSearch" type="button"><i class="fas fa-search"></i></button>
-                                            </div>
-                                        </form>
+                                      
                                     </tr>
                                 </thead> 
+                           
                                 <tbody>
                                         @foreach($transports as $transport)
                                             <tr>
@@ -72,6 +66,8 @@
                                 </tbody>    
 
                             </table>
+                            <a href="{{ route('exportExcel', ['viewType' => 'servconsultation']) }}" class="btn btn-success">Télécharger Excel</a>
+
                         </div>
                     </div>
                 </div>
@@ -79,6 +75,8 @@
         </div>
     </div>
 </div>
+
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <script src="{{ asset('js/search.js') }}"></script>
 
 @endsection
