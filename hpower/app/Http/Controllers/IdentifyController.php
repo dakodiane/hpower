@@ -142,3 +142,4 @@ class IdentifyController extends Controller
         return redirect('connexion');
     }
 }
+
