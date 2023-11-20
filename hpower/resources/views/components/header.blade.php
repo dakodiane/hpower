@@ -10,14 +10,7 @@
         </button>
         <ul class="navbar-nav mr-lg-2">
           <li class="nav-item nav-search d-none d-lg-block">
-            <div class="input-group">
-              <div class="input-group-prepend hover-cursor" id="navbar-search-icon">
-                <span class="input-group-text" id="search">
-                  <i class="icon-search"></i>
-                </span>
-              </div>
-              <input type="text" class="form-control" id="navbar-search-input" placeholder="Search now" aria-label="search" aria-describedby="search">
-            </div>
+          
           </li>
         </ul>
         <ul class="navbar-nav navbar-nav-right">
@@ -63,12 +56,14 @@
               <span class="menu-title">Tous les fournisseurs</span>
             </a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="{{'paiement'}}">
+          <!-- Mettez à jour le script dans votre fichier HTML -->
+
+       <!--     <li class="nav-item">
+            <a class="nav-link" href="{{'paiements'}}">
               <i class="icon-grid menu-icon"></i>
               <span class="menu-title">Tous les paiements</span>
             </a>
-          </li>
+          </li> -->
           <li class="nav-item">
             <a class="nav-link" href="{{'userlist'}}">
               <i class="icon-grid menu-icon"></i>

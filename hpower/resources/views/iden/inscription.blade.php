@@ -76,10 +76,10 @@
                <!--   <option value="directeur">Directeur</option>-->
                 <option value="fournisseur">Fournisseur</option>
                 <option value="rapporteur" selected>Rapporteur</option>
-               <!--    <option value="servicesemence">Service des Semences</option>
+             <option value="servicesemence">Service des Semences</option>
                 <option value="servicetransport">Service des Transports</option>
                 <option value="serviceappro">Service d'approvisionnement</option>
-                <option value="export">Export</option>-->
+                <option value="export">Export</option>
               </select>
               <label class="form-label" for="form3Example4">Qui êtes-vous?</label>
 
