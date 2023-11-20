@@ -285,11 +285,23 @@ class RapporteurController extends Controller
 
         return view('RapportAppro/enregistrerfin', compact('camions'));
     }
+    public function savefinfourni($fournisseur_id)
+    {
+        $camions = Fournisseur::find($fournisseur_id);
+        $nom_fournisseur = $camions->utilisateur->name;
+        return view('RapportAppro/fournifin', compact('camions','nom_fournisseur'));
+    }
     public function savefintransport($transport_id)
     {
         $camions = Transport::find($transport_id);
 
         return view('RapportTransport/enregistrerfin', compact('camions'));
+    }
+    public function updatetransport($transport_id)
+    {
+        $camions = Transport::find($transport_id);
+
+        return view('RapportTransport/update', compact('camions'));
     }
     public function savefinsemence($semence_id)
     {
@@ -332,6 +344,35 @@ class RapporteurController extends Controller
         $camions->save();
         return redirect()->intended(route('appro.viewfin',  compact('camions')));
     }
+
+    public function storefinfourni(Request $request, $fournisseur_id)
+    {
+        $user = Auth::user();
+        $camions = Fournisseur::findOrfail($fournisseur_id);
+
+        $data = $request->all();
+        if ($request->hasFile('cam_photo1')) {
+            $photoPath = $request->file('cam_photo1')->store('photo_immat', 'public');
+            $data['cam_photo1'] = $photoPath;
+        }
+        if ($request->hasFile('cam_photo2')) {
+            $photoPath = $request->file('cam_photo2')->store('photo_immat', 'public');
+            $data['cam_photo2'] = $photoPath;
+        }
+          $poidsCharge = $request->input('poids_charge');
+       $poidsVide = $request->input('poids_vide');
+      $poidsNet = $poidsCharge - $poidsVide;
+
+      $data['poids_net'] = $poidsNet;
+        $camions->fill($data);
+        $camions->save();
+
+        session()->flash('success', 'L\'enregistrement a été effectué avec succès!');
+        return redirect()->back()->with('success', 'Camion enregistré avec succès.');
+
+      
+    }
+
     public function storefintransport(Request $request, $transport_id)
     {
         $user = Auth::user();
@@ -443,4 +484,41 @@ class RapporteurController extends Controller
 
         return view('Users/listecamionsave', compact('camions'));
     }
+
+    public function updatefintransport(Request $request, $transport_id)
+{
+    // Récupérer l'utilisateur authentifié
+    $user = Auth::user();
+
+    // Récupérer le modèle Transport à mettre à jour
+    $camions = Transport::findOrFail($transport_id);
+
+    // Valider manuellement les données si nécessaire
+    // $request->validate([...]);
+
+    // Mettre à jour chaque attribut du modèle avec les données du formulaire
+    $camions->cam_nomchauf = $request->input('cam_nomchauf');
+    $camions->tel_conducteur = $request->input('tel_conducteur');
+    $camions->type_produit = $request->input('type_produit');
+    $camions->provenance = $request->input('provenance');
+    $camions->heure_arrive = $request->input('heure_arrive');
+    $camions->avancepaye = $request->input('avancepaye');
+    $camions->poids_charge = $request->input('poids_charge');
+
+    $poids_vide = $camions->poids_vide; // Assurez-vous que 'poids_vide' existe dans votre modèle
+    $poids_net = $request->input('poids_charge') - $poids_vide;
+
+    // Mettre à jour le champ poids_net
+    $camions->poids_net = $poids_net;
+
+    // Sauvegarder les modifications dans la base de données
+    $camions->save();
+
+    // Afficher les données pour débogage (vous pouvez le supprimer après)
+
+    // Rediriger avec un message de réussite vers la vue appropriée
+    return redirect()->route('transport.viewfin', compact('camions'))->with('success', 'Transport mis à jour avec succès');
+
+}
+
 }

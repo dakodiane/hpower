@@ -26,7 +26,7 @@
                     <th>Numéro de Bordereau HPG</th>
                     <th>Numéro d'immatriculation</th>
                     <th>Photo d'immatriculation</th>
-                    <th>Nom du chauffeur</th>
+                    <th>Nom du fournisseur</th>
                     <th>Type de produit</th>
  
                     <th>Action</th>
@@ -38,11 +38,11 @@
                   <td>{{ $camion->num_bordereau}}</td>
                     <td>{{ $camion->num_immatriculation }}</td>
                     <td><a href="{{ asset($camion->cam_photo) }}" type="button" class="btn btn-success btn-md">Voir la photo</a></td>
-                    <td>{{ $camion->cam_nomchauf }}</td>
+                    <td>{{ $camion->utilisateur->name }}</td>
                     <td>{{ $camion->type_produit }}</td>
              
               
-                    <td><a href="{{ route('savefin.appro', ['appro_id' => $camion->appro_id]) }}" type="button" class="btn btn-success btn-md">Finaliser</a></td>
+                    <td><a href="{{ route('savefin.fourni', ['fournisseur_id' => $camion->fournisseur_id]) }}" type="button" class="btn btn-success btn-md">Finaliser</a></td>
                   </tr>
                   @endforeach
                 </tbody>

@@ -59,7 +59,7 @@
                     <td>{{ $camion->poids_charge}}</td>
                     <td>{{ $camion->poids_vide}}</td>
                     <td>{{ $camion->poids_net}}</td>
-                    <td><a href="{{ route('savefin.transport', ['transport_id' => $camion->transport_id]) }}" type="button" class="btn btn-success btn-md">Modifier</a></td>
+                    <td><a href="{{ route('update.transport', ['transport_id' => $camion->transport_id]) }}" type="button" class="btn btn-success btn-md">Modifier</a></td>
                   </tr>
                   @endforeach
                 </tbody>
