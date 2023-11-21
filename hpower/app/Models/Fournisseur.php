@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 class Fournisseur extends Model
 {
     protected $table = 'fournisseurs'; // Nom de la table dans la base de données
-    protected $primaryKey = 'founisseur_id'; // Remplacez par le nom de votre colonne de clé primaire
+    protected $primaryKey = 'fournisseur_id'; // Remplacez par le nom de votre colonne de clé primaire
 
     protected $fillable = [
         'num_bordereau',
@@ -33,6 +33,8 @@ class Fournisseur extends Model
         'statut_paiement',
         'tel_conducteur',
         'nombre_sacs',
+        'cam_photo2',
+        'bordereauchargement',
     ];
 
 

@@ -24,7 +24,7 @@
               </div>
               <div class="form-group">
                 <label for="chauffeur">Numéro de téléphone du chauffeur</label>
-                <input type="text" class="form-control" id="chauffeur" name="tel_conducteur" placeholder="Numero du chauffeur" required>
+                <input type="number" class="form-control" id="chauffeur" name="tel_conducteur" placeholder="Numero du chauffeur" required>
               </div>
 
               <div class="form-group">

@@ -12,6 +12,14 @@ class Paiement extends Model
     protected $primaryKey = 'paie_id';
 
     protected $fillable = [
+        "date_paie",
+        "paie_prixlivraison",
+        "prix_tp",
+        "prix_HPG",
+        "montant_tp",
+        "montant_HPG",
+        "prod_magasin",
+        "prod_lieuprod",
         'prix_unit',
         'qte_totale',
          'prix_total',

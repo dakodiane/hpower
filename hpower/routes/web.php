@@ -146,7 +146,9 @@ Route::get('listeapprosave/', 'App\Http\Controllers\RapporteurController@viewapp
 Route::get('listeapprofin/', 'App\Http\Controllers\RapporteurController@viewfinappro')->name('appro.viewfin');
 Route::get('approfin/{appro_id}/', 'App\Http\Controllers\RapporteurController@savefinappro')->name('savefin.appro');
 Route::post('approfin/{appro_id}/','App\Http\Controllers\RapporteurController@storefinappro')->name('storefin.appro');
-
+Route::get('fournifin/{fournisseur_id}/', 'App\Http\Controllers\RapporteurController@savefinfourni')->name('savefin.fourni');
+Route::post('fournifin/{fournisseur_id}/','App\Http\Controllers\RapporteurController@storefinfourni')->name('storefin.fourni');
+Route::get('listefourni/', 'App\Http\Controllers\RapporteurController@viewfourni')->name('view.fourni');
 
 Route::get('enregistrersemence/', 'App\Http\Controllers\RapporteurController@createsemence')->name('create.semence');
 Route::post('enregistrersemence/','App\Http\Controllers\RapporteurController@storesemence')->name('store.semence');
@@ -163,7 +165,7 @@ Route::get('listetransportfin/', 'App\Http\Controllers\RapporteurController@view
 Route::get('transportfin/{transport_id}/', 'App\Http\Controllers\RapporteurController@savefintransport')->name('savefin.transport');
 Route::post('transportfin/{transport_id}/','App\Http\Controllers\RapporteurController@storefintransport')->name('storefin.transport');
 Route::get('transportupdate/{transport_id}/', 'App\Http\Controllers\RapporteurController@updatetransport')->name('update.transport');
-Route::post('transportupdate/{transport_id}/','App\Http\Controllers\RapporteurController@storefintransport')->name('storefin.transport');
+Route::post('transportupdate/{transport_id}/','App\Http\Controllers\RapporteurController@updatefintransport')->name('updatefin.transport');
 
 
 Route::get('enregistrerhpg/', 'App\Http\Controllers\RapporteurController@createhpg')->name('create.hpg');
