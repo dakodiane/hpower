@@ -199,3 +199,11 @@ Route::get('/rechercher-client', 'App\Http\Controllers\ExportController@recherch
 Route::get('GeneratePDF', [ServicetransController::class, 'GeneratePDF'])->name('GeneratePDF');
 
 Route::get('/recherche', 'SearchController@search')->name('search');
+
+
+Route::get('/export-excel/{viewType}', 'App\Http\Controllers\ServicetransController@exportExcel')->name('exportExcel');
+
+
+
+
+

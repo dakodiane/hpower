@@ -46,12 +46,16 @@
           <!-- partial:partials/_sidebar.html -->
           <nav class="sidebar sidebar-offcanvas" id="sidebar">
             <ul class="nav">
+<<<<<<< HEAD
               <li class="nav-item">
                 <a class="nav-link" href="{{route('affichage')}}">
                   <i class="icon-grid menu-icon"></i>
                   <span class="menu-title">TABLEAU DE BORD</span>
                 </a>
               </li>
+=======
+              
+>>>>>>> 814d4ebd83954415d7a7fa788be83c7d4c94fd2f
               <li class="nav-item">
                 <a class="nav-link" href="{{ '/approvisionnement/hpg' }}"> 
                   <i class="icon-grid menu-icon"></i>
@@ -76,6 +80,8 @@
                   <span class="menu-title">SEMENCES</span>
                 </a>
               </li>
+
+              
            
               <li class="nav-item">
                 <form method="POST" action="{{ route('logout') }}">

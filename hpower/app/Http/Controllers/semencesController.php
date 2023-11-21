@@ -125,6 +125,7 @@ class semencesController extends Controller
 
    // POur la vente
 
+<<<<<<< HEAD
    public function vente()
    {
         $user = Auth::user();
@@ -186,5 +187,8 @@ class semencesController extends Controller
    }
  
 
+=======
+  
+>>>>>>> 814d4ebd83954415d7a7fa788be83c7d4c94fd2f
 }
  
