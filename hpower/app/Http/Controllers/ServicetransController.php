@@ -16,6 +16,7 @@ use App\Http\Controllers\Response;
 use App\Exports\TransportsExport;
 use Maatwebsite\Excel\Facades\Excel;
 
+
 use Barryvdh\DomPDF\Facade\Pdf;
 
 class ServicetransController extends Controller
@@ -183,6 +184,7 @@ public function viewfin()
     }
         }
 
+  
 
         public function exportExcel($viewType)
         {

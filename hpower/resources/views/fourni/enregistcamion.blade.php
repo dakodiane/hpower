@@ -59,8 +59,8 @@
                     </div>   
                     
                     <div class="form-group">
-                      <label for="exampleSelectGender">Provenance </label>
-                      <input type="text" class="form-control"  id="provenance" name="provenance" placeholder="Tapez une ville" autocomplete="off" required>
+                      <label for="exampleSelectGender">Destination </label>
+                      <input type="text" class="form-control"  id="destination" name="destination" placeholder="Tapez une ville" autocomplete="off" required>
                         <ul id="villes-list"></ul>
                       </div>
 

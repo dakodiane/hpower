@@ -73,10 +73,10 @@
 
               {{-- Categories select --}}
               <br> <select class="form-select" name="role" aria-label="Default select example">
-               <!--   <option value="directeur">Directeur</option>-->
+                <!--   <option value="directeur">Directeur</option>-->
                 <option value="fournisseur">Fournisseur</option>
                 <option value="rapporteur" selected>Rapporteur</option>
-                 <option value="servicesemence">Service des Semences</option>
+                <option value="servicesemence">Service des Semences</option>
                 <option value="servicetransport">Service des Transports</option>
                 <option value="serviceappro">Service d'approvisionnement</option>
                 <option value="export">Export</option>

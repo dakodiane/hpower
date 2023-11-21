@@ -114,7 +114,7 @@
 
                             @endif
                         </div>
-                        <a href="{{ route('exportExcel', ['viewType' => 'servconsultationfin']) }}" class="btn btn-success">Télécharger Excel</a>
+<a href="{{ route('exportExcel', ['viewType' => 'servconsultationfin']) }}" class="btn btn-success">Télécharger Excel</a>
 
                     </div>
                 </div>

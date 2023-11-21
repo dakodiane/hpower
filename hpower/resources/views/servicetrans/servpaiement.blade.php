@@ -64,7 +64,7 @@
               </div>
 
               <div class="form-group">
-                <label for="exampleInputName1">Reste à payé</label>
+                <label for="exampleInputName1">Montant versé</label>
                 <input type="text" name="rest_paie" class="form-control" id="exampleInputName1" placeholder="" required>
               </div>
 
