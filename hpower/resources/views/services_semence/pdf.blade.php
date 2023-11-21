@@ -34,7 +34,7 @@
               <td>{{ $semence->created_at }}</td>                              
               <td>{{ $semence->sem_magdecht }}</td>
               <td>{{ $semence->sem_qtereçu }}</td>
-              <td>{{$semence->sem_prixunit}}</td>
+              <td>{{ $semence->sem_prixunit }}</td>
               <td>{{ $paiement->montant_tp }} FCFA</td>
               <td>{{ $semence->sem_nature }}</td>
               <td>{{ $semence->sem_type }}</td>                              

@@ -47,42 +47,51 @@
           <nav class="sidebar sidebar-offcanvas" id="sidebar">
             <ul class="nav">
               <li class="nav-item">
-                <a class="nav-link" href="{{route('Servicetrans.viewfin')}}">
+                <a class="nav-link" href="{{route('affichage')}}">
                   <i class="icon-grid menu-icon"></i>
                   <span class="menu-title">TABLEAU DE BORD</span>
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="{{route('hpg')}}">
+                <a class="nav-link" href="{{ '/approvisionnement/hpg' }}"> 
                   <i class="icon-grid menu-icon"></i>
                   <span class="menu-title">HPG</span>
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="{{route('create.transport')}}">
+                <a class="nav-link" href="">
                   <i class="icon-grid menu-icon"></i>
                   <span class="menu-title">RAPPORTEUR</span>
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="{{route('fournisave')}}">
+                <a class="nav-link" href="">
+                  <i class="icon-grid menu-icon"></i>
+                  <span class="menu-title">TRANSPORT</span>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="">
                   <i class="icon-grid menu-icon"></i>
                   <span class="menu-title">FOURNISSEUR</span>
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="{{route('dashboard')}}">
+                <a class="nav-link" href="{{ route('semences') }}">
                   <i class="icon-grid menu-icon"></i>
                   <span class="menu-title">SEMENCES</span>
                 </a>
               </li>
            
               <li class="nav-item">
-                <a class="nav-link" href="{{ route('connexion') }}">
-                  <i class="icon-paper menu-icon"></i>
-                  <span class="menu-title">DECONNEXION</span>
-                </a>
-              </li>
+                <form method="POST" action="{{ route('logout') }}">
+                    @csrf
+                    <button type="submit" class="nav-link" style="border: none; background: none; padding: 0; margin: 0; cursor: pointer;">
+                        <i class="icon-paper menu-icon"></i>
+                      <span class="menu-title">DECONNEXION</span>
+                    </a>
+                </form>
+              </li> 
             </ul>
           </nav>
           

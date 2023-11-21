@@ -8,7 +8,7 @@
             <div class="col-md-12 grid-margin">
               <div class="row">
                 <div class="col-12 col-xl-8 mb-4 mb-xl-0">
-                  <h3 class="font-weight-bold">Bienvenue M. BARCKLEY</h3>
+                  <h3 class="font-weight-bold">Bienvenue {{$user->name}}</h3>
                 </div>
                 <div class="col-12 col-xl-4">
                  <div class="justify-content-end d-flex">
@@ -75,8 +75,8 @@
                     <div class="card-body col-md-12" style="height: 600px; overflow: auto; width:100%">
                       <h4 class="card-title">Table des Semences (vente et réception)</h4>
                       <p class="card-description">
-                         <code><a class="btn btn-success" href="{{ '/semences/download/semence_id' }}">Exporter en PDF</a></code>
-                         <code><a class="btn btn-success" href="{{ '/pdf' }}">Exporter en Excel</a></code>
+                         <!-- <code><a class="btn btn-success" href="">Exporter en PDF</a></code> -->
+                         <!-- <code><a class="btn btn-success" href="{{ '/pdf' }}">Exporter en Excel</a></code> -->
                       </p>
                       <div class="table-responsive">
                         <table class="table-hover table-striped">
@@ -118,6 +118,10 @@
                               <td>{{ $semence->sem_deplace }}</td>
                               <td>{{ $semence->sem_nummatricul }}</td>
                               <td>{{ $semence->sem_bord }}</td>
+                              @endforeach 
+                              @endforeach 
+                            @foreach ($semences as $semence)
+                            @foreach ($paiements as $paiement) 
                               <td>{{ $semence->sem_qtevendue }}</td>
                               <td>{{ $semence->prixunitHPG }}</td>
                               <td>{{ $montant_HPG }}</td>

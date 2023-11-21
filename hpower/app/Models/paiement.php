@@ -22,7 +22,7 @@ class Paiement extends Model
         "prod_lieuprod",
         'prix_unit',
         'qte_totale',
-        'prix_total',
+         'prix_total',
         'cam_id',
         'date_paiement',
         'created_at',
@@ -32,13 +32,16 @@ class Paiement extends Model
         'montant_tp',
         'montant_HPG',
         'recette_HPG',
-         'solde',
+        'solde',
        'entrep_benef',
        'net_paye',
-        'rest_paie',
+       'rest_paie',
         'paietotal',
         'statut_paie',
-        'date_paie',
+        'paie_prixlivraison',
+        'prod_magasin',
+        'prod_lieuprod',        
+       
     ];
 
     public function utilisateur()
