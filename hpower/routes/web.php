@@ -182,5 +182,4 @@ Route::get('/export-excel/{viewType}', 'App\Http\Controllers\ServicetransControl
 
 
 
-Route::get('servconsultationfinext/', 'App\Http\Controllers\ServicetransController@viewfinext')->name('Servicetransext.viewfin');
-Route::get('dashboardaproext/', 'App\Http\Controllers\ApproController@affichagex')->name('dashboardaproext');
+

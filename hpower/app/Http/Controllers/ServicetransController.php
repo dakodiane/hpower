@@ -60,7 +60,7 @@ public function statistiquesCamions()
                 ->groupBy('provenance')
                 ->get();
 
-            return view('servicetrans/dashboardaproext', compact('transportsAujourdhui', 'transportsCeMois', 'sumPoidsParProvenance', 'user'));
+            return view('servicetrans/tableaudebord', compact('transportsAujourdhui', 'transportsCeMois', 'sumPoidsParProvenance', 'user'));
         } else {
             return redirect()->route('connexion');
         }
@@ -184,37 +184,7 @@ public function viewfin()
     }
         }
 
-        
-public function viewfinext()
-{
-    try {
-        $user = Auth::user();
-
-        // Récupérer les transports avec paiements associés ayant recette_HPG non égal à zéro
-        $transports = Transport::with(['paiements' => function ($query) {
-            $query->where('recette_HPG', '!=', 0);
-        }])
-        ->whereHas('paiements', function ($query) {
-            $query->where('recette_HPG', '!=', 0);
-        })
-        ->get();
-
-        // Calculer la somme des poids_net par provenance
-        $sumPoidsParProvenance = Transport::select('provenance', DB::raw('SUM(poids_net) as poids_total'))
-            ->groupBy('provenance')
-            ->get();
-
-        return view('appro.servconsultationfinext', [
-            'transports' => $transports,
-            'user' => $user,
-            'sumPoidsParProvenance' => $sumPoidsParProvenance,
-        ]);
-    } catch (\Exception $e) {
-        // Gérer l'erreur, par exemple, en enregistrant le message d'erreur ou en renvoyant une réponse appropriée
-        return back()->withError('Une erreur s\'est produite lors de la récupération des données.');
-    }
-        }
-
+  
 
         public function exportExcel($viewType)
         {

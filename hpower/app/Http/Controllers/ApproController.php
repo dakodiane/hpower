@@ -37,33 +37,7 @@ class ApproController extends Controller
 
           $mntVente = paiement::WhereNotNULL('semence_id')->get();
           $Vente = $mntVente->sum('montant_HPG');
-         return view("servicetrans/tableaudebord", compact('qteVendue', 'depense', 'qteAchetee', 'Vente', 'semences', 'paiements','stat','statt'));
-    }
-
-    public function affichagex()
-    {
-        $paiements = paiement::all();
-        $semences = Semence::all();
-        $appro = Approvisionnement::all();
-
-        $sttatt =   Approvisionnement::Where('statut_paiement','En attente')->get();
-        $stat = $sttatt->count('statut_paiement');
-
-        $statpaye = Approvisionnement::Where('statut_paiement','effectué')->get();
-        $statt = $statpaye->count('statut_paiement');
-
-          $mntRevient = paiement::WhereNotNULL('semence_id')->get();
-          $depense = $mntRevient->sum('montant_tp');
-
-          $qteVente = Semence::whereNotNULL('sem_qtevendue')->get();
-          $qteVendue = $qteVente->sum('sem_qtevendue');
-
-          $qteAchat = Semence::WhereNotNULL('sem_qtereçu')->get();
-          $qteAchetee = $qteAchat->sum('sem_qtereçu');
-
-          $mntVente = paiement::WhereNotNULL('semence_id')->get();
-          $Vente = $mntVente->sum('montant_HPG');
-         return view("servicetrans/dashboardaproext", compact('qteVendue', 'depense', 'qteAchetee', 'Vente', 'semences', 'paiements','stat','statt'));
+         return view("appro.dashboard", compact('qteVendue', 'depense', 'qteAchetee', 'Vente', 'semences', 'paiements','stat','statt'));
     }
 
     public function hpg()
