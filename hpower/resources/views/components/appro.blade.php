@@ -77,7 +77,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="{{ route('semences') }}">
+                <a class="nav-link" href="{{ route('approsem') }}">
                   <i class="icon-grid menu-icon"></i>
                   <span class="menu-title">SEMENCES</span>
                 </a>

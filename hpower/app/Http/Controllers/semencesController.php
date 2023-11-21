@@ -17,8 +17,8 @@ class semencesController extends Controller
 
             $user = Auth::user(); 
        
-          $paiements = paiement::orderBy('created_at','desc')->paginate(10);
-          $semences = Semence::orderBy('created_at','desc');
+          $paiements = paiement::orderBy('created_at','desc');
+          $semences = Semence::orderBy('created_at','desc')->paginate(10);
           
           $mntRevient = paiement::WhereNotNULL('semence_id')->get();
           $depense = $mntRevient->sum('montant_tp');
@@ -33,6 +33,29 @@ class semencesController extends Controller
           $Vente = $mntVente->sum('montant_HPG');
 
           return view ("services_semence.dashboard", compact('qteVendue', 'depense', 'qteAchetee', 'Vente', 'semences', 'paiements','user'));
+    }
+
+    public function indexext()
+    {
+
+            $user = Auth::user(); 
+       
+          $paiements = paiement::orderBy('created_at','desc');
+          $semences = Semence::orderBy('created_at','desc')->paginate(10);
+          
+          $mntRevient = paiement::WhereNotNULL('semence_id')->get();
+          $depense = $mntRevient->sum('montant_tp');
+
+          $qteVente = Semence::whereNotNULL('sem_qtevendue')->get();
+          $qteVendue = $qteVente->sum('sem_qtevendue');
+
+          $qteAchat = Semence::WhereNotNULL('sem_qtereçu')->get();
+          $qteAchetee = $qteAchat->sum('sem_qtereçu');
+
+          $mntVente = paiement::WhereNotNULL('semence_id')->get();
+          $Vente = $mntVente->sum('montant_HPG');
+
+          return view ("appro/approsem", compact('qteVendue', 'depense', 'qteAchetee', 'Vente', 'semences', 'paiements','user'));
     }
 
     // Pour la réception     

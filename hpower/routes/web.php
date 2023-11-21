@@ -89,14 +89,14 @@ Route::group([
 Route::group([
     'middleware' == 'App\Http\MiddlewareAuth',
 ], function() {
- 
+
     Route::get('/approvisionnement',[ApproController::class,'affichage'])->name('affichage');
 
     Route::get('/approvisionnement/hpg',[ApproController::class,'hpg']);
 
     Route::post('/approvisionnement/hpg',[ApproController::class,'paie'])->name('hpg');
 
-    Route::get('/approvisionnement/semence',[semencesController::class,'index'])->name('semences');
+    Route::get('/approsem','App\Http\Controllers\semencesController@indexext')->name('approsem');
 
 });
 

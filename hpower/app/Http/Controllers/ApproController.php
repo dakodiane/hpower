@@ -21,7 +21,7 @@ class ApproController extends Controller
          $user = Auth::user();
         $paiements = paiement::all();
         $semences = Semence::all();
-        $appro = Approvisionnement::all();
+        $appro = Approvisionnement::orderBy('created_at','desc')->paginate(10);
 
         $sttatt =   Approvisionnement::Where('statut_paiement','En attente')->get();
         $stat = $sttatt->count('statut_paiement');
@@ -40,7 +40,7 @@ class ApproController extends Controller
 
           $mntVente = paiement::WhereNotNULL('semence_id')->get();
           $Vente = $mntVente->sum('montant_HPG');
-         return view("appro.dashboard", compact('qteVendue', 'depense', 'qteAchetee', 'Vente', 'semences', 'paiements','stat','statt','user'));
+         return view("appro.dashboard", compact('qteVendue', 'depense', 'qteAchetee', 'Vente', 'semences', 'paiements','stat','statt','user','appro'));
     }
 
 
@@ -93,7 +93,7 @@ class ApproController extends Controller
      }
      $data['num_bordereau'] = $newNumBordereau;
 
-     
+
      // Approvisionnement::where('appro_id', $appro_id)->update([
      //      'cam_photo'=>$imageName,
      // ]);    
@@ -107,4 +107,6 @@ class ApproController extends Controller
           }
 
       }
+
+      
 }

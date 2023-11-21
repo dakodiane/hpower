@@ -14,7 +14,7 @@
                  <div class="justify-content-end d-flex">
                   <div class="dropdown flex-md-grow-1 flex-xl-grow-0">
                     <button class="btn btn-sm btn-light bg-white ">
-                     <i class="mdi mdi-calendar"></i> {{ now()->format('d-m-Y') }}
+                     <i class="mdi mdi-calendar"></i> {{ now()->format('d-m-Y') }} 
                     </button>
                 
                   </div>
@@ -73,7 +73,8 @@
                 <div class="col-md-12 grid-margin stretch-card">
                   <div class="card">
                     <div class="card-body col-md-12" style="height: 600px; overflow: auto; width:100%">
-                      <h4 class="card-title">Table des Semences (vente et réception)</h4>
+                      <h4 class="card-title">Table des Semences</h4>
+                      <small>Réception</small>
                       <p class="card-description">
                          <!-- <code><a class="btn btn-success" href="">Exporter en PDF</a></code> -->
                          <!-- <code><a class="btn btn-success" href="{{ '/pdf' }}">Exporter en Excel</a></code> -->
@@ -94,12 +95,6 @@
                               <th>Type de <br>Véhicule</th>
                               <th>Matricule du <br>Véhicule</th>
                               <th>Bordereau</th>
-                              <th>Quantité vendue</th>
-                              <th>Prix Unitaire HPG</th>
-                              <th>Montant HPG</th>
-                              <th>Client</th>
-                              <th>Lieu de Semi</th>
-                              <th>Recette</th> 
                             </tr>
                           </thead>
                           @foreach ($semences as $semence)
@@ -118,10 +113,44 @@
                               <td>{{ $semence->sem_deplace }}</td>
                               <td>{{ $semence->sem_nummatricul }}</td>
                               <td>{{ $semence->sem_bord }}</td>
+                            </tr>  
                               @endforeach 
                               @endforeach 
-                            @foreach ($semences as $semence)
-                            @foreach ($paiements as $paiement) 
+                            
+                          </tbody>
+                        </table>
+                      </div>
+
+                      <br><br>
+                      <div class="col-md-12 grid-margin stretch-card">
+                        <div class="card">
+                          <div class="card-body col-md-12" style="height: 600px; overflow: auto; width:100%">
+                        <h4 class="card-title">Table des Semences</h4>
+                        <small>Vente</small>
+                        <p class="card-description">
+                           <!-- <code><a class="btn btn-success" href="">Exporter en PDF</a></code> -->
+                           <!-- <code><a class="btn btn-success" href="{{ '/pdf' }}">Exporter en Excel</a></code> -->
+                        </p>
+                      <div class="table-responsive">
+                        <table class="table-hover table-striped">
+                          <thead>
+                            <tr>
+                              <th>N° Transaction</th>
+                              <th>Date</th>
+                              <th>Quantité vendue</th>
+                              <th>Prix Unitaire HPG</th>
+                              <th>Montant HPG</th>
+                              <th>Client</th>
+                              <th>Lieu de Semi</th>
+                              <th>Recette</th> 
+                            </tr>
+                          </thead>
+                          @foreach ($semences as $semence)
+                          @foreach ($paiements as $paiement) 
+                          <tbody>
+                            <tr>
+                              <td>HP202300{{$semence->semence_id}}</td>
+                              <td>{{ $semence->created_at }}</td> 
                               <td>{{ $semence->sem_qtevendue }}</td>
                               <td>{{ $semence->prixunitHPG }}</td>
                               <td>{{ $montant_HPG }}</td>
