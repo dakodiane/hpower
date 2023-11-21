@@ -85,20 +85,19 @@ class IdentifyController extends Controller
     }
 
 
-
     public function loginUser(Request $request)
     {
         $credentials = $request->only('email', 'password');
-
+    
         if (auth()->attempt($credentials)) {
-
             $user = auth()->user();
-
+    
             if ($user) {
                 // Vérifie si le champ 'active' est égal à 1
                 if ($user->active == 1) {
                     Cache::put('user-online-' . $user->id, true, now()->addMinutes(1));
-            
+    
+                    // Votre code actuel pour les redirections
                     if ($user->role == 'fournisseur') {
                         $request->session()->regenerate();
                         return redirect('fourni');
@@ -114,11 +113,10 @@ class IdentifyController extends Controller
                     } elseif ($user->role == 'servicetransport') {
                         $request->session()->regenerate();
                         return redirect('servicetrans');
-                    }  elseif ($user->role == 'serviceappro') {
+                    } elseif ($user->role == 'serviceappro') {
                         $request->session()->regenerate();
                         return redirect('approvisionnement');
-                    }
-                    elseif ($user->role == 'export') {
+                    } elseif ($user->role == 'export') {
                         $request->session()->regenerate();
                         return redirect('export');
                     } else {
@@ -128,14 +126,12 @@ class IdentifyController extends Controller
                     // Si le champ 'active' n'est pas égal à 1, l'utilisateur n'est pas autorisé
                     return redirect()->back()->withErrors(['active' => 'Votre compte n\'est pas actif. Veuillez contacter l\'administrateur.'])->withInput();
                 }
-            } elseif (!$user) {
-                // L'utilisateur n'existe pas dans la base de données
-                return redirect()->back()->withErrors(['email' => 'Adresse Email ou Mot de passe incorrect'])->withInput();
             }
-            
         }
+    
+        // L'authentification a échoué, retournez les erreurs
+        return redirect()->back()->withErrors(['email' => 'Adresse Email ou Mot de passe incorrect'])->withInput();
     }
-
 
     public function logout(Request $request)
     {

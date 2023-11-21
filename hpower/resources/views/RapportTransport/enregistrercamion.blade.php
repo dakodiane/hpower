@@ -72,7 +72,7 @@
               </div>
               <div class="form-group">
                 <label for="numerodebord">Quantité chargée</label>
-                <input type="text" class="form-control" id="qte_charge" name="qte_charge" placeholder="Avance payée" required>
+                <input type="text" class="form-control" id="qte_charge" name="qte_charge" placeholder="Quantité chargée" required>
               </div>
               <div class="form-group">
                 <label for="numerodebord">Avance payée</label>
