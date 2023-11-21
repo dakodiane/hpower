@@ -148,6 +148,7 @@ Route::get('approfin/{appro_id}/', 'App\Http\Controllers\RapporteurController@sa
 Route::post('approfin/{appro_id}/','App\Http\Controllers\RapporteurController@storefinappro')->name('storefin.appro');
 Route::get('fournifin/{fournisseur_id}/', 'App\Http\Controllers\RapporteurController@savefinfourni')->name('savefin.fourni');
 Route::post('fournifin/{fournisseur_id}/','App\Http\Controllers\RapporteurController@storefinfourni')->name('storefin.fourni');
+Route::get('listefourni/', 'App\Http\Controllers\RapporteurController@viewfourni')->name('view.fourni');
 
 Route::get('enregistrersemence/', 'App\Http\Controllers\RapporteurController@createsemence')->name('create.semence');
 Route::post('enregistrersemence/','App\Http\Controllers\RapporteurController@storesemence')->name('store.semence');

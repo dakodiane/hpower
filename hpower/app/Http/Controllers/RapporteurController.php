@@ -209,7 +209,14 @@ class RapporteurController extends Controller
             ->get();
         return view('RapportAppro/listeapprosave', compact('camions'));
     }
-
+    public function viewfourni()
+    {
+        $user = Auth::user();
+        $camions = Fournisseur::where('destination',$user->ville)
+            ->whereNotNull('numerodebord')
+            ->get();
+        return view('RapportAppro/listefourni', compact('camions'));
+    }
     public function viewtransport()
     {
         $user = Auth::user();
