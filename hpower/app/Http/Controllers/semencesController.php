@@ -8,6 +8,8 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use  PDF;
+use Maatwebsite\Excel\Facades\Excel;
+
 
 
 class semencesController extends Controller
@@ -169,6 +171,19 @@ class semencesController extends Controller
       
 
    }  
+
+   public function exportExcel()
+   {
+       try {
+           
+        $semences = Semence::all();
+
+           return Excel::download(new semencesExport($semences), 'semences.xlsx');
+       } catch (\Exception $e) {
+           // Gérer l'erreur, par exemple, en enregistrant le message d'erreur ou en renvoyant une réponse appropriée
+           return back()->withError('Une erreur s\'est produite lors de la récupération des données pour l\'export Excel.');
+       }
+   }
  
 
 }

@@ -77,7 +77,7 @@
                       <small>Réception</small>
                       <p class="card-description">
                          <!-- <code><a class="btn btn-success" href="">Exporter en PDF</a></code> -->
-                         <!-- <code><a class="btn btn-success" href="{{ '/pdf' }}">Exporter en Excel</a></code> -->
+                         <code><a class="btn btn-success" href="{{ route('telecharger') }}">Exporter en Excel</a></code>
                       </p>
                       <div class="table-responsive">
                         <table class="table-hover table-striped">
@@ -129,7 +129,7 @@
                         <small>Vente</small>
                         <p class="card-description">
                            <!-- <code><a class="btn btn-success" href="">Exporter en PDF</a></code> -->
-                           <!-- <code><a class="btn btn-success" href="{{ '/pdf' }}">Exporter en Excel</a></code> -->
+                           <code><a class="btn btn-success" href="{{route 'telecharger' }}">Exporter en Excel</a></code> 
                         </p>
                       <div class="table-responsive">
                         <table class="table-hover table-striped">

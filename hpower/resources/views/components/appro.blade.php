@@ -61,17 +61,11 @@
               <li class="nav-item">
                 <a class="nav-link" href="">
                   <i class="icon-grid menu-icon"></i>
-                  <span class="menu-title">RAPPORTEUR</span>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="">
-                  <i class="icon-grid menu-icon"></i>
                   <span class="menu-title">TRANSPORT</span>
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="">
+                <a class="nav-link" href="{{route('approfourni')}}">
                   <i class="icon-grid menu-icon"></i>
                   <span class="menu-title">FOURNISSEUR</span>
                 </a>

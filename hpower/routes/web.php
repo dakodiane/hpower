@@ -76,7 +76,7 @@ Route::group([
 
     Route::post('/semences/reception',[semencesController::class,'analyse'])->name('analyse');
 
-    Route::get('semences/download/{semence_id}',[DownloadController::class,'show'])->name('show');
+    Route::get('/export-excel',[semencesController::class,'exportExcel'])->name('telecharger');
 
     Route::get('/search',[ResearchController::class,'search']);
 
@@ -97,6 +97,8 @@ Route::group([
     Route::post('/approvisionnement/hpg',[ApproController::class,'paie'])->name('hpg');
 
     Route::get('/approsem','App\Http\Controllers\semencesController@indexext')->name('approsem');
+
+    Route::get('/approfourni', 'App\Http\Controllers\AfficheFourniController@fournisseur')->name('approfourni');
 
 });
 
