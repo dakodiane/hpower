@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Approvisionnement;
 use App\Models\Produit;
 use App\Models\Camion;
+use App\Models\Paiement;
 use App\Models\Semence;
 use App\Models\Transport;
 use App\Models\User;
@@ -48,6 +49,12 @@ class AdminController extends Controller
     return view('Admin/fournisseur', compact('users'));
 }
 
+public function paiements()
+{
+    $paiements = Paiement::all();
+ 
+    return view('Admin/paiement', compact('paiements'));
+}
 
 public function userlist()
 {

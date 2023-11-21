@@ -1,5 +1,11 @@
 <?php
 
+use App\Http\Controllers\ApproController;
+use App\Http\Controllers\PaiementController;
+use App\Http\Controllers\ResearchController;
+use App\Http\Controllers\semencesController;
+use App\Http\Controllers\SemenceController;
+use App\Http\Controllers\DownloadController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\IdentifyController;
 use App\Http\Controllers\fournicontroller;
@@ -19,12 +25,9 @@ use App\Http\Controllers\ServicetransController;
 
 
 
+
 Route::get('fourni/', function () {
     return view('fourni/tableaudebord');
-});
-
-Route::get('servicetrans/', function () {
-    return view('servicetrans/tableaudebord');
 });
 
 Route::get('enregistcamion/', function () {
@@ -60,13 +63,31 @@ Route::get('/inscription','App\Http\Controllers\IdentifyController@inscription')
 Route::post('/inscription','App\Http\Controllers\IdentifyController@registerUser')->name('inscription');
 Route::post('/connexion','App\Http\Controllers\IdentifyController@loginUser')->name('connexion');
 
+//SEMENCE
+
+Route::get('/semences',[semencesController::class,'index'])->name('dashboard');
+
+Route::get('/semences/vente',[SemenceController::class,'index'])->name('vente');
+
+Route::get('/semences/reception',[semencesController::class,'reception'])->name('reception');
+
+Route::post('/semences',[semencesController::class,'paie'])->name('paie');
+
+Route::get('semences/download/{semence_id}',[DownloadController::class,'show'])->name('show');
+
+Route::get('/search',[ResearchController::class,'search']);
+
+Route::get('/get-result',[ResearchController::class,'result'])->name('get-result');
+
+//APPROVISIONNEMENT
+Route::get('/approvisionnement',[ApproController::class,'affichage']);
+
+Route::get('/approvisionnement/hpg',[ApproController::class,'hpg'])->name('hpg');
 
 Route::get('allcamion/', function () {
     return view('Admin/allcamion');
 });
-Route::get('paiement/', function () {
-    return view('Admin/paiement');
-});
+
 //Route::get('connexion/', function () {
  //   return view('connexion');
 //});
@@ -88,8 +109,8 @@ Route::put('/deactivate-produit/{id}', 'App\Http\Controllers\ProduitController@d
 Route::get('allcamion/', 'App\Http\Controllers\AdminController@camions')->name('allcamion');
 
 Route::get('fournilist','App\Http\Controllers\AdminController@fournilist')->name('fournilist');
+Route::get('paiements','App\Http\Controllers\AdminController@paiements')->name('paiements');
 Route::get('fournisave/', 'App\Http\Controllers\CamionController@fournisave')->name('fournisave');
-
 
 Route::put('/activate-user/{id}', 'App\Http\Controllers\AdminController@activate')->name('user.activate');
 Route::put('/deactivate-user/{id}', 'App\Http\Controllers\AdminController@deactivate')->name('user.deactivate');
@@ -123,6 +144,8 @@ Route::get('listetransportsave/', 'App\Http\Controllers\RapporteurController@vie
 Route::get('listetransportfin/', 'App\Http\Controllers\RapporteurController@viewfintransport')->name('transport.viewfin');
 Route::get('transportfin/{transport_id}/', 'App\Http\Controllers\RapporteurController@savefintransport')->name('savefin.transport');
 Route::post('transportfin/{transport_id}/','App\Http\Controllers\RapporteurController@storefintransport')->name('storefin.transport');
+Route::get('transportupdate/{transport_id}/', 'App\Http\Controllers\RapporteurController@updatetransport')->name('update.transport');
+Route::post('transportupdate/{transport_id}/','App\Http\Controllers\RapporteurController@storefintransport')->name('storefin.transport');
 
 
 Route::get('enregistrerhpg/', 'App\Http\Controllers\RapporteurController@createhpg')->name('create.hpg');
@@ -156,3 +179,8 @@ Route::get('GeneratePDF', [ServicetransController::class, 'GeneratePDF'])->name(
 Route::get('/recherche', 'SearchController@search')->name('search');
 
 Route::get('/export-excel/{viewType}', 'App\Http\Controllers\ServicetransController@exportExcel')->name('exportExcel');
+
+
+
+Route::get('servconsultationfinext/', 'App\Http\Controllers\ServicetransController@viewfinext')->name('Servicetransext.viewfin');
+Route::get('dashboardaproext/', 'App\Http\Controllers\ApproController@affichagex')->name('dashboardaproext');

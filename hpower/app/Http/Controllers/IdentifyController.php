@@ -93,35 +93,46 @@ class IdentifyController extends Controller
         if (auth()->attempt($credentials)) {
 
             $user = auth()->user();
+
             if ($user) {
-                Cache::put('user-online-' . $user->id, true, now()->addMinutes(1));
-                //dd( $user = Auth::user());
-                if ($user->role == 'fournisseur') {
-                    $request->session()->regenerate();
-                    return redirect('fourni');
-                } elseif ($user->role == 'directeur') {
-                    $request->session()->regenerate();
-                    return redirect()->intended('admin');
-                } elseif ($user->role == 'rapporteur') {
-                    $request->session()->regenerate();
-                    return redirect()->intended('user');
-                    return redirect('user');
-                } elseif ($user->role == 'servicesemence') {
-                    $request->session()->regenerate();
-                    return redirect('user');
-                } elseif ($user->role == 'servicetransport') {
-                    $request->session()->regenerate();
-                    return redirect('servicetrans');
-                } elseif ($user->role == 'export') {
-                    $request->session()->regenerate();
-                    return redirect('export');
+                // Vérifie si le champ 'active' est égal à 1
+                if ($user->active == 1) {
+                    Cache::put('user-online-' . $user->id, true, now()->addMinutes(1));
+            
+                    if ($user->role == 'fournisseur') {
+                        $request->session()->regenerate();
+                        return redirect('fourni');
+                    } elseif ($user->role == 'directeur') {
+                        $request->session()->regenerate();
+                        return redirect()->intended('admin');
+                    } elseif ($user->role == 'rapporteur') {
+                        $request->session()->regenerate();
+                        return redirect()->intended('user');
+                    } elseif ($user->role == 'servicesemence') {
+                        $request->session()->regenerate();
+                        return redirect('semences');
+                    } elseif ($user->role == 'servicetransport') {
+                        $request->session()->regenerate();
+                        return redirect('servicetrans');
+                    }  elseif ($user->role == 'serviceappro') {
+                        $request->session()->regenerate();
+                        return redirect('approvisionnement');
+                    }
+                    elseif ($user->role == 'export') {
+                        $request->session()->regenerate();
+                        return redirect('export');
+                    } else {
+                        return redirect()->back()->withErrors(['role' => 'Rôle non reconnu'])->withInput();
+                    }
                 } else {
-                    return redirect()->back()->withErrors(['role' => 'Rôle non reconnu'])->withInput();
+                    // Si le champ 'active' n'est pas égal à 1, l'utilisateur n'est pas autorisé
+                    return redirect()->back()->withErrors(['active' => 'Votre compte n\'est pas actif. Veuillez contacter l\'administrateur.'])->withInput();
                 }
             } elseif (!$user) {
                 // L'utilisateur n'existe pas dans la base de données
                 return redirect()->back()->withErrors(['email' => 'Adresse Email ou Mot de passe incorrect'])->withInput();
             }
+            
         }
     }
 
@@ -142,3 +153,4 @@ class IdentifyController extends Controller
         return redirect('connexion');
     }
 }
+

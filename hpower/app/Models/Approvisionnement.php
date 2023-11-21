@@ -38,6 +38,7 @@ class Approvisionnement extends Model
        'avancepaye',
         'entreprise_benef',
         'qte_charge',
+        'qteAchetee',
     ];
 
 

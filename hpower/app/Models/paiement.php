@@ -5,12 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class paiement extends Model
+class Paiement extends Model
 {
-    protected $table = 'paiements'; // Nom de la table dans la base de données
-    protected $primaryKey = 'paie_id'; // Remplacez par le nom de votre colonne de clé primaire
+    use HasFactory;
+    protected $table = 'paiements'; 
+    protected $primaryKey = 'paie_id';
 
     protected $fillable = [
+
         'prix_unit',
         'qte_totale',
         'prix_total',
@@ -30,9 +32,14 @@ class paiement extends Model
         'paietotal',
         'statut_paie',
         'date_paie',
+        "paie_prixlivraison",
+        "prod_magasin",
+        "prod_lieuprod",
+
     ];
 
+    public function utilisateur()
+    {
+        return $this->belongsTo(User::class, 'util_id');
+    }
 }
-
-
-

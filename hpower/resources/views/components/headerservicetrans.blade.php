@@ -62,11 +62,25 @@
           <li class="nav-item">
             <a class="nav-link" href="{{route('Servicetrans.viewfin')}}">
               <i class="icon-grid menu-icon mdi mdi-cloud-download"></i>
-              <span class="menu-title">Liste des camions</span>
+              <span class="menu-title">Liste des camions payé</span>
             </a>
           </li>
         
-
+          <li class="nav-item">
+            <a class="nav-link" href="{{route('dashboardaproext')}}">
+              <i class="icon-grid menu-icon mdi mdi-cloud-download"></i>
+              <span class="menu-title">Approvisionnement</span>
+            </a>
+          </li>
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="{{route('dashboardaproext')}}">
+              <i class="icon-grid menu-icon mdi mdi-cloud-download"></i>
+              <span class="menu-title">SEMMENCE</span>
+            </a>
+          </li>
+          
           <li class="nav-item">
             <form method="POST" action="{{ route('logout') }}">
                 @csrf
