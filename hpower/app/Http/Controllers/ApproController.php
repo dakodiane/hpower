@@ -3,14 +3,16 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\Models\Approvisionnement;
 use App\Models\Produit;
 use App\Models\paiement;
 use App\Models\Semence;
 use App\Models\Camion;
+use App\Models\Fournisseur;
+use App\Models\Transport;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
-use Illuminate\Support\Facades\Auth;
 
 class ApproController extends Controller
 {
@@ -49,37 +51,60 @@ class ApproController extends Controller
     }
 
     public function paie(Request $request){
-
      $user = Auth::user();
+
+      $data = $request->all();
      $data = $request->validate([
           'nom'=>'required',
           'tel'=> 'required',
           'heure'=>'required',
-          'photo'=>'Image|required',
+          'image'=>'required|Image|mimes:jpeg,png,jpg,gif|max:5120',
           'provenance'=>'String|required',
           'qte'=>'required',
           'prix'=>'required',
           'obs'=>'String',               
      ]); 
 
+     // $path = request('image')->store('images');    
+
      $newApro = new Approvisionnement();
 
      $newApro->cam_nomchauf=$request->nom;
      $newApro->tel_conducteur=$request->tel;
      $newApro->heure_arrive=$request->heure;
-     $newApro->cam_photo=$request->photo;
-     $paiement->provenance=$provenance;
+     $data['provenance'] = $user->ville;
+     $newApro->provenance=$request->provenance;
      $newApro->qte_charge=$request->qte;
-     $newApro->prix_cession=$prix;
-     $newApro->observationt=$request->obs;
-     
-     $res = $newApro->save();
+     $newApro->prix_cession=$request->prix;
+     $newApro->observation=$request->obs;
 
-      if($res){
-        return redirect()->route('affichage');
-      }else{
-           return back()->with('fail','Erreur');
+     $image = $request->file('image');
+     $imageName = time() . '.' . $image->extension();
+     $image->move(public_path('photo_immat'),$imageName);
+     $newApro->num_immatriculation = $request->image;
+
+     $lastAppro = Approvisionnement::orderBy('appro_id', 'desc')->first();
+     if ($lastAppro) {
+         $lastNumBordereau = $lastAppro->num_bordereau;
+         $lastNumBordereau = substr($lastNumBordereau, 2);
+         $newNumBordereau = 'HP' . str_pad(($lastNumBordereau + 1), 4, '0', STR_PAD_LEFT);
+     } else {
+         $newNumBordereau = 'HP0001';
      }
-dd($res);
-     }
+     $data['num_bordereau'] = $newNumBordereau;
+
+     
+     // Approvisionnement::where('appro_id', $appro_id)->update([
+     //      'cam_photo'=>$imageName,
+     // ]);    
+          $newApro->fill($data);     
+        $res = $newApro->save();
+
+           if($res){
+             return redirect()->route('affichage');
+           }else{
+                return back()->with('fail','Erreur');
+          }
+
+      }
 }

@@ -2,6 +2,16 @@
 
 @section('document')
 
+<div>
+    @if($errors->any())
+    <ul>
+      @foreach ($errors->all() as $error)
+      <li>{{ $error }}</li> 
+      @endforeach                
+    </ul>
+    @endif
+</div>
+
 <div class="main-panel">
         <div class="content-wrapper">
           <div class="row">
@@ -34,7 +44,7 @@
                   <p class="card-description">
                     HPG
                   </p>
-                  <form class="forms-sample" method="POST" action="{{ route('hpg')}}">
+                  <form class="forms-sample" method="POST" action="{{ route('hpg')}}" enctype="multipart/form-data">
                     @csrf
                     <div class="form-group">
                       <label for="exampleInputName1">Nom chauffeur</label>
@@ -50,7 +60,7 @@
                     </div>
                     <div class="form-group">
                       <label>Immatriculation</label>
-                      <input type="file" name="img[]" name="photo" class="file-upload-default">
+                      <input type="file" name="image" class="file-upload-default" capture="camera" accept="image/*"> 
                       <div class="input-group col-xs-12">
                         <input type="text" class="form-control file-upload-info" disabled placeholder="Upload Image">
                         <span class="input-group-append">

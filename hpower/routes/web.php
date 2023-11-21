@@ -63,29 +63,42 @@ Route::post('/inscription','App\Http\Controllers\IdentifyController@registerUser
 Route::post('/connexion','App\Http\Controllers\IdentifyController@loginUser')->name('connexion');
 
 //SEMENCE
+Route::group([
+    'middleware' == 'App\Http\MiddlewareAuth',
+], function() { 
+    Route::get('/semences',[semencesController::class,'index'])->name('dashboard');
 
-Route::get('/semences',[semencesController::class,'index'])->name('dashboard');
+    Route::get('/semences/vente',[semencesController::class,'vente'])->name('vente');
 
-Route::get('/semences/vente',[semencesController::class,'vente'])->name('vente');
+    Route::post('/semences/vente',[semencesController::class,'traitement'])->name('traitement');
 
-Route::post('/semences/vente',[semencesController::class,'traitement'])->name('traitement');
+    Route::get('/semences/reception',[semencesController::class,'reception'])->name('reception');
 
-Route::get('/semences/reception',[semencesController::class,'reception'])->name('reception');
+    Route::post('/semences/reception',[semencesController::class,'analyse'])->name('analyse');
 
-Route::post('/semences/reception',[semencesController::class,'analyse'])->name('analyse');
+    Route::get('semences/download/{semence_id}',[DownloadController::class,'show'])->name('show');
 
-Route::get('semences/download/{semence_id}',[DownloadController::class,'show'])->name('show');
+    Route::get('/search',[ResearchController::class,'search']);
 
-Route::get('/search',[ResearchController::class,'search']);
+    Route::get('/get-result',[ResearchController::class,'result'])->name('get-result');
 
-Route::get('/get-result',[ResearchController::class,'result'])->name('get-result');
+});
+
 
 //APPROVISIONNEMENT
-Route::get('/approvisionnement',[ApproController::class,'affichage'])->name('affichage');
+Route::group([
+    'middleware' == 'App\Http\MiddlewareAuth',
+], function() {
+ 
+    Route::get('/approvisionnement',[ApproController::class,'affichage'])->name('affichage');
 
-Route::get('/approvisionnement/hpg',[ApproController::class,'hpg']);
+    Route::get('/approvisionnement/hpg',[ApproController::class,'hpg']);
 
-Route::post('/approvisionnement/hpg',[ApproController::class,'paie'])->name('hpg');
+    Route::post('/approvisionnement/hpg',[ApproController::class,'paie'])->name('hpg');
+
+    Route::get('/approvisionnement/semence',[semencesController::class,'index'])->name('semences');
+
+});
 
 
 
