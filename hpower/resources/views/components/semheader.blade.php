@@ -58,25 +58,22 @@
                   <span class="menu-title">RECEPTION</span>
                 </a>
               </li>
-            
-              
-           
               <li class="nav-item">
-                <a class="nav-link" href="{{route('consultationsem')}}">
+                <a class="nav-link" href="{{route('control')}}">
                   <i class="icon-grid menu-icon"></i>
-                  <span class="menu-title">Consultation</span>
+                  <span class="menu-title">VENTE</span>
+                </a>
+              </li>          
+               <li class="nav-item">
+                <a class="nav-link" href="{{route('consultation')}}">
+                  <i class="icon-grid menu-icon"></i>
+                  <span class="menu-title">CONSULTATION</span>
                 </a>
               </li>
-
-              <li class="nav-item">
-                <a class="nav-link" href="{{route('Consultationsem1')}}">
-                  <i class="icon-grid menu-icon"></i>
-                  <span class="menu-title">Listes Semences</span>
-                </a>
-              </li>
+             
            
               <li class="nav-item">
-                <a class="nav-link" href="{{route('connexion')}}">
+                <a class="nav-link" href="{{route('logout')}}">
                   <i class="icon-paper menu-icon"></i>
                   <span class="menu-title">DECONNEXION</span>
                 </a>

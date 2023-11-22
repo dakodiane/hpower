@@ -417,8 +417,6 @@ class RapporteurController extends Controller
         return redirect()->intended(route('appro.viewfin',  compact('camions')));
     }
 
-<<<<<<< HEAD
-=======
     public function storefinfourni(Request $request, $fournisseur_id)
     {
         $user = Auth::user();
@@ -447,7 +445,6 @@ class RapporteurController extends Controller
       
     }
 
->>>>>>> c4a4b9bf3f5a8057824b9efea00f9419dc145ffa
     public function storefintransport(Request $request, $transport_id)
     {
         $user = Auth::user();
