@@ -35,12 +35,12 @@ Route::get('enregistcamion/', function () {
 });
 
 Route::get('consultation/', function () {
-    return view('fourni/enregistcamion');
+    return view('fourni/consultaion');
 });
 
 
 
-Route::get('consultation/', 'App\Http\Controllers\ConsultcamController@show')->name('Consultcam.show');
+Route::get('consultation/', 'App\Http\Controllers\fourniController@show')->name('Consultcam.show');
 Route::get('enregistcamion/', 'App\Http\Controllers\fourniController@create')->name('fourni.create');
 Route::post('enregistcamion/','App\Http\Controllers\fourniController@store')->name('fourni.store');
 Route::get('fourni/','App\Http\Controllers\fournicontroller@statistiqueCamions');
@@ -78,6 +78,10 @@ Route::get('semences/download/{semence_id}',[DownloadController::class,'show'])-
 Route::get('/search',[ResearchController::class,'search']);
 
 Route::get('/get-result',[ResearchController::class,'result'])->name('get-result');
+
+
+
+
 
 //APPROVISIONNEMENT
 Route::get('/approvisionnement',[ApproController::class,'affichage']);

@@ -14,7 +14,16 @@
                           @csrf <!-- Le CSRF pour la sécurité -->
           
                   
-                  
+                          @if ($errors->any())
+                              <div class="alert alert-danger">
+                                  <ul>
+                                      @foreach ($errors->all() as $error)
+                                          <li>{{ $error }}</li>
+                                      @endforeach
+                                  </ul>
+                              </div>
+                          @endif
+
                     <div class="form-group">
                       <label for="exampleInputName1">Nom du conducteur</label>
                       <input type="text" class="form-control" id="exampleInputName1" placeholder="Nom et prenom" required name="cam_nomchauf" required>
@@ -94,36 +103,62 @@
       </div>
 
       <script>
-      var input = document.getElementById('provenance');
-      var villesList = document.getElementById('villes-list');
+  var input = document.getElementById('destination');
+  var villesList = document.getElementById('villes-list');
 
 
-      input.addEventListener('input', function() {
+  input.addEventListener('input', function() {
 
-        var recherche = input.value.toLowerCase();
+    var recherche = input.value.toLowerCase();
 
+    villesList.innerHTML = '';
+
+    var villes = ['Cotonou', 'Abomey-Calavi', 'Porto-Novo', 'Parakou', 'Djougou', 'Bohicon', 'Natitingou',
+      'Savé', 'Abomey', 'Nikki', 'Lokossa', 'Ouidah', 'Dogbo-Tota', 'Kandi', 'Cové', 'Malanville',
+      'Pobé', 'Kérou', 'Savalou', 'Sakété', 'Comè', 'Bembéréké', 'Bassila', 'Banikoara', 'Kétou',
+      'Dassa-Zoumè', 'Tchaourou', 'Allada', 'Aplahoué', 'Tanguiéta', 'N\'Dali', 'Segbana', 'Athiémé',
+      'Grand Popo', 'Kouandé',
+    ];
+
+    var villesFiltrees = villes.filter(function(ville) {
+      return ville.toLowerCase().includes(recherche);
+    });
+
+    villesFiltrees.forEach(function(ville) {
+      var li = document.createElement('li');
+      li.textContent = ville;
+      li.addEventListener('click', function() {
+        input.value = ville;
         villesList.innerHTML = '';
-
-        var villes = ['Cotonou', 'Abomey-Calavi', 'Porto-Novo', 'Parakou', 'Djougou', 'Bohicon', 'Natitingou',
-          'Savé', 'Abomey', 'Nikki', 'Lokossa', 'Ouidah', 'Dogbo-Tota', 'Kandi', 'Cové', 'Malanville',
-          'Pobé', 'Kérou', 'Savalou', 'Sakété', 'Comè', 'Bembéréké', 'Bassila', 'Banikoara', 'Kétou',
-          'Dassa-Zoumè', 'Tchaourou', 'Allada', 'Aplahoué', 'Tanguiéta', 'N\'Dali', 'Segbana', 'Athiémé',
-          'Grand Popo', 'Kouandé',
-        ];
-
-        var villesFiltrees = villes.filter(function(ville) {
-          return ville.toLowerCase().includes(recherche);
-        });
-
-        villesFiltrees.forEach(function(ville) {
-          var li = document.createElement('li');
-          li.textContent = ville;
-          li.addEventListener('click', function() {
-            input.value = ville;
-            villesList.innerHTML = '';
-          });
-          villesList.appendChild(li);
-        });
       });
-    </script>
+      villesList.appendChild(li);
+    });
+  });
+</script>
+<style>
+  #villes-list {
+    position: absolute;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    max-height: 150px;
+    overflow-y: auto;
+    width: 38%;
+    z-index: 1;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  }
+
+  #villes-list li {
+    padding: 8px 12px;
+    cursor: pointer;
+  }
+
+  #villes-list li:hover {
+    background-color: #f0f0f0;
+  }
+</style>
+
+
 @endsection

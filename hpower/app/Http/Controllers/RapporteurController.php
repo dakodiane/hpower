@@ -7,6 +7,7 @@ use App\Models\Camion;
 use App\Models\Semence;
 use App\Models\Fournisseur;
 use App\Models\Transport;
+use App\Models\Paiement;
 use App\Models\Approvisionnement;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
@@ -42,40 +43,100 @@ class RapporteurController extends Controller
         $produits = Produit::where('active', '1')->get();
         return view('Hpg/enregistrerhpg', ['produits' => $produits]);
     }
-    public function store(Request $request)
+
+
+    public function paie(Request $request)
     {
-
-        $data = $request->all();
-        $user = Auth::user();
-        $lastCamion = Camion::orderBy('cam_id', 'desc')->first();
-        if ($lastCamion) {
-            $lastNumBordereau = $lastCamion->num_bordereau;
-            $lastNumBordereau = substr($lastNumBordereau, 2);
-            $newNumBordereau = 'HP' . str_pad(($lastNumBordereau + 1), 4, '0', STR_PAD_LEFT);
+        // Vérifier si l'utilisateur est authentifié
+        if (auth()->check()) {
+            // Récupérer l'utilisateur authentifié
+            $user = Auth::user();
+            
+            // Valider les données du formulaire
+            $data = $request->validate([
+                'semence' => 'required',
+                'ql' => 'required|numeric',
+                'fournisseur' => 'required|string',
+                'nature' => 'required',
+                'magasin' => 'required|string',
+                'lieu' => 'required|string',
+                'pl' => 'required|numeric',
+                'pu' => 'numeric',
+                'transact' => 'numeric',
+                'bord' => 'numeric',
+                'moyen' => 'string',
+                'matricul' => 'image',
+                'date_paie' => 'string',
+            ]);
+    
+            // Créer une nouvelle instance de Semence et Paiement
+            $semence = new Semence();
+            $paiement = new Paiement();
+    
+            // Remplir les attributs de Semence
+            $semence->sem_numtrans = $request->transact;
+            $semence->sem_fourni = $request->fournisseur;
+            $semence->sem_type = $request->nature;
+            $semence->sem_prixunit = $request->pu;
+            $semence->sem_qtereçu = $request->ql;
+            $semence->sem_magdecht = $request->magasin;
+            $semence->sem_nature = $request->semence;
+            $semence->sem_deplace = $request->moyen;
+            $semence->sem_prove = $request->lieu;
+            $semence->sem_qtevendue = $request->qv;
+            $semence->sem_prixunitHPG = $request->puhpg;
+            $semence->sem_lieusemi = $request->lieusemi;
+    
+            // Générer le nouveau numéro de bordereau
+            $lastSemence = Semence::orderBy('semence_id', 'desc')->first();
+            $newNumBordereau = $this->generateNewNumBordereau($lastSemence);
+            $data['sem_bord'] = $newNumBordereau;
+            $data['sem_client'] = $newNumBordereau;
+            $data['sem_numtrans'] = $newNumBordereau;
+    
+            // Traiter le fichier matricul
+            $matricul = $request->file('matricul');
+            $matriculName = time() . '.' . $matricul->extension();
+            $matricul->move(public_path('photo_immat'), $matriculName);
+    
+            // Remplir les attributs restants de Semence
+            $semence->fill($data);
+            $semence->sem_nummatricul = $matriculName;
+            $semence->util_id = $user ? $user->id : null;
+            $paiement->util_id = $user ? $user->id : null;
+            
+    
+            // Calculer le prix de livraison
+            $prixlivraison = $semence->sem_prixunit * $semence->sem_qtereçu;
+            $paiement->paie_prixlivraison = $prixlivraison;
+    
+            // Sauvegarder la Semence et associer le paiement
+            $res = $semence->save();
+    
+            if ($res) {
+                $semence->paiements()->save($paiement);
+                return redirect()->route('dashboard');
+            } else {
+                return back()->with('fail', 'Erreur');
+            }
         } else {
-            $newNumBordereau = 'HP0001';
+            // Rediriger vers la page de connexion si l'utilisateur n'est pas authentifié
+            return redirect()->route('login');
         }
-        if ($request->hasFile('cam_photo')) {
-            $photoPath = $request->file('cam_photo')->store('photo_immat', 'public');
-            $data['cam_photo'] = $photoPath;
-        }
-        $data['num_bordereau'] = $newNumBordereau;
-
-        //    $poidsCharge = $request->input('poids_charge');
-        //    $poidsVide = $request->input('poids_vide');
-        //   $poidsNet = $poidsCharge - $poidsVide;
-
-        //   $data['poids_net'] = $poidsNet;
-        $data['provenance'] = $user->ville;
-        $data['util_id'] = $user->id;
-        $camion = new Camion();
-
-        $camion->fill($data);
-
-        $camion->save();
-        //dd($camion);
-        return redirect()->route('camion.create')->with('success', 'Camion enregistré avec succès.');
     }
+    
+    private function generateNewNumBordereau($lastSemence)
+    {
+        if ($lastSemence) {
+            $lastNumBordereau = $lastSemence->num_bordereau;
+            $lastNumBordereau = substr($lastNumBordereau, 2);
+            return 'HP' . str_pad((intval($lastNumBordereau) + 1), 4, '0', STR_PAD_LEFT);
+        } else {
+            return 'HP0001';
+        }
+        
+    }
+    
     public function storeappro(Request $request)
     {
 
@@ -155,6 +216,9 @@ class RapporteurController extends Controller
         session()->flash('success', 'L\'enregistrement a été effectué avec succès!');
         return redirect()->route('create.transport')->with('success', 'Camion enregistré avec succès.');
     }
+
+
+
     public function storesemence(Request $request)
     {
 
@@ -193,6 +257,7 @@ class RapporteurController extends Controller
         session()->flash('success', 'L\'enregistrement a été effectué avec succès!');
         return redirect()->route('create.semence')->with('success', 'Camion enregistré avec succès.');
     }
+
     public function view()
     {
         $user = Auth::user();
@@ -332,6 +397,7 @@ class RapporteurController extends Controller
         $camions->save();
         return redirect()->intended(route('appro.viewfin',  compact('camions')));
     }
+
     public function storefintransport(Request $request, $transport_id)
     {
         $user = Auth::user();
@@ -352,6 +418,7 @@ class RapporteurController extends Controller
         $camions->save();
         return redirect()->intended(route('transport.viewfin',  compact('camions')));
     }
+    
     public function storefinsemence(Request $request, $semence_id)
     {
         $user = Auth::user();

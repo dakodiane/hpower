@@ -12,89 +12,91 @@
 </div>
 
 <div class="main-panel">
-        <div class="content-wrapper">
-          <div class="row">
-            <div class="col-md-12 grid-margin">
-              <div class="row">
-                <div class="col-12 col-xl-8 mb-4 mb-xl-0">
-                  <h3 class="font-weight-bold">Bienvenue ALLAYE Akeem</h3>
-                </div>
-                <div class="col-12 col-xl-4">
-                 <div class="justify-content-end d-flex">
-                  <div class="dropdown flex-md-grow-1 flex-xl-grow-0">
-                    <button class="btn btn-sm btn-light bg-white ">
-                     <i class="mdi mdi-calendar"></i>{{ now()->format('d-m-Y') }}
+  <div class="content-wrapper">
+    <div class="row">
 
-                    </button>
-                
-                  </div>
-                 </div>
+
+      <div class="col-12 grid-margin stretch-card">
+        <div class="card">
+          <div class="card-body">
+            <h4 class="card-title">Vente semences</h4>
+            <form class="forms-sample" method="POST" action="{{ route('storefin.transport', ['transport_id' => $camions->transport_id]) }}" enctype="multipart/form-data" >
+            @csrf 
+              <div class="form-group">
+                <label for="exampleInputName1">Nom du chauffeur</label>
+                <input type="text" class="form-control" id="exampleInputName1" value="{{ isset($camions) ? $camions->cam_nomchauf : '' }}" readonly>
+              </div>
+
+              <div class="form-group">
+                <label for="exampleSelectGender">Type de produit</label>
+                <input type="text" class="form-control" id="type_produit" value="{{ isset($camions) ? $camions->type_produit : '' }}" readonly>
+              </div>
+              <div class="form-group">
+                <label for="exampleSelectGender">Provenance</label>
+                <input type="text" class="form-control" id="provenance" value="{{ isset($camions) ? $camions->provenance : '' }}" readonly>
+              </div>
+             
+              <div class="form-group">
+                <label for="numerodebord">Numéro de bordereau de pont</label>
+                <input type="text" class="form-control" id="numerodebord" name="numerodebord" placeholder="Numero de bordereau" required>
+              </div>
+
+              <div class="form-group">
+                <label for="photo_immatf">Photo du bordereau de pont</label>
+                <input type="file" name="cam_photo2" class="file-upload-default" required>
+                <div class="input-group col-xs-12">
+                  <input type="text" class="form-control file-upload-info" disabled placeholder="Charger l'image" required>
+                  <span class="input-group-append">
+                    <button class="file-upload-browse btn btn-primary" type="button">Charger l'image</button>
+                  </span>
                 </div>
               </div>
-            </div>
+              <div class="form-group">
+                <label for="exampleInputName1">Poids à vide</label>
+                <input type="number" name="poids_vide" class="form-control" id="exampleInputName1" placeholder="">
+              </div>
+              <div class="form-group">
+                <label for="exampleInputName1">Poids chargé</label>
+                <input type="number" name="poids_charge" class="form-control" id="exampleInputName1" placeholder="">
+              </div>
+              <div class="form-group">
+                <label for="exampleInputName1">Nombre de sacs</label>
+                <input type="number" name="nombre_sac" class="form-control" id="exampleInputName1" placeholder="">
+              </div>
+              <div class="form-group">
+                <label for="exampleInputName1">Nombre de sacs rejetés</label>
+                <input type="number" name="nombre_sacs" class="form-control" id="exampleInputName1" placeholder="">
+              </div>
+              <label for="exampleSelectGender">Entreprise bénéficiaire</label>
+                <select class="form-control" name="entreprise_benef" id="exampleSelectGender">
+                  <option>CIPI</option>
+                  <option>...</option>
+                </select>
+          
+              <div class="form-group">
+                <label for="exampleSelectGender">Statut de déchargement</label>
+                <select class="form-control" name="statut_dechargement" id="exampleSelectGender">
+                  <option>En attente</option>
+                  <option>Déchargé</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="exampleTextarea1">Observation</label>
+                <textarea class="form-control" name="observation1" id="exampleTextarea1" rows="4"></textarea>
+              </div>
+
+
+              <button type="submit" class="btn btn-primary mr-2">Enregistrer</button>
+              <button class="btn btn-light">Annuler</button>
+            </form>
           </div>
-          <div class="col-md-6 col-md-offset-1">
-            <div class="booking-form">
-                <form method="post" action="{{ route('paie') }}" enctype="multipart/form-data">
-                    @csrf
-                    @method('post')
-                    <div class="row">
-                      <div class="col-md-6">
-                        <div class="form-group">
-                            <input class="form-control" type="text" name="date" disabled>
-                            <span class="form-label">Date</span>
-                        </div>
-                    </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <input class="form-control" type="number" name="qv" placeholder="11.00" value="{{ old('qv') }}">
-                                <span class="form-label">Quantité Vendue</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <input class="form-control" type="number" name="puhpg" placeholder="11,00" value="{{ old('puhpg') }}">
-                                <span class="form-label">Prix unitaire</span>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <input class="form-control" type="number" name="montant" value="{{ old('montant') }}">
-                                <span class="form-label">Montant HPG</span>
-                            </div>
-                        </div>
-                    </div>
-                                     
-                      <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <input class="form-control" type="text" value="{{ old('client') }}" name="client" placeholder="AJENIYAN Olamide">
-                                <span class="form-label">Client</span>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <input class="form-control" type="text" name="lieusemi">
-                                <span class="form-label">Lieu de semi</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <input class="form-control" type="number" name="recette" disabled>
-                                <span class="form-label">Recette</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-btn">
-                        <button class="btn btn-danger" type="submit">VALIDER</button>
-                    </div>
-                </form>
-            </div>
+          </div>
         </div>
-      
-        </div>    
-  @endsection
+      </div>
+
+    </div>
+  </div>
+
+</div>
+@endsection

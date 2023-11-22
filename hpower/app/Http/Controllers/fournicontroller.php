@@ -25,66 +25,55 @@ class fournicontroller extends Controller
 
     
     public function store(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'tel_conducteur' => 'required|numeric|digits_between:1,8',
+            'num_immatriculation' => 'required|string|max:255',
+            // Ajoutez d'autres règles de validation selon vos besoins
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()
+                ->withErrors($validator)
+                ->withInput();
+        }
+
+        $data = $request->all();
+        $user = Auth::user(); // Récupère l'utilisateur connecté
+
+        $villeProvenance = $user->ville;
+
+        $lastFournisseur = Fournisseur::orderBy('fournisseur_id', 'desc')->first();
+
+        // Vérifier si un enregistrement avec le même numéro d'immatriculation a été effectué dans les dernières 24 heures
+        $existingFournisseur = Fournisseur::where('num_immatriculation', $request->input('num_immatriculation'))
+            ->where('created_at', '>', Carbon::now()->subDay())
+            ->first();
+// ...
+
+            if ($existingFournisseur) {
+                $errorMessage = 'Un enregistrement avec le numéro d\'immatriculation ' . $request->input('num_immatriculation') . ' a déjà été effectué dans les dernières 24 heures. Veuillez revenir après 24 heures.';
+                return redirect()->back()->withErrors(['num_immatriculation' => $errorMessage])->withInput();
+            }
+
+
+        // Le reste de votre code...
+
+        return redirect()->route('Consultcam.show')->with('success', 'Enregistrement effectué avec succès.');
+    }
+
+
+    
+public function show()
 {
-    $validator = Validator::make($request->all(), [
-        'tel_conducteur' => 'required|numeric|digits_between:1,8',
-        'num_immatriculation' => 'required|string|max:255',
-        // Ajoutez d'autres règles de validation selon vos besoins
-    ]);
+    // Récupérer l'utilisateur connecté
+    $user = Auth::user();
 
-    // Si la validation échoue, rediriger avec les erreurs
-    if ($validator->fails()) {
-        return redirect()->back()
-            ->withErrors($validator)
-            ->withInput();
-    }
+    // Récupérer les camions de l'utilisateur connecté
+    $fournisseurs = Fournisseur::where('util_id', $user->id)->get();
 
-    $data = $request->all();
-    $user = Auth::user(); // Récupère l'utilisateur connecté
-
-    // Récupérer la ville de provenance de l'utilisateur connecté
-    $villeProvenance = $user->provenance;
-
-    // Utiliser le modèle Fournisseur au lieu de Camion
-    $lastFournisseur = Fournisseur::orderBy('fournisseur_id', 'desc')->first();
-
-    if ($lastFournisseur) {
-        $lastNumBordereau = $lastFournisseur->num_bordereau;
-        $lastNumBordereau = substr($lastNumBordereau, 2); 
-        $newNumBordereau = 'HP' . str_pad(($lastNumBordereau + 1), 4, '0', STR_PAD_LEFT);
-    } else {
-        $newNumBordereau = 'HP0001';
-    }
-
-    if ($request->hasFile('cam_photo')) {
-        $photoPath = $request->file('cam_photo')->store('photo_immat', 'public');
-        $data['cam_photo'] = $photoPath;
-    }
-
-    $data['num_bordereau'] = $newNumBordereau;
-
-    $poidsCharge = $request->input('poids_charge');
-    $poidsVide = $request->input('poids_vide');
-    $poidsNet = $poidsCharge - $poidsVide;
-
-    $data['poids_net'] = $poidsNet;
-    $data['util_id'] = $user->id;
-
-    // Ajouter la ville de provenance à la création du fournisseur
-    $data['provenance'] = $villeProvenance;
-    dd($provenance);
-    // Utiliser le modèle Fournisseur au lieu de Camion
-    $fournisseur = new Fournisseur();
-    $fournisseur->fill($data);
-    $fournisseur->save();
-
-    return redirect()->route('fourni.create')->with('success', 'Fournisseur enregistré avec succès.');
+    return view('fourni/consultation', compact('fournisseurs'));
 }
-
-
-
-    
-    
 
     
     public function statistiqueCamions()
