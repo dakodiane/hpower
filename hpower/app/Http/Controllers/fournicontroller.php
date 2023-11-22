@@ -51,8 +51,8 @@ class fournicontroller extends Controller
                 ->withInput();
         }
 
-        $data = $request->all();
-        $user = Auth::user(); // Récupère l'utilisateur connecté
+    $data = $request->all();
+    $user = Auth::user(); // Récupère l'utilisateur connecté
 
         // Récupérer la ville de provenance de l'utilisateur connecté
         $villeProvenance = $user->provenance;

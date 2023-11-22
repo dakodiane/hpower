@@ -34,7 +34,7 @@ Route::get('enregistcamion/', function () {
 });
 
 Route::get('consultation/', function () {
-    return view('fourni/enregistcamion');
+    return view('fourni/consultaion');
 });
 
 
@@ -76,7 +76,9 @@ Route::group([
 
     Route::post('/semences/reception',[semencesController::class,'analyse'])->name('analyse');
 
-    Route::get('semences/download/{semence_id}',[DownloadController::class,'show'])->name('show');
+    Route::get('/export-excel',[semencesController::class,'exportExcel'])->name('telecharger');
+
+    Route::get('semences/{semence_id}/store/', 'App\Http\Controllers\semencesController@storepaie')->name('validation');
 
     Route::get('/search',[ResearchController::class,'search']);
 
@@ -85,18 +87,24 @@ Route::group([
 });
 
 
+
+
+
+
 //APPROVISIONNEMENT
 Route::group([
     'middleware' == 'App\Http\MiddlewareAuth',
 ], function() {
- 
+
     Route::get('/approvisionnement',[ApproController::class,'affichage'])->name('affichage');
 
     Route::get('/approvisionnement/hpg',[ApproController::class,'hpg']);
 
     Route::post('/approvisionnement/hpg',[ApproController::class,'paie'])->name('hpg');
 
-    Route::get('/approvisionnement/semence',[semencesController::class,'index'])->name('semences');
+    Route::get('/approsem','App\Http\Controllers\semencesController@indexext')->name('approsem');
+
+    Route::get('/approfourni', 'App\Http\Controllers\AfficheFourniController@fournisseur')->name('approfourni');
 
 });
 
@@ -203,3 +211,12 @@ Route::get('/export-excel/{viewType}', 'App\Http\Controllers\ServicetransControl
 
 
 
+///fournisseur paie dans appro
+
+// Pour afficher la page
+Route::get('paiefournisseur/{fournisseur_id}/', 'App\Http\Controllers\ApproController@paiefourni')->name('paiefourni');
+
+// Pour traiter les données
+Route::post('paiefournisseur/{fournisseur_id}/store', 'App\Http\Controllers\ApproController@storepaie')->name('fourni.storepaie');
+
+Route::GET('payefourni/', 'App\Http\Controllers\ApproController@payefourn')->name('payefourni');
