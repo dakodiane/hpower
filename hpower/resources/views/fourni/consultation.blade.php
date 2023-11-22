@@ -8,7 +8,11 @@
                 <div class="card">
                     <div class="card-body">
                         <h4 class="card-title">Liste des camions</h4>
-
+                        @if(session('success'))
+                        <div class="alert alert-success auto-dismiss" id="success">
+                            {{ session('success') }}
+                        </div>
+                    @endif
                         <div class="table-responsive">
                             <table class="tableau">
                                 <thead>
@@ -17,10 +21,9 @@
                                         <th>Numéro d'immatriculation</th>
                                         <th>Photo de l'immatriculation du camion</th>
                                         <th>Type de produit</th>
-                                        <th>Poids à vide</th>
-                                        <th>Poids charge</th>
                                         <th>Poids net</th>
                                         <th>Nombre de sacs</th>
+                                        <th>Prix FCFA/TONNE</th>
                                         <th>Heure d'enrégistrement</th>
                                         <th>Provenance</th>
                                         <th>Statut du chargement</th>
@@ -28,6 +31,7 @@
                                         <th>Paiement</th>
                                     </tr>
                                 </thead> 
+        
                                 <tbody>
                                     @foreach($fournisseurs as $Fournisseur)
                                     <tr>
@@ -35,10 +39,18 @@
                                        <td>{{ $Fournisseur->num_immatriculation }}</td>     
                                        <td><a href="{{ asset($Fournisseur->cam_photo) }}" type="button" class="btn btn-success btn-sm">Voir la photo</a></td>
                                         <td>{{ $Fournisseur->type_produit }}</td>
-                                        <td>{{ $Fournisseur->poids_vide }}</td>
-                                        <td>{{ $Fournisseur->poids_charge }}</td>
-                                        <td>{{ $Fournisseur->poids_net }}</td>
+                                        
+                                        <td>
+                                           @if ( $Fournisseur->poids_net == 0 )
+
+                                                Neant
+                                              @endif  
+                                        
+                                        </td>
                                         <td>{{ $Fournisseur->nombre_sac }}</td>
+                                        <td>{{ $Fournisseur->prix_unit }}</td>
+
+                                        
                                         <td>{{ $Fournisseur->created_at }}</td>
                                         <td>{{ $Fournisseur->provenance }}</td>
                                         <td>
@@ -63,4 +75,10 @@
         </div>
     </div>
 </div>
+
+<script>
+        setTimeout(function() {
+            document.getElementById('success').style.display = 'none';
+        }, 6000);
+    </script>
 @endsection

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "ebd3b5bbcabc7e378256ccc9a1db8ac7",
+    "content-hash": "b8ffc416caa3567495041281ad84ba18",
     "packages": [
         {
             "name": "barryvdh/laravel-dompdf",
@@ -1404,74 +1404,17 @@
             "time": "2023-09-13T12:18:19+00:00"
         },
         {
-            "name": "ladumor/laravel-pwa",
-            "version": "v0.0.4",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/shailesh-ladumor/laravel-pwa.git",
-                "reference": "1867899d6916803aef7ea02f489597555cc4ab02"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/shailesh-ladumor/laravel-pwa/zipball/1867899d6916803aef7ea02f489597555cc4ab02",
-                "reference": "1867899d6916803aef7ea02f489597555cc4ab02",
-                "shasum": ""
-            },
-            "require": {
-                "illuminate/support": ">=5.4",
-                "php": ">=5.6"
-            },
-            "type": "library",
-            "extra": {
-                "laravel": {
-                    "providers": [
-                        "\\Ladumor\\LaravelPwa\\PWAServiceProvider"
-                    ],
-                    "aliases": {
-                        "LaravelPwa": "Ladumor\\LaravelPwa\\LaravelPwa"
-                    }
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Ladumor\\LaravelPwa\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Shailesh Ladumor",
-                    "email": "shaileshmladumor@gmail.com"
-                }
-            ],
-            "description": "this package used for the make pwa website.",
-            "keywords": [
-                "laravel",
-                "laravel-pwa",
-                "php",
-                "pwa-laravel"
-            ],
-            "support": {
-                "issues": "https://github.com/shailesh-ladumor/laravel-pwa/issues",
-                "source": "https://github.com/shailesh-ladumor/laravel-pwa/tree/v0.0.4"
-            },
-            "time": "2023-09-02T13:09:30+00:00"
-        },
-        {
             "name": "laravel/framework",
-            "version": "v10.29.0",
+            "version": "v10.33.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "2d002849a16ad131110a50cbea4d64dbb78515a3"
+                "reference": "4536872e3e5b6be51b1f655dafd12c9a4fa0cfe8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/2d002849a16ad131110a50cbea4d64dbb78515a3",
-                "reference": "2d002849a16ad131110a50cbea4d64dbb78515a3",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/4536872e3e5b6be51b1f655dafd12c9a4fa0cfe8",
+                "reference": "4536872e3e5b6be51b1f655dafd12c9a4fa0cfe8",
                 "shasum": ""
             },
             "require": {
@@ -1660,7 +1603,7 @@
                 "issues": "https://github.com/laravel/framework/issues",
                 "source": "https://github.com/laravel/framework"
             },
-            "time": "2023-10-24T13:48:53+00:00"
+            "time": "2023-11-21T14:49:31+00:00"
         },
         {
             "name": "laravel/prompts",
@@ -4125,7 +4068,60 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2023-04-15T23:01:58+00:00"
+            "time": "2023-11-08T05:53:05+00:00"
+        },
+        {
+            "name": "sabberworm/php-css-parser",
+            "version": "8.4.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/sabberworm/PHP-CSS-Parser.git",
+                "reference": "e41d2140031d533348b2192a83f02d8dd8a71d30"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/sabberworm/PHP-CSS-Parser/zipball/e41d2140031d533348b2192a83f02d8dd8a71d30",
+                "reference": "e41d2140031d533348b2192a83f02d8dd8a71d30",
+                "shasum": ""
+            },
+            "require": {
+                "ext-iconv": "*",
+                "php": ">=5.6.20"
+            },
+            "require-dev": {
+                "codacy/coverage": "^1.4",
+                "phpunit/phpunit": "^4.8.36"
+            },
+            "suggest": {
+                "ext-mbstring": "for parsing UTF-8 CSS"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Sabberworm\\CSS\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Raphael Schweikert"
+                }
+            ],
+            "description": "Parser for CSS Files written in PHP",
+            "homepage": "https://www.sabberworm.com/blog/2010/6/10/php-css-parser",
+            "keywords": [
+                "css",
+                "parser",
+                "stylesheet"
+            ],
+            "support": {
+                "issues": "https://github.com/sabberworm/PHP-CSS-Parser/issues",
+                "source": "https://github.com/sabberworm/PHP-CSS-Parser/tree/8.4.0"
+            },
+            "time": "2021-12-11T13:40:54+00:00"
         },
         {
             "name": "symfony/console",
