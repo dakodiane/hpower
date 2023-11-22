@@ -108,7 +108,17 @@ class ApproController extends Controller
         // Retourner la vue avec les données
         return view('appro.fournpaye', compact('camions'));
     }
+
     
+    
+    public function payefournt()
+    {
+        // Récupérer les fournisseurs avec paiement associé
+        $camions = Fournisseur::has('paiements')->with('paiements')->get();
+    
+        // Retourner la vue avec les données
+        return view('servicetrans.payefournit', compact('camions'));
+    }
     
 
 

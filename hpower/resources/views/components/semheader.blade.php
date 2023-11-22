@@ -74,7 +74,7 @@
                   <span class="menu-title">Listes Semences</span>
                 </a>
               </li>
-           
+             
               <li class="nav-item">
                 <a class="nav-link" href="{{route('connexion')}}">
                   <i class="icon-paper menu-icon"></i>

@@ -220,3 +220,5 @@ Route::get('paiefournisseur/{fournisseur_id}/', 'App\Http\Controllers\ApproContr
 Route::post('paiefournisseur/{fournisseur_id}/store', 'App\Http\Controllers\ApproController@storepaie')->name('fourni.storepaie');
 
 Route::GET('payefourni/', 'App\Http\Controllers\ApproController@payefourn')->name('payefourni');
+
+Route::GET('payefournit/', 'App\Http\Controllers\ApproController@payefournt')->name('payefournit');
