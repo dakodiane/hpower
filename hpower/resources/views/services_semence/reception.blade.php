@@ -144,9 +144,6 @@
                                         <span class="form-label">Bordereau</span>
                                     </div>
                                 </div>
-
-                               
-                            </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-6">

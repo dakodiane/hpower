@@ -68,27 +68,30 @@ Route::group([
 ], function() { 
     Route::get('/semences',[semencesController::class,'index'])->name('dashboard');
 
-    Route::get('/semences/vente',[semencesController::class,'vente'])->name('vente');
+    Route::get('semences/vente/{semence_id}/',[semencesController::class,'vente'])->name('vente');
 
-    Route::post('/semences/vente',[semencesController::class,'traitement'])->name('traitement');
+    Route::post('semences/vente/{semence_id}/',[semencesController::class,'traitement'])->name('traitement');
 
-    Route::get('/semences/reception',[semencesController::class,'reception'])->name('reception');
+    Route::get('/semences/reception',[semencesController::class,'showSeedReceptionForm'])->name('reception');
 
-    Route::post('/semences/reception',[semencesController::class,'analyse'])->name('analyse');
+    Route::post('/semences/reception',[semencesController::class,'storeSeedReception'])->name('analyse');
+
+    Route::get('/semences/consultation',[semencesController::class,'showSeedConsultation'])->name('consultation');
+    
+    Route::get('/semences/control', [semencesController::class,'sellSeedView'])->name('control');
+
 
     Route::get('/export-excel',[semencesController::class,'exportExcel'])->name('telecharger');
 
-    Route::get('semences/{semence_id}/store/', 'App\Http\Controllers\semencesController@storepaie')->name('validation');
+    // Route::get('semences/{semence_id}/store/', 'App\Http\Controllers\semencesController@storepaie')->name('validation');
 
     Route::get('/search',[ResearchController::class,'search']);
 
     Route::get('/get-result',[ResearchController::class,'result'])->name('get-result');
 
+    Route::get('/semences/consultationachat',[semencesController::class,'storepaie'])->name('consultationsem');
+
 });
-
-
-
-
 
 
 //APPROVISIONNEMENT
