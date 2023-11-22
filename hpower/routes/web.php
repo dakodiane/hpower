@@ -78,6 +78,8 @@ Route::group([
 
     Route::get('/export-excel',[semencesController::class,'exportExcel'])->name('telecharger');
 
+    Route::get('semences/{semence_id}/store/', 'App\Http\Controllers\semencesController@storepaie')->name('validation');
+
     Route::get('/search',[ResearchController::class,'search']);
 
     Route::get('/get-result',[ResearchController::class,'result'])->name('get-result');

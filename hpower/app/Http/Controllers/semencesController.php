@@ -125,7 +125,7 @@ class semencesController extends Controller
 
    // POur la vente
 
-<<<<<<< HEAD
+
    public function vente()
    {
         $user = Auth::user();
@@ -158,7 +158,6 @@ class semencesController extends Controller
 
       $montant_HPG = $request->input('puhpg') * $request->input('qv');
       $recette = $request->input('pl') - $montant_HPG;
-      // $recette_HPG = $montant_HPG-$montant_tp;
       $paiement->util_id = $user->id;
       $paiement->solde = $recette;
         $paiement->save();
@@ -173,22 +172,90 @@ class semencesController extends Controller
 
    }  
 
-   public function exportExcel()
-   {
-       try {
+   // public function exportExcel()
+   // {
+   //     try {
            
-        $semences = Semence::all();
+   //      $semences = Semence::all();
 
-           return Excel::download(new semencesExport($semences), 'semences.xlsx');
-       } catch (\Exception $e) {
-           // Gérer l'erreur, par exemple, en enregistrant le message d'erreur ou en renvoyant une réponse appropriée
-           return back()->withError('Une erreur s\'est produite lors de la récupération des données pour l\'export Excel.');
-       }
-   }
+   //         return Excel::download(new semencesExport($semences), 'semences.xlsx');
+   //     } catch (\Exception $e) {
+   //         // Gérer l'erreur, par exemple, en enregistrant le message d'erreur ou en renvoyant une réponse appropriée
+   //         return back()->withError('Une erreur s\'est produite lors de la récupération des données pour l\'export Excel.');
+   //     }
+   // }
+
+    public function storepaie(Request $request, $semence_id)
+{
+    $user = Auth::user();
+    // Récupérer les données de la table semences
+    $semences = Semence::findOrFail($semence_id);
+    if ($semences->paiements()->exists()) {
+        // Gérer l'erreur ici, par exemple, en redirigeant avec un message d'erreur
+        return redirect()->back()->withErrors(['error' => 'Un paiement existe déjà pour cette semence.']);
+    }
+
+    // Récupérer les données du formulaire de vente
+    $data = $request->all();
+
+    // Calculs pour le modèle Paiement
+    //$recette_HPG = $montant_HPG-$montant_tp;
+    // Formules de calculs à,partir des variables du formulaire
+
+    $semence = $semences->sem_nature;
+    
+    $recette = $request->input('recette');
+    $montantHPG = $request->input('montant');
+    $qv = $request->input('qv');
+    $puhpg = $request->input('puhpg');
+
+
+
+    $montantHPG = $puhpg * $qv;
+    $recette = $montant_HPG - $paiements->montant_tp;
+    
+    $paiement = new Paiement();
+    $paiement->fill($data);
+    $paiement->montant_HPG = $montant_HPG;
+    $paiement->recette_HPG = $recette_HPG;
+    
+    // Vérifier le statut du paiement
+    $paiement->statut_paie = ($recette_HPG <= 0) ? 'effectué' : 'en attente';
+    $paiement->util_id = $user->id;
+    // Enregistrer le paiement en le liant au transport
+    $semences->paiements()->save($paiement);
+
+    // Rediriger vers la page appropriée
+
+    return redirect()->intended(route('semencesController.viewfin', ['semence_id' => $semences->id]))
+    ->with(['semences' => $semences, 'paiements' => $paiement, 'success' => 'Paiement enregistré avec succès.']);
+
+}
+
+    public function viewfin()
+    {
+        try {
+            $user = Auth::user();
+
+            // Récupérer les semences avec paiements associés ayant recette_HPG non égal à zéro
+            $semences = Semences::with(['paiements' => function ($query) {
+                $query->where('recette_HPG', '!=', 0);
+            }])
+            ->whereHas('paiements', function ($query) {
+                $query->where('recette_HPG', '!=', 0);
+            })
+            ->get();
+
+            return view('services_semence.consultation', [
+                'transports' => $transports,
+                'user' => $user,
+            ]);
+        } catch (\Exception $e) {
+            // Gérer l'erreur, par exemple, en enregistrant le message d'erreur ou en renvoyant une réponse appropriée
+            return back()->withError('Une erreur s\'est produite lors de la récupération des données.');
+        }
+            }
  
 
-=======
-  
->>>>>>> 814d4ebd83954415d7a7fa788be83c7d4c94fd2f
 }
  
