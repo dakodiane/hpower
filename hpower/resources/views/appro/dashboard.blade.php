@@ -8,7 +8,7 @@
             <div class="col-md-12 grid-margin">
               <div class="row">
                 <div class="col-12 col-xl-8 mb-4 mb-xl-0">
-                  <h3 class="font-weight-bold">Bienvenue M. BARCKLEY</h3>
+                  <h3 class="font-weight-bold">Bienvenu(e) {{($user->name)}}</h3>
                 </div>
                 <div class="col-12 col-xl-4">
                  <div class="justify-content-end d-flex">
@@ -91,5 +91,52 @@
               </div>
           </div>
 
+<<<<<<< HEAD
+          {{-- Tableau de réception des appros --}}
+              <br><br><br><div class="col-md-12 grid-margin stretch-card">
+                <div class="card">
+                  <div class="card-body col-md-12" style="height: 600px; overflow: auto; width:100%">
+                    <h4 class="card-title">Table des appros (vente et réception)</h4>
+                    <p class="card-description">
+                       <!-- <code><a class="btn btn-success" href="">Exporter en PDF</a></code> -->
+                       <!-- <code><a class="btn btn-success" href="{{ '/pdf' }}">Exporter en Excel</a></code> -->
+                    </p>
+                    <div class="table-responsive">
+                      <table class="table-hover table-striped">
+                        <thead>
+                          <tr>
+                            <th>N°</th>
+                            <th>Date</th>
+                            <th>Nom du chauffeur</th>
+                            <th>Telephone</th>
+                            <th>Heure d'arrivée</th>
+                            <th>Immatriculation</th>
+                            <th>Ville de provenance</th>
+                            <th>Quantité chargée</th>
+                            <th>Prix de cession</th>
+                            <th>Observations</th>                             
+                          </tr>
+                        </thead>
+                        @foreach ($appro as $appro) 
+                        <tbody>
+                          <tr>
+                            <td>HP202300{{$appro->appro_id}}</td>
+                            <td>{{ $appro->created_at }}</td>                              
+                            <td>{{ $appro->cam_nomchauf }}</td>
+                            <td>{{ $appro->tel_conducteur }}</td>
+                            <td>{{ $appro->heure_arrive }}</td>
+                            <td>{{ $appro->num_immatriculation }}</td>
+                            <td>{{ $appro->provenance }} FCFA</td>
+                            <td>{{ $appro->qte_charge }}</td>
+                            <td>{{ $appro->prix_cession }}</td>
+                            <td>{{ $appro->observation }}</td>                              
+                          </tr>
+                        </tbody>
+                        @endforeach
+                      </table>
+                    </div>
+              
+=======
          
+>>>>>>> 814d4ebd83954415d7a7fa788be83c7d4c94fd2f
   @endsection

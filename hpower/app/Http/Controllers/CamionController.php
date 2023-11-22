@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Approvisionnement;
 use App\Models\Produit;
 use App\Models\Camion;
+use App\Models\Fournisseur;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -115,14 +116,26 @@ class CamionController extends Controller
     public function fournisave()
     {
         $user = Auth::user();
-
-        $camions = Approvisionnement::where('destination', $user->ville)
+    
+        // Récupérer la liste des fournisseurs qui correspondent aux critères
+        $camions = Fournisseur::where('destination', $user->ville)
             ->whereHas('utilisateur', function ($query) {
                 $query->where('role', 'fournisseur');
             })
             ->whereNull('numerodebord')
             ->get();
-
-        return view('Users/listecamionsave', compact('camions'));
+    
+        // Créer une collection pour stocker les noms des fournisseurs
+        $noms_fournisseurs = collect();
+    
+        // Parcourir la liste des fournisseurs pour récupérer les noms
+        foreach ($camions as $camion) {
+            $noms_fournisseurs->push($camion->utilisateur->name);
+        }
+    
+        return view('RapportAppro.fournisave', compact('camions', 'noms_fournisseurs'));
     }
+    
+    
+    
 }

@@ -79,8 +79,12 @@
 <<<<<<< HEAD
                  <option value="servicesemence">Service des Semences</option>
 =======
+<<<<<<< HEAD
+                 <option value="servicesemence">Service des Semences</option>
+=======
              <option value="servicesemence">Service des Semences</option>
 >>>>>>> c3dfe0dcc7ebfeae8301ec43cddefdb978e520f9
+>>>>>>> 814d4ebd83954415d7a7fa788be83c7d4c94fd2f
                 <option value="servicetransport">Service des Transports</option>
                 <option value="serviceappro">Service d'approvisionnement</option>
                 <option value="export">Export</option>

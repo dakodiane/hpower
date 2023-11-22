@@ -13,9 +13,17 @@ class Paiement extends Model
 
     protected $fillable = [
 
+        "date_paie",
+        "paie_prixlivraison",
+        "prix_tp",
+        "prix_HPG",
+        "montant_tp",
+        "montant_HPG",
+        "prod_magasin",
+        "prod_lieuprod",
         'prix_unit',
         'qte_totale',
-        'prix_total',
+         'prix_total',
         'cam_id',
         'date_paiement',
         'created_at',
@@ -25,16 +33,12 @@ class Paiement extends Model
         'montant_tp',
         'montant_HPG',
         'recette_HPG',
-         'solde',
+        'solde',
        'entrep_benef',
        'net_paye',
-        'rest_paie',
+       'rest_paie',
         'paietotal',
-        'statut_paie',
-        'date_paie',
-        "paie_prixlivraison",
-        "prod_magasin",
-        "prod_lieuprod",
+        'statut_paie',       
 
     ];
 

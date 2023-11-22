@@ -83,8 +83,10 @@
               <ul class="nav flex-column sub-menu">
                 <li class="nav-item"> <a class="nav-link" href="{{ route('create.appro') }}">HPG </a></li>
                 <li class="nav-item"> <a class="nav-link" href="{{'/listeapprosave'}}"> Finaliser HPG </a></li>
-                <li class="nav-item"> <a class="nav-link" href="{{'/fournisave'}}">Fournisseurs </a></li>
                 <li class="nav-item"> <a class="nav-link" href="{{ route('appro.viewfin') }}">Liste camions finalisés</a></li>
+                <li class="nav-item"> <a class="nav-link" href="{{'/fournisave'}}">Fournisseurs </a></li>
+                <li class="nav-item"> <a class="nav-link" href="{{ route('view.fourni') }}">Liste fournisseurs</a></li>
+         
 
               </ul>
             </div>

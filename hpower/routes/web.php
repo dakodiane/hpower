@@ -4,7 +4,6 @@ use App\Http\Controllers\ApproController;
 use App\Http\Controllers\PaiementController;
 use App\Http\Controllers\ResearchController;
 use App\Http\Controllers\semencesController;
-use App\Http\Controllers\SemenceController;
 use App\Http\Controllers\DownloadController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\IdentifyController;
@@ -64,29 +63,52 @@ Route::post('/inscription','App\Http\Controllers\IdentifyController@registerUser
 Route::post('/connexion','App\Http\Controllers\IdentifyController@loginUser')->name('connexion');
 
 //SEMENCE
+Route::group([
+    'middleware' == 'App\Http\MiddlewareAuth',
+], function() { 
+    Route::get('/semences',[semencesController::class,'index'])->name('dashboard');
 
-Route::get('/semences',[semencesController::class,'index'])->name('dashboard');
+    Route::get('/semences/vente',[semencesController::class,'vente'])->name('vente');
 
-Route::get('/semences/vente',[SemenceController::class,'index'])->name('vente');
+    Route::post('/semences/vente',[semencesController::class,'traitement'])->name('traitement');
 
-Route::get('/semences/reception',[semencesController::class,'reception'])->name('reception');
+    Route::get('/semences/reception',[semencesController::class,'reception'])->name('reception');
 
-Route::post('/semences',[semencesController::class,'paie'])->name('paie');
+    Route::post('/semences/reception',[semencesController::class,'analyse'])->name('analyse');
 
-Route::get('semences/download/{semence_id}',[DownloadController::class,'show'])->name('show');
+    Route::get('/export-excel',[semencesController::class,'exportExcel'])->name('telecharger');
 
-Route::get('/search',[ResearchController::class,'search']);
+    Route::get('semences/{semence_id}/store/', 'App\Http\Controllers\semencesController@storepaie')->name('validation');
 
-Route::get('/get-result',[ResearchController::class,'result'])->name('get-result');
+    Route::get('/search',[ResearchController::class,'search']);
+
+    Route::get('/get-result',[ResearchController::class,'result'])->name('get-result');
+
+});
+
 
 
 
 
 
 //APPROVISIONNEMENT
-Route::get('/approvisionnement',[ApproController::class,'affichage']);
+Route::group([
+    'middleware' == 'App\Http\MiddlewareAuth',
+], function() {
 
-Route::get('/approvisionnement/hpg',[ApproController::class,'hpg'])->name('hpg');
+    Route::get('/approvisionnement',[ApproController::class,'affichage'])->name('affichage');
+
+    Route::get('/approvisionnement/hpg',[ApproController::class,'hpg']);
+
+    Route::post('/approvisionnement/hpg',[ApproController::class,'paie'])->name('hpg');
+
+    Route::get('/approsem','App\Http\Controllers\semencesController@indexext')->name('approsem');
+
+    Route::get('/approfourni', 'App\Http\Controllers\AfficheFourniController@fournisseur')->name('approfourni');
+
+});
+
+
 
 Route::get('allcamion/', function () {
     return view('Admin/allcamion');
@@ -132,7 +154,9 @@ Route::get('listeapprosave/', 'App\Http\Controllers\RapporteurController@viewapp
 Route::get('listeapprofin/', 'App\Http\Controllers\RapporteurController@viewfinappro')->name('appro.viewfin');
 Route::get('approfin/{appro_id}/', 'App\Http\Controllers\RapporteurController@savefinappro')->name('savefin.appro');
 Route::post('approfin/{appro_id}/','App\Http\Controllers\RapporteurController@storefinappro')->name('storefin.appro');
-
+Route::get('fournifin/{fournisseur_id}/', 'App\Http\Controllers\RapporteurController@savefinfourni')->name('savefin.fourni');
+Route::post('fournifin/{fournisseur_id}/','App\Http\Controllers\RapporteurController@storefinfourni')->name('storefin.fourni');
+Route::get('listefourni/', 'App\Http\Controllers\RapporteurController@viewfourni')->name('view.fourni');
 
 Route::get('enregistrersemence/', 'App\Http\Controllers\RapporteurController@createsemence')->name('create.semence');
 Route::post('enregistrersemence/','App\Http\Controllers\RapporteurController@storesemence')->name('store.semence');
@@ -149,7 +173,7 @@ Route::get('listetransportfin/', 'App\Http\Controllers\RapporteurController@view
 Route::get('transportfin/{transport_id}/', 'App\Http\Controllers\RapporteurController@savefintransport')->name('savefin.transport');
 Route::post('transportfin/{transport_id}/','App\Http\Controllers\RapporteurController@storefintransport')->name('storefin.transport');
 Route::get('transportupdate/{transport_id}/', 'App\Http\Controllers\RapporteurController@updatetransport')->name('update.transport');
-Route::post('transportupdate/{transport_id}/','App\Http\Controllers\RapporteurController@storefintransport')->name('storefin.transport');
+Route::post('transportupdate/{transport_id}/','App\Http\Controllers\RapporteurController@updatefintransport')->name('updatefin.transport');
 
 
 Route::get('enregistrerhpg/', 'App\Http\Controllers\RapporteurController@createhpg')->name('create.hpg');
@@ -182,7 +206,9 @@ Route::get('GeneratePDF', [ServicetransController::class, 'GeneratePDF'])->name(
 
 Route::get('/recherche', 'SearchController@search')->name('search');
 
+
 Route::get('/export-excel/{viewType}', 'App\Http\Controllers\ServicetransController@exportExcel')->name('exportExcel');
+
 
 
 
