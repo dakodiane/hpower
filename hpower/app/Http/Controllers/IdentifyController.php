@@ -88,16 +88,16 @@ class IdentifyController extends Controller
     public function loginUser(Request $request)
     {
         $credentials = $request->only('email', 'password');
-    
+
         if (auth()->attempt($credentials)) {
+
             $user = auth()->user();
-    
+
             if ($user) {
                 // Vérifie si le champ 'active' est égal à 1
                 if ($user->active == 1) {
                     Cache::put('user-online-' . $user->id, true, now()->addMinutes(1));
-    
-                    // Votre code actuel pour les redirections
+            
                     if ($user->role == 'fournisseur') {
                         $request->session()->regenerate();
                         return redirect('fourni');

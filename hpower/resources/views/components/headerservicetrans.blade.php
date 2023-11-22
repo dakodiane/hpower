@@ -66,7 +66,18 @@
             </a>
           </li>
         
-          
+          <li class="nav-item">
+            <a class="nav-link" data-toggle="collapse" href="#icons" aria-expanded="false" aria-controls="icons">
+              <i class="ti-truck menu-icon"></i>
+              <span class="menu-title">FOURNISSEUR</span>
+              <i class="menu-arrow"></i>
+            </a>
+            <div class="collapse" id="icons">
+              <ul class="nav flex-column sub-menu">
+                <li class="nav-item"> <a class="nav-link" href="{{route('payefournit')}}">Payé</a></li>
+              </ul>
+            </div>           
+          </li>
         
           
           <li class="nav-item">

@@ -23,49 +23,75 @@
                                         <th>Type de produit</th>
                                         <th>Poids net</th>
                                         <th>Nombre de sacs</th>
-                                        <th>Prix FCFA/TONNE</th>
                                         <th>Heure d'enrégistrement</th>
-                                        <th>Provenance</th>
+                                        <th>Destination</th>
                                         <th>Statut du chargement</th>
                                         <th>observation</th>
+                                        <th>Prix FCFA/TONNE</th>
+                                        <th>Prix HPG FCFA/TONNE</th>
+                                        <th>Montant à recevoir</th>
+                                        <th>Montant payé par HPG</th>
                                         <th>Paiement</th>
+                                       
                                     </tr>
                                 </thead> 
         
                                 <tbody>
-                                    @foreach($fournisseurs as $Fournisseur)
+                                     @if ($errors->has('num_immatriculation'))
+                                         <div id="error-message" class="alert alert-danger">
+                                              {{ $errors->first('num_immatriculation') }}
+                                        </div>
+                                     @endif
+
+                                    @foreach($fournisseurs as $fournisseur)
                                     <tr>
-                                       <td>{{ $Fournisseur->cam_nomchauf }}</td>
-                                       <td>{{ $Fournisseur->num_immatriculation }}</td>     
-                                       <td><a href="{{ asset($Fournisseur->cam_photo) }}" type="button" class="btn btn-success btn-sm">Voir la photo</a></td>
-                                        <td>{{ $Fournisseur->type_produit }}</td>
+                                       <td>{{ $fournisseur->cam_nomchauf }}</td>
+                                       <td>{{ $fournisseur->num_immatriculation }}</td>     
+                                       <td><a href="{{ asset($fournisseur->cam_photo) }}" type="button" class="btn btn-success btn-sm">Voir la photo</a></td>
+                                        <td>{{ $fournisseur->type_produit }}</td>
                                         
-                                        <td>
-                                           @if ( $Fournisseur->poids_net == 0 )
+                                       
+                                        
+                                           <td>{{ $fournisseur->poids_net }}</td>
+                                        
 
-                                                Neant
-                                              @endif  
+                                        <td>{{ $fournisseur->nombre_sac }}</td>
                                         
-                                        </td>
-                                        <td>{{ $Fournisseur->nombre_sac }}</td>
-                                        <td>{{ $Fournisseur->prix_unit }}</td>
 
                                         
-                                        <td>{{ $Fournisseur->created_at }}</td>
-                                        <td>{{ $Fournisseur->provenance }}</td>
+                                        <td>{{ $fournisseur->created_at }}</td>
+                                        <td>{{ $fournisseur->destination }}</td>
                                         <td>
-                                            @if($Fournisseur->statut_dechargement == 1)
+                                            @if($fournisseur->statut_dechargement == 1)
                                                 En route
                                             @else
                                                 Non en route
                                             @endif
                                         </td>
 
-                                        <td>{{ $Fournisseur->observation }}</td>
+                                        <td>{{ $fournisseur->observation }}</td>
+                                        <td>{{ $fournisseur->prix_unit }}</td>
+
+                                  @if (!$fournisseur->paiements->isEmpty())
+                                    
+                                        <td>{{ $fournisseur->paiements[0]->prix_HPG }}</td>
+                                        <td>{{ $fournisseur->paiements[0]->montant_tp }}</td>
+                                        <td>{{ $fournisseur->paiements[0]->montant_HPG }}</td>
+                                    
+                                        <!-- Ajoutez une condition pour afficher "Effectué" si montant_HPG n'est pas null -->
+                                        <td style="color: green;">{{ $fournisseur->paiements[0]->montant_HPG !== null ? 'Effectué' : 'En attente' }}</td>
+                                    @else
+                                        <!-- Si le camion n'a pas de paiements, affichez "Neant" -->
+                                        <td>Neant</td>
+                                        <td>Neant</td>
+                                        <td>Neant</td>
                                        
-                                        <td>{{ $Fournisseur->statut_paiement }}</td>
+                                        <!-- Affichez "En attente" si pas de paiement -->
+                                        <td style="color: red;">En attente</td>
+                                    @endif
                                     </tr>
                                     @endforeach
+                                    
                                 </tbody>
                             </table>
                         </div>

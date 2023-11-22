@@ -28,14 +28,18 @@ class Semence extends Model
         'statut_paiement',
         'created_at',
         'updated_at',
+        'sem_prixunit',
+        
     ];
 
 
             // Dans le modèle Camion
-        public function paiements()
-        {
-            return $this->hasMany(Paiement::class, 'semence_id');
-        }
+       // Dans le modèle Semence
+            public function paiements()
+            {
+                return $this->hasMany(Paiement::class, 'semence_id');
+            }
+
 
         public function utilisateur()
         {

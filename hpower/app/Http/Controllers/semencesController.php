@@ -8,17 +8,41 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use  PDF;
+use Maatwebsite\Excel\Facades\Excel;
+
 
 
 class semencesController extends Controller
 {
     public function index()
     {
+         $user = Auth::user();
+        $paiements = paiement::orderBy('created_at', 'desc');
+        $semences = Semence::orderBy('created_at', 'desc')->paginate(10);
+
+        $mntRevient = paiement::WhereNotNULL('semence_id')->get();
+        $depense = $mntRevient->sum('montant_tp');
+           
+        $qteVente = Semence::whereNotNULL('sem_qtevendue')->get();
+        $qteVendue = $qteVente->sum('sem_qtevendue');
+
+        $qteAchat = Semence::WhereNotNULL('sem_qtereçu')->get();
+        $qteAchetee = $qteAchat->sum('sem_qtereçu');
+
+        $mntVente = paiement::WhereNotNULL('semence_id')->get();
+        $Vente = $mntVente->sum('montant_HPG');
+
+        return view("services_semence.dashboard", compact('qteVendue', 'depense', 'qteAchetee', 'Vente', 'semences', 'paiements', 'user'));
+    }
+
+    public function indexext()
+    {
 
             $user = Auth::user(); 
+
        
-          $paiements = paiement::orderBy('created_at','desc')->paginate(10);
-          $semences = Semence::orderBy('created_at','desc');
+          $paiements = paiement::orderBy('created_at','desc');
+          $semences = Semence::orderBy('created_at','desc')->paginate(10);
           
           $mntRevient = paiement::WhereNotNULL('semence_id')->get();
           $depense = $mntRevient->sum('montant_tp');
@@ -32,121 +56,181 @@ class semencesController extends Controller
           $mntVente = paiement::WhereNotNULL('semence_id')->get();
           $Vente = $mntVente->sum('montant_HPG');
 
-          return view ("services_semence.dashboard", compact('qteVendue', 'depense', 'qteAchetee', 'Vente', 'semences', 'paiements','user'));
+          return view ("appro/approsem", compact('qteVendue', 'depense', 'qteAchetee', 'Vente', 'semences', 'paiements','user'));
     }
 
-    // Pour la réception     
+    
+        public function showSeedReceptionForm()
+        {
+            return view('services_semence.reception'); 
+        }
 
-   public function reception()
-   {
-        $user = Auth::user();  
-        return view("services_semence.reception", compact('user'));
-   }
+        public function showSeedConsultation()
+        {
 
-   
-   public function analyse (Request $request){
-     $user = Auth::user();
-     $data = $request->validate([
-          'semence'=>'required',
-          'ql'=> 'required|decimal:0,2',
-          'fournisseur'=>'String|required',
-          'nature'=>'required',
-          'magasin'=>'String|required',
-          'lieu'=>'String|required',
-          'pl'=>'Numeric|required',
-          'pu'=>'Numeric',     
-          'transact'=>'Numeric', 
-          'bord'=>'Numeric',
-          'moyen'=>'String',
-          'matricul'=>'Image',
-          // 'qv'=>'required|decimal: 0,2',
-          // 'puhpg'=>'numeric',
-          // 'montant'=>'numeric',
-          // 'client'=>'String',
-          // 'lieusemi'=>'String'
-          
-     ]);
+            $semences = Semence::orderBy('created_at', 'desc')->paginate(10);
 
-     $montant_tp = $request->input('pu') * $request->input('ql');
-     
+            return view('services_semence.consultation', compact('semences')); 
+        }
 
-     $newSemence = new Semence();
-     $paiement = new paiement();
+        public function storeSeedReception(Request $request)
+        {
 
-     $newSemence->sem_numtrans=$request->transact;
-     $newSemence->sem_nummatricul=$request->matricul;
-     $newSemence->sem_fourni=$request->fournisseur;
-     $newSemence->sem_type=$request->nature;
-     $paiement->montant_tp=$montant_tp;
-     $newSemence->sem_prixunit=$request->pu;
-     $newSemence->sem_qtereçu=$request->ql;
-     $newSemence->sem_magdecht=$request->magasin;
-     $newSemence->sem_nature=$request->semence;
-     $newSemence->sem_deplace=$request->moyen;
-     $newSemence->sem_bord=$request->bord;
-     $newSemence->sem_prove=$request->lieu;
-     // $newSemence->sem_
-     
-     $paiement->util_id = $user->id;
-     $paiement->save();
-     $res = $newSemence->save();
-      if($res){
-        return redirect()->route('dashboard', compact('montant_tp', 'user'));
-      }else{
-           return back()->with('fail','Erreur');
-     }
+            // Validate the form data
+            $validatedData = $request->validate([
+                'semence' => 'required',
+                'ql' => 'required|numeric',
+                'fournisseur' => 'required|string',
+                'nature' => 'required',
+                'magasin' => 'required|string',
+                'lieu' => 'required|string',
+                'pl' => 'required|numeric',
+                'pu' => 'numeric',
+                'transact' => 'numeric',
+                'bord' => 'string',
+                'moyen' => 'string',
+                'matricul' => 'image|mimes:jpeg,png,jpg,gif|max:5400',
+            ]);
 
-   }
+            // Calculate the value for "pl"
+            $pl = $validatedData['pu'] * $validatedData['ql'];
+            // Generate a unique transaction number
+            $transactionNumber = $this->generateTransactionNumber();
+            // Generate a unique slip number
+            $slipNumber = $this->generateSlipNumber();
+
+            // Add "pl","transactionNumber", "slipNumber" to the validated data
+            $validatedData['pl'] = $pl;
+             $validatedData['bord'] = $transactionNumber;
+              $validatedData['transact'] = $slipNumber;
+
+            // Additional logic for storing the data in the database
+            // For example, you can create and save instances of Semence and Paiement models
+
+              // Handle the file upload
+                  if ($request->hasFile('matricul')) {
+                      // Store the uploaded file in the storage disk
+                      $path = $request->file('matricul')->store('public/images');
+                      $validatedData['matricul'] = $path;
+                  }
 
    // POur la vente
 
-   public function vente()
-   {
-        $user = Auth::user();
-        return view("services_semence.vente", compact('user'));
-   }
+            $user = Auth::user();
 
-    public function traitement(Request $request){
-      $user = Auth::user();
-      
-      $newSemence = new Semence();
-      $paiement = new paiement();
+            $semence = new Semence();
+            $semence->sem_nature = $validatedData['semence'];
+            $semence->sem_qtereçu = $validatedData['ql'];
+            $semence->sem_type = $validatedData['nature'];
+            $semence->sem_fourni = $validatedData['fournisseur'];
+            $semence->sem_magdecht = $validatedData['magasin'];
+            $semence->sem_prove = $validatedData['lieu'];
+            $semence->sem_prixunit = $validatedData['pu'];
+            $semence->sem_numtrans = $validatedData['transact'];
+            $semence->sem_bord = $validatedData['bord'];
+            $semence->sem_deplace = $validatedData['moyen'];
+            $semence->sem_nummatricul = $validatedData['matricul'];
+            $semence->util_id = $user->id;
+            $semence->save();
+
+            $paiement = new Paiement();
+            // Set other Paiement fields based on the form data
+            $paiement->paie_prixlivraison = $validatedData['pl']; 
+            $paiement->util_id = $user->id;
+            $paiement->save();
+
+            // Attach the Paiement to the Semence
+            $semence->paiements()->save($paiement);
+
+            $semences = Semence::orderBy('created_at', 'desc')->paginate(10);
+
+            return view('services_semence.consultation', compact('semences', 'user'));
+
+        }
+
+            private function generateTransactionNumber()
+            {
+                $semence->util_id = $user->id;
+                // Use the current timestamp as a unique identifier
+                $timestamp = now()->format('YmdHis');
+
+                // Generate a unique transaction number by combining a prefix and timestamp
+                $transactionNumber = '00' . $timestamp;
+
+                // You can add more logic to ensure uniqueness if needed
+
+                return $transactionNumber;
+            }
 
 
-      $data = $request->validate([
-          'qv'=>'required|decimal: 0,2',
-          'puhpg'=>'numeric',
-          'montant'=>'numeric',
-          'client'=>'String',
-          'lieusemi'=>'String',
-          'pl'=>'Numeric'
-          
-     ]);
+             private function generateSlipNumber()
+            {
 
-     $newSemence->sem_qtevendue=$request->qv;
-     $newSemence->sem_prixunitHPG=$request->puhpg;
-     $paiement->montant_HPG=$request->montant;
-     $newSemence->sem_client=$request->client;
-     $newSemence->sem_lieusemi=$request->lieusemi;
+                // Generate a unique transaction number by combining a prefix and timestamp
+                $slipNumber = 'HP' .random_int(0, 9999);
+
+                // You can add more logic to ensure uniqueness if needed
+
+                return $slipNumber;
+            }
+       
+        
+        public function vente($semence_id){
+
+            $user = Auth::user();
+            $semences = Semence::find($semence_id);
+
+            return view('services_semence.vente', compact('semences', 'user'));
+        }
+
+        public function traitement(Request $request){
+
+            // Validate the form data
+            $validatedData = $request->validate([
+                'date' => 'string',
+                'qv' => 'required|numeric',
+                'puhpg' => 'required|numeric',
+                'montant' => 'numeric',
+                'lieusemi' => 'string',
+                'client' => 'required|string',
+                'pl' => 'numeric',
+                'recette' => 'numeric',
+            ]);
+
+            $user = Auth::user();
+
+            $semence = new Semence();
+            $semence->sem_qtevendue = $validatedData['qv'];            
+            $semence->sem_prixunitHPG = $validatedData['puhpg'];            
+            $semence->sem_client = $validatedData['client'];
+            $semence->sem_lieusemi = $validatedData['lieusemi'];
+            $semence->save();
+
+            // Calculate the value for "pl"
+            $montant = $validatedData['qv'] * $validatedData['puhpg'];
+            $validatedData['montant'] = $montant;
+            $date = now()->format('d-m-Y');
+            $validatedData['date'] = $date;
+
+            $paiement = new Paiement();
+            // Set other Paiement fields based on the form data
+            $paiement->date_paie = $validatedData['date'];
+            $paiement->montant_HPG = $validatedData['montant']; 
+            $paiement->util_id = $user->id;
+            $paiement->save();
+
+            $semence->paiements()->save($paiement);
+
+            $semences = Semence::orderBy('created_at', 'desc')->paginate(10);
+
+            return view('services_semence.control', compact('user', 'semences'));
+        }
 
 
-      $montant_HPG = $request->input('puhpg') * $request->input('qv');
-      $recette = $request->input('pl') - $montant_HPG;
-      // $recette_HPG = $montant_HPG-$montant_tp;
-      $paiement->util_id = $user->id;
-      $paiement->solde = $recette;
-        $paiement->save();
-
-        $res = $newSemence->save();
-      if($res){
-        return redirect()->route('dashboard', compact('montant_HPG', 'user'));
-      }else{
-           return back()->with('fail','Erreur');
-     }
-      
-
-   }  
- 
-
-}
- 
+        public function sellSeedView(){
+            $user = Auth::user();
+            $semences = Semence::orderBy('created_at', 'desc')->paginate(10);
+            return view('services_semence.control', compact('user', 'semences'));
+        }
+        
+    }
