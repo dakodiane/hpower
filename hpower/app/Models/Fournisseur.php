@@ -35,6 +35,7 @@ class Fournisseur extends Model
         'nombre_sacs',
         'cam_photo2',
         'bordereauchargement',
+        'prix_unit',
     ];
 
 

@@ -39,9 +39,9 @@ Route::get('consultation/', function () {
 
 
 
-Route::get('consultation/', 'App\Http\Controllers\ConsultcamController@show')->name('Consultcam.show');
+Route::get('consultation/', 'App\Http\Controllers\fourniController@show')->name('fourni.show');
 Route::get('enregistcamion/', 'App\Http\Controllers\fourniController@create')->name('fourni.create');
-Route::post('enregistcamion/','App\Http\Controllers\fourniController@store')->name('fourni.store');
+Route::post('enregistcamion/','App\Http\Controllers\fourniController@store')->name('fourni.store'); 
 Route::get('fourni/','App\Http\Controllers\fournicontroller@statistiqueCamions');
 
 //Admin
