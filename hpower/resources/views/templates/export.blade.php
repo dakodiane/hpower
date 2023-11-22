@@ -4,8 +4,12 @@
 <head>
         <meta charset="utf-8">
         <title>H-POWER GROUP</title>
+
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <link rel="manifest" href="{{ asset('manifest.json') }}">
+        <link rel="apple-touch-icon" href="{{ asset('icons/icon-192x192.png') }}">
+        <meta name="theme-color" content="#ffffff">
         <meta name="description" content="">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <!-- Inclure les feuilles de style -->
         <link rel="stylesheet" href="{{ asset('css/style.css') }}">

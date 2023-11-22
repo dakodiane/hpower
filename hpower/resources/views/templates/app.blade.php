@@ -1,10 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="utf-8">
-         <title>H-POWER GROUP</title>
+        <meta charset="utf-8">
+        <title>H-POWER GROUP</title>
+
+
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <link rel="manifest" href="{{ asset('manifest.json') }}">
+        <link rel="apple-touch-icon" href="{{ asset('icons/icon-192x192.png') }}">
+        <meta name="theme-color" content="#ffffff">
         <meta name="description" content="">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <link rel="stylesheet" href="{{asset('css/style.css')}}">
         <link rel="stylesheet" href="{{asset('vendors/feather/feather.css')}}">
@@ -13,17 +20,18 @@
         <link rel="stylesheet" href="{{ asset('vendors/select2/select2.min.css') }}">
         <link rel="stylesheet" href="{{ asset('vendors/select2-bootstrap-theme/select2-bootstrap.min.css') }}">
         <link rel="{{ asset('vendors/datatables.net-bs4/dataTables.bootstrap4.css') }}">
-        <link  type="text/css" src="{{ asset('js/select.dataTables.min.css') }}">
+        <link type="text/css" src="{{ asset('js/select.dataTables.min.css') }}">
         <link rel="stylesheet" href="{{asset('css/vertical-layout-light/style.css')}}">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 
 
-</head> 
+</head>
+
 <body>
-@include('components.header')
+        @include('components.header')
 
 
-@yield('document')
+        @yield('document')
 
 
         <script src="{{asset('vendors/js/vendor.bundle.base.js')}}"></script>
@@ -38,10 +46,11 @@
         <script src="{{asset('js/todolist.js')}}"></script>
         <script src="{{asset('js/dashboard.js')}}"></script>
         <script src="{{asset('js/Chart.roundedBarCharts.js')}}"></script>
-      
+
         <script src="{{asset('js/file-upload.js')}}"></script>
         <script src="{{asset('js/typeahead.js')}}"></script>
         <script src="{{asset('js/select2.js')}}"></script>
-        
+
 </body>
+
 </html>
