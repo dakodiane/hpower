@@ -52,7 +52,10 @@
                   <span class="menu-title">TABLEAU DE BORD</span>
                 </a>
               </li>
+<<<<<<< HEAD
 
+=======
+>>>>>>> ef6b7c8cec86fc342e36cbb65ec53f5506db4f65
               <li class="nav-item">
                 <a class="nav-link" href="{{ '/approvisionnement/hpg' }}"> 
                   <i class="icon-grid menu-icon"></i>

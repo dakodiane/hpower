@@ -130,6 +130,7 @@
                                     </div>
                                 </div>
                             </div>
+                          
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
@@ -143,6 +144,9 @@
                                         <span class="form-label">Bordereau</span>
                                     </div>
                                 </div>
+
+                               
+                            </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-6">

@@ -53,15 +53,25 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="{{('reception')}}">
+                <a class="nav-link" href="{{route('reception')}}">
                   <i class="icon-grid menu-icon"></i>
                   <span class="menu-title">RECEPTION</span>
                 </a>
               </li>
+            
+              
+           
               <li class="nav-item">
-                <a class="nav-link" href="{{route('vente')}}">
+                <a class="nav-link" href="{{route('consultationsem')}}">
                   <i class="icon-grid menu-icon"></i>
-                  <span class="menu-title">VENTE</span>
+                  <span class="menu-title">Consultation</span>
+                </a>
+              </li>
+
+              <li class="nav-item">
+                <a class="nav-link" href="{{route('Consultationsem1')}}">
+                  <i class="icon-grid menu-icon"></i>
+                  <span class="menu-title">Listes Semences</span>
                 </a>
               </li>
            

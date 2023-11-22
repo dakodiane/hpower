@@ -17,8 +17,7 @@
                                         <th>Numéro d'immatriculation</th>
                                         <th>Photo de l'immatriculation du camion</th>
                                         <th>Type de produit</th>
-                                        <th>Poids à vide</th>
-                                        <th>Poids charge</th>
+                                        
                                         <th>Poids net</th>
                                         <th>Nombre de sacs</th>
                                         <th>Heure d'enrégistrement</th>
@@ -29,15 +28,22 @@
                                     </tr>
                                 </thead> 
                                 <tbody>
+                                     @if ($errors->has('num_immatriculation'))
+                                         <div id="error-message" class="alert alert-danger">
+                                              {{ $errors->first('num_immatriculation') }}
+                                        </div>
+                                     @endif
+
                                     @foreach($fournisseurs as $Fournisseur)
                                     <tr>
                                        <td>{{ $Fournisseur->cam_nomchauf }}</td>
                                        <td>{{ $Fournisseur->num_immatriculation }}</td>     
                                        <td><a href="{{ asset($Fournisseur->cam_photo) }}" type="button" class="btn btn-success btn-sm">Voir la photo</a></td>
                                         <td>{{ $Fournisseur->type_produit }}</td>
-                                        <td>{{ $Fournisseur->poids_vide }}</td>
-                                        <td>{{ $Fournisseur->poids_charge }}</td>
-                                        <td>{{ $Fournisseur->poids_net }}</td>
+                                       
+                                        @if($Fournisseur->poids_net == 0)
+                                                NEANT
+                                            @endif
                                         <td>{{ $Fournisseur->nombre_sac }}</td>
                                         <td>{{ $Fournisseur->created_at }}</td>
                                         <td>{{ $Fournisseur->provenance }}</td>
@@ -63,4 +69,18 @@
         </div>
     </div>
 </div>
+
+<script>
+    // Attendre 15 secondes après le chargement de la page, puis masquer le message d'erreur
+    document.addEventListener("DOMContentLoaded", function() {
+    setTimeout(function() {
+        var errorMessage = document.querySelector('.alert-danger');
+        if (errorMessage) {
+            errorMessage.style.display = 'none';
+        }
+    }, 15000); // 15 secondes
+});
+
+
+</script>
 @endsection
