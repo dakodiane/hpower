@@ -8,18 +8,7 @@
         <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
           <span class="icon-menu"></span>
         </button>
-        <ul class="navbar-nav mr-lg-2">
-          <li class="nav-item nav-search d-none d-lg-block">
-            <div class="input-group">
-              <div class="input-group-prepend hover-cursor" id="navbar-search-icon">
-                <span class="input-group-text" id="search">
-                  <i class="icon-search"></i>
-                </span>
-              </div>
-              <input type="text" class="form-control" id="navbar-search-input" placeholder="Search now" aria-label="search" aria-describedby="search">
-            </div>
-          </li>
-        </ul>
+       
         <ul class="navbar-nav navbar-nav-right">
           <li class="nav-item nav-profile dropdown">
            
@@ -43,40 +32,74 @@
     </nav>
     <div class="container-fluid page-body-wrapper">
      
-      <!-- partial:partials/_sidebar.html -->
       <nav class="sidebar sidebar-offcanvas" id="sidebar">
         <ul class="nav">
           <li class="nav-item">
-            <a class="nav-link" href="{{{'user'}}}">
-              <i class="icon-grid menu-icon"></i>
+            <a class="nav-link" href="{{{'/user'}}}">
+              <i class="ti-layout-grid2-alt menu-icon"></i>
               <span class="menu-title">Tableau de bord</span>
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="{{'enregistrercamion'}}">
-              <i class="icon-grid menu-icon mdi mdi-cloud-download"></i>
-              <span class="menu-title">Enregistrer un camion</span>
+            <a class="nav-link" data-toggle="collapse" href="#icons" aria-expanded="false" aria-controls="icons">
+              <i class="ti-truck menu-icon"></i>
+              <span class="menu-title">Transport</span>
+              <i class="menu-arrow"></i>
             </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="{{'listecamionsave'}}">
-              <i class="icon-grid menu-icon"></i>
-              <span class="menu-title">Camions à finaliser</span>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="{{'listecamionfin'}}">
-              <i class="icon-grid menu-icon"></i>
-              <span class="menu-title">Camions finalisés</span>
-            </a>
-          </li>
+            <div class="collapse" id="icons">
+              <ul class="nav flex-column sub-menu">
+                <li class="nav-item"> <a class="nav-link" href="{{ route('create.transport') }}">Enregistrer camion</a></li>
+                <li class="nav-item"> <a class="nav-link" href="{{'/listetransportsave'}}">Finaliser camion</a></li>
+                <li class="nav-item"> <a class="nav-link" href="{{ route('transport.viewfin') }}">Liste camions finalisés</a></li>
 
-          <li class="nav-item">
-            <a class="nav-link" href="pages/documentation/documentation.html">
-              <i class="icon-paper menu-icon"></i>
-              <span class="menu-title">Deconnexion</span>
-            </a>
+
+              </ul>
+            </div>           
           </li>
+          
+      <!--<li class="nav-item">
+            <a class="nav-link" data-toggle="collapse" href="#auth" aria-expanded="false" aria-controls="auth">
+              <i class="ti-control-record menu-icon"></i>
+              <span class="menu-title">Semence</span>
+              <i class="menu-arrow"></i>
+            </a>
+            <div class="collapse" id="auth">
+              <ul class="nav flex-column sub-menu">
+                <li class="nav-item"> <a class="nav-link" href="{{ route('create.semence') }}"> Enregistrer camion </a></li>
+                <li class="nav-item"> <a class="nav-link" href="{{'/listesemencesave'}}"> Finaliser camion </a></li>
+                <li class="nav-item"> <a class="nav-link" href="{{ route('semence.viewfin') }}">Liste camions finalisés</a></li>
+
+              </ul>
+            </div>
+          </li>-->
+          
+          <li class="nav-item">
+            <a class="nav-link" data-toggle="collapse" href="#error" aria-expanded="false" aria-controls="error">
+              <i class="ti-shopping-cart menu-icon"></i>
+              <span class="menu-title">Approvisionnement</span>
+              <i class="menu-arrow"></i>
+            </a>
+            <div class="collapse" id="error">
+              <ul class="nav flex-column sub-menu">
+                <li class="nav-item"> <a class="nav-link" href="{{ route('create.appro') }}">HPG </a></li>
+                <li class="nav-item"> <a class="nav-link" href="{{'/listeapprosave'}}"> Finaliser HPG </a></li>
+                <li class="nav-item"> <a class="nav-link" href="{{ route('appro.viewfin') }}">Liste camions finalisés</a></li>
+                <li class="nav-item"> <a class="nav-link" href="{{'/fournisave'}}">Fournisseurs </a></li>
+                <li class="nav-item"> <a class="nav-link" href="{{ route('view.fourni') }}">Liste fournisseurs</a></li>
+         
+
+              </ul>
+            </div>
+          </li>
+          <li class="nav-item">
+            <form method="POST" action="{{ route('logout') }}">
+                @csrf
+                <button type="submit" class="nav-link" style="border: none; background: none; padding: 0; margin: 0; cursor: pointer;">
+                    <i class="icon-paper menu-icon"></i>
+            <span class="menu-title">Déconnexion</span>
+                </a>
+            </form>
+        </li>
         </ul>
       </nav>
       
