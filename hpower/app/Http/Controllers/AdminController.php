@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Approvisionnement;
+use App\Models\Booking;
 use App\Models\Produit;
 use App\Models\Camion;
+use App\Models\Loading;
 use App\Models\Paiement;
 use App\Models\Semence;
 use App\Models\Transport;
@@ -253,4 +255,16 @@ class AdminController extends Controller
             return redirect()->route('connexion');
         }
     }
+    public function bookingadmin()
+    {
+        $bookings = Booking::all();
+        return view('Admin/listbooking', compact('bookings'));
+    }
+    public function loadingadmin()
+    {
+        $loadings = Loading::all();
+        return view('Admin/listloading', compact('loadings'));
+    }
+
+
 }

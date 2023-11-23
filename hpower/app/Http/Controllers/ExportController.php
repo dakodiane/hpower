@@ -137,32 +137,17 @@ class ExportController extends Controller
 
 
 
-    public function tableaudebordT()
-    {
-        if (Auth::check()) {
-            $user = Auth::user();
-            if ($user->role == 'export') {
-
-            return view('serv_evra/tableaudebord', compact('user'));
-        } else {
-            return redirect()->route('connexion');
-        }
-    }
-        //  compact('camionsAujourdhui', 'camionsCeMois', 'user'
-
-    }
-
 
     public function listbookingT()
     {
         $bookings = Booking::all();
-        return view('serv_eva/listbooking', compact('bookings'));
+        return view('serv_eva/listbookingext', compact('bookings'));
     }
 
     public function listloadingT()
     {
         $loadings = Loading::all();
-        return view('serv_eva/listloading', compact('loadings'));
+        return view('serv_eva/listloadingext', compact('loadings'));
     }
 
 }

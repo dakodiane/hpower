@@ -239,8 +239,15 @@ Route::get('servicesemence/', 'App\Http\Controllers\AdminController@servicesemen
 Route::get('serviceapprovisionnementext/', 'App\Http\Controllers\AdminController@serviceapprovisionnementE')->name('serviceapprovisionnementext');
 Route::get('servicetransportext/', 'App\Http\Controllers\AdminController@servicetransportE')->name('servicetransportext');
 Route::get('servicesemenceext/', 'App\Http\Controllers\AdminController@servicesemenceE')->name('servicesemenceext');
+Route::get('listloadext/', 'App\Http\Controllers\ExportController@listloadingT')->name('loading');
+Route::get('listbookext/', 'App\Http\Controllers\ExportController@listbookingT')->name('booking');
+
+
+Route::get('listloadext/', 'App\Http\Controllers\ExportController@listloadingT')->name('loadingT');
+Route::get('listbookext/', 'App\Http\Controllers\ExportController@listbookingT')->name('bookingT');
 
 Route::get('allcamionext/', 'App\Http\Controllers\AdminController@camionsE')->name('allcamionext');
  Route::get('serveva','App\Http\Controllers\AdminController@statistiquesCamionsT')->name('serveval');
-Route::get('listload/', 'App\Http\Controllers\ExportController@listloadingT')->name('loading');
-Route::get('listbook/', 'App\Http\Controllers\ExportController@listbookingT')->name('booking');
+
+Route::get('loadingadmin/', 'App\Http\Controllers\AdminController@loadingadmin')->name('loadingadmin');
+Route::get('bookingadmin/', 'App\Http\Controllers\AdminController@bookingadmin')->name('bookingadmin');
