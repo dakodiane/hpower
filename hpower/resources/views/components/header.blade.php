@@ -93,6 +93,21 @@
             </a>
           </li>
           <li class="nav-item">
+            <a class="nav-link" href="{{'bookingadmin'}}" >
+              <i class="ti-pencil-alt menu-icon" ></i>
+              <span class="menu-title">Booking</span>
+              <i class="menu-title"></i>
+            </a>           
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{'loadingadmin'}}"  >
+              <i class="ti-control-record menu-icon"></i>
+              <span class="menu-title">Loading</span>
+              <i class="menu-title"></i>
+            </a>
+      
+          </li>
+          <li class="nav-item">
             <form method="POST" action="{{ route('logout') }}">
                 @csrf
                 <button type="submit" class="nav-link" style="border: none; background: none; padding: 0; margin: 0; cursor: pointer;">

@@ -63,13 +63,10 @@
                       <thead>
                       <tr>
                     <th>Date de paiement</th>
-                
-                    <th>Type de facture</th>
                     <th>Bénéficiaire</th>
                     <th>Poids total(Tonne)</th>
                     <th>Prix Unitaire(F CFA)</th>
-                    <th>Montant Total</th>
-                   
+                    <th>Montant Total</th>      
                     <th>Prélèvement HPG(F CFA)</th>
                     <th>Montant versé(F CFA)</th>
                     <th>Opérateur</th>

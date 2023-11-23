@@ -229,3 +229,5 @@ Route::GET('payefournit/', 'App\Http\Controllers\ApproController@payefournt')->n
 Route::get('serviceapprovisionnement/', 'App\Http\Controllers\AdminController@serviceapprovisionnement')->name('serviceapprovisionnement');
 Route::get('servicetransport/', 'App\Http\Controllers\AdminController@servicetransport')->name('servicetransport');
 Route::get('servicesemence/', 'App\Http\Controllers\AdminController@servicesemence')->name('servicesemence');
+Route::get('loadingadmin/', 'App\Http\Controllers\AdminController@loadingadmin')->name('loadingadmin');
+Route::get('bookingadmin/', 'App\Http\Controllers\AdminController@bookingadmin')->name('bookingadmin');
