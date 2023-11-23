@@ -2,17 +2,14 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-
 use Laravel\Sanctum\HasApiTokens;
 
-class User extends Authenticatable
+class User extends Authenticatable implements MustVerifyEmail
 {
-  
-
     use HasApiTokens, HasFactory, Notifiable;
 
     /**
@@ -29,9 +26,9 @@ class User extends Authenticatable
         'ville',
         'last_activity',
         'adresse',
-        'num_enregistrment',
+        'num_enregistrement', // Correction de la propriété
         'nom_entreprise',
-        'confirmation_token',
+        'confirmation_token', // Ajout de la propriété
     ];
 
     /**
@@ -58,5 +55,4 @@ class User extends Authenticatable
     {
         $this->update(['last_activity' => now()]);
     }
- 
 }

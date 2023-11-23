@@ -37,7 +37,7 @@ class Semence extends Model
        // Dans le modèle Semence
             public function paiements()
             {
-                return $this->hasMany(Paiement::class, 'semence_id');
+                return $this->hasMany(paiement::class, 'semence_id');
             }
 
 

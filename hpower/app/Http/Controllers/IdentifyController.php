@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Cache;
-
+use App\Notifications\NewUserNotification; //
 class IdentifyController extends Controller
 {
     public function connexion()
@@ -43,6 +43,8 @@ class IdentifyController extends Controller
         $user->role = $request->role;
         $user->ville = $request->ville;
         $res = $user->save();
+        $admin = User::where('role', 'directeur')->first();
+        $admin->notify(new NewUserNotification($user));
         if ($res) {
             return redirect()->route('connexion');
         } else {

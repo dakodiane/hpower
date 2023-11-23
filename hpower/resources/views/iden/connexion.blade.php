@@ -20,6 +20,14 @@
     <div class="p-5 bg-image" style="background: rgb(4, 70, 92) url('{{ asset('images/hpower.png') }}'); background-size: 500px; background-position: center; background-repeat: no-repeat;
             height: 500px;"></div>
     <!-- Background image -->
+<!-- Ajoutez ceci à l'endroit où vous voulez afficher l'invite d'installation -->
+<div id="installPrompt" class="install-prompt">
+    <div class="install-prompt-content">
+        <p>Vous souhaitez installer notre application ?</p>
+        <button id="installButton">Installer</button>
+        <button id="cancelButton">Annuler</button>
+    </div>
+</div>
 
     <div class="card mx-4 mx-md-5 shadow-5-strong" style="
             margin-top: -100px;
@@ -66,7 +74,66 @@
       </div>
     </div>
   </section>
-  <!-- Section: Design Block -->
+  /* Ajoutez ceci à votre feuille de style CSS ou dans une balise <style> dans votre vue */
+.install-prompt {
+    display: none;
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #fff;
+    padding: 20px;
+    border: 1px solid #ccc;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.install-prompt-content {
+    text-align: center;
+}
+
+#installButton, #cancelButton {
+    padding: 10px;
+    margin: 10px;
+    cursor: pointer;
+}
+</style>
+<script>
+window.addEventListener('beforeinstallprompt', (event) => {
+    event.preventDefault();
+    window.installPromptEvent = event;
+    showInstallPrompt(); // Affiche la boîte de dialogue
+});
+
+function showInstallPrompt() {
+    const installPrompt = document.getElementById('installPrompt');
+    if (installPrompt) {
+        installPrompt.style.display = 'block';
+
+        const installButton = document.getElementById('installButton');
+        const cancelButton = document.getElementById('cancelButton');
+
+        if (installButton) {
+            installButton.addEventListener('click', () => {
+                window.installPromptEvent.prompt();
+                hideInstallPrompt();
+            });
+        }
+
+        if (cancelButton) {
+            cancelButton.addEventListener('click', () => {
+                hideInstallPrompt();
+            });
+        }
+    }
+}
+
+function hideInstallPrompt() {
+    const installPrompt = document.getElementById('installPrompt');
+    if (installPrompt) {
+        installPrompt.style.display = 'none';
+    }
+}
+</script>
 </body>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 
