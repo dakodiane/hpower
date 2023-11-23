@@ -42,7 +42,7 @@ class Fournisseur extends Model
             // Dans le modèle Camion
         public function paiements()
         {
-            return $this->hasMany(Paiement::class, 'fournisseur_id');
+            return $this->hasMany(paiement::class, 'fournisseur_id');
         }
 
         public function utilisateur()

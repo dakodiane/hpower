@@ -39,9 +39,9 @@ Route::get('consultation/', function () {
 
 
 
-Route::get('consultation/', 'App\Http\Controllers\fourniController@show')->name('fourni.show');
-Route::get('enregistcamion/', 'App\Http\Controllers\fourniController@create')->name('fourni.create');
-Route::post('enregistcamion/','App\Http\Controllers\fourniController@store')->name('fourni.store'); 
+Route::get('consultation/', 'App\Http\Controllers\fournicontroller@show')->name('fourni.show');
+Route::get('enregistcamion/', 'App\Http\Controllers\fournicontroller@create')->name('fourni.create');
+Route::post('enregistcamion/','App\Http\Controllers\fournicontroller@store')->name('fourni.store'); 
 Route::get('fourni/','App\Http\Controllers\fournicontroller@statistiqueCamions');
 
 //Admin
@@ -225,3 +225,7 @@ Route::post('paiefournisseur/{fournisseur_id}/store', 'App\Http\Controllers\Appr
 Route::GET('payefourni/', 'App\Http\Controllers\ApproController@payefourn')->name('payefourni');
 
 Route::GET('payefournit/', 'App\Http\Controllers\ApproController@payefournt')->name('payefournit');
+
+Route::get('serviceapprovisionnement/', 'App\Http\Controllers\AdminController@serviceapprovisionnement')->name('serviceapprovisionnement');
+Route::get('servicetransport/', 'App\Http\Controllers\AdminController@servicetransport')->name('servicetransport');
+Route::get('servicesemence/', 'App\Http\Controllers\AdminController@servicesemence')->name('servicesemence');

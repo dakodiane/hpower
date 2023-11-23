@@ -76,7 +76,22 @@
               <span class="menu-title">Produits </span>
             </a>
           </li>
-       
+          <li class="nav-item">
+            <a class="nav-link" href="{{'serviceapprovisionnement'}}">
+              <i class="icon-grid menu-icon"></i>
+              <span class="menu-title">Service Approvisionnement </span>
+            </a>
+          </li>  <li class="nav-item">
+            <a class="nav-link" href="{{'servicetransport'}}">
+              <i class="icon-grid menu-icon"></i>
+              <span class="menu-title">Service Transport </span>
+            </a>
+          </li>  <li class="nav-item">
+            <a class="nav-link" href="{{'servicesemence'}}">
+              <i class="icon-grid menu-icon"></i>
+              <span class="menu-title">Service Semence </span>
+            </a>
+          </li>
           <li class="nav-item">
             <form method="POST" action="{{ route('logout') }}">
                 @csrf

@@ -1,8 +1,11 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Models\Camion;
+
 namespace App\Http\Controllers;
+
 use App\Models\Produit;
 use App\Models\Transport;
 use App\Models\paiement;
@@ -22,60 +25,60 @@ use Barryvdh\DomPDF\Facade\Pdf;
 class ServicetransController extends Controller
 {
 
-    
+
     public function show()
     {
         $user = Auth::user();
-    
+
         // Récupérer les transports sans paiements associés
         $transports = Transport::doesntHave('paiements')->get();
-    
+
         return view('servicetrans/servconsultation', compact('transports', 'user'));
     }
-    
 
-    
 
-public function statistiquesCamions()
-{
-    if (Auth::check()) {
-        $user = Auth::user();
-        if ($user->role == 'servicetransport') {
 
-            $aujourdHui = Carbon::now();
-            $ceMois = Carbon::now()->startOfMonth();
 
-            $transportsAujourdhui = DB::table('transports')
-                ->whereDate('created_at', $aujourdHui->toDateString())
-                ->count();
+    public function statistiquesCamions()
+    {
+        if (Auth::check()) {
+            $user = Auth::user();
+            if ($user->role == 'servicetransport') {
 
-            $transportsCeMois = DB::table('transports')
-                ->whereYear('created_at', $ceMois->year)
-                ->whereMonth('created_at', $ceMois->month)
-                ->count();
+                $aujourdHui = Carbon::now();
+                $ceMois = Carbon::now()->startOfMonth();
 
-            // Récupérer les statistiques par provenance
-            $sumPoidsParProvenance = DB::table('transports')
-                ->select('provenance', DB::raw('SUM(poids_net) as poids_total'))
-                ->groupBy('provenance')
-                ->get();
+                $transportsAujourdhui = DB::table('transports')
+                    ->whereDate('created_at', $aujourdHui->toDateString())
+                    ->count();
 
-            return view('servicetrans/tableaudebord', compact('transportsAujourdhui', 'transportsCeMois', 'sumPoidsParProvenance', 'user'));
+                $transportsCeMois = DB::table('transports')
+                    ->whereYear('created_at', $ceMois->year)
+                    ->whereMonth('created_at', $ceMois->month)
+                    ->count();
+
+                // Récupérer les statistiques par provenance
+                $sumPoidsParProvenance = DB::table('transports')
+                    ->select('provenance', DB::raw('SUM(poids_net) as poids_total'))
+                    ->groupBy('provenance')
+                    ->get();
+
+                return view('servicetrans/tableaudebord', compact('transportsAujourdhui', 'transportsCeMois', 'sumPoidsParProvenance', 'user'));
+            } else {
+                return redirect()->route('connexion');
+            }
         } else {
             return redirect()->route('connexion');
         }
-    } else {
-        return redirect()->route('connexion');
     }
-}
 
-        
+
     public function paiement($transport_id)
     {
         $user = Auth::user();
         $transports = Transport::find($transport_id);
 
-        return view('servicetrans/servpaiement', compact('transports','user'));
+        return view('servicetrans/servpaiement', compact('transports', 'user'));
     }
     /*public function paiement(Request $request, $transport_id)
     {
@@ -100,125 +103,119 @@ public function statistiquesCamions()
         return view('servicetrans/servpaiement', compact('transports', 'paiements'));
     }
 */
-  
+
 
     public function storepaie(Request $request, $transport_id)
-{
-    $user = Auth::user();
-    // Récupérer le transport
-    $transports = Transport::findOrFail($transport_id);
-    if ($transports->paiements()->exists()) {
-        // Gérer l'erreur ici, par exemple, en redirigeant avec un message d'erreur
-        return redirect()->back()->withErrors(['error' => 'Un paiement existe déjà pour ce transport.']);
-    }
-
-    // Récupérer les données du formulaire
-    $data = $request->all();
-
-    // Calculs pour le modèle Paiement
-    $poidsNet = $transports->poids_net; // Assurez-vous que le champ existe dans le modèle Transport
-
-    $prix_tp = $request->input('prix_tp');
-    $prix_HPG = $request->input('prix_HPG');
-    $rest_paie = $request->input('rest_paie');
-
-
-
-    $montant_tp = $poidsNet * $prix_tp;
-    $montant_HPG = $poidsNet * $prix_HPG;
-    $recette_HPG = $montant_tp - $montant_HPG;
-    $solde = $montant_HPG - $transports->avancepaye; // Assurez-vous que le champ existe dans le modèle Transport
-    $paietotal= $solde - $rest_paie;
-    
-    $paiement = new Paiement();
-    $paiement->fill($data);
-    $paiement->montant_tp = $montant_tp;
-    $paiement->montant_HPG = $montant_HPG;
-    $paiement->recette_HPG = $recette_HPG;
-    $paiement->solde = $solde;
-    $paiement->rest_paie = $rest_paie;
-    $paiement->paietotal = $paietotal;
-    
-    // Vérifier le statut du paiement
-    $paiement->statut_paie = ($paietotal == 0) ? 'effectué' : 'en attente';
-    $paiement->util_id = $user->id;
-    // Enregistrer le paiement en le liant au transport
-    $transports->paiements()->save($paiement);
-
-    // Rediriger vers la page appropriée
-
-    return redirect()->intended(route('Servicetrans.viewfin', ['transport_id' => $transports->id]))
-    ->with(['transports' => $transports, 'paiements' => $paiement, 'success' => 'Paiement enregistré avec succès.']);
-
-}
-
-
-
-public function viewfin()
-{
-    try {
+    {
         $user = Auth::user();
-
-        // Récupérer les transports avec paiements associés ayant recette_HPG non égal à zéro
-        $transports = Transport::with(['paiements' => function ($query) {
-            $query->where('recette_HPG', '!=', 0);
-        }])
-        ->whereHas('paiements', function ($query) {
-            $query->where('recette_HPG', '!=', 0);
-        })
-        ->get();
-
-        // Calculer la somme des poids_net par provenance
-        $sumPoidsParProvenance = Transport::select('provenance', DB::raw('SUM(poids_net) as poids_total'))
-            ->groupBy('provenance')
-            ->get();
-
-        return view('servicetrans.servconsultationfin', [
-            'transports' => $transports,
-            'user' => $user,
-            'sumPoidsParProvenance' => $sumPoidsParProvenance,
-        ]);
-    } catch (\Exception $e) {
-        // Gérer l'erreur, par exemple, en enregistrant le message d'erreur ou en renvoyant une réponse appropriée
-        return back()->withError('Une erreur s\'est produite lors de la récupération des données.');
-    }
+        // Récupérer le transport
+        $transports = Transport::findOrFail($transport_id);
+        if ($transports->paiements()->exists()) {
+            // Gérer l'erreur ici, par exemple, en redirigeant avec un message d'erreur
+            return redirect()->back()->withErrors(['error' => 'Un paiement existe déjà pour ce transport.']);
         }
 
-  
+        // Récupérer les données du formulaire
+        $data = $request->all();
 
-        public function exportExcel($viewType)
-        {
-            try {
-                
-                // Récupérer uniquement les transports en fonction de la vue
-                if ($viewType == 'servconsultation') {
-                    // Logique spécifique à la vue servconsultation
-                    $transports = Transport::doesntHave('paiements')->get();
-                } elseif ($viewType == 'servconsultationfin') {
-                    // Logique spécifique à la vue servconsultationfin
-                    $transports = Transport::with(['paiements' => function ($query) {
-                        $query->where('recette_HPG', '!=', 0);
-                    }])
+        // Calculs pour le modèle Paiement
+        $poidsNet = $transports->poids_net; // Assurez-vous que le champ existe dans le modèle Transport
+
+        $prix_tp = $request->input('prix_tp');
+        $prix_HPG = $request->input('prix_HPG');
+        $rest_paie = $request->input('rest_paie');
+
+
+
+        $montant_tp = $poidsNet * $prix_tp;
+        $montant_HPG = $poidsNet * $prix_HPG;
+        $recette_HPG = $montant_tp - $montant_HPG;
+        $solde = $montant_HPG - $transports->avancepaye; // Assurez-vous que le champ existe dans le modèle Transport
+        $paietotal = $solde - $rest_paie;
+
+        $paiement = new Paiement();
+        $paiement->fill($data);
+        $paiement->montant_tp = $montant_tp;
+        $paiement->montant_HPG = $montant_HPG;
+        $paiement->recette_HPG = $recette_HPG;
+        $paiement->solde = $solde;
+        $paiement->rest_paie = $rest_paie;
+        $paiement->paietotal = $paietotal;
+
+        // Vérifier le statut du paiement
+        $paiement->statut_paie = ($paietotal == 0) ? 'effectué' : 'en attente';
+        $paiement->util_id = $user->id;
+        // Enregistrer le paiement en le liant au transport
+        $transports->paiements()->save($paiement);
+
+        // Rediriger vers la page appropriée
+
+        return redirect()->intended(route('Servicetrans.viewfin', ['transport_id' => $transports->id]))
+            ->with(['transports' => $transports, 'paiements' => $paiement, 'success' => 'Paiement enregistré avec succès.']);
+    }
+
+
+
+    public function viewfin()
+    {
+        try {
+            $user = Auth::user();
+
+            // Récupérer les transports avec paiements associés ayant recette_HPG non égal à zéro
+            $transports = Transport::with(['paiements' => function ($query) {
+                $query->where('recette_HPG', '!=', 0);
+            }])
+                ->whereHas('paiements', function ($query) {
+                    $query->where('recette_HPG', '!=', 0);
+                })
+                ->get();
+
+            // Calculer la somme des poids_net par provenance
+            $sumPoidsParProvenance = Transport::select('provenance', DB::raw('SUM(poids_net) as poids_total'))
+                ->groupBy('provenance')
+                ->get();
+
+            return view('servicetrans.servconsultationfin', [
+                'transports' => $transports,
+                'user' => $user,
+                'sumPoidsParProvenance' => $sumPoidsParProvenance,
+            ]);
+        } catch (\Exception $e) {
+            // Gérer l'erreur, par exemple, en enregistrant le message d'erreur ou en renvoyant une réponse appropriée
+            return back()->withError('Une erreur s\'est produite lors de la récupération des données.');
+        }
+    }
+
+
+
+    public function exportExcel($viewType)
+    {
+        try {
+
+            // Récupérer uniquement les transports en fonction de la vue
+            if ($viewType == 'servconsultation') {
+                // Logique spécifique à la vue servconsultation
+                $transports = Transport::doesntHave('paiements')->get();
+            } elseif ($viewType == 'servconsultationfin') {
+                // Logique spécifique à la vue servconsultationfin
+                $transports = Transport::with(['paiements' => function ($query) {
+                    $query->where('recette_HPG', '!=', 0);
+                }])
                     ->whereHas('paiements', function ($query) {
                         $query->where('recette_HPG', '!=', 0);
                     })
                     ->get();
-                } else {
-                    // Gérer d'autres cas si nécessaire
-                    $transports = collect();
-                }
-                
-
-        
-                return Excel::download(new TransportsExport($transports), 'transports.xlsx');
-            } catch (\Exception $e) {
-                // Gérer l'erreur, par exemple, en enregistrant le message d'erreur ou en renvoyant une réponse appropriée
-                return back()->withError('Une erreur s\'est produite lors de la récupération des données pour l\'export Excel.');
+            } else {
+                // Gérer d'autres cas si nécessaire
+                $transports = collect();
             }
+
+
+
+            return Excel::download(new TransportsExport($transports), 'transports.xlsx');
+        } catch (\Exception $e) {
+            // Gérer l'erreur, par exemple, en enregistrant le message d'erreur ou en renvoyant une réponse appropriée
+            return back()->withError('Une erreur s\'est produite lors de la récupération des données pour l\'export Excel.');
         }
-        
-
-
-
-} 
-
+    }
+}
