@@ -45,7 +45,7 @@ class Approvisionnement extends Model
             // Dans le modèle Camion
         public function paiements()
         {
-            return $this->hasMany(Paiement::class, 'appro_id');
+            return $this->hasMany(paiement::class, 'appro_id');
         }
 
         public function utilisateur()

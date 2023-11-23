@@ -39,7 +39,7 @@ class Camion extends Model
             // Dans le modèle Camion
         public function paiements()
         {
-            return $this->hasMany(Paiement::class, 'cam_id');
+            return $this->hasMany(paiement::class, 'cam_id');
         }
 
         public function utilisateur()
