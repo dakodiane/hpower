@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Cache;
-use App\Notifications\NewUserNotification; //
+
 class IdentifyController extends Controller
 {
     public function connexion()
@@ -43,8 +43,6 @@ class IdentifyController extends Controller
         $user->role = $request->role;
         $user->ville = $request->ville;
         $res = $user->save();
-        $admin = User::where('role', 'directeur')->first();
-        $admin->notify(new NewUserNotification($user));
         if ($res) {
             return redirect()->route('connexion');
         } else {
@@ -86,20 +84,19 @@ class IdentifyController extends Controller
         }
     }
 
-
     public function loginUser(Request $request)
     {
         $credentials = $request->only('email', 'password');
-
+    
         if (auth()->attempt($credentials)) {
-
             $user = auth()->user();
-
+    
             if ($user) {
                 // Vérifie si le champ 'active' est égal à 1
                 if ($user->active == 1) {
                     Cache::put('user-online-' . $user->id, true, now()->addMinutes(1));
-            
+    
+                    // Votre code actuel pour les redirections
                     if ($user->role == 'fournisseur') {
                         $request->session()->regenerate();
                         return redirect('fourni');
@@ -118,6 +115,9 @@ class IdentifyController extends Controller
                     } elseif ($user->role == 'serviceappro') {
                         $request->session()->regenerate();
                         return redirect('approvisionnement');
+                    } elseif ($user->role == 'servicevalutation') {
+                        $request->session()->regenerate();
+                        return redirect()->intended('serveva');
                     } elseif ($user->role == 'export') {
                         $request->session()->regenerate();
                         return redirect('export');
@@ -134,6 +134,7 @@ class IdentifyController extends Controller
         // L'authentification a échoué, retournez les erreurs
         return redirect()->back()->withErrors(['email' => 'Adresse Email ou Mot de passe incorrect'])->withInput();
     }
+    
 
     public function logout(Request $request)
     {

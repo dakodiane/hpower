@@ -39,23 +39,18 @@
       <nav class="sidebar sidebar-offcanvas" id="sidebar">
         <ul class="nav">
           <li class="nav-item">
-            <a class="nav-link" href="{{('/admin')}}">
+            <a class="nav-link" href="{{('serveval')}}">
               <i class="icon-grid menu-icon"></i>
               <span class="menu-title">Tableau de bord</span>
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="{{'allcamion'}}">
+            <a class="nav-link" href="{{'allcamionext'}}">
               <i class="icon-grid menu-icon"></i>
               <span class="menu-title">Tous les camions</span>
             </a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="{{'fournilist'}}">
-              <i class="icon-grid menu-icon"></i>
-              <span class="menu-title">Tous les fournisseurs</span>
-            </a>
-          </li>
+          
           <!-- Mettez à jour le script dans votre fichier HTML -->
 
        <!--     <li class="nav-item">
@@ -64,8 +59,42 @@
               <span class="menu-title">Tous les paiements</span>
             </a>
           </li> -->
-          
-       
+        
+        
+          <li class="nav-item">
+            <a class="nav-link" href="{{'serviceapprovisionnementext'}}">
+              <i class="icon-grid menu-icon"></i>
+              <span class="menu-title">Service Approvisionnement </span>
+            </a>
+          </li>  <li class="nav-item">
+            <a class="nav-link" href="{{'servicetransportext'}}">
+              <i class="icon-grid menu-icon"></i>
+              <span class="menu-title">Service Transport </span>
+            </a>
+          </li>  <li class="nav-item">
+            <a class="nav-link" href="{{'servicesemenceext'}}">
+              <i class="icon-grid menu-icon"></i>
+              <span class="menu-title">Service Semence </span>
+            </a>
+          </li>
+
+     
+            
+              <li class="nav-item">
+            <a class="nav-link" data-toggle="collapse" href="#icons" aria-expanded="false" aria-controls="icons">
+              <i class="icon-grid menu-icon"></i>
+              <span class="menu-title">EXPORT</span>
+              <i class="menu-arrow"></i>
+            </a>
+            <div class="collapse" id="icons">
+            <ul class="nav flex-column sub-menu">
+            <li class="nav-item"> <a class="nav-link" href="{{ route('loading') }}">Liste Loading</a></li>
+                <li class="nav-item"> <a class="nav-link" href="{{ route('booking') }}">Liste Booking</a></li>
+
+
+              </ul>
+            </div>           
+          </li>
           <li class="nav-item">
             <form method="POST" action="{{ route('logout') }}">
                 @csrf

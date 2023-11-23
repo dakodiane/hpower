@@ -147,4 +147,110 @@ class AdminController extends Controller
         $Vente = $mntVente->sum('montant_HPG');
         return view("Admin.serviceapprovisionnement", compact('qteVendue', 'depense', 'qteAchetee', 'Vente', 'semences', 'paiements', 'stat', 'statt', 'user', 'appro'));
     }
+
+
+
+    //////////////////////////////evaluation 
+
+    public function serviceapprovisionnementE()
+    {
+        $user = Auth::user();
+        $paiements = paiement::all();
+        $semences = Semence::all();
+        $appro = Approvisionnement::orderBy('created_at', 'desc')->paginate(10);
+
+        $sttatt =   Approvisionnement::Where('statut_paiement', 'En attente')->get();
+        $stat = $sttatt->count('statut_paiement');
+
+        $statpaye = Approvisionnement::Where('statut_paiement', 'effectué')->get();
+        $statt = $statpaye->count('statut_paiement');
+
+        $mntRevient = paiement::WhereNotNULL('semence_id')->get();
+        $depense = $mntRevient->sum('montant_tp');
+
+        $qteVente = Semence::whereNotNULL('sem_qtevendue')->get();
+        $qteVendue = $qteVente->sum('sem_qtevendue');
+
+        $qteAchat = Semence::WhereNotNULL('sem_qtereçu')->get();
+        $qteAchetee = $qteAchat->sum('sem_qtereçu');
+
+        $mntVente = paiement::WhereNotNULL('semence_id')->get();
+        $Vente = $mntVente->sum('montant_HPG');
+        return view("serv_eva.serviceapprovisionnementext", compact('qteVendue', 'depense', 'qteAchetee', 'Vente', 'semences', 'paiements', 'stat', 'statt', 'user', 'appro'));
+    }
+
+    public function servicesemenceE()
+    {
+        
+        $semences = Semence::orderBy('created_at', 'desc')->paginate(10);
+        return view('serv_eva.servicesemenceext', compact('semences'));
+    }
+
+
+
+    public function camionsE(Request $request)
+    {
+
+        $semences = Semence::all();
+        $approvisionnements = Approvisionnement::whereNotNull('heure_arrive')->get();
+        $transports = Transport::whereNotNull('heure_arrive')->get();
+        return view('serv_eva/allcamionext', compact('semences', 'approvisionnements', 'transports'));
+    }
+
+    
+    public function servicetransportE()
+    {
+
+        // Récupérer les transports avec paiements associés ayant recette_HPG non égal à zéro
+        $transports = Transport::with(['paiements' => function ($query) {
+            $query->where('recette_HPG', '!=', 0);
+        }])
+            ->whereHas('paiements', function ($query) {
+                $query->where('recette_HPG', '!=', 0);
+            })
+            ->get();
+
+        // Calculer la somme des poids_net par provenance
+        $sumPoidsParProvenance = Transport::select('provenance', DB::raw('SUM(poids_net) as poids_total'))
+            ->groupBy('provenance')
+            ->get();
+
+        return view('serv_eva.servicetransportext', [
+            'transports' => $transports,
+            'sumPoidsParProvenance' => $sumPoidsParProvenance,
+        ]);
+    }
+
+    public function statistiquesCamionsT()
+    {
+        if (Auth::check()) {
+            $user = Auth::user();
+            if ($user->role == 'servicevalutation') {
+
+                $aujourdHui = Carbon::now();
+                $ceMois = Carbon::now()->startOfMonth();
+
+                $transportsAujourdhui = DB::table('transports')
+                    ->whereDate('created_at', $aujourdHui->toDateString())
+                    ->count();
+
+                $transportsCeMois = DB::table('transports')
+                    ->whereYear('created_at', $ceMois->year)
+                    ->whereMonth('created_at', $ceMois->month)
+                    ->count();
+
+                // Récupérer les statistiques par provenance
+                $sumPoidsParProvenance = DB::table('transports')
+                    ->select('provenance', DB::raw('SUM(poids_net) as poids_total'))
+                    ->groupBy('provenance')
+                    ->get();
+
+                return view('serv_eva/tableaudebordext', compact('transportsAujourdhui', 'transportsCeMois', 'sumPoidsParProvenance', 'user'));
+            } else {
+                return redirect()->route('connexion');
+            }
+        } else {
+            return redirect()->route('connexion');
+        }
+    }
 }

@@ -113,6 +113,55 @@ class CamionController extends Controller
         }
     }
 
+
+    
+    public function statistiqueCamionsT()
+    {
+        if (Auth::check()) {
+            $user = Auth::user();
+            if ($user->role == 'directeur') {
+
+                $aujourdHui = Carbon::now();
+                $ceMois = Carbon::now()->startOfMonth();
+
+                $semencesAujourdhui = DB::table('semences')
+                ->whereDate('created_at', $aujourdHui->toDateString())
+                ->count();
+            
+            $approvisionnementsAujourdhui = DB::table('approvisionnements')
+                ->whereDate('created_at', $aujourdHui->toDateString())
+                ->count();
+            
+            $transportsAujourdhui = DB::table('transports')
+                ->whereDate('created_at', $aujourdHui->toDateString())
+                ->count();
+          $totaltoday= $semencesAujourdhui + $approvisionnementsAujourdhui +$transportsAujourdhui;
+         
+            $semencesCeMois = DB::table('semences')
+                ->whereYear('created_at', $ceMois->year)
+                ->whereMonth('created_at', $ceMois->month)
+                ->count();
+            
+            $approvisionnementsCeMois = DB::table('approvisionnements')
+                ->whereYear('created_at', $ceMois->year)
+                ->whereMonth('created_at', $ceMois->month)
+                ->count();
+            
+            $transportsCeMois = DB::table('transports')
+                ->whereYear('created_at', $ceMois->year)
+                ->whereMonth('created_at', $ceMois->month)
+                ->count();
+            
+                $totalmonth=  $semencesCeMois + $approvisionnementsCeMois + $transportsCeMois;
+
+                return view('serv_eva/tableaudebordext', compact('totaltoday', 'totalmonth', 'user'));
+            } else {
+                return redirect()->route('connexion');
+            }
+        } else {
+            return redirect()->route('connexion');
+        }
+    }
     public function fournisave()
     {
         $user = Auth::user();

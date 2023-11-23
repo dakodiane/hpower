@@ -85,6 +85,7 @@
 
                 <option value="servicetransport">Service des Transports</option>
                 <option value="serviceappro">Service d'approvisionnement</option>
+                <option value="servicevalutation">Service d'évalutation</option>
                 <option value="export">Export</option>
               </select>
               <label class="form-label" for="form3Example4">Qui êtes-vous?</label>

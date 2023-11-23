@@ -229,3 +229,18 @@ Route::GET('payefournit/', 'App\Http\Controllers\ApproController@payefournt')->n
 Route::get('serviceapprovisionnement/', 'App\Http\Controllers\AdminController@serviceapprovisionnement')->name('serviceapprovisionnement');
 Route::get('servicetransport/', 'App\Http\Controllers\AdminController@servicetransport')->name('servicetransport');
 Route::get('servicesemence/', 'App\Http\Controllers\AdminController@servicesemence')->name('servicesemence');
+
+//consultation
+
+// Route::get('serveva/', function () {
+//     return view('serv_eva/tableaudebordext');
+// });
+
+Route::get('serviceapprovisionnementext/', 'App\Http\Controllers\AdminController@serviceapprovisionnementE')->name('serviceapprovisionnementext');
+Route::get('servicetransportext/', 'App\Http\Controllers\AdminController@servicetransportE')->name('servicetransportext');
+Route::get('servicesemenceext/', 'App\Http\Controllers\AdminController@servicesemenceE')->name('servicesemenceext');
+
+Route::get('allcamionext/', 'App\Http\Controllers\AdminController@camionsE')->name('allcamionext');
+ Route::get('serveva','App\Http\Controllers\AdminController@statistiquesCamionsT')->name('serveval');
+Route::get('listload/', 'App\Http\Controllers\ExportController@listloadingT')->name('loading');
+Route::get('listbook/', 'App\Http\Controllers\ExportController@listbookingT')->name('booking');

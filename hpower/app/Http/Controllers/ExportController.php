@@ -41,6 +41,8 @@ class ExportController extends Controller
         //  compact('camionsAujourdhui', 'camionsCeMois', 'user'
 
     }
+    
+    
 
     public function listloading()
     {
@@ -129,4 +131,38 @@ class ExportController extends Controller
         $loadings = Loading::all();
         return view('Export/listloading', compact('loadings', 'bookings'));
     }
+
+
+    ///////
+
+
+
+    public function tableaudebordT()
+    {
+        if (Auth::check()) {
+            $user = Auth::user();
+            if ($user->role == 'export') {
+
+            return view('serv_evra/tableaudebord', compact('user'));
+        } else {
+            return redirect()->route('connexion');
+        }
+    }
+        //  compact('camionsAujourdhui', 'camionsCeMois', 'user'
+
+    }
+
+
+    public function listbookingT()
+    {
+        $bookings = Booking::all();
+        return view('serv_eva/listbooking', compact('bookings'));
+    }
+
+    public function listloadingT()
+    {
+        $loadings = Loading::all();
+        return view('serv_eva/listloading', compact('loadings'));
+    }
+
 }
