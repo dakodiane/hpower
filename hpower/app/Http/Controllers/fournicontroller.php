@@ -7,6 +7,9 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\FournisseursExport;
+use App\Models\paiement;
 
 class fournicontroller extends Controller
 {
@@ -137,6 +140,16 @@ class fournicontroller extends Controller
     } 
 
 
+    public function exportFournisseurs()
+    {
+        try {
+            $fournisseurs = Fournisseur::all();
+
+            return Excel::download(new FournisseursExport($fournisseurs), 'fournisseurs.xlsx');
+        } catch (\Exception $e) {
+            return back()->withError('Une erreur s\'est produite lors de l\'export Excel.');
+        }
+    }
 
 
 

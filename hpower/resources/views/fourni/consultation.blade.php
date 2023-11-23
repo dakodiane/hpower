@@ -91,11 +91,16 @@
                                     @endif
                                     </tr>
                                     @endforeach
-                                    
+
                                 </tbody>
+
                             </table>
+                       
                         </div>
+                        <a href="{{ route('export-fournisseurs') }} "class="btn btn-success" >Exporter vers Excel</a>
+
                     </div>
+
                 </div>
             </div>
         </div>

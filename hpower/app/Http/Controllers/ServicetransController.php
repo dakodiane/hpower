@@ -94,7 +94,7 @@ class ServicetransController extends Controller
         $paiements = $transports->paiements;
     
         // Enregistrer les données du formulaire dans la base de données
-        $paiement = new Paiement();
+        $paiement = new paiement();
         $paiement->fill($data);
         $paiement->util_id = $user->id; // Ajouter l'utilisateur au paiement si nécessaire
         $transports->paiements()->save($paiement);
@@ -118,7 +118,7 @@ class ServicetransController extends Controller
         // Récupérer les données du formulaire
         $data = $request->all();
 
-        // Calculs pour le modèle Paiement
+        // Calculs pour le modèle paiement
         $poidsNet = $transports->poids_net; // Assurez-vous que le champ existe dans le modèle Transport
 
         $prix_tp = $request->input('prix_tp');
@@ -133,7 +133,7 @@ class ServicetransController extends Controller
         $solde = $montant_HPG - $transports->avancepaye; // Assurez-vous que le champ existe dans le modèle Transport
         $paietotal = $solde - $rest_paie;
 
-        $paiement = new Paiement();
+        $paiement = new paiement();
         $paiement->fill($data);
         $paiement->montant_tp = $montant_tp;
         $paiement->montant_HPG = $montant_HPG;
@@ -151,7 +151,7 @@ class ServicetransController extends Controller
         // Rediriger vers la page appropriée
 
         return redirect()->intended(route('Servicetrans.viewfin', ['transport_id' => $transports->id]))
-            ->with(['transports' => $transports, 'paiements' => $paiement, 'success' => 'Paiement enregistré avec succès.']);
+            ->with(['transports' => $transports, 'paiements' => $paiement, 'success' => 'paiement enregistré avec succès.']);
     }
 
 

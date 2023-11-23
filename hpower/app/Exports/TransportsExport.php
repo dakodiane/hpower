@@ -6,7 +6,7 @@ use Illuminate\Support\Collection;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 use App\Models\Transport;
-use App\Models\Paiement;
+use App\Models\paiement;
 
 
 class TransportsExport implements FromCollection, WithHeadings

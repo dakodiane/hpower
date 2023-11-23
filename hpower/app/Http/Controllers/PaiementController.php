@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Produit;
 
-use App\Models\Paiement;
+use App\Models\paiement;
 
 use Illuminate\Http\Request;
 
@@ -31,7 +31,7 @@ class PaiementController extends Controller
              // 'recette'=>'numeric'
         ]);
    
-        $newPaie = new Paiement();
+        $newPaie = new paiement();
         $newPaie->paie_prixlivraison=$request->pvf;
         $newPaie->montant_HPG=$request->phpg;
         $newPaie->recette=$request->recette_HPG;

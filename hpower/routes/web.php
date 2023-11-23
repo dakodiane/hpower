@@ -251,3 +251,6 @@ Route::get('allcamionext/', 'App\Http\Controllers\AdminController@camionsE')->na
 
 Route::get('loadingadmin/', 'App\Http\Controllers\AdminController@loadingadmin')->name('loadingadmin');
 Route::get('bookingadmin/', 'App\Http\Controllers\AdminController@bookingadmin')->name('bookingadmin');
+
+
+Route::get('export-fournisseurs/', 'App\Http\Controllers\fournicontroller@exportFournisseurs')->name('export-fournisseurs');
