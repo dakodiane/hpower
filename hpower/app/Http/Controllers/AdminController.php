@@ -25,6 +25,13 @@ class AdminController extends Controller
      
         return view('Admin/createproduit', compact('produits'));
     }
+
+    public function produitext()
+    {
+        $produits = Produit::all();
+     
+        return view('services_semence.listprod', compact('produits'));
+    }
     
         
     public function createproduit(Request $request)

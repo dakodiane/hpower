@@ -10,6 +10,8 @@ use App\Http\Controllers\IdentifyController;
 use App\Http\Controllers\fournicontroller;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ServicetransController;
+use App\Http\Controllers\ForgotPasswordController;
+use App\Http\Controllers\ResetPasswordController;
 
 /*
 |--------------------------------------------------------------------------
@@ -37,8 +39,6 @@ Route::get('consultation/', function () {
     return view('fourni/consultaion');
 });
 
-
-
 Route::get('consultation/', 'App\Http\Controllers\fourniController@show')->name('Consultcam.show');
 Route::get('enregistcamion/', 'App\Http\Controllers\fourniController@create')->name('fourni.create');
 Route::post('enregistcamion/','App\Http\Controllers\fourniController@store')->name('fourni.store');
@@ -57,10 +57,16 @@ Route::get('servicetrans/','App\Http\Controllers\ServicetransController@statisti
 Route::get('servpaiement/{transport_id}/', 'App\Http\Controllers\ServicetransController@paiement')->name('Servicetrans.servpaiement');
 Route::get('servpaiement/{transport_id}/store/', 'App\Http\Controllers\ServicetransController@storepaie')->name('Servicetrans.storepaie');
 
+// AUTHENTICATION ROUTES
 Route::get('/connexion','App\Http\Controllers\IdentifyController@connexion')->name('connexion');
-Route::get('/inscription','App\Http\Controllers\IdentifyController@inscription')->name('inscription');
+Route::get('/inscription','App\Http\Controllers\IdentifyController@inscription');
 Route::post('/inscription','App\Http\Controllers\IdentifyController@registerUser')->name('inscription');
 Route::post('/connexion','App\Http\Controllers\IdentifyController@loginUser')->name('connexion');
+
+Route::get('/connexion/editpassword', [PasswordController::class, 'showModifyForm'])->name('resetpassword');
+
+Route::post('/connexion/correctpassword', [PasswordController::class, 'treatModifyForm'])->name('reeditpassword');
+
 
 //SEMENCE
 Route::group([
@@ -80,8 +86,9 @@ Route::group([
     
     Route::get('/semences/control', [semencesController::class,'sellSeedView'])->name('control');
 
+    // In routes/web.php
+    Route::get('/export/excel', [semencesController::class,'exportExcel'])->name('export.excel');
 
-    Route::get('/export-excel',[semencesController::class,'exportExcel'])->name('telecharger');
 
     // Route::get('semences/{semence_id}/store/', 'App\Http\Controllers\semencesController@storepaie')->name('validation');
 
@@ -90,6 +97,12 @@ Route::group([
     Route::get('/get-result',[ResearchController::class,'result'])->name('get-result');
 
     Route::get('/semences/consultationachat',[semencesController::class,'storepaie'])->name('consultationsem');
+
+    Route::get('/semences/listprod','App\Http\Controllers\AdminController@produitext')->name('afficherprod');
+
+    Route::get('/semences/createproduit','App\Http\Controllers\semencesController@productForm')->name('createproduit');
+
+    Route::post('/semences/produit','App\Http\Controllers\semencesController@createproduitext')->name('produits');
 
 });
 
@@ -110,6 +123,8 @@ Route::group([
     Route::get('/approfourni', 'App\Http\Controllers\AfficheFourniController@fournisseur')->name('approfourni');
 
 });
+
+
 
 
 

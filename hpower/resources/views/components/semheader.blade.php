@@ -70,8 +70,18 @@
                   <span class="menu-title">CONSULTATION</span>
                 </a>
               </li>
-             
-           
+               <li class="nav-item">
+                <a class="nav-link" href="{{route('createproduit')}}">
+                  <i class="icon-grid menu-icon"></i>
+                  <span class="menu-title">AJOUTER UN PRODUIT</span>
+                </a>
+              </li>
+               <li class="nav-item">
+                <a class="nav-link" href="{{route('afficherprod')}}">
+                  <i class="icon-grid menu-icon"></i>
+                  <span class="menu-title">LISTE DES PRODUITS</span>
+                </a>
+              </li>          
               <li class="nav-item">
                 <a class="nav-link" href="{{route('logout')}}">
                   <i class="icon-paper menu-icon"></i>

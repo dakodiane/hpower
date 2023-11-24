@@ -17,6 +17,8 @@
             <div class="row">
                 <div class="col-lg-12 grid-margin stretch-card">
                     <div class="card">
+                        <a href="{{ route('export.excel') }}" class="btn btn-success">Télécharger Excel</a>
+
                         <div class="card-body" style="overflow-x: scroll;">
                             <h4 class="card-title">Réception des semences </h4>
 
@@ -57,7 +59,7 @@
                                             <td>{{ $semence->sem_prixunit * $semence->sem_qtereçu }}</td>
                                             <td>{{now()->format('d-m-Y')}}</td>
                                             <td>{{ $semence->sem_numtrans }}</td>
-                                            <td><a href="{{ asset($semence->semence_id) }}" type="button" class="btn btn-success btn-md">Voir la photo</a></td>           
+                                            <td><a href="{{ asset($semence->semence_numtrans) }}" type="button" class="btn btn-success btn-md">Voir la photo</a></td>           
                                              <td>{{ $semence->sem_deplace }}</td>
                                              <td><a href="{{ route('vente', ['semence_id' => $semence->semence_id]) }}" class="btn btn-primary">VENDRE</a>   </td>
                                             <!-- Ajoutez d'autres colonnes si nécessaire -->

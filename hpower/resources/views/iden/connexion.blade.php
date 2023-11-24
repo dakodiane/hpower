@@ -53,11 +53,22 @@
                 <label class="form-label" for="password">Mot de passe</label>
               </div>
 
-              <button type="submit" class="btn btn-primary btn-block mb-4">
-                Se connecter
-              </button>
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <button type="submit" class="btn btn-primary btn-block mb-4">Se connecter</button>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <p class="text-center"><a href="{{ route('resetpassword', ['user_id' => $user->user_id]) }}">Réinitialiser le mot de passe</a></p>
+                  </div>
+                </div>
+              </div> 
+              <div class="row">
+                
+              </div>                     
             </form>
-
           </div>
         </div>
       </div>
