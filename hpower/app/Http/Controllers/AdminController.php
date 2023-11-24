@@ -29,11 +29,7 @@ class AdminController extends Controller
         return view('Admin/createproduit', compact('produits'));
     }
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
 
->>>>>>> 1806d1b58709aad1729ef27d9968acd10d7f0de1
     public function produitext()
     {
         $produits = Produit::all();
@@ -41,13 +37,6 @@ class AdminController extends Controller
         return view('services_semence.listprod', compact('produits'));
     }
     
-        
-<<<<<<< HEAD
-=======
-
->>>>>>> d3be7a9081187f2603e1d2449162ece26395c8ef
-=======
->>>>>>> 1806d1b58709aad1729ef27d9968acd10d7f0de1
     public function createproduit(Request $request)
     {
         $request->validate([

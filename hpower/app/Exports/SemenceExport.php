@@ -21,7 +21,6 @@ class SemenceExport implements FromCollection
         return [
             'N° Transaction',
             'Numéro de Bordereau',
-            'Numéro d\'immatriculation',
             'Fournisseur',
             'Type de Semence',
             'Quantité Reçue',
@@ -33,7 +32,7 @@ class SemenceExport implements FromCollection
             'Déplacement',
             'Bordereau',
             'Provenance',
-            'Type de Paiement',
+            'Paiement',
             'Prix TP',
             'Prix HPG',
             'Montant TP',
@@ -59,7 +58,7 @@ class SemenceExport implements FromCollection
             $row = [
                 $semence->sem_numtrans,
                 $semence->numerodebord,
-                $semence->sem_nummatricul,
+                $semence->sem_fourni,
                 $semence->sem_client,
                 $semence->sem_type,
                 $semence->sem_qtereçu,

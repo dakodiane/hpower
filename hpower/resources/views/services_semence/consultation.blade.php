@@ -17,7 +17,7 @@
         <div class="row">
             <div class="col-lg-12 grid-margin stretch-card">
                 <div class="card">
-                    <a href="{{ route('export.excel') }}" class="btn btn-success">Télécharger Excel</a>
+                    
 
                     <div class="card-body" style="overflow-x: scroll;">
                         <h4 class="card-title">Réception des semences </h4>
@@ -67,7 +67,7 @@
                                     @endforeach
                                 </tbody>
                             </table>
-                            <!-- <a href="{{ route('exportExcel', ['viewType' => 'servconsultation']) }}" class="btn btn-success">Télécharger Excel</a> -->
+                            <a href="{{ route('export.excel') }}" class="btn btn-success">Télécharger Excel</a>
 
                             @else
                             <p>Aucune réception enregistrée.</p>
