@@ -266,7 +266,7 @@ class semencesController extends Controller
 
             $produits->save();
         
-            return redirect()->intended(route('services_semence.createproduit',  compact('produits')));
+            return redirect()->intended(route('appro.createproduit',  compact('produits')));
         }
 
         

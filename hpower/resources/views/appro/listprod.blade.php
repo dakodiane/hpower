@@ -1,4 +1,4 @@
-@extends('templates.semlayout') 
+@extends('templates.appro') 
 
 @section('document')
 <style>

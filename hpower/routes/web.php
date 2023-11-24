@@ -89,20 +89,15 @@ Route::group([
     // In routes/web.php
     Route::get('/export/excel', [semencesController::class,'exportExcel'])->name('export.excel');
 
-
-    // Route::get('semences/{semence_id}/store/', 'App\Http\Controllers\semencesController@storepaie')->name('validation');
-
     Route::get('/search',[ResearchController::class,'search']);
 
     Route::get('/get-result',[ResearchController::class,'result'])->name('get-result');
 
     Route::get('/semences/consultationachat',[semencesController::class,'storepaie'])->name('consultationsem');
 
-    Route::get('/semences/listprod','App\Http\Controllers\AdminController@produitext')->name('afficherprod');
+ 
+});
 
-    Route::get('/semences/createproduit','App\Http\Controllers\semencesController@productForm')->name('createproduit');
-
-    Route::post('/semences/produit','App\Http\Controllers\semencesController@createproduitext')->name('produits');
 
 });
 
@@ -121,6 +116,12 @@ Route::group([
     Route::get('/approsem','App\Http\Controllers\semencesController@indexext')->name('approsem');
 
     Route::get('/approfourni', 'App\Http\Controllers\AfficheFourniController@fournisseur')->name('approfourni');
+       Route::get('/approvisionnement/listprod','App\Http\Controllers\AdminController@produitext')->name('afficherprod');
+
+    Route::post('/approvisionnement/produit','App\Http\Controllers\semencesController@createproduitext')->name('produits');
+
+    Route::get('createproduct/', function () {
+    return view('appro/createproduct');
 
 });
 

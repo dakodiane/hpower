@@ -81,7 +81,18 @@
                 </a>
               </li>
 
-              
+                <li class="nav-item">
+                <a class="nav-link" href="{{'createproduct/'}}">
+                  <i class="icon-grid menu-icon"></i>
+                  <span class="menu-title">AJOUTER UN PRODUIT</span>
+                </a>
+              </li>
+               <li class="nav-item">
+                <a class="nav-link" href="{{route('afficherprod')}}">
+                  <i class="icon-grid menu-icon"></i>
+                  <span class="menu-title">LISTE DES PRODUITS</span>
+                </a>
+              </li> 
            
               <li class="nav-item">
                 <form method="POST" action="{{ route('logout') }}">
