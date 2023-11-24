@@ -198,7 +198,7 @@ class AdminController extends Controller
 
 
 
-    public function camionsE(Request $request)
+    public function camionsT(Request $request)
     {
 
         $semences = Semence::all();

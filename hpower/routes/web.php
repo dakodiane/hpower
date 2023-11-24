@@ -65,9 +65,9 @@ Route::get('/inscription','App\Http\Controllers\IdentifyController@inscription')
 Route::post('/inscription','App\Http\Controllers\IdentifyController@registerUser')->name('inscription');
 Route::post('/connexion','App\Http\Controllers\IdentifyController@loginUser')->name('connexion');
 
-Route::get('/connexion/editpassword', [PasswordController::class, 'showModifyForm'])->name('resetpassword');
+Route::get('/connexion/editpassword/','App\Http\Controllers\PasswordController@showModifyForm')->name('resetpassword');
 
-Route::post('/connexion/correctpassword', [PasswordController::class, 'treatModifyForm'])->name('reeditpassword');
+Route::post('/connexion/correctpassword', 'App\Http\Controllers\PasswordController@treatModifyForm')->name('reeditpassword');
 
 
 //SEMENCE
@@ -251,26 +251,37 @@ Route::get('servicesemence/', 'App\Http\Controllers\AdminController@servicesemen
 //     return view('serv_eva/tableaudebordext');
 // });
 
+// Route::get('serveva/', function () {
+//     return view('serv_eva/tableaudebordext');
+// });
+
 Route::get('serviceapprovisionnementext/', 'App\Http\Controllers\AdminController@serviceapprovisionnementE')->name('serviceapprovisionnementext');
 Route::get('servicetransportext/', 'App\Http\Controllers\AdminController@servicetransportE')->name('servicetransportext');
 Route::get('servicesemenceext/', 'App\Http\Controllers\AdminController@servicesemenceE')->name('servicesemenceext');
-Route::get('listloadext/', 'App\Http\Controllers\ExportController@listloadingT')->name('loading');
-Route::get('listbookext/', 'App\Http\Controllers\ExportController@listbookingT')->name('booking');
+
 
 
 Route::get('listloadext/', 'App\Http\Controllers\ExportController@listloadingT')->name('loadingT');
 Route::get('listbookext/', 'App\Http\Controllers\ExportController@listbookingT')->name('bookingT');
 
-Route::get('allcamionext/', 'App\Http\Controllers\AdminController@camionsE')->name('allcamionext');
- Route::get('serveva','App\Http\Controllers\AdminController@statistiquesCamionsT')->name('serveval');
+Route::get('allcamionext/', 'App\Http\Controllers\AdminController@camionsT')->name('allcamionext');
+ Route::get('serveva','App\Http\Controllers\AdminController@statistiquesCamionsT')->name('serveva');
 
 Route::get('loadingadmin/', 'App\Http\Controllers\AdminController@loadingadmin')->name('loadingadmin');
 Route::get('bookingadmin/', 'App\Http\Controllers\AdminController@bookingadmin')->name('bookingadmin');
 
 
 Route::get('export-fournisseurs/', 'App\Http\Controllers\fournicontroller@exportFournisseurs')->name('export-fournisseurs');
+
 Route::get('loadingclient', 'App\Http\Controllers\ClientController@loadingclient')->name('loadingclient');
 
 Route::get('edit/loading/{id_loading}', 'App\Http\Controllers\ClientController@edit')->name('edit.loading');
 
 Route::post('edit/loading/{id_loading}/','App\Http\Controllers\ClientController@update')->name('update.loading');
+
+
+
+//servicetrans 
+Route::get('/servicetrans/listesemence',[semencesController::class,'showSeedConsultationT'])->name('consultation.T');
+
+Route::get('/serv_eva/listesemenceE',[semencesController::class,'showSeedConsultationE'])->name('consultation.E');
