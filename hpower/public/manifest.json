@@ -1,0 +1,17 @@
+{
+    "name": "Powerlogistika",
+    "short_name": "PL",
+    "start_url": "/",
+    "background_color": "#6777ef",
+    "description": "Powerlogistika",
+    "display": "fullscreen",
+    "theme_color": "#6777ef",
+    "icons": [
+        {
+            "src": "hpower.jpeg",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "any maskable"
+        }
+    ]
+}

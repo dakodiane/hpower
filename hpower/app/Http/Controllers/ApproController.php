@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Approvisionnement;
 use App\Models\Produit;
-use App\Models\paiement;
+use App\Models\Paiement;
 use App\Models\Semence;
 use App\Models\Camion;
 use App\Models\Fournisseur;
@@ -44,6 +44,91 @@ class ApproController extends Controller
     }
 
 
+        
+    public function paiefourni($fournisseur_id)
+    {
+     $camions = Fournisseur::find($fournisseur_id);
+     $nom_fournisseur = $camions->utilisateur->name;
+     return view('Appro/paiefournisseur', compact('camions','nom_fournisseur'));
+    }
+
+
+    public function storepaie(Request $request, $fournisseur_id)
+    {
+        $user = Auth::user();
+        // Récupérer le fournisseur
+        $camions = Fournisseur::find($fournisseur_id);
+    
+        // Récupérer les données du formulaire
+        $data = $request->all();
+    
+        // Calculs pour le modèle Paiement
+        $poidsNet = $camions->poids_net; // Assurez-vous que le champ existe dans le modèle Fournisseur
+    
+        // Assurez-vous que ces champs existent dans le modèle Fournisseur
+        $prix_unit = $camions->prix_unit; 
+        $prix_HPG = $request->input('prix_HPG');
+    
+    
+        $montant_tp = $poidsNet * $prix_unit; // Calcul du montant total du fournisseur
+        $montant_HPG = $poidsNet * $prix_HPG; // Calcul du montant HPG
+    
+        $recette_HPG = $montant_tp - $montant_HPG;
+      
+    
+        // Créer une nouvelle instance de Paiement
+        $paiement = new Paiement();
+        $paiement->fill($data);
+        
+    
+        $paiement->montant_tp = $montant_tp;
+        $paiement->montant_HPG = $montant_HPG;
+        $paiement->recette_HPG = $recette_HPG;
+        
+        
+       
+        $paiement->util_id = $user->id;
+    
+        // Enregistrer le paiement en le liant au fournisseur
+        $camions->paiements()->save($paiement);
+    
+        // Rediriger vers la page appropriée
+        session()->flash('success', 'L\'enregistrement a été effectué avec succès!');
+        return redirect()->back()->with('success', 'Paiement enregistré avec succès.');
+    }
+    
+
+
+
+    public function payefourn()
+    {
+        // Récupérer les fournisseurs avec paiement associé
+        $camions = Fournisseur::has('paiements')->with('paiements')->get();
+    
+        // Retourner la vue avec les données
+        return view('appro.fournpaye', compact('camions'));
+    }
+
+    
+    
+    public function payefournt()
+    {
+        // Récupérer les fournisseurs avec paiement associé
+        $camions = Fournisseur::has('paiements')->with('paiements')->get();
+    
+        // Retourner la vue avec les données
+        return view('servicetrans.payefournit', compact('camions'));
+    }
+    
+
+
+
+
+
+
+
+
+   
     public function hpg()
     {   
           $user = Auth::user();

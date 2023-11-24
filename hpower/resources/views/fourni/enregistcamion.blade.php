@@ -10,6 +10,11 @@
               <div class="card">
                 <div class="card-body">
                       <h4 class="card-title">Enregistrement de camion </h4>   
+                      @if(session('error'))
+                            <div class="alert alert-danger">
+                                {{ session('error') }}
+                            </div>
+                        @endif
                       <form method="POST" action="{{ route('fourni.store') }}" enctype="multipart/form-data">
                           @csrf <!-- Le CSRF pour la sécurité -->
           
@@ -65,6 +70,10 @@
                     <div class="form-group">
                       <label for="exampleInputCity1">Nombre de sacs</label>
                       <input type="number" class="form-control" id="exampleInputCity1" placeholder="" required name="nombre_sac" required>
+                    </div> 
+                    <div class="form-group">
+                      <label for="exampleInputCity1">Prix FCFA/TONNE</label>
+                      <input type="number" class="form-control" id="exampleInputCity1" placeholder="" required name="prix_unit" required>
                     </div>   
                     
                     <div class="form-group">
@@ -101,6 +110,7 @@
         </div>
  
       </div>
+
 
       <script>
   var input = document.getElementById('destination');
@@ -159,6 +169,5 @@
     background-color: #f0f0f0;
   }
 </style>
-
 
 @endsection

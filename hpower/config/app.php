@@ -170,7 +170,11 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         Barryvdh\DomPDF\ServiceProvider::class,
+
         Maatwebsite\Excel\ExcelServiceProvider::class,
+
+        Ladumor\LaravelPwa\PWAServiceProvider::class,
+
     ])->toArray(),
 
 
@@ -188,6 +192,8 @@ return [
 
     'aliases' => Facade::defaultAliases()->merge([
         'PDF' => Barryvdh\DomPDF\Facade::class,
+        'LaravelPwa' => \Ladumor\LaravelPwa\LaravelPwa::class,
+
         // 'Example' => App\Facades\Example::class,
          Maatwebsite\Excel\Facades\Excel::class,
         

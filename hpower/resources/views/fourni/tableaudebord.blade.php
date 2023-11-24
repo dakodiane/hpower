@@ -20,7 +20,8 @@
             <div class="justify-content-end d-flex">
               <div class="dropdown flex-md-grow-1 flex-xl-grow-0">
                 <button class="btn btn-sm btn-light bg-white ">
-                  <i class="mdi mdi-calendar"></i> Today (10 Jan 2021)
+                <i class="mdi mdi-calendar"></i> {{ \Carbon\Carbon::now()->format('d M Y') }}
+
                 </button>
 
               </div>

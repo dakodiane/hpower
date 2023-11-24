@@ -3,8 +3,12 @@
 
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="manifest" href="{{ asset('manifest.json') }}">
+  <link rel="apple-touch-icon" href="{{ asset('icons/icon-192x192.png') }}">
+  <meta name="theme-color" content="#ffffff">
+  <meta name="description" content="">
   <title>Inscription</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 </head>
@@ -73,17 +77,25 @@
 
               {{-- Categories select --}}
               <br> <select class="form-select" name="role" aria-label="Default select example">
-               <!--   <option value="directeur">Directeur</option>-->
+         <option value="directeur">Directeur</option>
                 <option value="fournisseur">Fournisseur</option>
 
                 <option value="rapporteur" selected>Rapporteur</option>
 
+<<<<<<< HEAD
                  <option value="servicesemence">Service des Semences</option>
+=======
+             <option value="servicesemence">Service des Semences</option>
+>>>>>>> d3be7a9081187f2603e1d2449162ece26395c8ef
 
                 <option value="servicetransport">Service des Transports</option>
 
                 <option value="serviceappro">Service d'approvisionnement</option>
+<<<<<<< HEAD
 
+=======
+                <option value="servicevalutation">Service d'évalutation</option>
+>>>>>>> d3be7a9081187f2603e1d2449162ece26395c8ef
                 <option value="export">Export</option>
               </select>
               <label class="form-label" for="form3Example4">Qui êtes-vous?</label>

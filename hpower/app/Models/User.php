@@ -10,10 +10,11 @@ use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Auth\Passwords\CanResetPassword;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 
-class User extends Authenticatable implements CanResetPasswordContract
+
+class User extends Authenticatable implements MustVerifyEmail
 {
-    use Notifiable, CanResetPassword, HasApiTokens, HasFactory;
-   
+    use HasApiTokens, HasFactory, Notifiable;
+
     /**
      * The attributes that are mass assignable.
      *
@@ -29,9 +30,9 @@ class User extends Authenticatable implements CanResetPasswordContract
         'email_check',
         'last_activity',
         'adresse',
-        'num_enregistrment',
+        'num_enregistrement', // Correction de la propriété
         'nom_entreprise',
-        'confirmation_token',
+        'confirmation_token', // Ajout de la propriété
     ];
 
     /**
@@ -58,5 +59,4 @@ class User extends Authenticatable implements CanResetPasswordContract
     {
         $this->update(['last_activity' => now()]);
     }
- 
 }

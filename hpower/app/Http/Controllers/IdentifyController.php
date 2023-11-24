@@ -115,6 +115,9 @@ class IdentifyController extends Controller
                     } elseif ($user->role == 'serviceappro') {
                         $request->session()->regenerate();
                         return redirect('approvisionnement');
+                    } elseif ($user->role == 'servicevalutation') {
+                        $request->session()->regenerate();
+                        return redirect()->intended('serveva');
                     } elseif ($user->role == 'export') {
                         $request->session()->regenerate();
                         return redirect('export');
@@ -132,6 +135,7 @@ class IdentifyController extends Controller
         return redirect()->back()->withErrors(['email' => 'Adresse Email ou Mot de passe incorrect'])->withInput();
     }
     
+
     public function logout(Request $request)
     {
         $user = Auth::user();

@@ -52,10 +52,7 @@
                   <span class="menu-title">TABLEAU DE BORD</span>
                 </a>
               </li>
-<<<<<<< HEAD
 
-=======
->>>>>>> ef6b7c8cec86fc342e36cbb65ec53f5506db4f65
               <li class="nav-item">
                 <a class="nav-link" href="{{ '/approvisionnement/hpg' }}"> 
                   <i class="icon-grid menu-icon"></i>
@@ -74,6 +71,23 @@
                   <span class="menu-title">FOURNISSEUR</span>
                 </a>
               </li>
+
+              <li class="nav-item">
+            <a class="nav-link" data-toggle="collapse" href="#icons" aria-expanded="false" aria-controls="icons">
+              <i class="ti-truck menu-icon"></i>
+              <span class="menu-title">FOURNISSEUR</span>
+              <i class="menu-arrow"></i>
+            </a>
+            <div class="collapse" id="icons">
+              <ul class="nav flex-column sub-menu">
+                <li class="nav-item"> <a class="nav-link" href="{{route('approfourni')}}">Non payé</a></li>
+                <li class="nav-item"> <a class="nav-link" href="{{route('payefourni')}}">Payé</a></li>
+
+
+              </ul>
+            </div>           
+          </li>
+              
               <li class="nav-item">
                 <a class="nav-link" href="{{ route('approsem') }}">
                   <i class="icon-grid menu-icon"></i>
@@ -95,14 +109,14 @@
               </li> 
            
               <li class="nav-item">
-                <form method="POST" action="{{ route('logout') }}">
-                    @csrf
-                    <button type="submit" class="nav-link" style="border: none; background: none; padding: 0; margin: 0; cursor: pointer;">
-                        <i class="icon-paper menu-icon"></i>
-                      <span class="menu-title">DECONNEXION</span>
-                    </a>
-                </form>
-              </li> 
+            <form method="POST" action="{{ route('logout') }}">
+                @csrf
+                <button type="submit" class="nav-link" style="border: none; background: none; padding: 0; margin: 0; cursor: pointer;">
+                    <i class="icon-paper menu-icon"></i>
+            <span class="menu-title">Déconnexion</span>
+                </a>
+            </form>
+        </li>
             </ul>
           </nav>
           

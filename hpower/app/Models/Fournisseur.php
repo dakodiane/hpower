@@ -35,15 +35,16 @@ class Fournisseur extends Model
         'nombre_sacs',
         'cam_photo2',
         'bordereauchargement',
+        'prix_unit',
     ];
 
 
             // Dans le modèle Camion
-        public function paiements()
-        {
-            return $this->hasMany(Paiement::class, 'fournisseur_id');
-        }
-
+            public function paiements()
+            {
+                return $this->hasMany(Paiement::class, 'fournisseur_id');
+            }
+        
         public function utilisateur()
         {
             return $this->belongsTo(User::class, 'util_id');

@@ -39,9 +39,9 @@ Route::get('consultation/', function () {
     return view('fourni/consultaion');
 });
 
-Route::get('consultation/', 'App\Http\Controllers\fourniController@show')->name('Consultcam.show');
-Route::get('enregistcamion/', 'App\Http\Controllers\fourniController@create')->name('fourni.create');
-Route::post('enregistcamion/','App\Http\Controllers\fourniController@store')->name('fourni.store');
+Route::get('consultation/', 'App\Http\Controllers\fournicontroller@show')->name('fourni.show');
+Route::get('enregistcamion/', 'App\Http\Controllers\fournicontroller@create')->name('fourni.create');
+Route::post('enregistcamion/','App\Http\Controllers\fournicontroller@store')->name('fourni.store'); 
 Route::get('fourni/','App\Http\Controllers\fournicontroller@statistiqueCamions');
 
 //Admin
@@ -225,10 +225,48 @@ Route::get('GeneratePDF', [ServicetransController::class, 'GeneratePDF'])->name(
 
 Route::get('/recherche', 'SearchController@search')->name('search');
 
-
 Route::get('/export-excel/{viewType}', 'App\Http\Controllers\ServicetransController@exportExcel')->name('exportExcel');
 
 
 
 
+///fournisseur paie dans appro
 
+// Pour afficher la page
+Route::get('paiefournisseur/{fournisseur_id}/', 'App\Http\Controllers\ApproController@paiefourni')->name('paiefourni');
+
+// Pour traiter les données
+Route::post('paiefournisseur/{fournisseur_id}/store', 'App\Http\Controllers\ApproController@storepaie')->name('fourni.storepaie');
+
+Route::GET('payefourni/', 'App\Http\Controllers\ApproController@payefourn')->name('payefourni');
+
+Route::GET('payefournit/', 'App\Http\Controllers\ApproController@payefournt')->name('payefournit');
+
+Route::get('serviceapprovisionnement/', 'App\Http\Controllers\AdminController@serviceapprovisionnement')->name('serviceapprovisionnement');
+Route::get('servicetransport/', 'App\Http\Controllers\AdminController@servicetransport')->name('servicetransport');
+Route::get('servicesemence/', 'App\Http\Controllers\AdminController@servicesemence')->name('servicesemence');
+
+//consultation
+
+// Route::get('serveva/', function () {
+//     return view('serv_eva/tableaudebordext');
+// });
+
+Route::get('serviceapprovisionnementext/', 'App\Http\Controllers\AdminController@serviceapprovisionnementE')->name('serviceapprovisionnementext');
+Route::get('servicetransportext/', 'App\Http\Controllers\AdminController@servicetransportE')->name('servicetransportext');
+Route::get('servicesemenceext/', 'App\Http\Controllers\AdminController@servicesemenceE')->name('servicesemenceext');
+Route::get('listloadext/', 'App\Http\Controllers\ExportController@listloadingT')->name('loading');
+Route::get('listbookext/', 'App\Http\Controllers\ExportController@listbookingT')->name('booking');
+
+
+Route::get('listloadext/', 'App\Http\Controllers\ExportController@listloadingT')->name('loadingT');
+Route::get('listbookext/', 'App\Http\Controllers\ExportController@listbookingT')->name('bookingT');
+
+Route::get('allcamionext/', 'App\Http\Controllers\AdminController@camionsE')->name('allcamionext');
+ Route::get('serveva','App\Http\Controllers\AdminController@statistiquesCamionsT')->name('serveval');
+
+Route::get('loadingadmin/', 'App\Http\Controllers\AdminController@loadingadmin')->name('loadingadmin');
+Route::get('bookingadmin/', 'App\Http\Controllers\AdminController@bookingadmin')->name('bookingadmin');
+
+
+Route::get('export-fournisseurs/', 'App\Http\Controllers\fournicontroller@exportFournisseurs')->name('export-fournisseurs');

@@ -70,13 +70,26 @@
                   <span class="menu-title">CONSULTATION</span>
                 </a>
               </li>
+<<<<<<< HEAD
                       
               <li class="nav-item">
                 <a class="nav-link" href="{{route('logout')}}">
                   <i class="icon-paper menu-icon"></i>
                   <span class="menu-title">DECONNEXION</span>
+=======
+             
+           
+             
+          <li class="nav-item">
+            <form method="POST" action="{{ route('logout') }}">
+                @csrf
+                <button type="submit" class="nav-link" style="border: none; background: none; padding: 0; margin: 0; cursor: pointer;">
+                    <i class="icon-paper menu-icon"></i>
+            <span class="menu-title">Déconnexion</span>
+>>>>>>> d3be7a9081187f2603e1d2449162ece26395c8ef
                 </a>
-              </li>
+            </form>
+        </li>
             </ul>
           </nav>
           

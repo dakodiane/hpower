@@ -17,7 +17,7 @@
       <div class="col-lg-12 grid-margin stretch-card">
         <div class="card">
           <div class="card-body">
-            <h4 class="card-title">Liste fournisseur</h4>
+            <h4 class="card-title">Liste fournisseurs</h4>
             <div class="table-responsive">
            
               <table class="tableau">

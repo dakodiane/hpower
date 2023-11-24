@@ -119,6 +119,7 @@ class semencesController extends Controller
                 $matriculPath = 'photo_immat/' . $matriculName;
                 $validatedData['matricul'] = $matriculPath;
 
+   // POur la vente
 
                   $date = now()->format('d-m-Y');
                   $validatedData['date'] = $date;
@@ -244,7 +245,6 @@ class semencesController extends Controller
 
 
         public function sellSeedView(){
-
             $user = Auth::user();
             $semences = Semence::orderBy('created_at', 'desc')->paginate(10);
 
@@ -277,7 +277,12 @@ class semencesController extends Controller
         $semences = Semence::all();
 
         return Excel::download(new SemenceExport($semences), 'semences.xlsx');
-    }
 
+            return view('services_semence.control', compact('user', 'semences'));
+    }
+        
 
 }
+
+
+

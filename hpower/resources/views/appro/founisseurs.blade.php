@@ -38,7 +38,7 @@
                     <th>Poids chargé</th>
                     <th>Poids vide</th>
                     <th>Poids net</th>
-                
+                    <th>Action</th>                
                   </tr>
                 </thead>
                 <tbody>
@@ -59,6 +59,8 @@
                     <td>{{ $camion->poids_charge}}</td>
                     <td>{{ $camion->poids_vide}}</td>
                     <td>{{ $camion->poids_net}}</td>
+                    <td><a href="{{ route('paiefourni', ['fournisseur_id' => $camion->fournisseur_id]) }}" type="button" class="btn btn-success btn-md">Finaliser</a></td>
+
                   </tr>
                   @endforeach
                 </tbody>

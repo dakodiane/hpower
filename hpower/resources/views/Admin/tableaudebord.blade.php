@@ -1,6 +1,22 @@
 @extends('templates.app')
 
 @section('document')
+<style>
+  .reset-styles,
+  .reset-styles *,
+  .reset-styles *::before,
+  .reset-styles *::after {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font: inherit;
+    vertical-align: baseline;
+    box-sizing: border-box;
+    color: inherit;
+    text-decoration: none;
+    list-style: none;
+  }
+</style>
 
 <div class="main-panel">
   <div class="content-wrapper">
@@ -56,9 +72,56 @@
             </div>
           </div>
         </div>
+
+        <div class="row">
+            <div class="col-md-6 mb-4 mb-lg-0 stretch-card transparent" class="reset-styles">
+              <div class="card card-light-blue">
+                  <a href="{{'servicetransport'}}">
+                <div class="card-body">
+                  <p class="mb-4" style="color: white;">Tranports</p>
+                  <p class="fs-30 mb-2" style="color: white;">{{$transportsCeMois}} camions</p>
+
+                </div>
+                </a>
+              </div>
+            </div>
+          
+
+          
+            <div class="col-md-6 stretch-card transparent" class="reset-styles">
+         
+              <div class="card card-light-danger">
+              <a href="{{'servicesemence'}}">
+                <div class="card-body">
+                  <p class="mb-4" style="color: white;">Semences</p>
+                  <p class="fs-30 mb-2" style="color: white;">{{$semencesCeMois}} camions</p>
+
+                </div>
+                </a>
+              </div>
+            
+            </div>
+       
+
+        </div> <br><br>
+        <a href="{{'serviceapprovisionnement'}}" class="reset-styles">
+
+          <div class="row">
+            <div class="col-md-12 mb-4 mb-lg-0 stretch-card transparent">
+              <div class="card card-light-blue">
+                <div class="card-body">
+                  <p class="mb-4" style="color: white;">Approvisionnements</p>
+                  <p class="fs-30 mb-2" style="color: white;">{{$appro}} camions</p>
+
+                </div>
+              </div>
+            </div>
+
+
+          </div>
+        </a>
       </div>
     </div>
-
   </div>
 </div>
 </div>

@@ -41,6 +41,8 @@ class ExportController extends Controller
         //  compact('camionsAujourdhui', 'camionsCeMois', 'user'
 
     }
+    
+    
 
     public function listloading()
     {
@@ -129,4 +131,23 @@ class ExportController extends Controller
         $loadings = Loading::all();
         return view('Export/listloading', compact('loadings', 'bookings'));
     }
+
+
+    ///////
+
+
+
+
+    public function listbookingT()
+    {
+        $bookings = Booking::all();
+        return view('serv_eva/listbookingext', compact('bookings'));
+    }
+
+    public function listloadingT()
+    {
+        $loadings = Loading::all();
+        return view('serv_eva/listloadingext', compact('loadings'));
+    }
+
 }

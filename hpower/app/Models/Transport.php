@@ -44,7 +44,7 @@ class Transport extends Model
 
     public function paiements()
     {
-        return $this->hasMany(Paiement::class, 'transport_id');
+        return $this->hasMany(paiement::class, 'transport_id');
     }
 
     public function utilisateur()
