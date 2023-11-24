@@ -269,3 +269,8 @@ Route::get('bookingadmin/', 'App\Http\Controllers\AdminController@bookingadmin')
 
 
 Route::get('export-fournisseurs/', 'App\Http\Controllers\fournicontroller@exportFournisseurs')->name('export-fournisseurs');
+Route::get('loadingclient', 'App\Http\Controllers\ClientController@loadingclient')->name('loadingclient');
+
+Route::get('edit/loading/{id_loading}', 'App\Http\Controllers\ClientController@edit')->name('edit.loading');
+
+Route::post('edit/loading/{id_loading}/','App\Http\Controllers\ClientController@update')->name('update.loading');
