@@ -136,9 +136,7 @@
             </table>
           </div>
 
-<<<<<<< HEAD
           @endsection
-=======
           {{-- Tableau de réception des appros --}}
               <br><br><br><div class="col-md-12 grid-margin stretch-card">
                 <div class="card">
@@ -183,4 +181,3 @@
                       </table>
                     </div>
               
->>>>>>> a68079457d0d3f2a6bba36822850d9f34e618548
