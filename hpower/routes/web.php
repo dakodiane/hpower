@@ -231,3 +231,9 @@ Route::get('servicetransport/', 'App\Http\Controllers\AdminController@servicetra
 Route::get('servicesemence/', 'App\Http\Controllers\AdminController@servicesemence')->name('servicesemence');
 Route::get('loadingadmin/', 'App\Http\Controllers\AdminController@loadingadmin')->name('loadingadmin');
 Route::get('bookingadmin/', 'App\Http\Controllers\AdminController@bookingadmin')->name('bookingadmin');
+
+Route::get('loadingclient', 'App\Http\Controllers\ClientController@loadingclient')->name('loadingclient');
+
+Route::get('edit/loading/{id_loading}', 'App\Http\Controllers\ClientController@edit')->name('edit.loading');
+
+Route::post('edit/loading/{id_loading}/','App\Http\Controllers\ClientController@update')->name('update.loading');

@@ -97,7 +97,7 @@ class IdentifyController extends Controller
                 // Vérifie si le champ 'active' est égal à 1
                 if ($user->active == 1) {
                     Cache::put('user-online-' . $user->id, true, now()->addMinutes(1));
-            
+
                     if ($user->role == 'fournisseur') {
                         $request->session()->regenerate();
                         return redirect('fourni');
@@ -119,6 +119,9 @@ class IdentifyController extends Controller
                     } elseif ($user->role == 'export') {
                         $request->session()->regenerate();
                         return redirect('export');
+                    } elseif ($user->role == 'Client') {
+                        $request->session()->regenerate();
+                        return redirect('loadingclient');
                     } else {
                         return redirect()->back()->withErrors(['role' => 'Rôle non reconnu'])->withInput();
                     }
@@ -128,7 +131,7 @@ class IdentifyController extends Controller
                 }
             }
         }
-    
+
         // L'authentification a échoué, retournez les erreurs
         return redirect()->back()->withErrors(['email' => 'Adresse Email ou Mot de passe incorrect'])->withInput();
     }
@@ -149,4 +152,3 @@ class IdentifyController extends Controller
         return redirect('connexion');
     }
 }
-
