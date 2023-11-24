@@ -172,6 +172,7 @@ return [
         Barryvdh\DomPDF\ServiceProvider::class,
         Ladumor\LaravelPwa\PWAServiceProvider::class,
 
+        Maatwebsite\Excel\ExcelServiceProvider::class,
     ])->toArray(),
 
 
@@ -192,6 +193,7 @@ return [
         'LaravelPwa' => \Ladumor\LaravelPwa\LaravelPwa::class,
 
         // 'Example' => App\Facades\Example::class,
+         Maatwebsite\Excel\Facades\Excel::class,
         
     ])->toArray(),
     

@@ -22,6 +22,7 @@
                 </div>
                 <div class="col-md-6 col-md-offset-1">
                     <div class="booking-form">
+ 
                         <form method="post" action="{{ route('analyse') }}" enctype="multipart/form-data">
                             @csrf
                             @method('post')
@@ -29,12 +30,9 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <select class="form-control" name="semence" id="villes" value="{{ old('semence') }}">
-                                            <option value="soja">sodja</option>
-                                            <option value="cajou">cajou</option>
-                                            <option value="riz">riz</option>
-                                            <option value="coton">coton</option>
-                                            <option value="Djougou">noix d'arnacarde</option>
-                                            <option value="noix de palme">noix de palme</option>                      
+                                            @foreach($produits as $produit)
+                                            <option value="{{$produit->prod_nom}}">{{$produit->prod_nom}}</option>
+                                            @endforeach                      
                                         </select>
                                         <span class="select-arrow"></span>
                                         <span class="form-label">Semences</span>
@@ -160,6 +158,7 @@
                                 </div>
                             </div>
                             <div class="form-btn">
+                                <input class="form-control" type="hidden" name="date" value="{{now()->toDateString('Y-m-d')}}">
                                 <button class="btn btn-danger" type="submit">VALIDER</button>
                             </div>
                         </form>

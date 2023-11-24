@@ -32,7 +32,7 @@
                                         <td>{{ $semence->sem_client }}</td>
                                         <td>{{ $semence->sem_lieusemi }}</td>
                                         <td>{{ $semence->sem_prixunitHPG * $semence->sem_qtevendu }}</td>
-                                        <td>{{ $semence->montantHPG - $semence->paie_prixlivraison }}</td>
+                                        <td>{{ $semence->sem_prixunitHPG * $semence->sem_qtevendu - $semence->sem_qtereçu*$semence->sem_prixunit}}</td>
                                     </tr>
        
                                 </tbody> 
@@ -41,7 +41,6 @@
                             @else
                                 <p>Aucune réception enregistrée.</p> 
                             @endif
-                            <!-- <a href="{{ route('exportExcel', ['viewType' => 'servconsultation']) }}" class="btn btn-success">Télécharger Excel</a> -->
                             <br><br><div style="width:500px; height: 25px">{{ $semences->links() }}</div>
                         </div>
                     </div>

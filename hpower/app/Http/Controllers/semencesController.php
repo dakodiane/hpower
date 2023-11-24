@@ -4,11 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Models\paiement;
 use App\Models\Semence;
+use App\Models\Produit;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use  PDF;
 use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\SemenceExport; 
+use Illuminate\Database\Eloquent\Collection;
 
 
 
@@ -62,7 +65,8 @@ class semencesController extends Controller
     
         public function showSeedReceptionForm()
         {
-            return view('services_semence.reception'); 
+            $produits = Produit::where('active', '1')->get();
+            return view('services_semence.reception', compact('produits')); 
         }
 
         public function showSeedConsultation()
@@ -90,6 +94,7 @@ class semencesController extends Controller
                 'bord' => 'string',
                 'moyen' => 'string',
                 'matricul' => 'image|mimes:jpeg,png,jpg,gif|max:5400',
+                'date' => 'string', 
             ]);
 
             // Calculate the value for "pl"
@@ -108,13 +113,16 @@ class semencesController extends Controller
             // For example, you can create and save instances of Semence and Paiement models
 
               // Handle the file upload
-                  if ($request->hasFile('matricul')) {
-                      // Store the uploaded file in the storage disk
-                      $path = $request->file('matricul')->store('public/images');
-                      $validatedData['matricul'] = $path;
-                  }
+                $matricul = $request->file('matricul');
+                $matriculName = time() . '.' . $matricul->extension();
+                $matricul->move(public_path('photo_immat'), $matriculName);
+                $matriculPath = 'photo_immat/' . $matriculName;
+                $validatedData['matricul'] = $matriculPath;
 
    // POur la vente
+
+                  $date = now()->format('d-m-Y');
+                  $validatedData['date'] = $date;
 
             $user = Auth::user();
 
@@ -135,6 +143,7 @@ class semencesController extends Controller
 
             $paiement = new Paiement();
             // Set other Paiement fields based on the form data
+            $paiement->date_paie = $validatedData['date'];
             $paiement->paie_prixlivraison = $validatedData['pl']; 
             $paiement->util_id = $user->id;
             $paiement->save();
@@ -150,7 +159,7 @@ class semencesController extends Controller
 
             private function generateTransactionNumber()
             {
-                $semence->util_id = $user->id;
+                
                 // Use the current timestamp as a unique identifier
                 $timestamp = now()->format('YmdHis');
 
@@ -187,15 +196,24 @@ class semencesController extends Controller
 
             // Validate the form data
             $validatedData = $request->validate([
+                'ql' => 'numeric',
                 'date' => 'string',
                 'qv' => 'required|numeric',
                 'puhpg' => 'required|numeric',
                 'montant' => 'numeric',
                 'lieusemi' => 'string',
                 'client' => 'required|string',
-                'pl' => 'numeric',
+                'prixUnitaire' => 'numeric',
                 'recette' => 'numeric',
             ]);
+
+            $ql = $validatedData['ql'];
+            $prixUnitaire = $validatedData['prixUnitaire'];
+            $montant = $validatedData['montant'];
+            $recette = $validatedData['recette'];
+
+            $montant = $validatedData['qv'] * $validatedData['puhpg'];
+            $recette = $montant - $ql*$prixUnitaire;
 
             $user = Auth::user();
 
@@ -207,7 +225,7 @@ class semencesController extends Controller
             $semence->save();
 
             // Calculate the value for "pl"
-            $montant = $validatedData['qv'] * $validatedData['puhpg'];
+            
             $validatedData['montant'] = $montant;
             $date = now()->format('d-m-Y');
             $validatedData['date'] = $date;
@@ -215,22 +233,51 @@ class semencesController extends Controller
             $paiement = new Paiement();
             // Set other Paiement fields based on the form data
             $paiement->date_paie = $validatedData['date'];
-            $paiement->montant_HPG = $validatedData['montant']; 
+            $paiement->montant_HPG = $montant; 
+            $paiement->recette_HPG = $recette;
             $paiement->util_id = $user->id;
             $paiement->save();
 
             $semence->paiements()->save($paiement);
 
-            $semences = Semence::orderBy('created_at', 'desc')->paginate(10);
-
-            return view('services_semence.control', compact('user', 'semences'));
+            
         }
 
 
         public function sellSeedView(){
             $user = Auth::user();
             $semences = Semence::orderBy('created_at', 'desc')->paginate(10);
+
             return view('services_semence.control', compact('user', 'semences'));
         }
+
+        public function productForm(){
+
+            return view('Admin/enregistrerproduit');
+        }
+
+        public function createproduitext(Request $request)
+        {
+            $request->validate([
+                'prod_nom' => 'required|string|max:255',
+            ]);
+            $produits = new Produit();
+            $produits->prod_nom = $request->input('prod_nom');
+
+            $produits->save();
         
+            return redirect()->intended(route('appro.createproduit',  compact('produits')));
+        }
+
+        
+
+
+       public function exportExcel()
+    {
+        $semences = Semence::all();
+
+        return Excel::download(new SemenceExport($semences), 'semences.xlsx');
     }
+
+
+}

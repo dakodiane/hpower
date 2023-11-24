@@ -69,8 +69,8 @@
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <input class="form-control" type="number" value="{{ isset($paiements) ? $paiements->paie_prixlivraison : '' }}" readonly>
-                                <span class="form-label">Prix de livraison</span>
+                                <input class="form-control" type="number" name="prixUnitaire" value="{{ isset($semences) ? $semences->sem_prixunit : '' }}" readonly>
+                                <span class="form-label">Prix unitaire à l'achat</span>
                             </div>
                         </div>
                     </div>
@@ -120,7 +120,7 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="form-group">
-                                <input class="form-control" type="number" name="recette" disabled>
+                                <input class="form-control" type="hidden" name="recette" disabled>
                                 <span class="form-label">Recette</span>
                             </div>
                         </div>

@@ -79,17 +79,26 @@
               <br> <select class="form-select" name="role" aria-label="Default select example">
          <option value="directeur">Directeur</option>
                 <option value="fournisseur">Fournisseur</option>
+
                 <option value="rapporteur" selected>Rapporteur</option>
 
+<<<<<<< HEAD
              <option value="servicesemence">Service des Semences</option>
+=======
+                 <option value="servicesemence">Service des Semences</option>
+>>>>>>> a68079457d0d3f2a6bba36822850d9f34e618548
 
                 <option value="servicetransport">Service des Transports</option>
+
                 <option value="serviceappro">Service d'approvisionnement</option>
+<<<<<<< HEAD
                 <option value="servicevalutation">Service d'évalutation</option>
+=======
+
+>>>>>>> a68079457d0d3f2a6bba36822850d9f34e618548
                 <option value="export">Export</option>
               </select>
               <label class="form-label" for="form3Example4">Qui êtes-vous?</label>
-
 
               <br>
               <div class="form-outline mb-4">
@@ -99,9 +108,19 @@
                 <ul id="villes-list"></ul>
               </div>
 
-              <br><br><button type="submit" value="inscription" class="btn btn-primary btn-block mb-4">
-                S'inscrire
-              </button>
+              <br><br>
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <button type="submit" value="inscription" class="btn btn-info">S'inscrire</button>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <a href="{{'/connexion'}}" class="btn btn-dark">Se connecter</a>
+                  </div>
+                </div>
+              </div>
             </form>
           </div>
         </div>

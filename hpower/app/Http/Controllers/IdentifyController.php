@@ -86,7 +86,7 @@ class IdentifyController extends Controller
 
     public function loginUser(Request $request)
     {
-        $credentials = $request->only('email', 'password');
+        $credentials = $request->only('telephone', 'password');
     
         if (auth()->attempt($credentials)) {
             $user = auth()->user();
@@ -151,5 +151,6 @@ class IdentifyController extends Controller
 
         return redirect('connexion');
     }
+    
 }
 
