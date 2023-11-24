@@ -63,7 +63,7 @@ Route::get('/inscription','App\Http\Controllers\IdentifyController@inscription')
 Route::post('/inscription','App\Http\Controllers\IdentifyController@registerUser')->name('inscription');
 Route::post('/connexion','App\Http\Controllers\IdentifyController@loginUser')->name('connexion');
 
-Route::get('/connexion/editpassword', [PasswordController::class, 'showModifyForm'])->name('resetpassword');
+Route::get('/connexion/editpassword/{user_id}', [PasswordController::class, 'showModifyForm'])->name('resetpassword');
 
 Route::post('/connexion/correctpassword', [PasswordController::class, 'treatModifyForm'])->name('reeditpassword');
 
@@ -99,8 +99,6 @@ Route::group([
 });
 
 
-});
-
 
 //APPROVISIONNEMENT
 Route::group([
@@ -122,6 +120,7 @@ Route::group([
 
     Route::get('createproduct/', function () {
     return view('appro/createproduct');
+});
 
 });
 

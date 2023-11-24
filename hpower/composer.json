@@ -5,7 +5,7 @@
     "keywords": ["laravel", "framework"],
     "license": "MIT",
      "require": {
-        "php": "^8.2.0",
+        "php": "8.1.*",
         "barryvdh/laravel-dompdf": "^2.0",
         "barryvdh/laravel-snappy": "^1.0",
         "guzzlehttp/guzzle": "^7.2",
@@ -69,3 +69,4 @@
     "minimum-stability": "stable",
     "prefer-stable": true
 }
+ 

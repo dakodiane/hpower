@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\Approvisionnement;
 use App\Models\Produit;
 use App\Models\Paiement;
-use App\Models\Semence;
+use App\Models\appro;
 use App\Models\Camion;
 use App\Models\Fournisseur;
 use App\Models\Transport;
@@ -20,7 +20,7 @@ class ApproController extends Controller
     {
          $user = Auth::user();
         $paiements = paiement::all();
-        $semences = Semence::all();
+        $appros = Approvisionnement::all();
         $appro = Approvisionnement::orderBy('created_at','desc')->paginate(10);
 
         $sttatt =   Approvisionnement::Where('statut_paiement','En attente')->get();
@@ -29,18 +29,18 @@ class ApproController extends Controller
         $statpaye = Approvisionnement::Where('statut_paiement','effectué')->get();
         $statt = $statpaye->count('statut_paiement');
 
-          $mntRevient = paiement::WhereNotNULL('semence_id')->get();
+          $mntRevient = paiement::WhereNotNULL('appro_id')->get();
           $depense = $mntRevient->sum('montant_tp');
 
-          $qteVente = Semence::whereNotNULL('sem_qtevendue')->get();
+          $qteVente = Approvisionnement::whereNotNULL('sem_qtevendue')->get();
           $qteVendue = $qteVente->sum('sem_qtevendue');
 
-          $qteAchat = Semence::WhereNotNULL('sem_qtereçu')->get();
+          $qteAchat = Approvisionnement::WhereNotNULL('sem_qtereçu')->get();
           $qteAchetee = $qteAchat->sum('sem_qtereçu');
 
-          $mntVente = paiement::WhereNotNULL('semence_id')->get();
+          $mntVente = paiement::WhereNotNULL('appro_id')->get();
           $Vente = $mntVente->sum('montant_HPG');
-         return view("appro.dashboard", compact('qteVendue', 'depense', 'qteAchetee', 'Vente', 'semences', 'paiements','stat','statt','user','appro'));
+         return view("appro.dashboard", compact('qteVendue', 'depense', 'qteAchetee', 'Vente', 'appros', 'paiements','stat','statt','user','appro'));
     }
 
 
@@ -193,5 +193,13 @@ class ApproController extends Controller
 
       }
 
+           public function exportExcel()
+        {
+            $appros = Approvisionnement::all();
+
+            return Excel::download(new ApproExport($appros), 'appros.xlsx');
+
+                return view('services_appro.control', compact('user', 'appros'));
+        }
        
 }

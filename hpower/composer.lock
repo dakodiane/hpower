@@ -4,11 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-
-    "content-hash": "37ff710889424e59a4334a1dfac09b60",
-
-    "content-hash": "ee54a9e942ab87a52b7667986e1213b9",
-
+    "content-hash": "395ce57c5a65756c26f7aeec7c4716c1",
     "packages": [
         {
             "name": "barryvdh/laravel-dompdf",
@@ -1408,17 +1404,6 @@
             "time": "2023-09-13T12:18:19+00:00"
         },
         {
-<<<<<<< HEAD
-            "name": "laravel/framework",
-            "version": "v10.33.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/laravel/framework.git",
-                "reference": "4536872e3e5b6be51b1f655dafd12c9a4fa0cfe8"
-            },
-            "dist": {
-                "type": "zip",
-=======
             "name": "ladumor/laravel-pwa",
             "version": "v0.0.4",
             "source": {
@@ -1485,7 +1470,6 @@
             },
             "dist": {
                 "type": "zip",
->>>>>>> d3be7a9081187f2603e1d2449162ece26395c8ef
                 "url": "https://api.github.com/repos/laravel/framework/zipball/4536872e3e5b6be51b1f655dafd12c9a4fa0cfe8",
                 "reference": "4536872e3e5b6be51b1f655dafd12c9a4fa0cfe8",
                 "shasum": ""
@@ -9225,7 +9209,7 @@
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
-        "php": "^8.2.0"
+        "php": "8.1.*"
     },
     "platform-dev": [],
     "plugin-api-version": "2.6.0"
