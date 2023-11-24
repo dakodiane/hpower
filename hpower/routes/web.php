@@ -272,3 +272,5 @@ Route::post('edit/loading/{id_loading}/','App\Http\Controllers\ClientController@
 Route::get('/servicetrans/listesemence',[semencesController::class,'showSeedConsultationT'])->name('consultation.T');
 
 Route::get('/serv_eva/listesemenceE',[semencesController::class,'showSeedConsultationE'])->name('consultation.E');
+
+Route::get('/exports/excel', [ApproController::class,'exportExcel'])->name('exports.excel');

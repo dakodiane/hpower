@@ -100,7 +100,7 @@
           <h4 class="card-title">Table des appros (vente et réception)</h4>
           <p class="card-description">
             <!-- <code><a class="btn btn-success" href="">Exporter en PDF</a></code> -->
-            <!-- <code><a class="btn btn-success" href="{{ '/pdf' }}">Exporter en Excel</a></code> -->
+            <code><a class="btn btn-success" href="{{ route('exports.excel') }}">Exporter en Excel</a></code>
           </p>
           <div class="table-responsive">
             <table class="table-hover table-striped">
