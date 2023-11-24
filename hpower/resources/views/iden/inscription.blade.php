@@ -83,19 +83,33 @@
                 <option value="rapporteur" selected>Rapporteur</option>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
                  <option value="servicesemence">Service des Semences</option>
 =======
              <option value="servicesemence">Service des Semences</option>
 >>>>>>> d3be7a9081187f2603e1d2449162ece26395c8ef
+=======
+             <option value="servicesemence">Service des Semences</option>
+=======
+                 <option value="servicesemence">Service des Semences</option>
+>>>>>>> a68079457d0d3f2a6bba36822850d9f34e618548
+>>>>>>> 1806d1b58709aad1729ef27d9968acd10d7f0de1
 
                 <option value="servicetransport">Service des Transports</option>
 
                 <option value="serviceappro">Service d'approvisionnement</option>
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
                 <option value="servicevalutation">Service d'évalutation</option>
 >>>>>>> d3be7a9081187f2603e1d2449162ece26395c8ef
+=======
+                <option value="servicevalutation">Service d'évalutation</option>
+=======
+
+>>>>>>> a68079457d0d3f2a6bba36822850d9f34e618548
+>>>>>>> 1806d1b58709aad1729ef27d9968acd10d7f0de1
                 <option value="export">Export</option>
               </select>
               <label class="form-label" for="form3Example4">Qui êtes-vous?</label>

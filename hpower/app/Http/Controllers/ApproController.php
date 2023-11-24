@@ -32,14 +32,15 @@ class ApproController extends Controller
           $mntRevient = paiement::WhereNotNULL('appro_id')->get();
           $depense = $mntRevient->sum('montant_tp');
 
-          $qteVente = Approvisionnement::whereNotNULL('sem_qtevendue')->get();
-          $qteVendue = $qteVente->sum('sem_qtevendue');
+         $qteVente = Semence::whereNotNULL('sem_qtevendue')->get();
+         $qteVendue = $qteVente->sum('sem_qtevendue');
 
-          $qteAchat = Approvisionnement::WhereNotNULL('sem_qtereçu')->get();
+          $qteAchat = Semence::WhereNotNULL('sem_qtereçu')->get();
           $qteAchetee = $qteAchat->sum('sem_qtereçu');
 
           $mntVente = paiement::WhereNotNULL('appro_id')->get();
           $Vente = $mntVente->sum('montant_HPG');
+          
          return view("appro.dashboard", compact('qteVendue', 'depense', 'qteAchetee', 'Vente', 'appros', 'paiements','stat','statt','user','appro'));
     }
 
@@ -119,14 +120,6 @@ class ApproController extends Controller
         // Retourner la vue avec les données
         return view('servicetrans.payefournit', compact('camions'));
     }
-    
-
-
-
-
-
-
-
 
    
     public function hpg()
@@ -193,13 +186,13 @@ class ApproController extends Controller
 
       }
 
-           public function exportExcel()
-        {
-            $appros = Approvisionnement::all();
+        public function exportExcel()
+             {
+                 $appros = Approvisionnement::all();
 
-            return Excel::download(new ApproExport($appros), 'appros.xlsx');
+                 return Excel::download(new ApproExport($appros), 'appros.xlsx');
 
-                return view('services_appro.control', compact('user', 'appros'));
-        }
+                     return view('services_appro.control', compact('user', 'appros'));
+             }
        
 }

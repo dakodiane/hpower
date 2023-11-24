@@ -76,9 +76,7 @@
                 @csrf
                 <button type="submit" class="nav-link" style="border: none; background: none; padding: 0; margin: 0; cursor: pointer;">
                     <i class="icon-paper menu-icon"></i>
-            <span class="menu-title">Déconnexion</span>
-
-                </a>
+            <span class="menu-title">DECONNEXION</span>
             </form>
         </li>
             </ul>

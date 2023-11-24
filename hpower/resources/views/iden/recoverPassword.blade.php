@@ -11,6 +11,16 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-8">
+                <!-- Votre code HTML existant... -->
+
+@if (session('success'))
+    <div class="alert alert-success">
+        {{ session('success') }}
+    </div>
+@endif
+
+<!-- Le reste de votre code HTML... -->
+
                 <div class="card">
                     <div class="card-header">Rééditer le mot de passe </div>
 

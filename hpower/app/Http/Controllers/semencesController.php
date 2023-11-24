@@ -77,6 +77,25 @@ class semencesController extends Controller
             return view('services_semence.consultation', compact('semences')); 
         }
 
+
+        
+
+        public function showSeedConsultationT()
+        {
+
+            $semences = Semence::orderBy('created_at', 'desc')->paginate(10);
+
+            return view('servicetrans.listesemence', compact('semences')); 
+        }
+
+        public function showSeedConsultationE()
+        {
+
+            $semences = Semence::orderBy('created_at', 'desc')->paginate(10);
+
+            return view('serv_eva.listesemenceE', compact('semences')); 
+        }
+
         public function storeSeedReception(Request $request)
         {
 

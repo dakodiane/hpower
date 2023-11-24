@@ -47,8 +47,8 @@
               </div>
               @endif
               <div class="form-outline mb-4">
-                <input type="email" name="email" id="email" class="form-control" />
-                <label class="form-label" for="email">Email</label>
+                <input type="tel" name="telephone" id="telephone" class="form-control" />
+                <label class="form-label" for="email">Telephone</label>
               </div>
 
               <div class="form-outline mb-4">
@@ -64,7 +64,7 @@
                 </div>
                 <div class="col-md-6">
                   <div class="form-group">
-                    <p class="text-center"><a href="{{ route('resetpassword', ['user_id' => $user->user_id]) }}">Réinitialiser le mot de passe</a></p>
+                    <p class="text-center"><a href="{{ route('resetpassword') }}">Réinitialiser le mot de passe</a></p>
                   </div>
                 </div>
               </div> 

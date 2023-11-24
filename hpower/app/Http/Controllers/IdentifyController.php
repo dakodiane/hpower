@@ -84,57 +84,111 @@ class IdentifyController extends Controller
         }
     }
 
+    // public function loginUser(Request $request)
+    // {
+    //     $credentials = $request->only('telephone', 'password');
+    //     dd($credentials);
+
+    //     if (auth()->attempt($credentials)) {
+    //         $user = auth()->user();
+    
+    //         if ($user) {
+    //             // Vérifie si le champ 'active' est égal à 1
+    //             if ($user->active == 1) {
+    //                 Cache::put('user-online-' . $user->id, true, now()->addMinutes(1));
+    
+            
+
+    //                 if ($user->role == 'fournisseur') {
+    //                     $request->session()->regenerate();
+    //                     return redirect('fourni');
+    //                 } elseif ($user->role == 'directeur') {
+    //                     $request->session()->regenerate();
+    //                     return redirect()->intended('admin');
+    //                 } elseif ($user->role == 'rapporteur') {
+    //                     $request->session()->regenerate();
+    //                     return redirect()->intended('user');
+    //                 } elseif ($user->role == 'servicesemence') {
+    //                     $request->session()->regenerate();
+    //                     return redirect('semences');
+    //                 } elseif ($user->role == 'servicetransport') {
+    //                     $request->session()->regenerate();
+    //                     return redirect('servicetrans');
+    //                 } elseif ($user->role == 'serviceappro') {
+    //                     $request->session()->regenerate();
+    //                     return redirect('approvisionnement');
+    //                 } elseif ($user->role == 'servicevalutation') {
+    //                     $request->session()->regenerate();
+    //                     return redirect()->intended('serveva');
+    //                 } elseif ($user->role == 'export') {
+    //                     $request->session()->regenerate();
+    //                     return redirect('export');
+    //                 } elseif ($user->role == 'Client') {
+    //                     $request->session()->regenerate();
+    //                     return redirect('loadingclient');
+    //                 } else {
+    //                     return redirect()->back()->withErrors(['role' => 'Rôle non reconnu'])->withInput();
+    //                 }
+    //             } else {
+    //                 // Si le champ 'active' n'est pas égal à 1, l'utilisateur n'est pas autorisé
+    //                 return redirect()->back()->withErrors(['active' => 'Votre compte n\'est pas actif. Veuillez contacter l\'administrateur.'])->withInput();
+    //             }
+    //         }
+    //     }
+
+    //     // L'authentification a échoué, retournez les erreurs
+    //     return redirect()->back()->withErrors(['email' => 'Numéro ou Mot de passe incorrect'])->withInput();
+    // }
+    
+
     public function loginUser(Request $request)
     {
         $credentials = $request->only('telephone', 'password');
-    
+        // dd($credentials);
         if (auth()->attempt($credentials)) {
             $user = auth()->user();
-    
-            if ($user) {
-                // Vérifie si le champ 'active' est égal à 1
-                if ($user->active == 1) {
-                    Cache::put('user-online-' . $user->id, true, now()->addMinutes(1));
-    
-                    // Votre code actuel pour les redirections
-                    if ($user->role == 'fournisseur') {
-                        $request->session()->regenerate();
-                        return redirect('fourni');
-                    } elseif ($user->role == 'directeur') {
-                        $request->session()->regenerate();
-                        return redirect()->intended('admin');
-                    } elseif ($user->role == 'rapporteur') {
-                        $request->session()->regenerate();
-                        return redirect()->intended('user');
-                    } elseif ($user->role == 'servicesemence') {
-                        $request->session()->regenerate();
-                        return redirect('semences');
-                    } elseif ($user->role == 'servicetransport') {
-                        $request->session()->regenerate();
-                        return redirect('servicetrans');
-                    } elseif ($user->role == 'serviceappro') {
-                        $request->session()->regenerate();
-                        return redirect('approvisionnement');
-                    } elseif ($user->role == 'servicevalutation') {
-                        $request->session()->regenerate();
-                        return redirect()->intended('serveva');
-                    } elseif ($user->role == 'export') {
-                        $request->session()->regenerate();
-                        return redirect('export');
-                    } else {
-                        return redirect()->back()->withErrors(['role' => 'Rôle non reconnu'])->withInput();
-                    }
+
+            if ($user->active == 1) {
+                Cache::put('user-online-' . $user->id, true, now()->addMinutes(1));
+
+                if ($user->role == 'fournisseur') {
+                    $request->session()->regenerate();
+                    return redirect('fourni');
+                } elseif ($user->role == 'directeur') {
+                    $request->session()->regenerate();
+                    return redirect()->intended('admin');
+                } elseif ($user->role == 'rapporteur') {
+                    $request->session()->regenerate();
+                    return redirect()->intended('user');
+                } elseif ($user->role == 'servicesemence') {
+                    $request->session()->regenerate();
+                    return redirect('semences');
+                } elseif ($user->role == 'servicetransport') {
+                    $request->session()->regenerate();
+                    return redirect('servicetrans');
+                } elseif ($user->role == 'serviceappro') {
+                    $request->session()->regenerate();
+                    return redirect('approvisionnement');
+                } elseif ($user->role == 'servicevalutation') {
+                    $request->session()->regenerate();
+                    return redirect()->intended('serveva');
+                } elseif ($user->role == 'export') {
+                    $request->session()->regenerate();
+                    return redirect('export');
+                } elseif ($user->role == 'Client') {
+                    $request->session()->regenerate();
+                    return redirect('loadingclient');
                 } else {
-                    // Si le champ 'active' n'est pas égal à 1, l'utilisateur n'est pas autorisé
-                    return redirect()->back()->withErrors(['active' => 'Votre compte n\'est pas actif. Veuillez contacter l\'administrateur.'])->withInput();
+                    return redirect()->back()->withErrors(['role' => 'Rôle non reconnu'])->withInput();
                 }
+            } else {
+                // Si le champ 'active' n'est pas égal à 1, l'utilisateur n'est pas autorisé
+                return redirect()->back()->withErrors(['active' => 'Votre compte n\'est pas actif. Veuillez contacter l\'administrateur.'])->withInput();
             }
         }
-    
-        // L'authentification a échoué, retournez les erreurs
-        return redirect()->back()->withErrors(['email' => 'Adresse Email ou Mot de passe incorrect'])->withInput();
+
+        return redirect()->back()->withErrors(['telephone' => 'Telephone ou Mot de passe incorrect'])->withInput();
     }
-    
 
     public function logout(Request $request)
     {
@@ -153,4 +207,3 @@ class IdentifyController extends Controller
     }
     
 }
-

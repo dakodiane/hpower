@@ -1,4 +1,4 @@
-@extends('templates.servicetrans')
+@extends('templates.eva')
 
 @section('document')
     <div>
@@ -20,7 +20,7 @@
 
                         <div class="card-body" style="overflow-x: scroll;">
                             <h4 class="card-title">Réception des semences </h4>
-w
+
                             <div class="table-responsive">
                         <h2>Réceptions Enregistrées</h2>
                         <a href="{{ route('export.excel') }}" class="btn btn-success">Télécharger Excel</a>

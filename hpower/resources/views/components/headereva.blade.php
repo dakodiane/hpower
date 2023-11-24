@@ -2,7 +2,7 @@
     
 <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
       <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
-        <a class="navbar-brand " style="width: 200px;" href="{{'admin'}}"><img src="{{asset('images/hpower.jpeg')}}"  alt="logo"/></a>
+        <a class="navbar-brand " style="width: 200px;" href="{{route('serveva')}}"><img src="{{asset('images/hpower.jpeg')}}"  alt="logo"/></a>
       </div>
       <div class="navbar-menu-wrapper d-flex align-items-center justify-content-end">
         <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
@@ -39,13 +39,13 @@
       <nav class="sidebar sidebar-offcanvas" id="sidebar">
         <ul class="nav">
           <li class="nav-item">
-            <a class="nav-link" href="{{('serveval')}}">
+            <a class="nav-link" href="{{route('serveva')}}">
               <i class="icon-grid menu-icon"></i>
               <span class="menu-title">Tableau de bord</span>
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="{{'allcamionext'}}">
+            <a class="nav-link" href="{{route('allcamionext')}}">
               <i class="icon-grid menu-icon"></i>
               <span class="menu-title">Tous les camions</span>
             </a>
@@ -60,23 +60,23 @@
             </a>
           </li> -->
         
-        
           <li class="nav-item">
-            <a class="nav-link" href="{{'serviceapprovisionnementext'}}">
+            <a class="nav-link" href="{{route('consultation.E')}}" >
+              <i class="icon-grid menu-icon mdi mdi-cloud-download"></i>
+              <span class="menu-title">SEMENCE</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{route('serviceapprovisionnementext')}}">
               <i class="icon-grid menu-icon"></i>
               <span class="menu-title">Service Approvisionnement </span>
             </a>
           </li>  <li class="nav-item">
-            <a class="nav-link" href="{{'servicetransportext'}}">
+            <a class="nav-link" href="{{route('servicetransportext')}}">
               <i class="icon-grid menu-icon"></i>
               <span class="menu-title">Service Transport </span>
             </a>
-          </li>  <li class="nav-item">
-            <a class="nav-link" href="{{'servicesemenceext'}}">
-              <i class="icon-grid menu-icon"></i>
-              <span class="menu-title">Service Semence </span>
-            </a>
-          </li>
+          </li> 
 
      
             
