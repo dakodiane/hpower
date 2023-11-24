@@ -32,16 +32,16 @@ class ApproController extends Controller
           $mntRevient = paiement::WhereNotNULL('appro_id')->get();
           $depense = $mntRevient->sum('montant_tp');
 
-         $qteVente = Semence::whereNotNULL('sem_qtevendue')->get();
-         $qteVendue = $qteVente->sum('sem_qtevendue');
+         // $qteVente = Semence::whereNotNULL('sem_qtevendue')->get();
+         // $qteVendue = $qteVente->sum('sem_qtevendue');
 
-          $qteAchat = Semence::WhereNotNULL('sem_qtereçu')->get();
-          $qteAchetee = $qteAchat->sum('sem_qtereçu');
+         //  $qteAchat = Semence::WhereNotNULL('sem_qtereçu')->get();
+         //  $qteAchetee = $qteAchat->sum('sem_qtereçu');
 
           $mntVente = paiement::WhereNotNULL('appro_id')->get();
           $Vente = $mntVente->sum('montant_HPG');
-          
-         return view("appro.dashboard", compact('qteVendue', 'depense', 'qteAchetee', 'Vente', 'appros', 'paiements','stat','statt','user','appro'));
+
+         return view("appro.dashboard", compact('depense', 'Vente', 'appros', 'paiements','stat','statt','user','appro'));
     }
 
 
@@ -97,8 +97,6 @@ class ApproController extends Controller
         session()->flash('success', 'L\'enregistrement a été effectué avec succès!');
         return redirect()->back()->with('success', 'Paiement enregistré avec succès.');
     }
-    
-
 
 
     public function payefourn()

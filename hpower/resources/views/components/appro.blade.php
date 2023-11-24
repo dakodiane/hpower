@@ -68,33 +68,23 @@
               <li class="nav-item">
                 <a class="nav-link" href="{{route('approfourni')}}">
                   <i class="icon-grid menu-icon"></i>
-                  <span class="menu-title">FOURNISSEUR</span>
+                  <span class="menu-title">FOURNISSEUR NON PAYE</span>
+                  <i class="menu-arrow"></i>
                 </a>
               </li>
-
               <li class="nav-item">
-            <a class="nav-link" data-toggle="collapse" href="#icons" aria-expanded="false" aria-controls="icons">
-              <i class="ti-truck menu-icon"></i>
-              <span class="menu-title">FOURNISSEUR</span>
-              <i class="menu-arrow"></i>
-            </a>
-            <div class="collapse" id="icons">
-              <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="{{route('approfourni')}}">Non payé</a></li>
-                <li class="nav-item"> <a class="nav-link" href="{{route('payefourni')}}">Payé</a></li>
-
-
-              </ul>
-            </div>           
-          </li>
-              
+                <a class="nav-link" href="{{route('payefourni')}}">
+                  <i class="icon-grid menu-icon"></i>
+                  <span class="menu-title">FOURNISSEUR PAYE</span>
+                  <i class="menu-arrow"></i>
+                </a>
+              </li>          
               <li class="nav-item">
                 <a class="nav-link" href="{{ route('approsem') }}">
                   <i class="icon-grid menu-icon"></i>
                   <span class="menu-title">SEMENCES</span>
                 </a>
               </li>
-
                 <li class="nav-item">
                 <a class="nav-link" href="{{'createproduct/'}}">
                   <i class="icon-grid menu-icon"></i>
@@ -106,17 +96,15 @@
                   <i class="icon-grid menu-icon"></i>
                   <span class="menu-title">LISTE DES PRODUITS</span>
                 </a>
-              </li> 
-           
+              </li>            
               <li class="nav-item">
-            <form method="POST" action="{{ route('logout') }}">
+                <form method="POST" action="{{ route('logout') }}">
                 @csrf
                 <button type="submit" class="nav-link" style="border: none; background: none; padding: 0; margin: 0; cursor: pointer;">
                     <i class="icon-paper menu-icon"></i>
-            <span class="menu-title">Déconnexion</span>
-                </a>
-            </form>
-        </li>
+                 <span class="menu-title">DECONNEXION</span>
+               </form>
+              </li>
             </ul>
           </nav>
           
